@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
 import java.util.function.Supplier;
@@ -18,8 +19,13 @@ public class RegistryPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static void registerCompostable(ItemLike name, float chance) {
+        throw new AssertionError();
+    }
+
     @ExpectPlatform //fabric
-    public static <T extends Item> Supplier<T> registerItemBurnTime(Item item, int burnTime) {
+    public static void registerItemBurnTime(Item item, int burnTime) {
         throw new AssertionError();
     }
 
