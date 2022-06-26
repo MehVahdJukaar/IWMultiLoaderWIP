@@ -9,7 +9,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 class FlowerCrownMaterial implements ArmorMaterial {
 
-    public static final FlowerCrownMaterial INSTANCE = new FlowerCrownMaterial();
+    public static final com.ordana.immersive_weathering.items.materials.FlowerCrownMaterial INSTANCE = new com.ordana.immersive_weathering.items.materials.FlowerCrownMaterial();
 
     @Override
     public int getDurabilityForSlot(EquipmentSlot slot) {

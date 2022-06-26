@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.common.blocks.mossable;
 
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.blocks.PatchSpreader;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
 import net.minecraft.core.BlockPos;

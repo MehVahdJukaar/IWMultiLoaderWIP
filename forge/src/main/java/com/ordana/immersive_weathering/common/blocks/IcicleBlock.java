@@ -1,8 +1,8 @@
 package com.ordana.immersive_weathering.common.blocks;
 
 import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.ModDamageSource;
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModDamageSource;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.entity.FallingIcicleEntity;
 import com.ordana.immersive_weathering.common.entity.IcicleBlockEntity;
 import net.minecraft.core.BlockPos;

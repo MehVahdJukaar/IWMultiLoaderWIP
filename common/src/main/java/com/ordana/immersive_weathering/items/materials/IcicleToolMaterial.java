@@ -1,6 +1,6 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items.materials;
 
-import com.ordana.immersive_weathering.common.ModItems;
+import com.ordana.immersive_weathering.reg.ModItems;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 

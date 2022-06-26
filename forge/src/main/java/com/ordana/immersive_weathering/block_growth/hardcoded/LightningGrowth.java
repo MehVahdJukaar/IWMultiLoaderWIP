@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.block_growth.hardcoded;
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
 import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.blocks.crackable.Crackable;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
 import net.minecraft.core.BlockPos;

@@ -1,11 +1,14 @@
 package com.ordana.immersive_weathering.reg;
 
-import com.ordana.immersive_weathering.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
-import com.ordana.immersive_weathering.common.ModFoods;
+import com.ordana.immersive_weathering.common.items.AzaleaFlowersItem;
+import com.ordana.immersive_weathering.common.items.FlowerCrownItem;
+import com.ordana.immersive_weathering.common.items.IceSickleItem;
 import com.ordana.immersive_weathering.common.items.IcicleItem;
 import com.ordana.immersive_weathering.items.BurnableItem;
 import com.ordana.immersive_weathering.items.LeafPileBlockItem;
+import com.ordana.immersive_weathering.items.materials.FlowerCrownMaterial;
+import com.ordana.immersive_weathering.items.materials.IcicleToolMaterial;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -23,7 +26,6 @@ public class ModItems {
     public static <T extends Item> Supplier<T> regItem(String name, Supplier<T> itemSup) {
         return RegistryPlatform.registerItem(name, itemSup);
     }
-
 
     //helpers
 
@@ -47,9 +49,9 @@ public class ModItems {
     public static final Supplier<BlockItem> AZALEA_LEAF_PILE = regLeafPile("azalea_leaf_pile", ModBlocks.AZALEA_LEAF_PILE);
     public static final Supplier<BlockItem> FLOWERING_AZALEA_LEAF_PILE = regLeafPile("flowering_azalea_leaf_pile", ModBlocks.FLOWERING_AZALEA_LEAF_PILE);
     public static final Supplier<BlockItem> AZALEA_FLOWER_PILE = regLeafPile("azalea_flower_pile", ModBlocks.AZALEA_FLOWER_PILE);
-    
+
     //bricks
-    
+
     public static final Supplier<Item> STONE_BRICK = regItem("stone_brick", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
     public static final Supplier<Item> PRISMARINE_BRICK = regItem("prismarine_brick", () ->
@@ -67,9 +69,11 @@ public class ModItems {
 
     public static final Supplier<Item> AZALEA_FLOWERS = regItem("azalea_flowers", () ->
             new AzaleaFlowersItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
     public static final Supplier<Item> FLOWER_CROWN = regItem("flower_crown", () ->
             new FlowerCrownItem(FlowerCrownMaterial.INSTANCE, EquipmentSlot.HEAD,
                     new Item.Properties().tab(CreativeModeTab.TAB_TOOLS)));
+
     public static final Supplier<Item> MOSS_CLUMP = regItem("moss_clump", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).food(ModFoods.MOSS_CLUMP)));
     public static final Supplier<Item> GOLDEN_MOSS_CLUMP = regItem("golden_moss_clump", () ->

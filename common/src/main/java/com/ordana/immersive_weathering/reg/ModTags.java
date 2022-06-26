@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common;
+package com.ordana.immersive_weathering.reg;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;

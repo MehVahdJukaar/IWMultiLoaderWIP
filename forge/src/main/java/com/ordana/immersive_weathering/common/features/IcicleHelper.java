@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.common.features;
 
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.common.ModBlocks;
 import java.util.function.Consumer;

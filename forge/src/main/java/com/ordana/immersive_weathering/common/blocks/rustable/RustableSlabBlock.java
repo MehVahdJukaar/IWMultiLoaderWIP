@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.common.blocks.rustable;
 import java.util.Random;
 
 import com.ordana.immersive_weathering.common.ModParticles;
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.blocks.Waxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,7 +15,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ToolAction;

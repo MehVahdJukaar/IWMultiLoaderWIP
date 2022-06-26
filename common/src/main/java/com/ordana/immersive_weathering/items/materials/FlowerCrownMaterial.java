@@ -1,13 +1,13 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items.materials;
 
-import com.ordana.immersive_weathering.common.ModItems;
+import com.ordana.immersive_weathering.reg.ModItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 
-class FlowerCrownMaterial implements ArmorMaterial {
+public class FlowerCrownMaterial implements ArmorMaterial {
 
     public static final FlowerCrownMaterial INSTANCE = new FlowerCrownMaterial();
 

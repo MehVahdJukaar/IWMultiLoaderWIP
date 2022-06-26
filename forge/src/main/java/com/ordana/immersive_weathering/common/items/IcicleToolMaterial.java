@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class IcicleToolMaterial implements Tier {
 
-    public static final IcicleToolMaterial INSTANCE = new IcicleToolMaterial();
+    public static final com.ordana.immersive_weathering.items.materials.IcicleToolMaterial INSTANCE = new com.ordana.immersive_weathering.items.materials.IcicleToolMaterial();
 
     @Override
     public int getUses() {

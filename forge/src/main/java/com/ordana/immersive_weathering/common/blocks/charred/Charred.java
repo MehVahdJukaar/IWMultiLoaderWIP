@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.common.blocks.charred;
 
 import com.ordana.immersive_weathering.common.ModParticles;
-import com.ordana.immersive_weathering.common.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.mehvahdjukaar.supplementaries.api.ILightable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
