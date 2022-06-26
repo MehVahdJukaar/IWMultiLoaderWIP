@@ -3,6 +3,7 @@ package com.ordana.immersive_weathering.reg;
 import com.ordana.immersive_weathering.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.common.ModFoods;
+import com.ordana.immersive_weathering.common.items.IcicleItem;
 import com.ordana.immersive_weathering.items.BurnableItem;
 import com.ordana.immersive_weathering.items.LeafPileBlockItem;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
@@ -32,7 +33,7 @@ public class ModItems {
 
     //icicle
 
-    public static final Supplier<BlockItem> ICICLE = regItem("icicle", () -> new IcicleBlock(
+    public static final Supplier<BlockItem> ICICLE = regItem("icicle", () -> new IcicleItem(
             ModBlocks.ICICLE.get(), new Item.Properties().food(ModFoods.ICICLE).tab(CreativeModeTab.TAB_DECORATIONS)));
 
     //leaf pile

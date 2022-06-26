@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.items;
 
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -16,8 +17,7 @@ public class BurnableBlockItem extends BlockItem {
         RegistryPlatform.registerItemBurnTime(this, burnTime);
     }
 
-
-    //forge override
+    @PlatformOnly(PlatformOnly.FORGE)
     public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
         return this.burnTime;
     }
