@@ -18,6 +18,11 @@ public class RegistryPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform //fabric
+    public static <T extends Item> Supplier<T> registerItemBurnTime(Item item, int burnTime) {
+        throw new AssertionError();
+    }
+
 }
 
 
