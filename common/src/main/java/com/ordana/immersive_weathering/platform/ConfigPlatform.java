@@ -1,320 +1,187 @@
 package com.ordana.immersive_weathering.platform;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
-import org.jetbrains.annotations.Nullable;
+import net.minecraftforge.common.ForgeConfigSpec;
 
-//this will be messy
 public class ConfigPlatform {
 
-    //moss
+    public static class Client {
 
-    @ExpectPlatform
-    public static double mossInterestForFace() {
-        throw new AssertionError();
     }
 
-    @ExpectPlatform
-    public static double mossPatchiness() {
-        throw new AssertionError();
-    }
+    public static class Server {
+        public static ForgeConfigSpec SPEC;
 
-    @ExpectPlatform
-    public static double mossImmuneChance() {
-        throw new AssertionError();
-    }
+        // "leaves_config"
+        public static ForgeConfigSpec.BooleanValue fallingLeafParticles;
+        public static ForgeConfigSpec.BooleanValue leafDecayPiles;
+        public static ForgeConfigSpec.BooleanValue leafDecayParticles;
+        public static ForgeConfigSpec.BooleanValue leafDecaySound;
+        public static ForgeConfigSpec.BooleanValue leafPilesForm;
+        public static ForgeConfigSpec.BooleanValue leafPilesConvertBlockBelow;
+        public static ForgeConfigSpec.BooleanValue leggingsPreventThornDamage;
+        public static ForgeConfigSpec.BooleanValue composterDropsDirt;
+        public static ForgeConfigSpec.BooleanValue mulchGrowsCrops;
+        public static ForgeConfigSpec.BooleanValue featherFallingFarmer;
 
-    @ExpectPlatform
-    public static boolean mossNeedsAir() {
-        throw new AssertionError();
-    }
+        // "fire_and_ice_config"
+        public static ForgeConfigSpec.BooleanValue fireCharsWood;
+        public static ForgeConfigSpec.BooleanValue campfiresCreateSoot;
+        public static ForgeConfigSpec.BooleanValue lightningCreateMagma;
+        public static ForgeConfigSpec.BooleanValue lightningCreateLava;
+        public static ForgeConfigSpec.BooleanValue lightningCreateVitrifiedSand;
+        public static ForgeConfigSpec.BooleanValue flammableCobwebs;
+        public static ForgeConfigSpec.BooleanValue freezingWater;
+        public static ForgeConfigSpec.IntValue freezingWaterSeverity;
+        public static ForgeConfigSpec.BooleanValue permafrostFreezing;
+        public static ForgeConfigSpec.IntValue freezingPermafrostSeverity;
+        public static ForgeConfigSpec.BooleanValue icicleFreezing;
+        public static ForgeConfigSpec.IntValue freezingIcicleSeverity;
+        public static ForgeConfigSpec.BooleanValue thinIceFormation;
+        public static ForgeConfigSpec.BooleanValue thinIceMelting;
+        public static ForgeConfigSpec.BooleanValue glassFrosting;
+        public static ForgeConfigSpec.BooleanValue grassFrosting;
+        public static ForgeConfigSpec.BooleanValue naturalIceMelt;
+        public static ForgeConfigSpec.BooleanValue iciclePlacement;
 
-    //cracking
+        // "block_growth_config"
+        public static ForgeConfigSpec.BooleanValue blockGrowth;
+        public static ForgeConfigSpec.BooleanValue blockCracking;
+        public static ForgeConfigSpec.BooleanValue blockMossing;
+        public static ForgeConfigSpec.BooleanValue blockRusting;
 
-    @ExpectPlatform
-    public static double crackInterestForFace() {
-        throw new AssertionError();
-    }
+        // "generators_config"
+        public static ForgeConfigSpec.BooleanValue allGenerators;
+        public static ForgeConfigSpec.BooleanValue basaltGenerator;
+        public static ForgeConfigSpec.BooleanValue deepslateGenerator;
+        public static ForgeConfigSpec.BooleanValue graniteGenerator;
+        public static ForgeConfigSpec.BooleanValue andesiteGenerator;
+        public static ForgeConfigSpec.BooleanValue dioriteGenerator;
+        public static ForgeConfigSpec.BooleanValue tuffGenerator;
+        public static ForgeConfigSpec.BooleanValue blackstoneGenerator;
+        public static ForgeConfigSpec.BooleanValue magmaGenerator;
+        public static ForgeConfigSpec.BooleanValue terracottaGenerator;
+        public static ForgeConfigSpec.BooleanValue vitrifiedSandGenerator;
+        public static ForgeConfigSpec.BooleanValue cryingObsidianGenerator;
+        public static ForgeConfigSpec.BooleanValue iceGenerator;
 
-    @ExpectPlatform
-    public static double crackPatchiness() {
-        throw new AssertionError();
-    }
+        // "item_uses_config"
+        public static ForgeConfigSpec.BooleanValue cauldronWashing;
+        public static ForgeConfigSpec.BooleanValue pistonSliming;
+        public static ForgeConfigSpec.BooleanValue soilShearing;
+        public static ForgeConfigSpec.BooleanValue azaleaShearing;
+        public static ForgeConfigSpec.BooleanValue mossShearing;
+        public static ForgeConfigSpec.BooleanValue mossBurning;
+        public static ForgeConfigSpec.BooleanValue charredBlockIgniting;
+        public static ForgeConfigSpec.BooleanValue shovelExtinguishing;
+        public static ForgeConfigSpec.BooleanValue spongeRusting;
+        public static ForgeConfigSpec.BooleanValue pickaxeCracking;
+        public static ForgeConfigSpec.BooleanValue axeStripping;
+        public static ForgeConfigSpec.BooleanValue axeScraping;
 
-    @ExpectPlatform
-    public static double crackImmuneChance() {
-        throw new AssertionError();
-    }
+        // "worldgen_config"
+        public static ForgeConfigSpec.BooleanValue icicleFeature;
+        public static ForgeConfigSpec.BooleanValue cryosolFeature;
+        public static ForgeConfigSpec.BooleanValue humusFeature;
+        public static ForgeConfigSpec.BooleanValue rootsFeature;
+        public static ForgeConfigSpec.BooleanValue fluvisolFeature;
+        public static ForgeConfigSpec.BooleanValue siltFeature;
+        public static ForgeConfigSpec.BooleanValue lakebedFeature;
+        public static ForgeConfigSpec.BooleanValue vertisolFeature;
+        public static ForgeConfigSpec.BooleanValue oakLeavesFeature;
+        public static ForgeConfigSpec.BooleanValue darkLeavesFeature;
+        public static ForgeConfigSpec.BooleanValue birchLeavesFeature;
+        public static ForgeConfigSpec.BooleanValue spruceLeavesFeature;
 
-    @ExpectPlatform
-    public static boolean crackNeedsAir() {
-        throw new AssertionError();
-    }
+        static {
+            ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+            builder.push("leaves_config");
+            fallingLeafParticles = builder.comment("Enable falling leaf particles").define("fallingLeafParticles", true);
+            leafDecayPiles = builder.comment("Enable leaf pile decay").define("leafDecayPiles", true);
+            leafDecayParticles = builder.comment("Enable leaf pile decay particles").define("leafDecayParticles", true);
+            leafDecaySound = builder.comment("Enable leaf pile decay sound").define("leafDecaySound", true);
+            leafPilesForm = builder.comment("Enable leaf pile formation").define("leafPilesForm", true);
+            leafPilesConvertBlockBelow = builder.comment("Enable leaf pile conversion").define("leafPilesConvertBlockBelow", true);
+            leggingsPreventThornDamage = builder.comment("Enable leggings prevent thorn damage").define("leggingsPreventThornDamage", true);
+            composterDropsDirt = builder.comment("Enable composter drops dirt").define("composterDropsDirt", true);
+            mulchGrowsCrops = builder.comment("Enable mulch grows crops").define("mulchGrowsCrops", true);
+            featherFallingFarmer = builder.comment("Enable feather falling farmer").define("featherFallingFarmer", true);
+            builder.pop();
 
-    //bark
+            builder.push("fire_and_ice_config");
+            fireCharsWood = builder.comment("Enable fire chars wood").define("fireCharsWood", true);
+            campfiresCreateSoot = builder.comment("Enable campfires create soot").define("campfiresCreateSoot", true);
+            lightningCreateMagma = builder.comment("Enable lightning create magma").define("lightningCreateMagma", true);
+            lightningCreateLava = builder.comment("Enable lightning create lava").define("lightningCreateLava", true);
+            lightningCreateVitrifiedSand = builder.comment("Enable lightning create vitrified sand").define("lightningCreateVitrifiedSand", true);
+            flammableCobwebs = builder.comment("Enable flammable cobwebs").define("flammableCobwebs", true);
+            freezingWater = builder.comment("Enable freezing water").define("freezingWater", true);
+            freezingWaterSeverity = builder.comment("Severity of freezing water").defineInRange("freezingWaterSeverity", 200, 0, 1000);
+            permafrostFreezing = builder.comment("Enable permafrost freezing").define("permafrostFreezing", true);
+            freezingPermafrostSeverity = builder.comment("Severity of permafrost freezing").defineInRange("freezingPermafrostSeverity", 200, 0, 1000);
+            icicleFreezing = builder.comment("Enable icicle freezing").define("icicleFreezing", true);
+            freezingIcicleSeverity = builder.comment("Severity of icicle freezing").defineInRange("freezingIcicleSeverity", 300, 0, 1000);
+            thinIceFormation = builder.comment("Enable thin ice formation").define("thinIceFormation", true);
+            thinIceMelting = builder.comment("Enable thin ice melting").define("thinIceMelting", true);
+            glassFrosting = builder.comment("Enable glass frosting").define("glassFrosting", true);
+            grassFrosting = builder.comment("Enable grass frosting").define("grassFrosting", true);
+            naturalIceMelt = builder.comment("Enable natural ice melt").define("naturalIceMelt", true);
+            iciclePlacement = builder.comment("Enable icicle placement").define("iciclePlacement", true);
+            builder.pop();
 
-    @ExpectPlatform
-    public static boolean barkEnabled() {
-        throw new AssertionError();
-    }
+            builder.push("block_growth_config");
+            blockGrowth = builder.comment("Enable block growth").define("blockGrowth", true);
+            blockCracking = builder.comment("Enable block cracking").define("blockCracking", true);
+            blockMossing = builder.comment("Enable block mossing").define("blockMossing", true);
+            blockRusting = builder.comment("Enable block rusting").define("blockRusting", true);
+            builder.pop();
 
-    @ExpectPlatform
-    public static boolean genericBark() {
-        throw new AssertionError();
-    }
+            builder.push("generators_config");
+            allGenerators = builder.comment("Enable all generators").define("allGenerators", true);
+                    basaltGenerator = builder.comment("Enable basalt generator").define("basaltGenerator", true);
+            deepslateGenerator = builder.comment("Enable deep slate generator").define("deepslateGenerator", true);
+                    graniteGenerator = builder.comment("Enable granite generator").define("graniteGenerator", true);
+            andesiteGenerator = builder.comment("Enable andesite generator").define("andesiteGenerator", true);
+                    dioriteGenerator = builder.comment("Enable diorite generator").define("dioriteGenerator", true);
+            tuffGenerator = builder.comment("Enable tuff generator").define("tuffGenerator", true);
+                    blackstoneGenerator = builder.comment("Enable blackstone generator").define("blackstoneGenerator", true);
+            magmaGenerator = builder.comment("Enable magma generator").define("magmaGenerator", true);
+                    terracottaGenerator = builder.comment("Enable terracotta generator").define("terracottaGenerator", true);
+            vitrifiedSandGenerator = builder.comment("Enable vitrified sand generator").define("vitrifiedSandGenerator", true);
+                    cryingObsidianGenerator = builder.comment("Enable crying obsidian generator").define("cryingObsidianGenerator", true);
+            iceGenerator = builder.comment("Enable ice generator").define("iceGenerator", true);
+            builder.pop();
 
-    //leaf piles
+            builder.push("item_uses_config");
+            cauldronWashing = builder.comment("Enable cauldron washing").define("cauldronWashing", true);
+                    pistonSliming = builder.comment("Enable piston sliming").define("pistonSliming", true);
+            soilShearing = builder.comment("Enable soil shearing").define("soilShearing", true);
+                    azaleaShearing = builder.comment("Enable azalea shearing").define("azaleaShearing", true);
+            mossShearing = builder.comment("Enable moss shearing").define("mossShearing", true);
+                    mossBurning = builder.comment("Enable moss burning").define("mossBurning", true);
+            charredBlockIgniting = builder.comment("Enable charred block igniting").define("charredBlockIgniting", true);
+                    shovelExtinguishing = builder.comment("Enable shovel extinguishing").define("shovelExtinguishing", true);
+            spongeRusting = builder.comment("Enable sponge rusting").define("spongeRusting", true);
+                    pickaxeCracking = builder.comment("Enable pickaxe cracking").define("pickaxeCracking", true);
+            axeStripping = builder.comment("Enable axe stripping").define("axeStripping", true);
+                    axeScraping = builder.comment("Enable axe scraping").define("axeScraping", true);
+            builder.pop();
 
-    @ExpectPlatform
-    public static LeafPileMode fallenLeafPiles() {
-        throw new AssertionError();
-    }
-    // todo: LEAF_PILES_BLACKLIST tag
+            builder.push("worldgen_config");
+            icicleFeature = builder.comment("Enable icicle feature").define("icicleFeature", true);
+                    cryosolFeature = builder.comment("Enable cryosol feature").define("cryosolFeature", true);
+            humusFeature = builder.comment("Enable humus feature").define("humusFeature", true);
+                    rootsFeature = builder.comment("Enable roots feature").define("rootsFeature", true);
+            fluvisolFeature = builder.comment("Enable fluvisol feature").define("fluvisolFeature", true);
+                    siltFeature = builder.comment("Enable silt feature").define("siltFeature", true);
+            lakebedFeature = builder.comment("Enable lakebed feature").define("lakebedFeature", true);
+                    vertisolFeature = builder.comment("Enable vertisol feature").define("vertisolFeature", true);
+            oakLeavesFeature = builder.comment("Enable oak leaves feature").define("oakLeavesFeature", true);
+                    darkLeavesFeature = builder.comment("Enable dark leaves feature").define("darkLeavesFeature", true);
+            birchLeavesFeature = builder.comment("Enable birch leaves feature").define("birchLeavesFeature", true);
+                    spruceLeavesFeature = builder.comment("Enable spruce leaves feature").define("spruceLeavesFeature", true);
+            builder.pop();
 
-    @ExpectPlatform
-    public static boolean fallingIcicles() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int icicleRarity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean blockGrowths() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int leafPileMaxHeight() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int leafPileReach() {
-        throw new AssertionError();
-    }
-
-    public enum LeafPileMode {
-        LEAF_LAYER, SIMPLE, OFF
-    }
-
-    @ExpectPlatform
-    public static double humusSpawnBelowChance() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    @Nullable
-    public static boolean leggingsPreventThornDamage() {;
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean composterDropsDirt() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean featherFallingFarmers() {
-        throw new AssertionError();
-    }
-
-    //TODO: fix campfire soot onto non burnable
-    //fire stuff
-
-    @ExpectPlatform
-    public static boolean fireCharsWood() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean ashSpawns() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean sootSpawns() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean flammableCobwebs() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean vitrifiedSand() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean fulgurite() {
-        throw new AssertionError();
-    }
-
-    //frost
-
-    @ExpectPlatform
-    public static boolean freezingWater() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int freezingWaterSeverity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean permafrostFreezing() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int freezingPermafrostSeverity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean icicleFreezing() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static int freezingIcicleSeverity() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean thinIceFormation() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean thinIceMelting() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean glassFrosting() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean naturalIceMelt() { //?
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean iciclePlacement() { //?
-        throw new AssertionError();
-    }
-
-
-    //food
-
-    @ExpectPlatform
-    public static boolean icicleFood() {
-        throw new AssertionError();
-    }
-
-
-    public boolean lightningCreateMagma = true; //bg
-    public boolean lightningCreateLava = true; //bg
-    public boolean lightningCreateVitrifiedSand = true;
-
-
-    //client configs
-
-    @ExpectPlatform
-    public static boolean fallingLeafParticles() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean leafPilesParticles() {
-        throw new AssertionError();
-    }
-
-    @ExpectPlatform
-    public static boolean leafDecaySound() {
-        throw new AssertionError();
-    }
-
-
-    //TODO: turn into datapack
-    @Config(name = "generators_config")
-    public static final class GeneratorsConfig implements ConfigData {
-
-        public boolean allGenerators = true;
-        public boolean mossBurning = true;
-        public boolean basaltGenerator = true;
-        public boolean deepslateGenerator = true;
-        public boolean graniteGenerator = true;
-        public boolean andesiteGenerator = true;
-        public boolean dioriteGenerator = true;
-        public boolean tuffGenerator = true;
-        public boolean blackstoneGenerator = true;
-        public boolean magmaGenerator = true;
-        public boolean terracottaGenerator = true;
-        public boolean vitrifiedSandGenerator = true;
-        public boolean cryingObsidianGenerator = true;
-        public boolean iceGenerator = true;
-
-        private GeneratorsConfig() {
+            SPEC = builder.build();
         }
     }
-
-    @Config(name = "item_uses_config")
-    public static final class ItemUsesConfig implements ConfigData {
-
-        public boolean cauldronWashing = false;
-        public boolean pistonSliming = true;
-        public boolean soilShearing = true;
-        public boolean azaleaShearing = true;
-        public boolean mossShearing = true;
-        public boolean mossBurning = true;
-        public boolean charredBlockIgniting = true;
-        public boolean shovelExtinguishing = true;
-        public boolean spongeRusting = true;
-        public boolean pickaxeCracking = true;
-        public boolean axeStripping = true;
-        public boolean axeScraping = true;
-
-        private ItemUsesConfig() {
-        }
-    }
-
-    //not needed on forge which is data driven
-    @Config(name = "worldgen_config")
-    public static final class WorldgenConfig implements ConfigData {
-
-        public boolean icicleFeature = true;
-        public boolean cryosolFeature = true;
-        public boolean humusFeature = true;
-        public boolean rootsFeature = true;
-        public boolean fluvisolFeature = true;
-        public boolean siltFeature = true;
-        public boolean lakebedFeature = true;
-        public boolean vertisolFeature = true;
-        public boolean oakLeavesFeature = true;
-        public boolean darkLeavesFeature = true;
-        public boolean birchLeavesFeature = true;
-        public boolean spruceLeavesFeature = true;
-
-
-        public static ForgeConfigSpec.DoubleValue MOSS_CLUMP_CHANCE;
-        public static ForgeConfigSpec.BooleanValue ICICLE_FIRE_RESISTANCE;
-        public static ForgeConfigSpec.BooleanValue ICICLE_FOOD;
-
-        public static ForgeConfigSpec.BooleanValue CRACK_REQUIRES_SHIFTING;
-
-        public static ForgeConfigSpec.DoubleValue HUMUS_SPAWN_BELOW_LEAVES;
-
-
-        public static ForgeConfigSpec.BooleanValue VITRIFIED_LAVA;
-
-        public static ForgeConfigSpec.BooleanValue HUMUS_PATCHES;
-        public static ForgeConfigSpec.BooleanValue BLOCK_GROWTH;
-
-    }
+}
