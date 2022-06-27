@@ -1,8 +1,11 @@
-package com.ordana.immersive_weathering.registry.entities;
+package com.ordana.immersive_weathering.entities;
 
 import com.ordana.immersive_weathering.blocks.LayerBlock;
+import com.ordana.immersive_weathering.reg.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -10,6 +13,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
@@ -21,32 +25,47 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Author: MehVahdJukaar
- */
+public class FallingLayerEntity extends FallingBlockEntity {
 
-public class FallingAshEntity extends ImprovedFallingBlockEntity {
-
-    public FallingAshEntity(EntityType<FallingAshEntity> type, Level level) {
+    public FallingLayerEntity(EntityType<FallingLayerEntity> type, Level level) {
         super(type, level);
     }
 
-    public FallingAshEntity(Level level) {
-        super(ModEntities.FALLING_ASH, level);
+    public FallingLayerEntity(Level level) {
+        this(ModEntities.FALLING_LAYER.get(), level);
+    }
+    public FallingLayerEntity(Level level, BlockPos pos,
+                              BlockState blockState) {
+        super(ModEntities.FALLING_LAYER.get(), level);
+        this.blocksBuilding = true;
+        this.xo = pos.getX() + 0.5D;
+        this.yo = pos.getY();
+        this.zo = pos.getZ() + 0.5D;
+        this.setPos(xo, yo + (double) ((1.0F - this.getBbHeight()) / 2.0F), zo);
+        this.setDeltaMovement(Vec3.ZERO);
+        this.setStartPos(this.blockPosition());
+        this.setBlockState(blockState);
     }
 
-    public FallingAshEntity(Level level, BlockPos pos, BlockState blockState) {
-        super(ModEntities.FALLING_ASH, level, pos, blockState, false);
+    public void setBlockState(BlockState state) {
+        if (state.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            state = state.setValue(BlockStateProperties.WATERLOGGED, false);
+        }
+        CompoundTag tag = new CompoundTag();
+        tag.put("BlockState", NbtUtils.writeBlockState(state));
+        tag.putInt("Time", this.time);
+        this.readAdditionalSaveData(tag);
     }
 
-    public static FallingAshEntity fall(Level level, BlockPos pos, BlockState state) {
-        FallingAshEntity entity = new FallingAshEntity(level, pos, state);
+    public static FallingLayerEntity fall(Level level, BlockPos pos, BlockState state) {
+        FallingLayerEntity entity = new FallingLayerEntity(level, pos, state);
         level.setBlock(pos, state.getFluidState().createLegacyBlock(), 3);
         level.addFreshEntity(entity);
         return entity;

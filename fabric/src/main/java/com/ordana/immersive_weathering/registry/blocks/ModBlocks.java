@@ -1,6 +1,9 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
+import com.ordana.immersive_weathering.blocks.LayerBlock;
+import com.ordana.immersive_weathering.blocks.soil.CrackedMudBlock;
+import com.ordana.immersive_weathering.blocks.test.*;
 import com.ordana.immersive_weathering.registry.ModParticles;
 import com.ordana.immersive_weathering.registry.blocks.charred.*;
 import com.ordana.immersive_weathering.registry.blocks.crackable.Crackable;
@@ -68,7 +71,7 @@ public class ModBlocks {
 
     public static final Block SAND_LAYER_BLOCK = new SandLayerBlock(Blocks.SAND.defaultBlockState(),14406560, FabricBlockSettings.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.5f).sound(SoundType.SAND).isSuffocating(NEVER).isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(SandLayerBlock.LAYERS) >= 8).noOcclusion());
     public static final Block RED_SAND_LAYER_BLOCK = new SandLayerBlock(Blocks.RED_SAND.defaultBlockState(),11098145, FabricBlockSettings.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE).strength(0.5f).sound(SoundType.SAND).isSuffocating(NEVER).isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(SandLayerBlock.LAYERS) >= 8).noOcclusion());
-    public static final Block ASH_LAYER_BLOCK = new AshLayerBlock(FabricBlockSettings.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW).isSuffocating(NEVER).isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(AshLayerBlock.LAYERS) >= 8).noOcclusion());
+    public static final Block ASH_LAYER_BLOCK = new LayerBlock(FabricBlockSettings.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW).isSuffocating(NEVER).isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(LayerBlock.LAYERS) >= 8).noOcclusion());
     public static final Block ASH_BLOCK = new AshBlock(FabricBlockSettings.of(Material.SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW));
     public static final Block SOOT = new SootBlock(FabricBlockSettings.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.SNOW).randomTicks());
 

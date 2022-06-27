@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.block_growth.position_test;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.ordana.immersive_weathering.mixin.accessors.BiomeAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.Level;
@@ -32,8 +33,8 @@ record TemperatureMatchTest(float max, float min, Optional<Boolean> useLocalPos)
         float temp;
         if (level.dimensionType().ultraWarm()) {
             temp = 3;
-        } else if (useLocalPos.isPresent() && useLocalPos.get()) {
-            temp = biome.value().getTemperature(pos);
+        } else if (useLocalPos.isPresent() && useLocalPos.get() && biome.value() instanceof BiomeAccessor ba) {
+            temp = ba.invokeGetTemperature(pos);
         } else {
             temp = biome.value().getBaseTemperature();
         }

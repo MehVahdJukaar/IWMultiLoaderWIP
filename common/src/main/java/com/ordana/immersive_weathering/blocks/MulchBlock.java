@@ -1,12 +1,14 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.blocks;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
+import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
@@ -31,17 +34,10 @@ import java.util.Random;
 public class MulchBlock extends FarmBlock {
 
     public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public static final int MAX_MOISTURE = 7;
 
     public MulchBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(MOISTURE, 0));
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -61,7 +57,7 @@ public class MulchBlock extends FarmBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return Shapes.block();
     }
 
     @Override
@@ -105,10 +101,10 @@ public class MulchBlock extends FarmBlock {
             var targetPos = pos.relative(direction);
             var biome = world.getBiome(pos);
             BlockState neighborState = world.getBlockState(targetPos);
-            if (neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+            if (neighborState.getFluidState().is(FluidTags.WATER)) {
                 isTouchingWater = true;
             }
-            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().is(FluidTags.WATER)) {
                 temperature--;
             } else if (neighborState.is(ModTags.MAGMA_SOURCE) || biome.is(ModTags.HOT) || world.dimension() == Level.NETHER) {
                 temperature++;
@@ -126,7 +122,7 @@ public class MulchBlock extends FarmBlock {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.causeFallDamage(fallDistance, 1F, DamageSource.FALL);
+        entity.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL);
     }
 
     @Override

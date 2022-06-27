@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks.test;
+package com.ordana.immersive_weathering.blocks.test;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
@@ -7,13 +7,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -21,11 +21,11 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.Random;
 
-public class SiltBlock extends Block implements IConditionalGrowingBlock {
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    protected static final VoxelShape PUDDLE_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
+public class FluvisolBlock extends SoilBlock implements IConditionalGrowingBlock {
+    protected static final VoxelShape SHAPE = box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
+    protected static final VoxelShape PUDDLE_SHAPE = box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
 
-    public SiltBlock(Properties settings) {
+    public FluvisolBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(SOAKED, false).setValue(FERTILE, true));
     }
@@ -37,6 +37,7 @@ public class SiltBlock extends Block implements IConditionalGrowingBlock {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(SOAKED);
         stateManager.add(FERTILE);
+        stateManager.add(SNOWY);
     }
 
     @Override
@@ -64,8 +65,8 @@ public class SiltBlock extends Block implements IConditionalGrowingBlock {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         BlockState upState = world.getBlockState(pos.above());
         BlockState downState = world.getBlockState(pos.below());
-        if (downState.is(BlockTags.DIRT)) {
-            world.setBlockAndUpdate(pos.below(), ModBlocks.FLUVISOL.defaultBlockState());
+        if (downState.is(ModBlocks.SILT) || downState.is(ModBlocks.FLUVISOL)) {
+            world.setBlockAndUpdate(pos.below(), Blocks.DIRT.defaultBlockState());
         }
         for (Direction direction : Direction.values()) {
             var targetPos = pos.relative(direction);

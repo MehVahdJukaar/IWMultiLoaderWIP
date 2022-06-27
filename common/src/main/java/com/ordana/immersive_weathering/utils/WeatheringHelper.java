@@ -8,11 +8,14 @@ import com.ordana.immersive_weathering.platform.CommonPlatform;
 import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModParticles;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -199,11 +202,37 @@ public class WeatheringHelper {
         return level.getBiome(pos).value().getTemperature(pos);
     }
 
-    public boolean isCold(Biome biome, BlockPos pos) {
-        return false;
+    public boolean isPosWet(Level level, Holder<Biome> biome, BlockPos pos) {
+        return biome.is(ModTags.WET);
     }
 
-    public boolean isWarm(Biome level, BlockPos pos) {
-        return false;
+    public boolean isPosHot(Level level, Holder<Biome> biome, BlockPos pos) {
+        return biome.is(ModTags.HOT);
+    }
+
+    private boolean shouldGetWet(ServerLevel world, BlockPos pos) {
+        int temperature = 0;
+        boolean isTouchingWater = false;
+        for (Direction direction : Direction.values()) {
+            var targetPos = pos.relative(direction);
+            var biome = world.getBiome(pos);
+            BlockState neighborState = world.getBlockState(targetPos);
+
+            if (neighborState.getFluidState().is(FluidTags.WATER)) {
+                isTouchingWater = true;
+                break;
+            }
+
+            if (world.isRainingAt(pos.relative(direction))) {
+                temperature--;
+            } else if (neighborState.is(ModTags.MAGMA_SOURCE) || world.dimensionType().ultraWarm()) {
+                temperature++;
+            } else if (isPosWet(world, biome, pos)) {
+                temperature--;
+            } else if (isPosHot(world, biome, pos)) {
+                temperature++;
+            }
+        }
+        return temperature < 0 || isTouchingWater;
     }
 }

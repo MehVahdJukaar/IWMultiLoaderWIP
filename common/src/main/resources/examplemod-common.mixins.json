@@ -17,7 +17,8 @@
     "RabbitEatGoalMixin",
     "RabbitMixin",
     "RootedDirtBlockMixin",
-    "SweetBerryBushMixin"
+    "SweetBerryBushMixin",
+    "accessors.BiomeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

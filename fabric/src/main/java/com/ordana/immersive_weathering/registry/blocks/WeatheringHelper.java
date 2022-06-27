@@ -5,7 +5,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
 import com.ordana.immersive_weathering.registry.ModParticles;
 import com.ordana.immersive_weathering.registry.blocks.charred.CharredBlock;
-import com.ordana.immersive_weathering.registry.blocks.test.FulguriteBlock;
+import com.ordana.immersive_weathering.blocks.test.FulguriteBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;

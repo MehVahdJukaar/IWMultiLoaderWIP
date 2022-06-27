@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.reg;
 
 import com.ordana.immersive_weathering.entities.FallingIcicleEntity;
+import com.ordana.immersive_weathering.entities.FallingLayerEntity;
 import com.ordana.immersive_weathering.entities.IcicleBlockEntity;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import net.minecraft.world.entity.EntityType;

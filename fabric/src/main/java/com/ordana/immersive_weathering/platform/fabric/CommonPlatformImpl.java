@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -68,6 +69,8 @@ public class CommonPlatformImpl {
     public static FlowingFluid getFlowingFluid(LiquidBlock block) {
         return null;
     }
+
+
 
 
 }

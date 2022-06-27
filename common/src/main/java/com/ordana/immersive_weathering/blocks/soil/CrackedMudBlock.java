@@ -2,16 +2,17 @@ package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
 import com.ordana.immersive_weathering.reg.ModTags;
+import com.ordana.immersive_weathering.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Fluids;
 
 import java.util.Random;
 
@@ -43,29 +44,13 @@ public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        int temperature = 0;
-        boolean isTouchingWater = false;
-        for (Direction direction : Direction.values()) {
-            var targetPos = pos.relative(direction);
-            var biome = world.getBiome(pos);
-            BlockState neighborState = world.getBlockState(targetPos);
-            if (neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
-                isTouchingWater = true;
-            }
-            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
-                temperature--;
-            } else if (neighborState.is(ModTags.MAGMA_SOURCE) || biome.is(ModTags.HOT) || world.dimension() == Level.NETHER) {
-                temperature++;
-            }
-        }
-        if (temperature < 0 || isTouchingWater) {
-            if (!state.getValue(SOAKED)) {
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
-            }
-        } else if (temperature > 0 && state.getValue(SOAKED)) {
-            world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
+        boolean newState = shouldGetWet(world, pos);
+        if (state.getValue(SOAKED) != newState) {
+            world.setBlockAndUpdate(pos, state.setValue(SOAKED, newState));
         }
     }
+
+
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {

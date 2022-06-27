@@ -61,7 +61,7 @@ public class WeedsBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModItems.WEEDS;
+        return this;
     }
 
     @Override

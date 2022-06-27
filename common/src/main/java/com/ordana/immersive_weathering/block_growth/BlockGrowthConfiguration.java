@@ -240,7 +240,7 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
         }
     }
 
-    //builtin waterlogging support
+    //builtin waterlogged support
     private BlockState setWaterIfNeeded(BlockState toPlace, BlockState target) {
         if (toPlace.hasProperty(BlockStateProperties.WATERLOGGED) && target.getFluidState().is(FluidTags.WATER)) {
             return toPlace.setValue(BlockStateProperties.WATERLOGGED, true);
