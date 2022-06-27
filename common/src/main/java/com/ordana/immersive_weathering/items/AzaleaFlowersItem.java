@@ -1,6 +1,7 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items;
 
-import com.ordana.immersive_weathering.common.WeatheringHelper;
+
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

@@ -1,11 +1,18 @@
 package com.ordana.immersive_weathering.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
@@ -21,9 +28,38 @@ public class RegistryPlatform {
         throw new AssertionError();
     }
 
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory,
+                                                                                MobCategory category, float width, float height) {
+        return registerEntityType(name, factory, category, width, height, 5);
+    }
+
+
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory,
+                                                                                MobCategory category, float width,
+                                                                                float height, int clientTrackingRange) {
+        return registerEntityType(name, factory, category, width, height, clientTrackingRange, 3);
+    }
+
     @ExpectPlatform
-    public static <T extends EntityType<?>> Supplier<T> registerEntity(String name, Supplier<T> entity) {
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory,
+                                                                                MobCategory category, float width, float height,
+                                                                                int clientTrackingRange, int updateInterval) {
         throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> registerBlockEntityType(String name, Supplier<T> blockEntity) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BlockEntitySupplier<T> blockEntitySupplier, Block... validBlocks) {
+        throw new AssertionError();
+    }
+
+    @FunctionalInterface
+    public interface BlockEntitySupplier<T extends BlockEntity> {
+        @NotNull T create(BlockPos pos, BlockState state);
     }
 
     @ExpectPlatform
@@ -44,7 +80,7 @@ public class RegistryPlatform {
     }
 
     @ExpectPlatform //fabric
-    public static void registerBlockFlammability(Block item, int burn, int spread) {
+    public static void registerBlockFlammability(Block item, int fireSpread, int flammability) {
         throw new AssertionError();
     }
 

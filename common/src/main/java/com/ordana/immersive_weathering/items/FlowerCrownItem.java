@@ -1,9 +1,7 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items;
 
-import com.ordana.immersive_weathering.common.ModParticles;
+import com.ordana.immersive_weathering.reg.ModParticles;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,7 +33,7 @@ public class FlowerCrownItem extends ArmorItem {
                                 v.y + entity.getY() + entity.getEyeHeight() + 0.15D,
                                 v.z + entity.getRandomZ(0.675D),
                                 1,
-                                0, 0, 0,0);
+                                0, 0, 0, 0);
                     }
                 }
             }

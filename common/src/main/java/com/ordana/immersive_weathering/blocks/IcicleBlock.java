@@ -1,10 +1,10 @@
 package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.ModDamageSource;
-import com.ordana.immersive_weathering.common.ModTags;
-import com.ordana.immersive_weathering.common.entity.FallingIcicleEntity;
-import com.ordana.immersive_weathering.common.entity.IcicleBlockEntity;
+import com.ordana.immersive_weathering.entities.FallingIcicleEntity;
+import com.ordana.immersive_weathering.entities.IcicleBlockEntity;
+import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModDamageSource;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -189,7 +189,7 @@ public class IcicleBlock extends PointedDripstoneBlock implements EntityBlock {
     @Override
     public void onBrokenAfterFall(Level world, BlockPos pos, FallingBlockEntity fallingBlockEntity) {
         if (!fallingBlockEntity.isSilent()) {
-            world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK,pos, Block.getId(this.defaultBlockState()));
+            world.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(this.defaultBlockState()));
         }
     }
 
@@ -203,7 +203,7 @@ public class IcicleBlock extends PointedDripstoneBlock implements EntityBlock {
 
         //check if it can fall first
         for (BlockState blockstate = state; isIcicle(blockstate); blockstate = level.getBlockState(mutable)) {
-            if(!this.canSurvive(blockstate, level, mutable))break;
+            if (!this.canSurvive(blockstate, level, mutable)) break;
             if (isTip(blockstate, true)) {
                 if (!FallingBlock.isFree(level.getBlockState(mutable.below()))) return;
                 break;
@@ -425,7 +425,7 @@ public class IcicleBlock extends PointedDripstoneBlock implements EntityBlock {
     }
 
     private static boolean canGrow(BlockState iceBlockState, BlockState waterState) {
-        return ((iceBlockState.is(ModTags.ICE)) && (waterState.is(Blocks.WATER)));
+        return (iceBlockState.is(ModTags.ICE) && (waterState.is(Blocks.WATER)));
     }
 
     private static Optional<BlockPos> searchInDirection(LevelAccessor world, BlockPos pos, Direction.AxisDirection direction, Predicate<BlockState> continuePredicate, Predicate<BlockState> stopPredicate, int range) {

@@ -28,8 +28,8 @@ public class LeafPileBlockItem extends BlockItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level p_43441_, Player p_43442_, InteractionHand p_43443_) {
         BlockHitResult blockhitresult = getPlayerPOVHitResult(p_43441_, p_43442_, ClipContext.Fluid.SOURCE_ONLY);
-        BlockHitResult blockhitresult1 = blockhitresult.withPosition(blockhitresult.getBlockPos().above());
-        InteractionResult interactionresult = super.useOn(new UseOnContext(p_43442_, p_43443_, blockhitresult1));
+        BlockHitResult hitResult = blockhitresult.withPosition(blockhitresult.getBlockPos().above());
+        InteractionResult interactionresult = super.useOn(new UseOnContext(p_43442_, p_43443_, hitResult));
         return new InteractionResultHolder<>(interactionresult, p_43442_.getItemInHand(p_43443_));
     }
 }

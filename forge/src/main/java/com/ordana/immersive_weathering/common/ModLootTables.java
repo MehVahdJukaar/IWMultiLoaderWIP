@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.common;
 
 import com.ordana.immersive_weathering.registry.items.ModItems;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;

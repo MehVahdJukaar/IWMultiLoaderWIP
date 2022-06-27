@@ -4,11 +4,8 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
-import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
-import com.ordana.immersive_weathering.common.blocks.charred.CharredBlock;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
-import com.ordana.immersive_weathering.integration.IntegrationHandler;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import net.minecraft.core.BlockPos;
@@ -24,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -134,7 +130,7 @@ public class WeatheringHelper {
     }
 
     public static boolean isIciclePos(BlockPos pos) {
-        int rarity = ServerConfigs.ICICLES_GENERATION_RARITY.get();
+        int rarity = ConfigPlatform.icicleRarity();
         if (rarity == 1001) return false;
         Random posRandom = new Random(Mth.getSeed(pos));
         return posRandom.nextInt(rarity) == 0;

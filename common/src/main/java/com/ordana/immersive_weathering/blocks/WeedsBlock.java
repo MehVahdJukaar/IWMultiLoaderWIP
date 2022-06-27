@@ -1,6 +1,9 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.common.ModBlocks;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.platform.RegistryPlatform;
+import com.ordana.immersive_weathering.reg.ModTags;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -8,9 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -23,8 +24,22 @@ import java.util.Random;
 
 public class WeedsBlock extends CropBlock {
 
+    private static final int FIRE_SPREAD = 60;
+    private static final int FLAMMABILITY = 100;
+
     public WeedsBlock(Properties settings) {
         super(settings);
+        RegistryPlatform.registerBlockFlammability(this, FIRE_SPREAD, FLAMMABILITY);
+    }
+
+    @PlatformOnly(PlatformOnly.FORGE)
+    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return FIRE_SPREAD;
+    }
+
+    @PlatformOnly(PlatformOnly.FORGE)
+    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return FLAMMABILITY;
     }
 
     @Override
@@ -40,7 +55,7 @@ public class WeedsBlock extends CropBlock {
 
     @Override
     protected ItemLike getBaseSeedId() {
-        return ModBlocks.WEEDS.get();
+        return this;
     }
 
     @Override
@@ -55,20 +70,10 @@ public class WeedsBlock extends CropBlock {
     }
 
     @Override
-    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 60;
-    }
-
-    @Override
-    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 100;
-    }
-
-    @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (level.random.nextFloat() < 0.1 && entity instanceof Player player) { //no more dead villagers
             if (!level.isClientSide && state.getValue(AGE) > 0 && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-                if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty()) {
+                if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty() || !ConfigPlatform.leggingsPreventThornDamage()) {
                     double d0 = Math.abs(entity.getX() - entity.xOld);
                     double d1 = Math.abs(entity.getZ() - entity.zOld);
                     if (d0 >= (double) 0.003F || d1 >= (double) 0.003F) {
@@ -79,5 +84,17 @@ public class WeedsBlock extends CropBlock {
         }
     }
 
+    //not needed on forge
+
+    @PlatformOnly(PlatformOnly.FABRIC)
+    public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+        BlockPos below = pos.below();
+        return this.mayPlaceOn(world.getBlockState(below), world, below);
+    }
+
+    @PlatformOnly(PlatformOnly.FABRIC)
+    protected boolean mayPlaceOn(BlockState floor, BlockGetter world, BlockPos pos) {
+        return floor.is(ModTags.FERTILE_BLOCKS) || floor.is(BlockTags.DIRT) || floor.is(ModTags.CRACKED) || floor.is(ModTags.MOSSY);
+    }
 
 }

@@ -3,6 +3,11 @@ package com.ordana.immersive_weathering.blocks;
 import com.ordana.immersive_weathering.common.ModBlocks;
 import com.ordana.immersive_weathering.common.WeatheringHelper;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.platform.RegistryPlatform;
+import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,18 +38,19 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public class LeafPileBlock extends Block implements BonemealableBlock {
 
+    private static final int FIRE_SPREAD = 30;
+    private static final int FLAMMABILITY = 60;
+
     public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 0, 8);
-    ;
+
     protected static final VoxelShape[] LAYERS_TO_SHAPE = new VoxelShape[]{
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -60,7 +66,7 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
     private final boolean hasFlowers; //if it can be boneMealed
     private final boolean hasThorns; //if it can hurt & make podzol
     private final boolean isLeafy; //if it can make humus
-    private final List<Lazy<SimpleParticleType>> particles;
+    private final List<Supplier<SimpleParticleType>> particles;
 
     public LeafPileBlock(Properties settings, boolean hasFlowers, boolean hasThorns, boolean isLeafy,
                          List<Supplier<SimpleParticleType>> particles) {
@@ -68,9 +74,21 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, 1));
         this.hasFlowers = hasFlowers;
         this.hasThorns = hasThorns;
-        this.particles = particles.stream().map(Lazy::of).collect(Collectors.toList());
+        this.particles = particles;
         this.isLeafy = isLeafy;
+        RegistryPlatform.registerBlockFlammability(this, FIRE_SPREAD, FLAMMABILITY);
     }
+
+    @PlatformOnly(PlatformOnly.FORGE)
+    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return FIRE_SPREAD;
+    }
+
+    @PlatformOnly(PlatformOnly.FABRIC)
+    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return FLAMMABILITY;
+    }
+
 
     @Override
     public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
@@ -245,15 +263,6 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
         }
     }
 
-    @Override
-    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 30;
-    }
-
-    @Override
-    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return 60;
-    }
 
     @Override
     public boolean isRandomlyTicking(BlockState state) {
@@ -264,7 +273,8 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         int layers = this.getLayers(state);
-        if (layers > 1 && random.nextFloat() < ServerConfigs.HUMUS_SPAWN_BELOW_LEAVES.get()) {
+        double chance = ConfigPlatform.humusSpawnBelowChance();
+        if (layers > 1 && random.nextFloat() < chance) {
             //TODO: maybe move this to data
             if (this.isLeafy || this.hasThorns) {
                 BlockState below = world.getBlockState(pos.below());

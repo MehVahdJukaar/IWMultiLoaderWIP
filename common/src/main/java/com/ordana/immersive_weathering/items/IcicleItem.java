@@ -1,7 +1,7 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items;
 
-import com.ordana.immersive_weathering.common.ModFoods;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.reg.ModFoods;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -25,11 +25,11 @@ public class IcicleItem extends BlockItem {
     @Nullable
     @Override
     public FoodProperties getFoodProperties() {
-        return ServerConfigs.ICICLE_FOOD.get() ? ModFoods.ICICLE : null;
+        return ConfigPlatform.icicleFood() ? ModFoods.ICICLE : null;
     }
 
     @Override
     public boolean isEdible() {
-        return ServerConfigs.ICICLE_FOOD.get();
+        return ConfigPlatform.icicleFood();
     }
 }

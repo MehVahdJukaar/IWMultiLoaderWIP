@@ -1,12 +1,6 @@
 package com.ordana.immersive_weathering.platform;
 
-import com.google.common.collect.ImmutableBiMap;
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-
-import java.util.List;
-import java.util.function.Supplier;
 
 //this will be messy
 public class ConfigPlatform {
@@ -80,6 +74,10 @@ public class ConfigPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static int icicleRarity() {
+        throw new AssertionError();
+    }
 
     @ExpectPlatform
     public static boolean blockGrowths() {
@@ -101,7 +99,7 @@ public class ConfigPlatform {
     }
 
     @ExpectPlatform
-    public static boolean leafPileConvertBelow() {
+    public static double humusSpawnBelowChance() {
         throw new AssertionError();
     }
 
@@ -210,6 +208,15 @@ public class ConfigPlatform {
         throw new AssertionError();
     }
 
+
+    //food
+
+    @ExpectPlatform
+    public static boolean icicleFood() {
+        throw new AssertionError();
+    }
+
+
     public boolean lightningCreateMagma = true; //bg
     public boolean lightningCreateLava = true; //bg
     public boolean lightningCreateVitrifiedSand = true;
@@ -231,6 +238,7 @@ public class ConfigPlatform {
     public static boolean leafDecaySound() {
         throw new AssertionError();
     }
+
 
 
     //TODO: turn into datapack
