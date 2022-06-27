@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -46,7 +47,7 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
     private static final int FIRE_SPREAD = 30;
     private static final int FLAMMABILITY = 60;
 
-    public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 0, 8);
+    public static final IntegerProperty LAYERS = ModBlockProperties.LAYERS;
 
     protected static final VoxelShape[] LAYERS_TO_SHAPE = new VoxelShape[]{
             Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),

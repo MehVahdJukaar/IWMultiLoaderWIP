@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ReloadableServerResources.class)
 public abstract class DataPackContentMixin {
 
-    @Inject(method = "refresh", at = @At("TAIL"))
+    @Inject(method = "updateRegistryTags", at = @At("TAIL"))
     private void onTagReload(RegistryAccess registryAccess, CallbackInfo ci){
         BlockGrowthHandler.rebuild(registryAccess);
     }

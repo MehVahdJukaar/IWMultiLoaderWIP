@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryCodecs;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -17,7 +18,7 @@ public class BlockSetMatchTest extends RuleTest {
 
     public static final Codec<BlockSetMatchTest> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).fieldOf("blocks").forGetter(b -> b.blocks),
-            Codec.FLOAT.optionalFieldOf("probability").forGetter(b -> Optional.of(b.probability))
+            Codec.FLOAT.optionalFieldOf("probability",1f).forGetter(b->b.probability)
     ).apply(instance, BlockSetMatchTest::new));
 
     public static final RuleTestType<BlockSetMatchTest> TYPE = RuleTestType.register("immersive_weathering:block_set_match", CODEC);
@@ -25,9 +26,9 @@ public class BlockSetMatchTest extends RuleTest {
     private final HolderSet<Block> blocks;
     private final float probability;
 
-    public BlockSetMatchTest(HolderSet<Block> blocks, Optional<Float> chance) {
+    public BlockSetMatchTest(HolderSet<Block> blocks, Float chance) {
         this.blocks = blocks;
-        this.probability = chance.orElse(1f);
+        this.probability = chance;
     }
 
     public boolean test(BlockState state, Random random) {

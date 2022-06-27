@@ -7,10 +7,13 @@ import com.ordana.immersive_weathering.common.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
 import com.ordana.immersive_weathering.common.WeatheringHelper;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -145,5 +148,30 @@ public class LeavesGrowth implements IBlockGrowth {
     @Override
     public Collection<TickSource> getTickSources() {
         return List.of(TickSource.BLOCK_TICK);
+    }
+
+
+
+
+    //FABRIC STUFF: TODO: Merge
+   if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayPiles) {
+        if (state.hasProperty(LeavesBlock.PERSISTENT) && !state.getValue(LeavesBlock.PERSISTENT) && state.hasProperty(LeavesBlock.DISTANCE) && state.getValue(LeavesBlock.DISTANCE) == 7 && state.is(ModTags.VANILLA_LEAVES)) {
+            var leafPile = WeatheringHelper.getFallenLeafPile(state).orElse(null);
+            if (leafPile == null) return;
+            BlockState baseLeaf = leafPile.defaultBlockState().setValue(LeafPileBlock.LAYERS, 0);
+            var leafParticle = WeatheringHelper.getFallenLeafParticle(state).orElse(null);
+            if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayParticles) {
+                world.sendParticles(leafParticle, (double) pos.getX() + 0.5D,
+                        (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 10,
+                        0.5D, 0.5D, 0.5D, 0.0D);
+            }
+            if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecaySound) {
+                world.playSound(null, pos, SoundEvents.AZALEA_LEAVES_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+            }
+            if (world.random.nextFloat() < 0.3f) {
+                world.setBlock(pos, baseLeaf.setValue(LeafPileBlock.LAYERS, Mth.randomBetweenInclusive(random, 1, 6)), 2);
+                ci.cancel();
+            }
+        }
     }
 }

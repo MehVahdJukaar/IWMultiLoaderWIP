@@ -2,7 +2,6 @@ package com.ordana.immersive_weathering.block_growth.position_test;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;

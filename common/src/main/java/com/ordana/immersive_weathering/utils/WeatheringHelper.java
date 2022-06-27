@@ -193,6 +193,8 @@ public class WeatheringHelper {
         return false;
     }
 
+
+    //TODO: add serene seasons compat
     public float getTemp(Level level, BlockPos pos) {
         return level.getBiome(pos).value().getTemperature(pos);
     }

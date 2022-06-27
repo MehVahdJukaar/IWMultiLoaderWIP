@@ -1,11 +1,19 @@
 {
   "required": true,
-  "package": "net.examplemod.mixin",
+  "package": "com.ordana.immersive_weathering.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
-    "MixinTitleScreen"
+    "RandomBlockMatchTestAccessor"
   ],
   "mixins": [
+    "BeeMixin",
+    "BlocksMixin",
+    "CampfireMixin",
+    "IceMixin",
+    "LargeFernBlockMixin",
+    "LeavesMixin",
+    "LightningEntityMixin",
+    "RabbitMixin"
   ],
   "injectors": {
     "defaultRequire": 1

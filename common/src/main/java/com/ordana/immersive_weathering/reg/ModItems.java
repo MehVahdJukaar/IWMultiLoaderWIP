@@ -1,12 +1,7 @@
 package com.ordana.immersive_weathering.reg;
 
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
-import com.ordana.immersive_weathering.common.items.AzaleaFlowersItem;
-import com.ordana.immersive_weathering.common.items.FlowerCrownItem;
-import com.ordana.immersive_weathering.common.items.IceSickleItem;
-import com.ordana.immersive_weathering.common.items.IcicleItem;
-import com.ordana.immersive_weathering.items.BurnableItem;
-import com.ordana.immersive_weathering.items.LeafPileBlockItem;
+import com.ordana.immersive_weathering.items.*;
 import com.ordana.immersive_weathering.items.materials.FlowerCrownMaterial;
 import com.ordana.immersive_weathering.items.materials.IcicleToolMaterial;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
@@ -76,8 +71,17 @@ public class ModItems {
 
     public static final Supplier<Item> MOSS_CLUMP = regItem("moss_clump", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).food(ModFoods.MOSS_CLUMP)));
+
     public static final Supplier<Item> GOLDEN_MOSS_CLUMP = regItem("golden_moss_clump", () ->
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).food(ModFoods.GOLDEN_MOSS_CLUMP)));
+
+    public static final Supplier<Item> ENCHANTED_GOLDEN_MOSS_CLUMP = regItem("enchanted_golden_moss_clump", () ->
+            new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)
+                    .rarity(Rarity.EPIC).food(ModFoods.ENCHANTED_GOLDEN_MOSS_CLUMP)));
+
+    //I hate pond water ;_;
+    public static final Supplier<Item> POND_WATER = regItem("pond_water",()-> new PondWaterItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(ModFoods.POND_WATER).stacksTo(16));
+
 
     //bark
 

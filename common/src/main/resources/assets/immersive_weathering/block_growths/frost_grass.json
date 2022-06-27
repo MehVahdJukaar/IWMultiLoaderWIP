@@ -1,0 +1,40 @@
+{
+  "growth_chance": 0.05,
+  "position_predicates": [
+    {
+      "biomes": [
+        "#immersive_weathering:icy"
+      ],
+      "predicate_type": "biome_match"
+    },
+    {
+      "predicate_type": "day_test",
+      "day": false
+    }
+  ],
+  "target_self": true,
+  "growth_for_face": [
+    {
+      "direction": "up",
+      "weight": 1,
+      "growth": [
+        {
+          "data": {
+            "block": {
+              "Name": "immersive_weathering:frosty_grass",
+              "Properties": {
+                "half": "lower"
+              }
+            }
+          },
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "owners": "minecraft:grass",
+  "replacing_target": {
+    "block": "minecraft:air",
+    "predicate_type": "minecraft:block_match"
+  }
+}

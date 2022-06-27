@@ -6,6 +6,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.immersive_weathering.block_growth.area_condition.AreaCondition;
 import com.ordana.immersive_weathering.block_growth.position_test.PositionRuleTest;
+import com.ordana.immersive_weathering.mixin.RandomBlockMatchTestAccessor;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
@@ -32,20 +34,20 @@ import java.util.stream.Collectors;
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class BlockGrowthConfiguration implements IBlockGrowth {
 
-    public static final BlockGrowthConfiguration EMPTY = new BlockGrowthConfiguration(Optional.empty(), 1,
-            AlwaysTrueTest.INSTANCE, Optional.empty(), List.of(), Optional.of(HolderSet.direct(Holder.direct(Blocks.AIR))),
-            Optional.empty(), Optional.empty(), Optional.empty());
+    public static final BlockGrowthConfiguration EMPTY = new BlockGrowthConfiguration(List.of(), 1,
+            AlwaysTrueTest.INSTANCE, AreaCondition.EMPTY, List.of(), Optional.of(HolderSet.direct(Holder.direct(Blocks.AIR))),
+            List.of(), false, false);
 
     public static final Codec<BlockGrowthConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            TickSource.CODEC.listOf().optionalFieldOf("tick_sources").forGetter(s -> Optional.of(s.getTickSources())),
+            TickSource.CODEC.listOf().optionalFieldOf("tick_sources",List.of(TickSource.BLOCK_TICK)).forGetter(BlockGrowthConfiguration::getTickSources),
             Codec.FLOAT.fieldOf("growth_chance").forGetter(BlockGrowthConfiguration::getGrowthChance),
             RuleTest.CODEC.fieldOf("replacing_target").forGetter(BlockGrowthConfiguration::getTargetPredicate),
-            AreaCondition.CODEC.optionalFieldOf("area_condition").forGetter(BlockGrowthConfiguration::getAreaCondition),
+            AreaCondition.CODEC.optionalFieldOf("area_condition",AreaCondition.EMPTY).forGetter(BlockGrowthConfiguration::getAreaCondition),
             DirectionalList.CODEC.listOf().fieldOf("growth_for_face").forGetter(BlockGrowthConfiguration::encodeRandomLists),
             RegistryCodecs.homogeneousList(Registry.BLOCK_REGISTRY).optionalFieldOf("owners").forGetter(b -> Optional.ofNullable(b.owners)),
-            PositionRuleTest.CODEC.listOf().optionalFieldOf("position_predicates").forGetter(BlockGrowthConfiguration::getPositionTests),
-            Codec.BOOL.optionalFieldOf("target_self").forGetter(b -> b.targetSelf() ? Optional.of(Boolean.TRUE) : Optional.empty()),
-            Codec.BOOL.optionalFieldOf("destroy_target").forGetter(b -> b.destroyTarget() ? Optional.of(Boolean.TRUE) : Optional.empty())
+            PositionRuleTest.CODEC.listOf().optionalFieldOf("position_predicates",List.of()).forGetter(BlockGrowthConfiguration::getPositionTests),
+            Codec.BOOL.optionalFieldOf("target_self",false).forGetter(BlockGrowthConfiguration::targetSelf),
+            Codec.BOOL.optionalFieldOf("destroy_target",false).forGetter(BlockGrowthConfiguration::destroyTarget)
     ).apply(instance, BlockGrowthConfiguration::new));
 
     @Nullable //null for universal ones
@@ -63,15 +65,15 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
     private final int maxRange;
     private final AreaCondition areaCondition;
 
-    public BlockGrowthConfiguration(Optional<List<TickSource>> sources, float growthChance,
-                                    RuleTest targetPredicate, Optional<AreaCondition> areaCheck,
+    public BlockGrowthConfiguration(List<TickSource> sources, float growthChance,
+                                    RuleTest targetPredicate, AreaCondition areaCheck,
                                     List<DirectionalList> growthForDirection,
-                                    Optional<HolderSet<Block>> owners, Optional<List<PositionRuleTest>> biomePredicates,
-                                    Optional<Boolean> targetSelf, Optional<Boolean> destroyTarget) {
-        this.tickSources =  sources.orElse(List.of(TickSource.BLOCK_TICK));
+                                    Optional<HolderSet<Block>> owners, List<PositionRuleTest> biomePredicates,
+                                    Boolean targetSelf, Boolean destroyTarget) {
+        this.tickSources =  sources;
         this.growthChance = growthChance;
         this.owners = owners.orElse(null);
-        this.positionTests = biomePredicates.orElse(List.of());
+        this.positionTests = biomePredicates;
         this.targetPredicate = targetPredicate;
 
         SimpleWeightedRandomList.Builder<Direction> dirBuilder = SimpleWeightedRandomList.builder();
@@ -100,10 +102,10 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
         this.blockGrowths = growthBuilder.build();
         this.possibleBlocks = blockBuilder.build();
 
-        this.areaCondition = areaCheck.orElse(AreaCondition.EMPTY);
+        this.areaCondition = areaCheck;
         this.maxRange = areaCondition.getMaxRange();
-        this.targetSelf = targetSelf.orElse(false);
-        this.destroyTarget = destroyTarget.orElse(false);
+        this.targetSelf = targetSelf;
+        this.destroyTarget = destroyTarget;
     }
 
     private void decodeRandomList(Direction direction, SimpleWeightedRandomList.Builder<Direction> dirBuilder, ImmutableMap.Builder<Direction,
@@ -140,8 +142,8 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
         return targetPredicate;
     }
 
-    public Optional<AreaCondition> getAreaCondition() {
-        return areaCondition == AreaCondition.EMPTY ? Optional.empty() : Optional.of(areaCondition);
+    public AreaCondition getAreaCondition() {
+        return areaCondition;
     }
 
     public Set<Block> getPossibleBlocks() {
@@ -156,8 +158,8 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
         return destroyTarget;
     }
 
-    public Optional<List<PositionRuleTest>> getPositionTests() {
-        return this.positionTests.isEmpty() ? Optional.empty() : Optional.of(this.positionTests);
+    public List<PositionRuleTest> getPositionTests() {
+        return this.positionTests;
     }
 
     @Override
@@ -176,7 +178,7 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
                 //they all need to be true
                 if (!positionTest.test(biome, pos, level)) return false;
             }
-            return level.isAreaLoaded(pos, maxRange);
+            return CommonPlatform.isAreaLoaded(level, pos, maxRange);
         }
         return false;
     }
@@ -203,9 +205,9 @@ public class BlockGrowthConfiguration implements IBlockGrowth {
             BlockState target = level.getBlockState(targetPos);
 
             if (targetSelf || targetPredicate.test(target, seed)) {
-                if (targetSelf && targetPredicate instanceof RandomBlockMatchTest rbm) {
+                if (targetSelf && targetPredicate instanceof RandomBlockMatchTestAccessor rbm) {
                     //hack to get a probability here for self target
-                    if (!(seed.nextFloat() < rbm.probability)) return;
+                    if (!(seed.nextFloat() < rbm.getProbability())) return; //TODO: use accessor here
                 }
                 var l = blockGrowths.get(dir);
                 if (l != null) {

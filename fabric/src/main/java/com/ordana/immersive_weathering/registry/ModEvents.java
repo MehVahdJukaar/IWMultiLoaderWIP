@@ -58,6 +58,8 @@ public class ModEvents {
     private static final HashMap<Block, Block> UNWAXED_BLOCKS = new HashMap<>();
     private static final HashMap<Block, Block> FLOWERY_BLOCKS = new HashMap<>();
 
+    //TODO: add composter stuff
+
     static {
         CLEANED_BLOCKS.put(Blocks.MOSSY_COBBLESTONE, Blocks.COBBLESTONE);
         CLEANED_BLOCKS.put(Blocks.MOSSY_COBBLESTONE_SLAB, Blocks.COBBLESTONE_SLAB);

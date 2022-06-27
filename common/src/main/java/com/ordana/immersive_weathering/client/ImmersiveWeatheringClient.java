@@ -188,7 +188,6 @@ public class ImmersiveWeatheringClient {
         event.register(defaultFoliageColor, ModBlocks.ACACIA_LEAF_PILE.get());
         event.register(defaultFoliageColor, ModBlocks.DARK_OAK_LEAF_PILE.get());
 
-
         event.register(defaultGrassColor, ModBlocks.FROSTY_GRASS.get());
         event.register(defaultGrassColor, ModBlocks.FROSTY_FERN.get());
         event.register(defaultGrassColor, ModBlocks.ROOTED_GRASS_BLOCK.get());

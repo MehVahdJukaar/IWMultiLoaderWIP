@@ -60,7 +60,7 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onTagUpdated(TagsUpdatedEvent event) {
-        GROWTH_MANAGER.rebuild();
+        GROWTH_MANAGER.rebuild(event.getTagManager());
     }
 
 
@@ -69,18 +69,7 @@ public class ModEvents {
     //use this until forge approves that datapack registries PR (will take some time)
     @SubscribeEvent
     public static void onAddReloadListeners(final AddReloadListenerEvent event) {
-        TagManager t = null;
-        for(var l : event.getServerResources().listeners()){
-            if(l instanceof TagManager tm){
-                t = tm;
-                GROWTH_MANAGER.registryAccess = t.registryAccess;
-                event.addListener(GROWTH_MANAGER);
-                break;
-            }
-        }
-        if(t == null){
-            throw(new RuntimeException("Failed to register Growth Manager. This means many weathering features wont work:"));
-        }
+        event.addListener(GROWTH_MANAGER);
     }
 
 

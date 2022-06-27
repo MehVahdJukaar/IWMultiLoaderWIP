@@ -2,7 +2,6 @@ package com.ordana.immersive_weathering.registry.blocks;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.entities.FallingLeafLayerEntity;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -106,7 +105,7 @@ public class LeafPileBlock extends FallingBlock implements BonemealableBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         int layers = this.getLayers(state);
-        if(ImmersiveWeathering1.getConfig().leavesConfig.leafPilesConvertBlockBelow) {
+        if (ImmersiveWeathering1.getConfig().leavesConfig.leafPilesConvertBlockBelow) {
             if (layers > 1) {
                 if (this.hasThorns) {
                     if (world.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) || world.getBlockState(pos.below()).is(Blocks.DIRT) || world.getBlockState(pos.below()).is(Blocks.COARSE_DIRT) || world.getBlockState(pos.below()).is(Blocks.ROOTED_DIRT)) {
@@ -132,10 +131,9 @@ public class LeafPileBlock extends FallingBlock implements BonemealableBlock {
 
                 if (layers >= 6 && this.hasThorns) {
                     if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-                        if(entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering1.getConfig().leavesConfig.leggingsPreventThornDamage){
+                        if (entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering1.getConfig().leavesConfig.leggingsPreventThornDamage) {
                             return;
-                        }
-                        else if (entity instanceof Player player) {
+                        } else if (entity instanceof Player player) {
                             double d = Math.abs(entity.getX() - entity.xOld);
                             double e = Math.abs(entity.getZ() - entity.zOld);
                             if (d >= 0.003000000026077032D || e >= 0.003000000026077032D) {
@@ -158,10 +156,10 @@ public class LeafPileBlock extends FallingBlock implements BonemealableBlock {
                 int color = world.getBiome(pos).value().getFoliageColor();
                 for (var p : particles) {
                     world.addParticle(p,
-                            entity.getX() +Mth.randomBetween(random,-0.2f,0.2f),
+                            entity.getX() + Mth.randomBetween(random, -0.2f, 0.2f),
                             y,
-                            entity.getZ() +Mth.randomBetween(random,-0.2f,0.2f),
-                            Mth.randomBetween(random,-0.75f,-1),
+                            entity.getZ() + Mth.randomBetween(random, -0.2f, 0.2f),
+                            Mth.randomBetween(random, -0.75f, -1),
                             color,
                             0);
                     //Mth.randomBetween(random, -1.0F, 1.0F) * 0.001f)

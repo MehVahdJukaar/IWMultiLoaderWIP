@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.block_growth.hardcoded.HardcodedGrowths;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -31,7 +31,7 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(); //json object that will write stuff
 
-    private static final List<IBlockGrowth> GROWTH_TO_PARSE = new ArrayList<>();
+    private static final Map<ResourceLocation, JsonElement> GROWTH_TO_PARSE = new HashMap<>();
 
     //block specific growth. fast access with map
     private static final Map<TickSource, ImmutableSet<Block>> TICKING_BLOCKS = new HashMap<>();
@@ -39,8 +39,6 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
     //set or universal ones
     private static final Map<TickSource, Set<IBlockGrowth>> UNIVERSAL_GROWTHS = new HashMap<>();
 
-
-    public RegistryAccess registryAccess;
     private boolean needsRefresh;
 
     public BlockGrowthHandler() {
@@ -52,7 +50,8 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
     }
 
     public static void tickBlock(TickSource source, BlockState state, ServerLevel level, BlockPos pos) {
-        if (!ServerConfigs.BLOCK_GROWTH.get()) return;
+        if (!ConfigPlatform.blockGrowths()) return;
+
         //TODO: move this line to datapack self predicate
         if (state.getBlock() instanceof IConditionalGrowingBlock cb && !cb.canGrow(state)) return;
 
@@ -99,29 +98,36 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
         return jsonObject;
     }
 
-
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> jsons, ResourceManager manager, ProfilerFiller profile) {
-        if (registryAccess == null) return;
         this.needsRefresh = true;
         GROWTH_TO_PARSE.clear();
         for (var e : jsons.entrySet()) {
-            //var result = CODEC.parse(JsonOps.INSTANCE,e.getValue());
-            var result = CODEC.parse(RegistryOps.create(JsonOps.INSTANCE, registryAccess),
-                    e.getValue());
-            var o = result.resultOrPartial(error -> ImmersiveWeathering.LOGGER.error("Failed to read block growth JSON object for {} : {}", e.getKey(), error));
-            o.ifPresent(GROWTH_TO_PARSE::add);
+            GROWTH_TO_PARSE.put(e.getKey(), e.getValue().deepCopy());
         }
-        ImmersiveWeathering.LOGGER.info("Loaded {} block growths configurations", GROWTH_TO_PARSE.size());
     }
 
     //called after all tags are reloaded
-    public void rebuild() {
+    public void rebuild(RegistryAccess registryAccess) {
+
         if (this.needsRefresh) {
+            this.needsRefresh = false;
+
+            List<IBlockGrowth> growths = new ArrayList<>(HardcodedGrowths.getHardcoded());
+
+            for (var e : GROWTH_TO_PARSE.entrySet()) {
+                //var result = CODEC.parse(JsonOps.INSTANCE,e.getValue());
+                var result = CODEC.parse(RegistryOps.create(JsonOps.INSTANCE, registryAccess),
+                        e.getValue());
+                var o = result.resultOrPartial(error -> ImmersiveWeathering.LOGGER.error("Failed to read block growth JSON object for {} : {}", e.getKey(), error));
+                o.ifPresent(growths::add);
+            }
+            ImmersiveWeathering.LOGGER.info("Loaded {} block growths configurations", GROWTH_TO_PARSE.size());
+
             GROWTH_FOR_BLOCK.clear();
             UNIVERSAL_GROWTHS.clear();
-            GROWTH_TO_PARSE.addAll(HardcodedGrowths.getHardcoded());
-            for (var config : GROWTH_TO_PARSE) {
+
+            for (var config : growths) {
 
                 var sources = config.getTickSources();
                 for (var s : sources) {
@@ -147,7 +153,7 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
                 TICKING_BLOCKS.put(g.getKey(), b.build());
             }
             GROWTH_TO_PARSE.clear();
-            this.needsRefresh = false;
+
         }
     }
 }

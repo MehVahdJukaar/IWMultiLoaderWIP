@@ -4,13 +4,20 @@ import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.integration.IntegrationHandler;
 import com.ordana.immersive_weathering.integration.QuarkPlugin;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -75,6 +82,14 @@ public class CommonPlatformImpl {
 
     public static boolean isMobGriefingOn(Level level, Entity entity) {
         return ForgeEventFactory.getMobGriefingEvent(level, entity);
+    }
+
+    public static boolean isAreaLoaded(Level level, BlockPos pos, int maxRange) {
+        return level.isAreaLoaded(pos, maxRange);
+    }
+
+    public static int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+        return state.getFlammability(level, pos, face);
     }
 
 

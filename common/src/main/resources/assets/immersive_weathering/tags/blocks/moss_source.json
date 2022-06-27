@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:moss_block",
+    "minecraft:moss_carpet",
+    "minecraft:vine",
+    "minecraft:water",
+    "immersive_weathering:ivy"
+  ]
+}
