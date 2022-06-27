@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
@@ -86,7 +86,7 @@ public class ThinIceBlock extends IceBlock implements SimpleWaterloggedBlock {
             this.melt(state, world, pos);
         }
 
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.thinIceMelting) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.thinIceMelting) {
             if (world.dimensionType().ultraWarm() || (!world.isRaining() && world.isDay()) || (world.getBrightness(LightLayer.BLOCK, pos) > 7 - state.getLightBlock(world, pos))) {
                 world.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
             }

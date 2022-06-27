@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.blocks.FrostyGrassBlock;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
@@ -36,7 +36,7 @@ public class FernBlockMixin extends BushBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.grassFrosting) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.grassFrosting) {
             if (state.is(Blocks.GRASS)) {
                 if ((world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY) && (world.getBrightness(LightLayer.BLOCK, pos) < 7 - state.getLightBlock(world, pos))) {
                     world.setBlockAndUpdate(pos, ModBlocks.FROSTY_GRASS.defaultBlockState().setValue(FrostyGrassBlock.NATURAL, true));

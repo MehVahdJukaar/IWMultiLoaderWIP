@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.items.ModItems;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ public class WeedsBlock extends CropBlock {
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         if (entity instanceof LivingEntity && !(entity instanceof Fox || entity instanceof Bee || entity instanceof Sheep || entity instanceof Cat || entity instanceof Villager)) {
             if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-                if (entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering.getConfig().leavesConfig.leggingsPreventThornDamage) {
+                if (entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering1.getConfig().leavesConfig.leggingsPreventThornDamage) {
                     return;
                 } else if (entity instanceof Player player) {
                     double d = Math.abs(entity.getX() - entity.xOld);

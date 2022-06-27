@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.platform.forge;
 
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -13,4 +14,8 @@ public class RegistryPlatformImpl {
     }
 
     public static void registerItemBurnTime(Item item, int burnTime) {}
+
+    public static Supplier<SimpleParticleType> registerParticle(String name) {
+
+    }
 }

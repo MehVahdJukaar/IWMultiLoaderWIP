@@ -150,6 +150,7 @@ public class ImmersiveWeatheringClient {
                 // if(ModList.get().isLoaded("quark")) QuarkPlugin.onFirstClientTick();
 
                 try {
+                    //TODO: we dont need this
                     BlockColors bc = Minecraft.getInstance().getBlockColors();
                     Map<IRegistryDelegate<Block>, BlockColor> blockColorMap = ((BlockColorAccessor) bc).getBlockColors();
 

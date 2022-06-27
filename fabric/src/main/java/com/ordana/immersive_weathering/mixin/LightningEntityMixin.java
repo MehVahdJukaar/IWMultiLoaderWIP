@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.FulguriteBlock;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import com.ordana.immersive_weathering.registry.blocks.WeatheringHelper;
@@ -37,29 +37,29 @@ public abstract class LightningEntityMixin extends Entity {
         for (Direction direction : Direction.values()) {
             var targetPos = blockPos.relative(direction);
             BlockState neighborState = level.getBlockState(targetPos);
-            if (neighborState.is(BlockTags.BASE_STONE_OVERWORLD) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateMagma) {
+            if (neighborState.is(BlockTags.BASE_STONE_OVERWORLD) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateMagma) {
                 if (level.random.nextFloat() < 0.5f) {
                     level.setBlockAndUpdate(targetPos, Blocks.MAGMA_BLOCK.defaultBlockState());
                 }
             }
-            else if (neighborState.is(Blocks.MAGMA_BLOCK) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateLava) {
+            else if (neighborState.is(Blocks.MAGMA_BLOCK) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateLava) {
                 if (level.random.nextFloat() < 0.5f) {
                     level.setBlockAndUpdate(targetPos, Blocks.LAVA.defaultBlockState());
                 }
             }
-            else if (neighborState.is(BlockTags.SAND) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateVitrifiedSand) {
+            else if (neighborState.is(BlockTags.SAND) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateVitrifiedSand) {
                 if (level.random.nextFloat() < 0.5f) {
                     level.setBlockAndUpdate(targetPos, ModBlocks.VITRIFIED_SAND.defaultBlockState());
                 }
             }
         }
-        if (blockState.is(BlockTags.SAND) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateVitrifiedSand) {
+        if (blockState.is(BlockTags.SAND) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateVitrifiedSand) {
             WeatheringHelper.onLightningHit(blockPos, level, 0);
         }
-        else if (blockState.is(BlockTags.BASE_STONE_OVERWORLD) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateMagma) {
+        else if (blockState.is(BlockTags.BASE_STONE_OVERWORLD) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateMagma) {
             level.setBlockAndUpdate(blockPos, Blocks.MAGMA_BLOCK.defaultBlockState());
         }
-        else if (blockState.is(Blocks.MAGMA_BLOCK) && ImmersiveWeathering.getConfig().fireAndIceConfig.lightningCreateLava) {
+        else if (blockState.is(Blocks.MAGMA_BLOCK) && ImmersiveWeathering1.getConfig().fireAndIceConfig.lightningCreateLava) {
             level.setBlockAndUpdate(blockPos, Blocks.LAVA.defaultBlockState());
         }
         else if (blockState.is(ModBlocks.FULGURITE)) {

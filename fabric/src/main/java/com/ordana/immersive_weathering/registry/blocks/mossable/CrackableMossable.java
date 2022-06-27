@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks.mossable;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.PatchSpreader;
 import com.ordana.immersive_weathering.registry.blocks.crackable.Crackable;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public interface CrackableMossable extends Mossable, Crackable {
 
     @Override
     default void tryWeather(BlockState state, ServerLevel serverLevel, BlockPos pos, Random random) {
-        if(ImmersiveWeathering.getConfig().blockGrowthConfig.blockCracking && ImmersiveWeathering.getConfig().blockGrowthConfig.blockMossing) {
+        if(ImmersiveWeathering1.getConfig().blockGrowthConfig.blockCracking && ImmersiveWeathering1.getConfig().blockGrowthConfig.blockMossing) {
             if (random.nextFloat() < this.getWeatherChanceSpeed()) {
                 boolean isMoss = this.getMossSpreader().getWantedWeatheringState(true, pos, serverLevel);
                 Optional<BlockState> opt = Optional.empty();

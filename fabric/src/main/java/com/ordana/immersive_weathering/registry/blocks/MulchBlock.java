@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
@@ -84,7 +84,7 @@ public class MulchBlock extends FarmBlock {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
 
         BlockState cropState = world.getBlockState(pos.above());
-        if (ImmersiveWeathering.getConfig().leavesConfig.mulchGrowsCrops) {
+        if (ImmersiveWeathering1.getConfig().leavesConfig.mulchGrowsCrops) {
             if (state.is(ModBlocks.MULCH_BLOCK) && state.getValue(MulchBlock.MOISTURE) == 7) {
                 if (world.getRawBrightness(pos.above(), 0) >= 9) {
                     if (cropState.getBlock() instanceof BeetrootBlock) {

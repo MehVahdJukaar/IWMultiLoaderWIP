@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModParticles;
 import com.ordana.immersive_weathering.registry.blocks.charred.*;
 import com.ordana.immersive_weathering.registry.blocks.crackable.Crackable;
@@ -254,201 +254,201 @@ public class ModBlocks {
 
     public static void registerBlocks() {
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "icicle"), ICICLE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "frost"), FROST);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "frosty_grass"), FROSTY_GRASS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "frosty_fern"), FROSTY_FERN);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "frosty_glass"), FROSTY_GLASS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "frosty_glass_pane"), FROSTY_GLASS_PANE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "thin_ice"), THIN_ICE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "icicle"), ICICLE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "frost"), FROST);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "frosty_grass"), FROSTY_GRASS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "frosty_fern"), FROSTY_FERN);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "frosty_glass"), FROSTY_GLASS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "frosty_glass_pane"), FROSTY_GLASS_PANE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "thin_ice"), THIN_ICE);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "vitrified_sand"), VITRIFIED_SAND);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "fulgurite"), FULGURITE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "vitrified_sand"), VITRIFIED_SAND);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "fulgurite"), FULGURITE);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "oak_leaf_pile"), OAK_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "spruce_leaf_pile"), SPRUCE_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "birch_leaf_pile"), BIRCH_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "jungle_leaf_pile"), JUNGLE_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "acacia_leaf_pile"), ACACIA_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "dark_oak_leaf_pile"), DARK_OAK_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "azalea_leaf_pile"), AZALEA_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "flowering_azalea_leaf_pile"), FLOWERING_AZALEA_LEAF_PILE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "azalea_flower_pile"), AZALEA_FLOWER_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "oak_leaf_pile"), OAK_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "spruce_leaf_pile"), SPRUCE_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "birch_leaf_pile"), BIRCH_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "jungle_leaf_pile"), JUNGLE_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "acacia_leaf_pile"), ACACIA_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "dark_oak_leaf_pile"), DARK_OAK_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "azalea_leaf_pile"), AZALEA_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "flowering_azalea_leaf_pile"), FLOWERING_AZALEA_LEAF_PILE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "azalea_flower_pile"), AZALEA_FLOWER_PILE);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "humus"), HUMUS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "fluvisol"), FLUVISOL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "silt"), SILT);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "vertisol"), VERTISOL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_mud"), CRACKED_MUD);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cryosol"), CRYOSOL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "permafrost"), PERMAFROST);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "humus"), HUMUS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "fluvisol"), FLUVISOL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "silt"), SILT);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "vertisol"), VERTISOL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_mud"), CRACKED_MUD);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cryosol"), CRYOSOL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "permafrost"), PERMAFROST);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mulch_block"), MULCH_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "nulch_block"), NULCH_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rooted_grass_block"), ROOTED_GRASS_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "ivy"), IVY);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weeds"), WEEDS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mulch_block"), MULCH_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "nulch_block"), NULCH_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rooted_grass_block"), ROOTED_GRASS_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "ivy"), IVY);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weeds"), WEEDS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "sand_layer_block"), SAND_LAYER_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "red_sand_layer_block"), RED_SAND_LAYER_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "ash_layer_block"), ASH_LAYER_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "ash_block"), ASH_BLOCK);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "soot"), SOOT);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "sand_layer_block"), SAND_LAYER_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "red_sand_layer_block"), RED_SAND_LAYER_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "ash_layer_block"), ASH_LAYER_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "ash_block"), ASH_BLOCK);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "soot"), SOOT);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_log"), CHARRED_LOG);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_planks"), CHARRED_PLANKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_slab"), CHARRED_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_stairs"), CHARRED_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_fence"), CHARRED_FENCE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "charred_fence_gate"), CHARRED_FENCE_GATE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_log"), CHARRED_LOG);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_planks"), CHARRED_PLANKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_slab"), CHARRED_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_stairs"), CHARRED_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_fence"), CHARRED_FENCE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "charred_fence_gate"), CHARRED_FENCE_GATE);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_log"), ROTTEN_LOG);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_planks"), ROTTEN_PLANKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_slab"), ROTTEN_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_stairs"), ROTTEN_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_fence"), ROTTEN_FENCE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rotten_fence_gate"), ROTTEN_FENCE_GATE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_log"), ROTTEN_LOG);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_planks"), ROTTEN_PLANKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_slab"), ROTTEN_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_stairs"), ROTTEN_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_fence"), ROTTEN_FENCE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rotten_fence_gate"), ROTTEN_FENCE_GATE);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_bricks"), MOSSY_BRICKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_brick_slab"), MOSSY_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_brick_wall"), MOSSY_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_bricks"), MOSSY_BRICKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_brick_stairs"), MOSSY_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_brick_slab"), MOSSY_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_brick_wall"), MOSSY_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_stone"), MOSSY_STONE);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_stone_stairs"), MOSSY_STONE_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_stone_slab"), MOSSY_STONE_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "mossy_stone_wall"), MOSSY_STONE_WALL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "stone_wall"), STONE_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_stone"), MOSSY_STONE);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_stone_stairs"), MOSSY_STONE_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_stone_slab"), MOSSY_STONE_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "mossy_stone_wall"), MOSSY_STONE_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "stone_wall"), STONE_WALL);
 
 
         //cracked blocks
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_bricks"), CRACKED_BRICKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_brick_stairs"), CRACKED_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_brick_slab"), CRACKED_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_brick_wall"), CRACKED_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_bricks"), CRACKED_BRICKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_brick_stairs"), CRACKED_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_brick_slab"), CRACKED_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_brick_wall"), CRACKED_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_prismarine_bricks"), CRACKED_PRISMARINE_BRICKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_prismarine_brick_stairs"), CRACKED_PRISMARINE_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_prismarine_brick_slab"), CRACKED_PRISMARINE_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_prismarine_brick_wall"), CRACKED_PRISMARINE_BRICK_WALL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "prismarine_brick_wall"), PRISMARINE_BRICK_WALL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "dark_prismarine_wall"), DARK_PRISMARINE_WALL);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "chiseled_prismarine_bricks"), CHISELED_PRISMARINE_BRICKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_prismarine_bricks"), CRACKED_PRISMARINE_BRICKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_prismarine_brick_stairs"), CRACKED_PRISMARINE_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_prismarine_brick_slab"), CRACKED_PRISMARINE_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_prismarine_brick_wall"), CRACKED_PRISMARINE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "prismarine_brick_wall"), PRISMARINE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "dark_prismarine_wall"), DARK_PRISMARINE_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "chiseled_prismarine_bricks"), CHISELED_PRISMARINE_BRICKS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_end_stone_bricks"), CRACKED_END_STONE_BRICKS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_end_stone_brick_stairs"), CRACKED_END_STONE_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_end_stone_brick_slab"), CRACKED_END_STONE_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_end_stone_brick_wall"), CRACKED_END_STONE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_end_stone_bricks"), CRACKED_END_STONE_BRICKS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_end_stone_brick_stairs"), CRACKED_END_STONE_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_end_stone_brick_slab"), CRACKED_END_STONE_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_end_stone_brick_wall"), CRACKED_END_STONE_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_stone_brick_stairs"), CRACKED_STONE_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_stone_brick_slab"), CRACKED_STONE_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_stone_brick_wall"), CRACKED_STONE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_stone_brick_stairs"), CRACKED_STONE_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_stone_brick_slab"), CRACKED_STONE_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_stone_brick_wall"), CRACKED_STONE_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_polished_blackstone_brick_stairs"), CRACKED_POLISHED_BLACKSTONE_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_polished_blackstone_brick_slab"), CRACKED_POLISHED_BLACKSTONE_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_polished_blackstone_brick_wall"), CRACKED_POLISHED_BLACKSTONE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_polished_blackstone_brick_stairs"), CRACKED_POLISHED_BLACKSTONE_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_polished_blackstone_brick_slab"), CRACKED_POLISHED_BLACKSTONE_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_polished_blackstone_brick_wall"), CRACKED_POLISHED_BLACKSTONE_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_nether_brick_stairs"), CRACKED_NETHER_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_nether_brick_slab"), CRACKED_NETHER_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_nether_brick_wall"), CRACKED_NETHER_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_nether_brick_stairs"), CRACKED_NETHER_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_nether_brick_slab"), CRACKED_NETHER_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_nether_brick_wall"), CRACKED_NETHER_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_brick_stairs"), CRACKED_DEEPSLATE_BRICK_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_brick_slab"), CRACKED_DEEPSLATE_BRICK_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_brick_wall"), CRACKED_DEEPSLATE_BRICK_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_brick_stairs"), CRACKED_DEEPSLATE_BRICK_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_brick_slab"), CRACKED_DEEPSLATE_BRICK_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_brick_wall"), CRACKED_DEEPSLATE_BRICK_WALL);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_tile_stairs"), CRACKED_DEEPSLATE_TILE_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_tile_slab"), CRACKED_DEEPSLATE_TILE_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cracked_deepslate_tile_wall"), CRACKED_DEEPSLATE_TILE_WALL);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_tile_stairs"), CRACKED_DEEPSLATE_TILE_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_tile_slab"), CRACKED_DEEPSLATE_TILE_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cracked_deepslate_tile_wall"), CRACKED_DEEPSLATE_TILE_WALL);
 
 
         //cut iron
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cut_iron"), CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_cut_iron"), EXPOSED_CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_cut_iron"), WEATHERED_CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_cut_iron"), RUSTED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cut_iron"), CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_cut_iron"), EXPOSED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_cut_iron"), WEATHERED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_cut_iron"), RUSTED_CUT_IRON);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cut_iron_stairs"), CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_cut_iron_stairs"), EXPOSED_CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_cut_iron_stairs"), WEATHERED_CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_cut_iron_stairs"), RUSTED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cut_iron_stairs"), CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_cut_iron_stairs"), EXPOSED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_cut_iron_stairs"), WEATHERED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_cut_iron_stairs"), RUSTED_CUT_IRON_STAIRS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "cut_iron_slab"), CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_cut_iron_slab"), EXPOSED_CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_cut_iron_slab"), WEATHERED_CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_cut_iron_slab"), RUSTED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "cut_iron_slab"), CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_cut_iron_slab"), EXPOSED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_cut_iron_slab"), WEATHERED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_cut_iron_slab"), RUSTED_CUT_IRON_SLAB);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_cut_iron"), WAXED_CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_cut_iron"), WAXED_EXPOSED_CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_cut_iron"), WAXED_WEATHERED_CUT_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_cut_iron"), WAXED_RUSTED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_cut_iron"), WAXED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_cut_iron"), WAXED_EXPOSED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_cut_iron"), WAXED_WEATHERED_CUT_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_cut_iron"), WAXED_RUSTED_CUT_IRON);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_cut_iron_stairs"), WAXED_CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_cut_iron_stairs"), WAXED_EXPOSED_CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_cut_iron_stairs"), WAXED_WEATHERED_CUT_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_cut_iron_stairs"), WAXED_RUSTED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_cut_iron_stairs"), WAXED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_cut_iron_stairs"), WAXED_EXPOSED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_cut_iron_stairs"), WAXED_WEATHERED_CUT_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_cut_iron_stairs"), WAXED_RUSTED_CUT_IRON_STAIRS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_cut_iron_slab"), WAXED_CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_cut_iron_slab"), WAXED_EXPOSED_CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_cut_iron_slab"), WAXED_WEATHERED_CUT_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_cut_iron_slab"), WAXED_RUSTED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_cut_iron_slab"), WAXED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_cut_iron_slab"), WAXED_EXPOSED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_cut_iron_slab"), WAXED_WEATHERED_CUT_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_cut_iron_slab"), WAXED_RUSTED_CUT_IRON_SLAB);
 
         //plate iron
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "plate_iron"), PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_plate_iron"), EXPOSED_PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_plate_iron"), WEATHERED_PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_plate_iron"), RUSTED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "plate_iron"), PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_plate_iron"), EXPOSED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_plate_iron"), WEATHERED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_plate_iron"), RUSTED_PLATE_IRON);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "plate_iron_stairs"), PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_plate_iron_stairs"), EXPOSED_PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_plate_iron_stairs"), WEATHERED_PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_plate_iron_stairs"), RUSTED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "plate_iron_stairs"), PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_plate_iron_stairs"), EXPOSED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_plate_iron_stairs"), WEATHERED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_plate_iron_stairs"), RUSTED_PLATE_IRON_STAIRS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "plate_iron_slab"), PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_plate_iron_slab"), EXPOSED_PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_plate_iron_slab"), WEATHERED_PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_plate_iron_slab"), RUSTED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "plate_iron_slab"), PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_plate_iron_slab"), EXPOSED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_plate_iron_slab"), WEATHERED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_plate_iron_slab"), RUSTED_PLATE_IRON_SLAB);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_plate_iron"), WAXED_PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_plate_iron"), WAXED_EXPOSED_PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_plate_iron"), WAXED_WEATHERED_PLATE_IRON);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_plate_iron"), WAXED_RUSTED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_plate_iron"), WAXED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_plate_iron"), WAXED_EXPOSED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_plate_iron"), WAXED_WEATHERED_PLATE_IRON);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_plate_iron"), WAXED_RUSTED_PLATE_IRON);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_plate_iron_stairs"), WAXED_PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_plate_iron_stairs"), WAXED_EXPOSED_PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_plate_iron_stairs"), WAXED_WEATHERED_PLATE_IRON_STAIRS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_plate_iron_stairs"), WAXED_RUSTED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_plate_iron_stairs"), WAXED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_plate_iron_stairs"), WAXED_EXPOSED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_plate_iron_stairs"), WAXED_WEATHERED_PLATE_IRON_STAIRS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_plate_iron_stairs"), WAXED_RUSTED_PLATE_IRON_STAIRS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_plate_iron_slab"), WAXED_PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_plate_iron_slab"), WAXED_EXPOSED_PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_plate_iron_slab"), WAXED_WEATHERED_PLATE_IRON_SLAB);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_plate_iron_slab"), WAXED_RUSTED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_plate_iron_slab"), WAXED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_plate_iron_slab"), WAXED_EXPOSED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_plate_iron_slab"), WAXED_WEATHERED_PLATE_IRON_SLAB);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_plate_iron_slab"), WAXED_RUSTED_PLATE_IRON_SLAB);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_iron_door"), EXPOSED_IRON_DOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_iron_door"), WEATHERED_IRON_DOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_iron_door"), RUSTED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_iron_door"), EXPOSED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_iron_door"), WEATHERED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_iron_door"), RUSTED_IRON_DOOR);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_iron_trapdoor"), EXPOSED_IRON_TRAPDOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_iron_trapdoor"), WEATHERED_IRON_TRAPDOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_iron_trapdoor"), RUSTED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_iron_trapdoor"), EXPOSED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_iron_trapdoor"), WEATHERED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_iron_trapdoor"), RUSTED_IRON_TRAPDOOR);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "exposed_iron_bars"), EXPOSED_IRON_BARS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "weathered_iron_bars"), WEATHERED_IRON_BARS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "rusted_iron_bars"), RUSTED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "exposed_iron_bars"), EXPOSED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "weathered_iron_bars"), WEATHERED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "rusted_iron_bars"), RUSTED_IRON_BARS);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_iron_door"), WAXED_IRON_DOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_iron_door"), WAXED_EXPOSED_IRON_DOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_iron_door"), WAXED_WEATHERED_IRON_DOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_iron_door"), WAXED_RUSTED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_iron_door"), WAXED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_iron_door"), WAXED_EXPOSED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_iron_door"), WAXED_WEATHERED_IRON_DOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_iron_door"), WAXED_RUSTED_IRON_DOOR);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_iron_trapdoor"), WAXED_IRON_TRAPDOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_iron_trapdoor"), WAXED_EXPOSED_IRON_TRAPDOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_iron_trapdoor"), WAXED_WEATHERED_IRON_TRAPDOOR);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_iron_trapdoor"), WAXED_RUSTED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_iron_trapdoor"), WAXED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_iron_trapdoor"), WAXED_EXPOSED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_iron_trapdoor"), WAXED_WEATHERED_IRON_TRAPDOOR);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_iron_trapdoor"), WAXED_RUSTED_IRON_TRAPDOOR);
 
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_iron_bars"), WAXED_IRON_BARS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_exposed_iron_bars"), WAXED_EXPOSED_IRON_BARS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_weathered_iron_bars"), WAXED_WEATHERED_IRON_BARS);
-        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering.MOD_ID, "waxed_rusted_iron_bars"), WAXED_RUSTED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_iron_bars"), WAXED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_exposed_iron_bars"), WAXED_EXPOSED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_weathered_iron_bars"), WAXED_WEATHERED_IRON_BARS);
+        Registry.register(Registry.BLOCK, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "waxed_rusted_iron_bars"), WAXED_RUSTED_IRON_BARS);
 
     }
 }

@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.entities;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
@@ -29,7 +29,7 @@ public class ModEntities {
 
     private static <T extends BlockEntity> BlockEntityType<T>
     registerBlockEntity(FabricBlockEntityTypeBuilder.Factory<T> factory, Block... blocks) {
-        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new ResourceLocation(ImmersiveWeathering.MOD_ID, "icicle"), FabricBlockEntityTypeBuilder.create(factory, blocks).build());
+        return Registry.register(Registry.BLOCK_ENTITY_TYPE, new ResourceLocation(ImmersiveWeathering1.MOD_ID, "icicle"), FabricBlockEntityTypeBuilder.create(factory, blocks).build());
     }
 
     public static void registerEntities() {

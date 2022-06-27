@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.entities.FallingLeafLayerEntity;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
@@ -106,7 +106,7 @@ public class LeafPileBlock extends FallingBlock implements BonemealableBlock {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         int layers = this.getLayers(state);
-        if(ImmersiveWeathering.getConfig().leavesConfig.leafPilesConvertBlockBelow) {
+        if(ImmersiveWeathering1.getConfig().leavesConfig.leafPilesConvertBlockBelow) {
             if (layers > 1) {
                 if (this.hasThorns) {
                     if (world.getBlockState(pos.below()).is(Blocks.GRASS_BLOCK) || world.getBlockState(pos.below()).is(Blocks.DIRT) || world.getBlockState(pos.below()).is(Blocks.COARSE_DIRT) || world.getBlockState(pos.below()).is(Blocks.ROOTED_DIRT)) {
@@ -132,7 +132,7 @@ public class LeafPileBlock extends FallingBlock implements BonemealableBlock {
 
                 if (layers >= 6 && this.hasThorns) {
                     if (!world.isClientSide && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-                        if(entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering.getConfig().leavesConfig.leggingsPreventThornDamage){
+                        if(entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering1.getConfig().leavesConfig.leggingsPreventThornDamage){
                             return;
                         }
                         else if (entity instanceof Player player) {

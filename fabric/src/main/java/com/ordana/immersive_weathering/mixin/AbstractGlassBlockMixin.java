@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.blocks.FrostyGrassBlock;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
@@ -28,7 +28,7 @@ public class AbstractGlassBlockMixin extends Block {
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.glassFrosting) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.glassFrosting) {
             if (state.is(Blocks.GLASS)) {
                 if ((world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY)) {
                     world.setBlockAndUpdate(pos, ModBlocks.FROSTY_GLASS.defaultBlockState().setValue(FrostyGrassBlock.NATURAL, true));

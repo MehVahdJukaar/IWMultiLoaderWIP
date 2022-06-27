@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModEvents;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
@@ -48,8 +48,8 @@ public abstract class FluidMixin extends Block implements BucketPickup {
             if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || ((LivingEntity) entity).hasEffect(MobEffects.CONDUIT_POWER) || entity.getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
                 return;
             }
-            else if (ImmersiveWeathering.getConfig().fireAndIceConfig.freezingWater && entity.isInWater()) {
-                entity.setTicksFrozen(ImmersiveWeathering.getConfig().fireAndIceConfig.freezingWaterSeverity);
+            else if (ImmersiveWeathering1.getConfig().fireAndIceConfig.freezingWater && entity.isInWater()) {
+                entity.setTicksFrozen(ImmersiveWeathering1.getConfig().fireAndIceConfig.freezingWaterSeverity);
             }
         }
     }
@@ -73,7 +73,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
 
     @Inject(method = "receiveNeighborFluids", at = @At("HEAD"), cancellable = true)
     private void receiveNeighborFluids(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if(ImmersiveWeathering.getConfig().generatorsConfig.allGenerators) {
+        if(ImmersiveWeathering1.getConfig().generatorsConfig.allGenerators) {
             if (this.fluid.is(FluidTags.LAVA)) {
                 boolean hasWater = false;
                 boolean blueIceDown = false;
@@ -138,7 +138,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                     if (world.getBlockState(blockPos).is(Blocks.RED_SAND)) {
                         hasRedSand = true;
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.basaltGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.basaltGenerator) {
                         if (!world.getFluidState(pos).isSource()) {
                             if (basaltDown) {
                                 world.setBlockAndUpdate(pos, Blocks.BASALT.defaultBlockState());
@@ -147,56 +147,56 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                             }
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.deepslateGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.deepslateGenerator) {
                         if (blueIceDown && blueIceUp) {
                             world.setBlockAndUpdate(pos, Blocks.DEEPSLATE.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.dioriteGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.dioriteGenerator) {
                         if (hasWater && hasQuartz) {
                             world.setBlockAndUpdate(pos, Blocks.DIORITE.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.andesiteGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.andesiteGenerator) {
                         if (hasWater && hasDiorite) {
                             world.setBlockAndUpdate(pos, Blocks.ANDESITE.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.graniteGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.graniteGenerator) {
                         if (hasWater && hasQuartz && hasDiorite) {
                             world.setBlockAndUpdate(pos, Blocks.GRANITE.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.tuffGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.tuffGenerator) {
                         if (hasWater && hasAsh) {
                             world.setBlockAndUpdate(pos, Blocks.TUFF.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.blackstoneGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.blackstoneGenerator) {
                         if (hasMagma && hasBlueIce) {
                             world.setBlockAndUpdate(pos, Blocks.BLACKSTONE.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.magmaGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.magmaGenerator) {
                         if (hasBubbles) {
                             world.setBlockAndUpdate(pos, Blocks.MAGMA_BLOCK.defaultBlockState());
                             this.playExtinguishSound(world, pos);
                             cir.setReturnValue(false);
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.terracottaGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.terracottaGenerator) {
                         if (hasClay) {
                             if (world.getBlockState(blockPos).is(Blocks.CLAY)) {
                                 world.setBlockAndUpdate(blockPos, Blocks.TERRACOTTA.defaultBlockState());
@@ -205,7 +205,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                             }
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.mossBurning) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.mossBurning) {
                         if (hasMossyBlock) {
                             if (world.getBlockState(blockPos).is(ModTags.MOSSY)) {
                                 world.setBlockAndUpdate(blockPos, ModEvents.CLEANED_BLOCKS.get(targetState.getBlock()).withPropertiesOf(targetState));
@@ -214,7 +214,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                             }
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.vitrifiedSandGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.vitrifiedSandGenerator) {
                         if (hasSand || hasRedSand) {
                             if (world.getBlockState(blockPos).is(BlockTags.SAND)) {
                                 world.setBlockAndUpdate(blockPos, ModBlocks.VITRIFIED_SAND.defaultBlockState());
@@ -223,7 +223,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                             }
                         }
                     }
-                    if(ImmersiveWeathering.getConfig().generatorsConfig.cryingObsidianGenerator) {
+                    if(ImmersiveWeathering1.getConfig().generatorsConfig.cryingObsidianGenerator) {
                         if (world.getFluidState(blockPos).is(FluidTags.WATER) && hasSoulfire) {
                             world.setBlockAndUpdate(pos, Blocks.CRYING_OBSIDIAN.defaultBlockState());
                             this.playExtinguishSound(world, pos);
@@ -233,7 +233,7 @@ public abstract class FluidMixin extends Block implements BucketPickup {
                 }
             } else if (this.fluid.is(FluidTags.WATER)) {
                 boolean hasBlueIce = false;
-                if(ImmersiveWeathering.getConfig().generatorsConfig.iceGenerator) {
+                if(ImmersiveWeathering1.getConfig().generatorsConfig.iceGenerator) {
                     for (Direction direction : UPDATE_SHAPE_ORDER) {
                         BlockPos blockPos = pos.relative(direction.getOpposite());
                         if (world.getBlockState(blockPos).is(Blocks.BLUE_ICE)) {

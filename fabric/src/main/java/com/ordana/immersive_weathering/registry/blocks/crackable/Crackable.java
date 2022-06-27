@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.registry.blocks.crackable;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import com.ordana.immersive_weathering.registry.blocks.PatchSpreader;
 import com.ordana.immersive_weathering.registry.blocks.Weatherable;
@@ -89,7 +89,7 @@ public interface Crackable extends Weatherable {
 
     @Override
     default void tryWeather(BlockState state, ServerLevel serverWorld, BlockPos pos, Random random) {
-        if(ImmersiveWeathering.getConfig().blockGrowthConfig.blockCracking) {
+        if(ImmersiveWeathering1.getConfig().blockGrowthConfig.blockCracking) {
             if (random.nextFloat() < this.getWeatherChanceSpeed()) {
                 Optional<BlockState> opt = Optional.empty();
                 if (this.getCrackSpreader().getWantedWeatheringState(true, pos, serverWorld)) {

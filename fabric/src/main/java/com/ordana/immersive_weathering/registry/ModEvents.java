@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.*;
 import com.ordana.immersive_weathering.registry.blocks.charred.*;
 import com.ordana.immersive_weathering.registry.items.ModItems;
@@ -329,7 +329,7 @@ public class ModEvents {
             BlockState targetBlock = world.getBlockState(targetPos);
             ItemStack heldItem = player.getItemInHand(hand);
 
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.cauldronWashing) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.cauldronWashing) {
                 if (heldItem.getItem() == Items.DIRT) {
                     if (targetBlock.is(Blocks.WATER_CAULDRON) && (targetBlock.getValue(LayeredCauldronBlock.LEVEL) >= 3)) {
                         Block.popResource(world, fixedPos, new ItemStack(Items.CLAY));
@@ -377,7 +377,7 @@ public class ModEvents {
                     }
                 }
             }
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.pistonSliming) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.pistonSliming) {
                 if (heldItem.getItem() == Items.SLIME_BALL) {
                     if (targetBlock.is(Blocks.PISTON) && !targetBlock.getValue(PistonBaseBlock.EXTENDED)) {
                         world.playSound(player, targetPos, SoundEvents.SLIME_SQUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -434,7 +434,7 @@ public class ModEvents {
                 }
             }
             if (heldItem.getItem() instanceof ShearsItem) {
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.soilShearing) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.soilShearing) {
                     if (targetBlock.hasProperty(ModGrassBlock.FERTILE) && targetBlock.getValue(ModGrassBlock.FERTILE) && targetBlock.hasProperty(SnowyDirtBlock.SNOWY) && !targetBlock.getValue(SnowyDirtBlock.SNOWY)) {
                         world.playSound(player, targetPos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0f, 1.0f);
                         ParticleUtils.spawnParticlesOnBlockFaces(world, targetPos, new BlockParticleOption(ParticleTypes.BLOCK, targetBlock), UniformInt.of(3,5));
@@ -456,7 +456,7 @@ public class ModEvents {
                     }
                     return InteractionResult.SUCCESS;
                 }
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.azaleaShearing) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.azaleaShearing) {
                     if (targetBlock.is(ModTags.FLOWERY)) {
                         Block.popResource(world, fixedPos, new ItemStack(ModItems.AZALEA_FLOWERS));
                         world.playSound(player, targetPos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -469,7 +469,7 @@ public class ModEvents {
                         return InteractionResult.SUCCESS;
                     }
                 }
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.mossShearing) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.mossShearing) {
                     if (targetBlock.is(ModTags.MOSSY)) {
                         Block.popResource(world, fixedPos, new ItemStack(ModItems.MOSS_CLUMP));
                         world.playSound(player, targetPos, SoundEvents.GROWING_PLANT_CROP, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -482,7 +482,7 @@ public class ModEvents {
                         return InteractionResult.SUCCESS;
                     }
                 }
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.pistonSliming) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.pistonSliming) {
                     if (targetBlock.is(Blocks.STICKY_PISTON) && !targetBlock.getValue(PistonBaseBlock.EXTENDED)) {
                         world.playSound(player, targetPos, SoundEvents.SLIME_SQUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
                         ParticleUtils.spawnParticlesOnBlockFaces(world, targetPos, ParticleTypes.ITEM_SLIME, UniformInt.of(3, 5));
@@ -661,7 +661,7 @@ public class ModEvents {
                 }
             }
             if (heldItem.getItem() instanceof ShovelItem) {
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.shovelExtinguishing) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.shovelExtinguishing) {
                     if (targetBlock.is(Blocks.CAMPFIRE) && targetBlock.getValue(BlockStateProperties.LIT)) {
                         Block.popResource(world, fixedPos, new ItemStack(ModItems.ASH_LAYER_BLOCK));
                         world.playSound(player, targetPos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -704,7 +704,7 @@ public class ModEvents {
                 }
 
             }
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.azaleaShearing) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.azaleaShearing) {
                 if (heldItem.getItem() == ModItems.AZALEA_FLOWERS) {
                     if (targetBlock.is(ModTags.FLOWERABLE)) {
                         world.playSound(player, targetPos, SoundEvents.FLOWERING_AZALEA_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -722,7 +722,7 @@ public class ModEvents {
                     }
                 }
             }
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.mossShearing) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.mossShearing) {
                 if (heldItem.getItem() == ModItems.MOSS_CLUMP) {
                     if (targetBlock.is(ModTags.MOSSABLE)) {
                         world.playSound(player, targetPos, SoundEvents.MOSS_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -740,7 +740,7 @@ public class ModEvents {
                 }
             }
             if (heldItem.getItem() == Items.FLINT_AND_STEEL) {
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.charredBlockIgniting) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.charredBlockIgniting) {
                     if ((targetBlock.getBlock() instanceof CharredPillarBlock || targetBlock.getBlock() instanceof CharredBlock || targetBlock.getBlock() instanceof CharredStairsBlock || targetBlock.getBlock() instanceof CharredSlabBlock || targetBlock.getBlock() instanceof CharredFenceBlock || targetBlock.getBlock() instanceof CharredFenceGateBlock) && !targetBlock.getValue(CharredBlock.SMOLDERING)) {
                         world.playSound(player, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
                         ParticleUtils.spawnParticlesOnBlockFaces(world, targetPos, ModParticles.EMBERSPARK, UniformInt.of(3, 5));
@@ -752,7 +752,7 @@ public class ModEvents {
                         return InteractionResult.SUCCESS;
                     }
                 }
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.mossBurning) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.mossBurning) {
                     if (targetBlock.is(ModTags.MOSSY)) {
                         world.playSound(player, targetPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0f, 1.0f);
                         ModParticles.spawnParticlesOnBlockFaces(world, targetPos, ParticleTypes.SMALL_FLAME, UniformInt.of(3, 5));
@@ -807,7 +807,7 @@ public class ModEvents {
                 }
             }
 
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.spongeRusting) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.spongeRusting) {
                 if (heldItem.getItem() == Items.WET_SPONGE) {
                     if (targetBlock.is(ModTags.RUSTABLE)) {
                         world.playSound(player, targetPos, SoundEvents.AMBIENT_UNDERWATER_ENTER, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -856,7 +856,7 @@ public class ModEvents {
                     return InteractionResult.SUCCESS;
                 }
             }
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.pickaxeCracking) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.pickaxeCracking) {
                 if (heldItem.getItem() instanceof PickaxeItem) {
                     if (targetBlock.is(ModTags.CRACKABLE)) {
                         Block.popResource(world, fixedPos, new ItemStack(DROPPED_BRICKS.get(targetBlock.getBlock())));
@@ -916,7 +916,7 @@ public class ModEvents {
                 }
             }
             if (heldItem.getItem() instanceof AxeItem) {
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.axeStripping) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.axeStripping) {
                     if (targetBlock.is(ModTags.RAW_LOGS)) {
                         Block.popResource(world, fixedPos, new ItemStack(DROPPED_BARK.get(targetBlock.getBlock())));
                         world.playSound(player, targetPos, SoundEvents.AXE_STRIP, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -930,7 +930,7 @@ public class ModEvents {
                         return InteractionResult.SUCCESS;
                     }
                 }
-                if(ImmersiveWeathering.getConfig().itemUsesConfig.axeScraping) {
+                if(ImmersiveWeathering1.getConfig().itemUsesConfig.axeScraping) {
                     if (targetBlock.is(ModTags.WEATHERED_IRON) || targetBlock.is(ModTags.RUSTED_IRON)) {
                         world.playSound(player, targetPos, SoundEvents.AXE_SCRAPE, SoundSource.BLOCKS, 1.0f, 1.0f);
                         world.playSound(player, targetPos, SoundEvents.SHIELD_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
@@ -957,7 +957,7 @@ public class ModEvents {
                     }
                 }
             }
-            if(ImmersiveWeathering.getConfig().itemUsesConfig.axeStripping) {
+            if(ImmersiveWeathering1.getConfig().itemUsesConfig.axeStripping) {
                 if (UNSTRIP_LOG.containsKey(heldItem.getItem()) && targetBlock.is(STRIPPED_BLOCKS.get(UNSTRIP_LOG.get(heldItem.getItem())))) {
                     Block fixedBlock = UNSTRIP_LOG.get(heldItem.getItem());
                     SoundEvent placeSound = fixedBlock.getSoundType(fixedBlock.defaultBlockState()).getPlaceSound();

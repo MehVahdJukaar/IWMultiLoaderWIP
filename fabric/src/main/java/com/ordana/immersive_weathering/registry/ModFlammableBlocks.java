@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +17,7 @@ public class ModFlammableBlocks {
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.AZALEA_LEAF_PILE, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.FLOWERING_AZALEA_LEAF_PILE, 30, 60);
         FlammableBlockRegistry.getDefaultInstance().add(ModBlocks.WEEDS, 60, 100);
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.flammableCobwebs) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.flammableCobwebs) {
             FlammableBlockRegistry.getDefaultInstance().add(Blocks.COBWEB, 100, 100);
         }
     }

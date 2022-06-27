@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import com.ordana.immersive_weathering.registry.blocks.ThinIceBlock;
@@ -37,7 +37,7 @@ abstract public class IceMixin extends Block {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
         int rand = random.nextInt(4);
         Direction direction = Direction.from2DDataValue(rand);
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.thinIceFormation) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.thinIceFormation) {
             if (world.getBlockState(pos.above()).is(Blocks.AIR) && (world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY) && (world.getBrightness(LightLayer.BLOCK, pos) < 7 - state.getLightBlock(world, pos))) {
                 if (world.getFluidState(pos.relative(direction)).is(Fluids.WATER)) {
                     world.setBlockAndUpdate(pos.relative(direction), ModBlocks.THIN_ICE.defaultBlockState().setValue(ThinIceBlock.WATERLOGGED, true));
@@ -48,7 +48,7 @@ abstract public class IceMixin extends Block {
 
     //TODO: is day is broken on client side
     private boolean canMelt(BlockState state, Level level, BlockPos pos) {
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.naturalIceMelt) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.naturalIceMelt) {
             return level.dimensionType().ultraWarm() || (level.getBiome(pos).value().shouldSnowGolemBurn(pos) && level.isDay()) ||
                     (level.getBrightness(LightLayer.BLOCK, pos) > 11 - state.getLightBlock(level, pos));
 

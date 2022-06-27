@@ -1,12 +1,10 @@
 package com.ordana.immersive_weathering.common.blocks.soil;
 
-import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
 import com.ordana.immersive_weathering.registry.ModTags;
 import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;

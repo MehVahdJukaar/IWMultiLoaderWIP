@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.ModTags;
 import com.ordana.immersive_weathering.registry.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.registry.blocks.WeatheringHelper;
@@ -36,18 +36,18 @@ public abstract class LeavesMixin extends Block implements BonemealableBlock {
 
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
-        if(ImmersiveWeathering.getConfig().leavesConfig.leafDecayPiles) {
+        if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayPiles) {
             if (state.hasProperty(LeavesBlock.PERSISTENT) && !state.getValue(LeavesBlock.PERSISTENT) && state.hasProperty(LeavesBlock.DISTANCE) && state.getValue(LeavesBlock.DISTANCE) == 7 && state.is(ModTags.VANILLA_LEAVES)) {
                 var leafPile = WeatheringHelper.getFallenLeafPile(state).orElse(null);
                 if (leafPile == null) return;
                 BlockState baseLeaf = leafPile.defaultBlockState().setValue(LeafPileBlock.LAYERS, 0);
                 var leafParticle = WeatheringHelper.getFallenLeafParticle(state).orElse(null);
-                if(ImmersiveWeathering.getConfig().leavesConfig.leafDecayParticles) {
+                if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayParticles) {
                     world.sendParticles(leafParticle, (double) pos.getX() + 0.5D,
                             (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 10,
                             0.5D, 0.5D, 0.5D, 0.0D);
                 }
-                if(ImmersiveWeathering.getConfig().leavesConfig.leafDecaySound) {
+                if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecaySound) {
                     world.playSound(null, pos, SoundEvents.AZALEA_LEAVES_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
                 if (world.random.nextFloat() < 0.3f) {
@@ -62,7 +62,7 @@ public abstract class LeavesMixin extends Block implements BonemealableBlock {
     public void randomDisplayTick(BlockState state, Level world, BlockPos pos, Random random, CallbackInfo ci) {
         var leafParticle = WeatheringHelper.getFallenLeafParticle(state).orElse(null);
         if (leafParticle == null) return;
-        if(ImmersiveWeathering.getConfig().leavesConfig.fallingLeafParticles && state.is(ModTags.VANILLA_LEAVES)) {
+        if(ImmersiveWeathering1.getConfig().leavesConfig.fallingLeafParticles && state.is(ModTags.VANILLA_LEAVES)) {
             if (random.nextInt(32) == 0 && !world.getBlockState(pos.below()).isRedstoneConductor(world, pos)) {
                 if (!(world.getBlockState(pos.below()).getBlock() instanceof LeavesBlock) && state.is(ModTags.VANILLA_LEAVES)) {
                     ParticleUtils.spawnParticlesOnBlockFaces(world, pos, leafParticle, UniformInt.of(0, 1));

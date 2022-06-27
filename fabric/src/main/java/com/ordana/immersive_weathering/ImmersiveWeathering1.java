@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.function.Supplier;
 
-public class ImmersiveWeathering implements ModInitializer {
+public class ImmersiveWeathering1 implements ModInitializer {
 
     public static final String MOD_ID = "immersive_weathering";
 
@@ -59,7 +59,7 @@ public class ImmersiveWeathering implements ModInitializer {
         LogMatchTest.init();
         BlockSetMatchTest.init();
 
-        FabricLoader.getInstance().getModContainer(ImmersiveWeathering.MOD_ID).ifPresent(modContainer -> {
+        FabricLoader.getInstance().getModContainer(ImmersiveWeathering1.MOD_ID).ifPresent(modContainer -> {
             ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("immersive_weathering:better_brick_items"), modContainer, ResourcePackActivationType.NORMAL);
             ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("immersive_weathering:better_brick_blocks"), modContainer, ResourcePackActivationType.NORMAL);
             ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("immersive_weathering:visual_waxed_iron_items"), modContainer, ResourcePackActivationType.NORMAL);

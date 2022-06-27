@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import com.ordana.immersive_weathering.registry.blocks.WeatheringHelper;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
@@ -32,7 +32,7 @@ public abstract class FireMixin extends BaseFireBlock{
                     target = "Lnet/minecraft/world/World;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z",
                     shift = At.Shift.AFTER))
     private void afterRemoveBlock(Level world, BlockPos pos, int spreadFactor, Random rand, int currentAge, CallbackInfo ci) {
-        if(ImmersiveWeathering.getConfig().fireAndIceConfig.fireCharsWood) {
+        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.fireCharsWood) {
             WeatheringHelper.tryCharBlock(world, pos, bs);
         }
     }

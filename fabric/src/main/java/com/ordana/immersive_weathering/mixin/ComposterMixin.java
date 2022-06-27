@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +24,7 @@ public class ComposterMixin {
     private void onUse(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
         int i = state.getValue(ComposterBlock.LEVEL);
         if (i == 8) {
-            if(ImmersiveWeathering.getConfig().leavesConfig.composterDropsDirt) {
+            if(ImmersiveWeathering1.getConfig().leavesConfig.composterDropsDirt) {
                 if (world.random.nextFloat() < 0.5f) {
                     Block.popResource(world, pos.above(), new ItemStack(Items.DIRT));
                 }
