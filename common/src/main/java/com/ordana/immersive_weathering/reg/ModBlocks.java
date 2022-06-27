@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.reg;
 
 import com.ordana.immersive_weathering.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
+import com.ordana.immersive_weathering.blocks.WeedsBlock;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostBlock;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostyGlassBlock;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostyGlassPaneBlock;

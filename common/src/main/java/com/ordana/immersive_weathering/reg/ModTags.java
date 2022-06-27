@@ -8,6 +8,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
 public final class ModTags {
+
     //blocks
     public static final TagKey<Block> MOSSY = registerBlockTag("mossy");
     public static final TagKey<Block> MOSSABLE = registerBlockTag("mossable");
@@ -32,10 +33,8 @@ public final class ModTags {
     public static final TagKey<Block> RUSTABLE = registerBlockTag("rustable");
     public static final TagKey<Block> WAXED_BLOCKS = registerBlockTag("waxed_blocks");
 
-
     public static final TagKey<Block> FLOWERY = registerBlockTag("flowery");
     public static final TagKey<Block> FLOWERABLE = registerBlockTag("flowerable");
-
 
     //items
     public static final TagKey<Item> BARK = registerItemTag("bark");
@@ -48,6 +47,23 @@ public final class ModTags {
     public static final TagKey<Biome> HOT = registerBiomeTag("hot");
     public static final TagKey<Biome> WET = registerBiomeTag("wet");
     public static final TagKey<Biome> OLD_GROWTH = registerBiomeTag("old_growth");
+
+
+    //fabric only.
+    //TODO: remove unneded from forge
+    public static final TagKey<Block> RAW_LOGS = registerBlockTag("raw_logs");
+    public static final TagKey<Block> STRIPPED_LOGS = registerBlockTag("stripped_logs");
+
+    public static final TagKey<Block> FERTILE_BLOCKS = registerBlockTag("fertile_blocks");
+    public static final TagKey<Block> VANILLA_LEAVES = registerBlockTag("vanilla_leaves");
+    public static final TagKey<Block> LEAF_PILE_REPLACEABLE = registerBlockTag("leaf_pile_replaceable");
+    public static final TagKey<Block> WEEDS_REPLACEABLE = registerBlockTag("weeds_replaceable");
+    public static final TagKey<Block> WART_GROW_BLOCKS = registerBlockTag("wart_grow_blocks");
+
+    public static final TagKey<Block> COPPER = registerBlockTag("copper");
+    public static final TagKey<Block> BARS = registerBlockTag("bars");
+
+
 
     private ModTags() {
     }

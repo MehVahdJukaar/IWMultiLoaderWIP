@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import org.jetbrains.annotations.Nullable;
 
 //this will be messy
 public class ConfigPlatform {
@@ -94,8 +95,8 @@ public class ConfigPlatform {
         throw new AssertionError();
     }
 
-    public enum LeafPileMode{
-        LEAF_LAYER, SIMPLE,OFF
+    public enum LeafPileMode {
+        LEAF_LAYER, SIMPLE, OFF
     }
 
     @ExpectPlatform
@@ -104,7 +105,8 @@ public class ConfigPlatform {
     }
 
     @ExpectPlatform
-    public static boolean leggingsPreventThornDamage() {
+    @Nullable
+    public static boolean leggingsPreventThornDamage() {;
         throw new AssertionError();
     }
 
@@ -240,81 +242,79 @@ public class ConfigPlatform {
     }
 
 
-
     //TODO: turn into datapack
-@Config(name = "generators_config")
-public static final class GeneratorsConfig implements ConfigData {
+    @Config(name = "generators_config")
+    public static final class GeneratorsConfig implements ConfigData {
 
-    public boolean allGenerators = true;
-    public boolean mossBurning = true;
-    public boolean basaltGenerator = true;
-    public boolean deepslateGenerator = true;
-    public boolean graniteGenerator = true;
-    public boolean andesiteGenerator = true;
-    public boolean dioriteGenerator = true;
-    public boolean tuffGenerator = true;
-    public boolean blackstoneGenerator = true;
-    public boolean magmaGenerator = true;
-    public boolean terracottaGenerator = true;
-    public boolean vitrifiedSandGenerator = true;
-    public boolean cryingObsidianGenerator = true;
-    public boolean iceGenerator = true;
+        public boolean allGenerators = true;
+        public boolean mossBurning = true;
+        public boolean basaltGenerator = true;
+        public boolean deepslateGenerator = true;
+        public boolean graniteGenerator = true;
+        public boolean andesiteGenerator = true;
+        public boolean dioriteGenerator = true;
+        public boolean tuffGenerator = true;
+        public boolean blackstoneGenerator = true;
+        public boolean magmaGenerator = true;
+        public boolean terracottaGenerator = true;
+        public boolean vitrifiedSandGenerator = true;
+        public boolean cryingObsidianGenerator = true;
+        public boolean iceGenerator = true;
 
-    private GeneratorsConfig() {
+        private GeneratorsConfig() {
+        }
     }
-}
 
-@Config(name = "item_uses_config")
-public static final class ItemUsesConfig implements ConfigData {
+    @Config(name = "item_uses_config")
+    public static final class ItemUsesConfig implements ConfigData {
 
-    public boolean cauldronWashing = false;
-    public boolean pistonSliming = true;
-    public boolean soilShearing = true;
-    public boolean azaleaShearing = true;
-    public boolean mossShearing = true;
-    public boolean mossBurning = true;
-    public boolean charredBlockIgniting = true;
-    public boolean shovelExtinguishing = true;
-    public boolean spongeRusting = true;
-    public boolean pickaxeCracking = true;
-    public boolean axeStripping = true;
-    public boolean axeScraping = true;
+        public boolean cauldronWashing = false;
+        public boolean pistonSliming = true;
+        public boolean soilShearing = true;
+        public boolean azaleaShearing = true;
+        public boolean mossShearing = true;
+        public boolean mossBurning = true;
+        public boolean charredBlockIgniting = true;
+        public boolean shovelExtinguishing = true;
+        public boolean spongeRusting = true;
+        public boolean pickaxeCracking = true;
+        public boolean axeStripping = true;
+        public boolean axeScraping = true;
 
-    private ItemUsesConfig() {
+        private ItemUsesConfig() {
+        }
     }
-}
 
-//not needed on forge which is data driven
-@Config(name = "worldgen_config")
-public static final class WorldgenConfig implements ConfigData {
+    //not needed on forge which is data driven
+    @Config(name = "worldgen_config")
+    public static final class WorldgenConfig implements ConfigData {
 
-    public boolean icicleFeature = true;
-    public boolean cryosolFeature = true;
-    public boolean humusFeature = true;
-    public boolean rootsFeature = true;
-    public boolean fluvisolFeature = true;
-    public boolean siltFeature = true;
-    public boolean lakebedFeature = true;
-    public boolean vertisolFeature = true;
-    public boolean oakLeavesFeature = true;
-    public boolean darkLeavesFeature = true;
-    public boolean birchLeavesFeature = true;
-    public boolean spruceLeavesFeature = true;
-
+        public boolean icicleFeature = true;
+        public boolean cryosolFeature = true;
+        public boolean humusFeature = true;
+        public boolean rootsFeature = true;
+        public boolean fluvisolFeature = true;
+        public boolean siltFeature = true;
+        public boolean lakebedFeature = true;
+        public boolean vertisolFeature = true;
+        public boolean oakLeavesFeature = true;
+        public boolean darkLeavesFeature = true;
+        public boolean birchLeavesFeature = true;
+        public boolean spruceLeavesFeature = true;
 
 
-    public static ForgeConfigSpec.DoubleValue MOSS_CLUMP_CHANCE;
-    public static ForgeConfigSpec.BooleanValue ICICLE_FIRE_RESISTANCE;
-    public static ForgeConfigSpec.BooleanValue ICICLE_FOOD;
+        public static ForgeConfigSpec.DoubleValue MOSS_CLUMP_CHANCE;
+        public static ForgeConfigSpec.BooleanValue ICICLE_FIRE_RESISTANCE;
+        public static ForgeConfigSpec.BooleanValue ICICLE_FOOD;
 
-    public static ForgeConfigSpec.BooleanValue CRACK_REQUIRES_SHIFTING;
+        public static ForgeConfigSpec.BooleanValue CRACK_REQUIRES_SHIFTING;
 
-    public static ForgeConfigSpec.DoubleValue HUMUS_SPAWN_BELOW_LEAVES;
+        public static ForgeConfigSpec.DoubleValue HUMUS_SPAWN_BELOW_LEAVES;
 
 
-    public static ForgeConfigSpec.BooleanValue VITRIFIED_LAVA;
+        public static ForgeConfigSpec.BooleanValue VITRIFIED_LAVA;
 
-    public static ForgeConfigSpec.BooleanValue HUMUS_PATCHES;
-    public static ForgeConfigSpec.BooleanValue BLOCK_GROWTH;
+        public static ForgeConfigSpec.BooleanValue HUMUS_PATCHES;
+        public static ForgeConfigSpec.BooleanValue BLOCK_GROWTH;
 
-}
+    }

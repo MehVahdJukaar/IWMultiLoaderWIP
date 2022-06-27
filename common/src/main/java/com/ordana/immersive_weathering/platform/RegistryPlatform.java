@@ -11,6 +11,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -69,6 +70,16 @@ public class RegistryPlatform {
 
     @ExpectPlatform
     public static void registerCompostable(ItemLike name, float chance) {
+        throw new AssertionError();
+    }
+
+    public enum StairType{
+
+        NORMAL,MOSSY,CRACKED, CRACKABLE, CHARRED, RUSTABLE;
+    }
+
+    @ExpectPlatform
+    public static Block createStairs(StairType type, Supplier<Block> baseBlock, BlockBehaviour.Properties properties) {
         throw new AssertionError();
     }
 
