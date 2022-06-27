@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
+import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import com.ordana.immersive_weathering.registry.ModTags;
 
 public class RustableStairsBlock
@@ -23,7 +23,7 @@ public class RustableStairsBlock
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
-        if(ImmersiveWeathering1.getConfig().blockGrowthConfig.blockRusting) {
+        if(ImmersiveWeatheringFabric.getConfig().blockGrowthConfig.blockRusting) {
             if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
                 for (Direction direction : Direction.values()) {
                     var targetPos = pos.relative(direction);

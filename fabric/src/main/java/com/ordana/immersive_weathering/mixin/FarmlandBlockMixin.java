@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
+import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,7 +25,7 @@ public class FarmlandBlockMixin extends Block {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/FarmlandBlock;setToDirt(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;)V"), method="onLandedUpon", cancellable = true)
     public void checkFeatherFallingOnLanding(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo info) {
         if (entity != null) {
-            if(ImmersiveWeathering1.getConfig().leavesConfig.featherFallingFarmer) {
+            if(ImmersiveWeatheringFabric.getConfig().leavesConfig.featherFallingFarmer) {
                 if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FALL_PROTECTION, (LivingEntity) entity) > 0) {
                     super.fallOn(world, state, pos, entity, fallDistance);
                     info.cancel();

@@ -11,8 +11,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -68,6 +70,11 @@ public class CommonPlatform {
 
     @ExpectPlatform
     public static int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static FlowingFluid getFlowingFluid(LiquidBlock block){
         throw new AssertionError();
     }
 

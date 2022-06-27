@@ -17,8 +17,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -61,6 +63,10 @@ public class CommonPlatformImpl {
 
     public static int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
         return FlammableBlockRegistry.getDefaultInstance().get(state.getBlock()).getBurnChance();
+    }
+
+    public static FlowingFluid getFlowingFluid(LiquidBlock block) {
+        return null;
     }
 
 

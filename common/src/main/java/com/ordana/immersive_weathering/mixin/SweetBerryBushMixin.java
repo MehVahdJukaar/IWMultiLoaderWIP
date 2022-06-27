@@ -1,6 +1,5 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,15 +12,15 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(SweetBerryBushBlock.class)
 public class SweetBerryBushMixin {
 
-    @Redirect(method = "onEntityCollision",
+    @Redirect(method = "entityInside",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-    private boolean onEntityCollision(Entity entity, DamageSource source, float amount) {
-        if(entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty() && ImmersiveWeathering1.getConfig().leavesConfig.leggingsPreventThornDamage){
+                    target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private boolean removeBlock(Entity entity, DamageSource source, float amount) {
+        if (entity instanceof Player player && !player.getItemBySlot(EquipmentSlot.LEGS).isEmpty()) {
             return false;
-        }
-        else{
+        } else {
             return entity.hurt(source, amount);
         }
     }
+
 }

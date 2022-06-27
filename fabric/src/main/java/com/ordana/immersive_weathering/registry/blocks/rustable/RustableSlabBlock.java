@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering.registry.blocks.rustable;
 
 import java.util.Random;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
+import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import com.ordana.immersive_weathering.registry.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
-        if(ImmersiveWeathering1.getConfig().blockGrowthConfig.blockRusting) {
+        if(ImmersiveWeatheringFabric.getConfig().blockGrowthConfig.blockRusting) {
             if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
                 for (Direction direction : Direction.values()) {
                     var targetPos = pos.relative(direction);

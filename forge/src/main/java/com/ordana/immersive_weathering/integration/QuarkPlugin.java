@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.integration;
 
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -62,7 +62,7 @@ public class QuarkPlugin {
                 if (ForgeRegistries.BLOCKS.containsKey(vsRes)) {
                     vs = ForgeRegistries.BLOCKS.getValue(vsRes);
                 } else {
-                    vsRes = ImmersiveWeathering.res(vsName);
+                    vsRes = ImmersiveWeatheringForge.res(vsName);
                     if (ForgeRegistries.BLOCKS.containsKey(vsRes)) {
                         vs = ForgeRegistries.BLOCKS.getValue(vsRes);
                     }
@@ -71,7 +71,7 @@ public class QuarkPlugin {
                 if (ForgeRegistries.BLOCKS.containsKey(vsAltRes)) {
                     vsAlt = ForgeRegistries.BLOCKS.getValue(vsAltRes);
                 } else {
-                    vsAltRes = ImmersiveWeathering.res(vsAltName);
+                    vsAltRes = ImmersiveWeatheringForge.res(vsAltName);
                     if (ForgeRegistries.BLOCKS.containsKey(vsAltRes)) {
                         vsAlt = ForgeRegistries.BLOCKS.getValue(vsAltRes);
                     }

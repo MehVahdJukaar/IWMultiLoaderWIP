@@ -2,6 +2,9 @@ package com.ordana.immersive_weathering.registry.blocks;
 
 import java.util.*;
 import java.util.stream.Stream;
+
+import com.ordana.immersive_weathering.platform.RegistryPlatform;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -22,9 +25,23 @@ public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 10);
 	public static final int MAX_AGE = 10;
 
+	private static final int FIRE_SPREAD = 30;
+	private static final int FLAMMABILITY = 60;
+
 	public IvyBlock(Properties settings) {
 		super(settings);
 		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 7));
+		RegistryPlatform.registerBlockFlammability(this, FIRE_SPREAD, FLAMMABILITY);
+	}
+
+	@PlatformOnly(PlatformOnly.FORGE)
+	public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+		return FIRE_SPREAD;
+	}
+
+	@PlatformOnly(PlatformOnly.FORGE)
+	public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+		return FLAMMABILITY;
 	}
 
 	@Override

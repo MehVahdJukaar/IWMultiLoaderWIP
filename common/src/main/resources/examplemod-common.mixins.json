@@ -3,7 +3,7 @@
   "package": "com.ordana.immersive_weathering.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
-    "RandomBlockMatchTestAccessor"
+    "accessors.RandomBlockMatchTestAccessor"
   ],
   "mixins": [
     "BeeMixin",
@@ -13,7 +13,11 @@
     "LargeFernBlockMixin",
     "LeavesMixin",
     "LightningEntityMixin",
-    "RabbitMixin"
+    "LiquidBlockMixin",
+    "RabbitEatGoalMixin",
+    "RabbitMixin",
+    "RootedDirtBlockMixin",
+    "SweetBerryBushMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.integration.dynamic_stuff;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.configs.ClientConfigs;
 import net.mehvahdjukaar.selene.block_set.BlockType;
 import net.mehvahdjukaar.selene.client.asset_generators.LangBuilder;
@@ -22,7 +22,7 @@ import java.util.Objects;
 public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider {
 
     public ClientDynamicResourcesHandler() {
-        super(new DynamicTexturePack(ImmersiveWeathering.res("generated_pack")));
+        super(new DynamicTexturePack(ImmersiveWeatheringForge.res("generated_pack")));
         this.dynamicPack.generateDebugResources = false;
     }
 
@@ -33,7 +33,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
     @Override
     public Logger getLogger() {
-        return ImmersiveWeathering.LOGGER;
+        return ImmersiveWeatheringForge.LOGGER;
     }
 
     @Override
@@ -52,31 +52,31 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
         {
 
             StaticResource leafParticle = StaticResource.getOrLog(manager,
-                    ResType.PARTICLES.getPath(ImmersiveWeathering.res("oak_leaf")));
+                    ResType.PARTICLES.getPath(ImmersiveWeatheringForge.res("oak_leaf")));
 
             StaticResource lpBlockState = StaticResource.getOrLog(manager,
-                    ResType.BLOCKSTATES.getPath(ImmersiveWeathering.res("oak_leaf_pile")));
+                    ResType.BLOCKSTATES.getPath(ImmersiveWeatheringForge.res("oak_leaf_pile")));
             StaticResource lpModel1 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height1")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height1")));
             StaticResource lpModel2 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height2")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height2")));
             StaticResource lpModel4 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height4")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height4")));
             StaticResource lpModel6 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height6")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height6")));
             StaticResource lpModel8 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height8")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height8")));
             StaticResource lpModel10 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height10")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height10")));
             StaticResource lpModel12 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height12")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height12")));
             StaticResource lpModel14 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height14")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height14")));
             StaticResource lpModel16 = StaticResource.getOrLog(manager,
-                    ResType.BLOCK_MODELS.getPath(ImmersiveWeathering.res("leaf_piles/oak_leaf_pile_height16")));
+                    ResType.BLOCK_MODELS.getPath(ImmersiveWeatheringForge.res("leaf_piles/oak_leaf_pile_height16")));
 
             StaticResource lpItemModel = StaticResource.getOrLog(manager,
-                    ResType.ITEM_MODELS.getPath(ImmersiveWeathering.res("oak_leaf_pile")));
+                    ResType.ITEM_MODELS.getPath(ImmersiveWeatheringForge.res("oak_leaf_pile")));
 
             ModDynamicRegistry.LEAF_TO_TYPE.forEach((pile, leafType) -> {
                 if (leafType.isVanilla()) return;
@@ -130,7 +130,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
         //bark
         {
             StaticResource itemModel = StaticResource.getOrLog(manager,
-                    ResType.ITEM_MODELS.getPath(ImmersiveWeathering.res("oak_bark")));
+                    ResType.ITEM_MODELS.getPath(ImmersiveWeatheringForge.res("oak_bark")));
 
             ModDynamicRegistry.MODDED_BARK.forEach((woodType, bark) -> {
                 if (!woodType.isVanilla()) {
@@ -221,7 +221,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
         string = string.replace("heavy_oak_leaves", id.replace("/", "/heavy_"));
 
         //adds modified under my namespace
-        ResourceLocation newRes = ImmersiveWeathering.res(path);
+        ResourceLocation newRes = ImmersiveWeatheringForge.res(path);
         dynamicPack.addBytes(newRes, string.getBytes(), ResType.GENERIC);
     }
 
@@ -232,8 +232,8 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
     public void regenerateDynamicAssets(ResourceManager manager) {
 
         //leaf particle textures
-        try (TextureImage template = TextureImage.open(manager, ImmersiveWeathering.res("particle/oak_leaf_0"));
-             TextureImage template1 = TextureImage.open(manager, ImmersiveWeathering.res("particle/oak_leaf_1"))) {
+        try (TextureImage template = TextureImage.open(manager, ImmersiveWeatheringForge.res("particle/oak_leaf_0"));
+             TextureImage template1 = TextureImage.open(manager, ImmersiveWeatheringForge.res("particle/oak_leaf_1"))) {
 
             Respriter respriter = Respriter.of(template);
             Respriter respriter1 = Respriter.of(template1);
@@ -247,7 +247,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
                         RPUtils.findFirstBlockTextureLocation(manager, type.leaves))) {
 
                     {
-                        ResourceLocation textureRes = ImmersiveWeathering.res(
+                        ResourceLocation textureRes = ImmersiveWeatheringForge.res(
                                 String.format("particle/%s_leaf_0", path));
                         if (!alreadyHasTextureAtLocation(manager, textureRes)) {
 
@@ -259,7 +259,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
                     }
 
                     {
-                        ResourceLocation textureRes = ImmersiveWeathering.res(
+                        ResourceLocation textureRes = ImmersiveWeatheringForge.res(
                                 String.format("particle/%s_leaf_1", path));
                         if (!alreadyHasTextureAtLocation(manager, textureRes)) {
 
@@ -286,7 +286,7 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
 
             try (TextureImage baseTexture = TextureImage.open(manager, RPUtils.findFirstBlockTextureLocation(manager, type.leaves))) {
 
-                ResourceLocation textureRes = ImmersiveWeathering.res(
+                ResourceLocation textureRes = ImmersiveWeatheringForge.res(
                         String.format("block/%s", path));
                 if (!alreadyHasTextureAtLocation(manager, textureRes)) {
 
@@ -306,13 +306,13 @@ public class ClientDynamicResourcesHandler extends RPAwareDynamicTextureProvider
         });
 
         //bark textures
-        try (TextureImage template = TextureImage.open(manager, ImmersiveWeathering.res("item/bark_template"))) {
+        try (TextureImage template = TextureImage.open(manager, ImmersiveWeatheringForge.res("item/bark_template"))) {
 
             ModDynamicRegistry.MODDED_BARK.forEach((type, bark) -> {
 
                 if (type.isVanilla()) return;
 
-                ResourceLocation textureRes = ImmersiveWeathering.res(
+                ResourceLocation textureRes = ImmersiveWeatheringForge.res(
                         "item/" + bark.getRegistryName().getPath());
                 if (!alreadyHasTextureAtLocation(manager, textureRes)) {
 

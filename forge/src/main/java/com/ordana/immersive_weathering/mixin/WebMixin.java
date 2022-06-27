@@ -22,7 +22,6 @@ public abstract class WebMixin extends Block {
         super(settings);
     }
 
-
     @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return 60;

@@ -1,11 +1,20 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.ordana.immersive_weathering.common.ModBlocks;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +23,7 @@ import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -32,7 +42,11 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
     protected abstract void fizz(LevelAccessor p_54701_, BlockPos p_54702_);
 
     @Shadow
-    public abstract FlowingFluid getFluid();
+    public abstract FluidState getFluidState(BlockState blockState);
+
+    @Shadow
+    @Final
+    protected FlowingFluid fluid;
 
     public LiquidBlockMixin(Properties settings, FlowingFluid fluid) {
         super(settings);
@@ -107,7 +121,8 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
                     newState = Blocks.TUFF.defaultBlockState();
                 } else if (hasMagma && hasBlueIce) {
                     newState = Blocks.BLACKSTONE.defaultBlockState();
-                }if (hasWater && hasSoulfire) {
+                }
+                if (hasWater && hasSoulfire) {
                     newState = Blocks.CRYING_OBSIDIAN.defaultBlockState();
                 } else if (hasBubbles) {
                     newState = Blocks.MAGMA_BLOCK.defaultBlockState();
@@ -130,4 +145,22 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
             }
         }
     }
+
+    @Override
+    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+        if (world.getBiome(pos).is(ModTags.ICY) && this.getFluid().is(FluidTags.WATER)) {
+            if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || ((LivingEntity) entity).hasEffect(MobEffects.CONDUIT_POWER) || entity.getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
+                return;
+            } else if (ConfigPlatform.freezingWater() && entity.isInWater()) {
+                entity.setTicksFrozen(ConfigPlatform.freezingWaterSeverity());
+            }
+        }
+    }
+
+    private FlowingFluid getFluid() {
+        var f = CommonPlatform.getFlowingFluid((LiquidBlock) (Object) this);
+        if (f == null) return this.fluid;
+        return f;
+    }
+
 }

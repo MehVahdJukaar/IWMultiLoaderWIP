@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.integration.dynamic_stuff;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import net.mehvahdjukaar.selene.block_set.leaves.LeavesType;
 import net.mehvahdjukaar.selene.block_set.wood.WoodTypeRegistry;
 import net.mehvahdjukaar.selene.resourcepack.DynamicDataPack;
@@ -11,23 +11,21 @@ import net.mehvahdjukaar.selene.resourcepack.resources.TagBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.Logger;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
 
     public ServerDynamicResourcesHandler() {
-        super(new DynamicDataPack(ImmersiveWeathering.res("generated_pack")));
+        super(new DynamicDataPack(ImmersiveWeatheringForge.res("generated_pack")));
         this.dynamicPack.generateDebugResources = false;
     }
 
     @Override
     public Logger getLogger() {
-        return ImmersiveWeathering.LOGGER;
+        return ImmersiveWeatheringForge.LOGGER;
     }
 
     @Override
@@ -38,8 +36,8 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
 
-        StaticResource lootTable = StaticResource.getOrLog(manager, ResType.BLOCK_LOOT_TABLES.getPath(ImmersiveWeathering.res("oak_leaf_pile")));
-        StaticResource recipe = StaticResource.getOrLog(manager, ResType.RECIPES.getPath(ImmersiveWeathering.res("oak_leaf_pile")));
+        StaticResource lootTable = StaticResource.getOrLog(manager, ResType.BLOCK_LOOT_TABLES.getPath(ImmersiveWeatheringForge.res("oak_leaf_pile")));
+        StaticResource recipe = StaticResource.getOrLog(manager, ResType.RECIPES.getPath(ImmersiveWeatheringForge.res("oak_leaf_pile")));
 
         for (var e : ModDynamicRegistry.LEAF_TO_TYPE.entrySet()) {
             LeavesType leafType = e.getValue();
@@ -72,12 +70,12 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
     @Override
     public void generateStaticAssetsOnStartup(ResourceManager manager) {
         //tag
-        TagBuilder leafPiles = TagBuilder.of(ImmersiveWeathering.res("leaf_piles"))
+        TagBuilder leafPiles = TagBuilder.of(ImmersiveWeatheringForge.res("leaf_piles"))
                 .addEntries(ModDynamicRegistry.LEAF_TO_TYPE.keySet());
         dynamicPack.addTag(leafPiles, Registry.BLOCK_REGISTRY);
         dynamicPack.addTag(leafPiles, Registry.ITEM_REGISTRY);
 
-        dynamicPack.addTag(TagBuilder.of(ImmersiveWeathering.res("bark"))
+        dynamicPack.addTag(TagBuilder.of(ImmersiveWeatheringForge.res("bark"))
                 .addEntries(ModDynamicRegistry.MODDED_BARK.values()), Registry.ITEM_REGISTRY);
 
         //only needed for datagen. remove later
@@ -130,7 +128,7 @@ public class ServerDynamicResourcesHandler extends RPAwareDynamicDataProvider {
         string = string.replace("minecraft:oak_leaves", leafBlockId);
 
         //adds modified under my namespace
-        ResourceLocation newRes = ImmersiveWeathering.res(path);
+        ResourceLocation newRes = ImmersiveWeatheringForge.res(path);
         dynamicPack.addBytes(newRes, string.getBytes(), ResType.GENERIC);
     }
 

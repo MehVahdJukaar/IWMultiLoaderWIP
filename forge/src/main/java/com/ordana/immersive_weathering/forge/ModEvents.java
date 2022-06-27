@@ -1,8 +1,8 @@
-package com.ordana.immersive_weathering.common;
+package com.ordana.immersive_weathering.forge;
 
 
 import com.mojang.datafixers.util.Pair;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
 import com.ordana.immersive_weathering.common.blocks.Waxables;
 import com.ordana.immersive_weathering.common.blocks.Weatherable;
@@ -18,13 +18,13 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.TagManager;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -32,6 +32,8 @@ import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -39,12 +41,15 @@ import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -53,7 +58,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = ImmersiveWeathering.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = ImmersiveWeatheringForge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEvents {
 
     private static final BlockGrowthHandler GROWTH_MANAGER = new BlockGrowthHandler();
@@ -374,22 +379,22 @@ public class ModEvents {
 
 
     private static final Map<String, ResourceLocation> fullReMap = new HashMap<>() {{
-        put("ash_block", ImmersiveWeathering.res("soot_block"));
-        put("nulch", ImmersiveWeathering.res("nulch_block"));
-        put("mulch", ImmersiveWeathering.res("mulch_block"));
+        put("ash_block", ImmersiveWeatheringForge.res("soot_block"));
+        put("nulch", ImmersiveWeatheringForge.res("nulch_block"));
+        put("mulch", ImmersiveWeatheringForge.res("mulch_block"));
     }};
 
     @SubscribeEvent
     public static void onRemapBlocks(RegistryEvent.MissingMappings<Block> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings(ImmersiveWeathering.MOD_ID)) {
+        for (RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings(ImmersiveWeatheringForge.MOD_ID)) {
             String k = mapping.key.getPath();
             if (fullReMap.containsKey(k)) {
                 var i = fullReMap.get(k);
                 try {
-                    ImmersiveWeathering.LOGGER.warn("Remapping block '{}' to '{}'", mapping.key, i);
+                    ImmersiveWeatheringForge.LOGGER.warn("Remapping block '{}' to '{}'", mapping.key, i);
                     mapping.remap(ForgeRegistries.BLOCKS.getValue(i));
                 } catch (Throwable t) {
-                    ImmersiveWeathering.LOGGER.warn("Remapping block '{}' to '{}' failed: {}", mapping.key, i, t);
+                    ImmersiveWeatheringForge.LOGGER.warn("Remapping block '{}' to '{}' failed: {}", mapping.key, i, t);
                 }
             }
         }
@@ -397,16 +402,40 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void onRemapItems(RegistryEvent.MissingMappings<Item> event) {
-        for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings(ImmersiveWeathering.MOD_ID)) {
+        for (RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings(ImmersiveWeatheringForge.MOD_ID)) {
             String k = mapping.key.getPath();
             if (fullReMap.containsKey(k)) {
                 var i = fullReMap.get(k);
                 try {
-                    ImmersiveWeathering.LOGGER.warn("Remapping item '{}' to '{}'", mapping.key, i);
+                    ImmersiveWeatheringForge.LOGGER.warn("Remapping item '{}' to '{}'", mapping.key, i);
                     mapping.remap(ForgeRegistries.ITEMS.getValue(i));
                 } catch (Throwable t) {
-                    ImmersiveWeathering.LOGGER.warn("Remapping item '{}' to '{}' failed: {}", mapping.key, i, t);
+                    ImmersiveWeatheringForge.LOGGER.warn("Remapping item '{}' to '{}' failed: {}", mapping.key, i, t);
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void addFeaturesToBiomes(BiomeLoadingEvent event) {
+
+        ResourceKey<Biome> key = ResourceKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
+        //Holder<Biome> holder = BuiltinRegistries.BIOME.getHolderOrThrow(key);
+
+        Biome.BiomeCategory category = event.getCategory();
+
+        if(ServerConfigs.ICICLES_PATCHES.get()) {
+            if (BiomeDictionary.hasType(key, BiomeDictionary.Type.SNOWY) || category == Biome.BiomeCategory.ICY) {
+                addFeature(event, ICICLES, GenerationStep.Decoration.TOP_LAYER_MODIFICATION);
+                if (category == Biome.BiomeCategory.UNDERGROUND) {
+                    addFeature(event, CAVE_ICICLES, GenerationStep.Decoration.UNDERGROUND_DECORATION);
+                }
+            }
+        }
+
+        if(ServerConfigs.HUMUS_PATCHES.get()) {
+            if (key == Biomes.DARK_FOREST) {
+                addFeature(event, "humus_patches", GenerationStep.Decoration.LOCAL_MODIFICATIONS);
             }
         }
     }

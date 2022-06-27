@@ -2,12 +2,10 @@ package com.ordana.immersive_weathering;
 
 import com.ordana.immersive_weathering.common.*;
 import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
-import com.ordana.immersive_weathering.common.ModItems;
-import com.ordana.immersive_weathering.configs.ClientConfigs;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
 import com.ordana.immersive_weathering.block_growth.rute_test.BlockSetMatchTest;
 import com.ordana.immersive_weathering.block_growth.rute_test.FluidMatchTest;
 import com.ordana.immersive_weathering.block_growth.rute_test.LogMatchTest;
+import com.ordana.immersive_weathering.forge.ModRegistry;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -15,10 +13,7 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,8 +25,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forgespi.locating.IModFile;
 import net.minecraftforge.resource.PathResourcePack;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
@@ -39,17 +32,19 @@ import java.io.IOException;
  * Author: Ordana, Keybounce, MehVahdJukaar
  */
 @Mod(ImmersiveWeathering.MOD_ID)
-public class ImmersiveWeathering {
+public class ImmersiveWeatheringForge {
+    public static final String MOD_ID = ImmersiveWeathering.MOD_ID;
 
-    public static final String MOD_ID = "immersive_weathering";
+    public ImmersiveWeatheringForge() {
 
-    public static final Logger LOGGER = LogManager.getLogger();
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-    public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
-    }
-
-    public ImmersiveWeathering() {
+        ModRegistry.BLOCKS.register(bus);
+        ModRegistry.BLOCK_ENTITIES.register(bus);
+        ModRegistry.ENTITIES.register(bus);
+        ModRegistry.ITEMS.register(bus);
+        ModRegistry.PARTICLES.register(bus);
+        ModRegistry.FEATURES.register(bus);
 
         /**
          * Update stuff:
@@ -61,23 +56,13 @@ public class ImmersiveWeathering {
 
         //TODO: fix layers texture generation
         //TODO: fix grass growth replacing double plants and add tag
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModBlocks.BLOCKS.register(bus);
-        ModBlocks.BLOCKS_OVERRIDE.register(bus);
-        ModEntities.BLOCK_ENTITIES.register(bus);
-        ModEntities.ENTITIES.register(bus);
-        ModItems.ITEMS.register(bus);
-        ModItems.ITEMS_OVERRIDE.register(bus);
-        ModParticles.PARTICLES.register(bus);
-        ModFeatures.FEATURES.register(bus);
-        MinecraftForge.EVENT_BUS.register(ModFeatures.class);
 
         LeafPilesRegistry.registerBus(bus);
 
 
-        bus.addListener(ImmersiveWeathering::init);
-        bus.addListener(ImmersiveWeathering::addPackFinders);
+        bus.addListener(ImmersiveWeatheringForge::init);
+        bus.addListener(ImmersiveWeatheringForge::addPackFinders);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ServerConfigs.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC);
@@ -106,14 +91,14 @@ public class ImmersiveWeathering {
 
     private static void registerBuiltinResourcePack(AddPackFindersEvent event, MutableComponent name, String folder) {
         event.addRepositorySource((consumer, constructor) -> {
-            String path = ImmersiveWeathering.res(folder).toString();
-            IModFile file = ModList.get().getModFileById(ImmersiveWeathering.MOD_ID).getFile();
+            String path = ImmersiveWeatheringForge.res(folder).toString();
+            IModFile file = ModList.get().getModFileById(ImmersiveWeatheringForge.MOD_ID).getFile();
             try (PathResourcePack pack = new PathResourcePack(
                     path,
                     file.findResource("resourcepacks/" + folder));) {
 
                 consumer.accept(constructor.create(
-                        ImmersiveWeathering.res(folder).toString(),
+                        ImmersiveWeatheringForge.res(folder).toString(),
                         name,
                         false,
                         () -> pack,

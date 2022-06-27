@@ -1,8 +1,8 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.ordana.immersive_weathering.common.blocks.AshBlock;
-import com.ordana.immersive_weathering.common.ModBlocks;
 import com.ordana.immersive_weathering.common.blocks.SootLayerBlock;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +25,7 @@ import java.util.Random;
 @Mixin(FireBlock.class)
 public abstract class FireMixin {
 
+    //TODO: re add to main mixin
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(BlockState state, ServerLevel level, BlockPos pos, Random random, CallbackInfo ci) {
         if (level.getGameRules().getBoolean(GameRules.RULE_DOFIRETICK)) {
@@ -54,8 +55,8 @@ public abstract class FireMixin {
     @Inject(method = "tick",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z",
-            ordinal = 3,
-            shift = At.Shift.AFTER))
+                    ordinal = 3,
+                    shift = At.Shift.AFTER))
     private void removeBlock(BlockState state, ServerLevel serverLevel, BlockPos pos, Random random, CallbackInfo ci) {
         SootLayerBlock.convertToSoot(serverLevel, pos, state);
     }

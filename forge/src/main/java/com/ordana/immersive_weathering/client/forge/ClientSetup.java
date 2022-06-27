@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.client.forge;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.client.ImmersiveWeatheringClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
@@ -19,8 +19,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.function.Function;
 
-@Mod.EventBusSubscriber(modid = ImmersiveWeathering.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ClientInit {
+@Mod.EventBusSubscriber(modid = ImmersiveWeatheringForge.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class ClientSetup {
 
     @SubscribeEvent
     public static void init(final FMLClientSetupEvent event) {
@@ -46,7 +46,7 @@ public class ClientInit {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void registerParticles(ParticleFactoryRegisterEvent event) {
-        ImmersiveWeatheringClient.onRegisterParticles(ClientInit::registerParticle);
+        ImmersiveWeatheringClient.onRegisterParticles(ClientSetup::registerParticle);
     }
 
     private static <T extends ParticleOptions> void registerParticle(ParticleType<T> type, Function<SpriteSet,

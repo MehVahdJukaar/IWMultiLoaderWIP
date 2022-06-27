@@ -29,6 +29,7 @@ public class ImmersiveWeathering {
         BurnableTest.init();
     }
 
+    //hanging roots item override
     //TODO: re add frosty stuff as growths
     //RE add lightning strike growths
 }

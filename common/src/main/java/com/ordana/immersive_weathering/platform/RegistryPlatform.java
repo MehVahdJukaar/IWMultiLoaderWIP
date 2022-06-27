@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -26,6 +27,11 @@ public class RegistryPlatform {
 
     @ExpectPlatform
     public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> feature) {
         throw new AssertionError();
     }
 

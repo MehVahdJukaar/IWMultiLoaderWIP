@@ -1,7 +1,9 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.blocks;
 
 import java.util.*;
 import java.util.stream.Stream;
+
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -19,7 +21,7 @@ import com.google.common.collect.Lists;
 import org.jetbrains.annotations.Nullable;
 
 public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
-	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 10);
+	public static final IntegerProperty AGE = ModBlockProperties.AGE;
 	public static final int MAX_AGE = 10;
 
 	public IvyBlock(Properties settings) {
@@ -239,7 +241,7 @@ public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
 				if (dir.getAxis() != idealFacingDir.getAxis()) {
 					BlockPos adjacentPos = pos.relative(dir);
 					BlockState adjacentState = world.getBlockState(adjacentPos);
-					BlockState newState = ModBlocks.IVY.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true);
+					BlockState newState = this.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true);
 					if ((adjacentState.isAir() || adjacentState.is(this)) && this.canSurvive(newState, world, adjacentPos) && isIvyPos(adjacentPos)) {
 						BlockState finalNewState = adjacentState.is(this) ? adjacentState.setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true) : (state.getValue(AGE) < MAX_AGE ? newState.setValue(AGE, state.getValue(AGE) + 1) : newState);
 						world.setBlockAndUpdate(adjacentPos, finalNewState);
@@ -262,7 +264,7 @@ public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
 				if (dir.getAxis() != idealFacingDir.getAxis()) {
 					BlockPos adjacentPos = pos.relative(dir);
 					BlockState adjacentState = world.getBlockState(adjacentPos);
-					BlockState newState = ModBlocks.IVY.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true);
+					BlockState newState = this.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true);
 					if ((adjacentState.isAir() || adjacentState.is(this)) && this.canSurvive(newState, world, adjacentPos)) {
 						BlockState finalNewState = adjacentState.is(this) ? adjacentState.setValue(MultifaceBlock.getFaceProperty(idealFacingDir), true) : (state.getValue(AGE) < MAX_AGE ? newState.setValue(AGE, state.getValue(AGE) + 1) : newState);
 						if (!finalNewState.equals(adjacentState)) {
@@ -288,7 +290,7 @@ public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
 				if (dir.getAxis() != idealFacingDir.getAxis()) {
 					BlockPos externalPos = pos.relative(idealFacingDir).relative(dir);
 					BlockState externalState = world.getBlockState(externalPos);
-					BlockState newStateOpposed = ModBlocks.IVY.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true);
+					BlockState newStateOpposed = this.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true);
 
 					if (world.getBlockState(pos.relative(dir)).isAir() && (externalState.isAir() || externalState.is(this)) && this.canSurvive(newStateOpposed, world, externalPos) && isIvyPos(externalPos)) {
 						BlockState finalNewState = externalState.is(this) ? externalState.setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true) : (state.getValue(AGE) < MAX_AGE ? newStateOpposed.setValue(AGE, state.getValue(AGE) + 1) : newStateOpposed);
@@ -312,7 +314,7 @@ public class IvyBlock extends MultifaceBlock implements BonemealableBlock {
 				if (dir.getAxis() != idealFacingDir.getAxis()) {
 					BlockPos externalPos = pos.relative(idealFacingDir).relative(dir);
 					BlockState externalState = world.getBlockState(externalPos);
-					BlockState newStateOpposed = ModBlocks.IVY.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true);
+					BlockState newStateOpposed = this.defaultBlockState().setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true);
 
 					if (world.getBlockState(pos.relative(dir)).isAir() && (externalState.isAir() || externalState.is(this)) && this.canSurvive(newStateOpposed, world, externalPos)) {
 						BlockState finalNewState = externalState.is(this) ? externalState.setValue(MultifaceBlock.getFaceProperty(dir.getOpposite()), true) : (state.getValue(AGE) < MAX_AGE ? newStateOpposed.setValue(AGE, state.getValue(AGE) + 1) : newStateOpposed);

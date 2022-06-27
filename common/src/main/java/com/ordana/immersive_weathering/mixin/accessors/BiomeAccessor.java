@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.mixin.accessors;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.biome.Biome;

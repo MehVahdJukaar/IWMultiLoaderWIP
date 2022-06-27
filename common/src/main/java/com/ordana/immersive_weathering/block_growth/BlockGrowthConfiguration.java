@@ -6,7 +6,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.ordana.immersive_weathering.block_growth.area_condition.AreaCondition;
 import com.ordana.immersive_weathering.block_growth.position_test.PositionRuleTest;
-import com.ordana.immersive_weathering.mixin.RandomBlockMatchTestAccessor;
+import com.ordana.immersive_weathering.mixin.accessors.RandomBlockMatchTestAccessor;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.minecraft.core.*;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.templatesystem.AlwaysTrueTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.RandomBlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import org.jetbrains.annotations.Nullable;
 

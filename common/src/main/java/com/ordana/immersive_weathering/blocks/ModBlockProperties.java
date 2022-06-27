@@ -10,4 +10,5 @@ public class ModBlockProperties {
     public static final BooleanProperty MOLTEN = BooleanProperty.create("molten");
     public static final IntegerProperty CRACKED = IntegerProperty.create("cracked", 0,3);
     public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 0, 8);
+    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 10);
 }

@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.registry.blocks.test;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
+import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import java.util.Random;
 
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
@@ -53,8 +53,8 @@ public class PermafrostBlock extends Block {
         if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || isWearingBoots(entity) || entity.getType() == EntityType.VILLAGER || entity.getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES) || entity.getType() == EntityType.FOX || entity.getType() == EntityType.RABBIT || entity.getType() == EntityType.SHEEP || entity.getType() == EntityType.STRAY || entity.getType() == EntityType.GOAT) {
             return;
         }
-        if (ImmersiveWeathering1.getConfig().fireAndIceConfig.permafrostFreezing) {
-            entity.setTicksFrozen(ImmersiveWeathering1.getConfig().fireAndIceConfig.freezingPermafrostSeverity);
+        if (ImmersiveWeatheringFabric.getConfig().fireAndIceConfig.permafrostFreezing) {
+            entity.setTicksFrozen(ImmersiveWeatheringFabric.getConfig().fireAndIceConfig.freezingPermafrostSeverity);
         }
 
         super.stepOn(world, pos, state, entity);

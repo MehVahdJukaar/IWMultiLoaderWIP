@@ -5,7 +5,7 @@ import com.ordana.immersive_weathering.block_growth.TickSource;
 import com.ordana.immersive_weathering.common.ModBlocks;
 import com.ordana.immersive_weathering.common.WeatheringHelper;
 import com.ordana.immersive_weathering.common.blocks.IcicleBlock;
-import com.ordana.immersive_weathering.mixin.IceInvoker;
+import com.ordana.immersive_weathering.mixin.accessors.IceInvoker;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

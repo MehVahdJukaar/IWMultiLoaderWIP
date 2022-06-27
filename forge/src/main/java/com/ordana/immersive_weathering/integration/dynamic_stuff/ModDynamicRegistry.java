@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering.integration.dynamic_stuff;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
-import com.ordana.immersive_weathering.ImmersiveWeathering;
+import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.common.ModBlocks;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.common.blocks.LeafPileBlock;
@@ -19,9 +19,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -69,7 +67,7 @@ public class ModDynamicRegistry {
                 String name = type.getNamespace() + "/" + type.getTypeName() + "_bark";
 
                 Item item = new BurnableItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS), 200)
-                        .setRegistryName(ImmersiveWeathering.res(name));
+                        .setRegistryName(ImmersiveWeatheringForge.res(name));
                 registry.register(item);
                 MODDED_BARK.put(type, item);
             }
@@ -96,7 +94,7 @@ public class ModDynamicRegistry {
                 LeafPileBlock block = (LeafPileBlock) new LeafPileBlock(
                         BlockBehaviour.Properties.copy(ModBlocks.OAK_LEAF_PILE.get()),
                         false, false, true, List.of(() -> (SimpleParticleType) TYPE_TO_LEAF_PARTICLE.get(type))
-                ).setRegistryName(ImmersiveWeathering.res(name));
+                ).setRegistryName(ImmersiveWeatheringForge.res(name));
                 registry.register(block);
                 LEAF_TO_TYPE.put(block, type);
             }
