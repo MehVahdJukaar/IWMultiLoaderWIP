@@ -3,7 +3,10 @@ package com.ordana.immersive_weathering.platform.fabric;
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,6 +36,13 @@ public class CommonPlatformImpl {
     }
 
     public static void addExtraMossyBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
+    }
+
+    public static void addExtraCrackedBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
+    }
+
+    public static boolean isMobGriefingOn(Level level, Entity entity) {
+        return level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
     }
 
 

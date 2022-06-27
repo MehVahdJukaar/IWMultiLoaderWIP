@@ -1,22 +1,17 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.blocks;
 
-import net.mehvahdjukaar.selene.blocks.WaterBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
@@ -30,9 +25,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
+public class VerticalSlabBlock extends WaterBlock {
 
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.create("type", VerticalSlabType.class);
 
     public VerticalSlabBlock(Properties properties) {
@@ -63,7 +57,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(TYPE,WATERLOGGED);
+        builder.add(TYPE);
     }
 
     @Override
@@ -84,7 +78,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         BlockState blockstate = context.getLevel().getBlockState(blockpos);
         if (blockstate.getBlock() == this) {
             return blockstate.setValue(TYPE, VerticalSlabType.DOUBLE).setValue(WATERLOGGED, false);
-        }else{
+        } else {
             FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
             BlockState state = this.defaultBlockState().setValue(WATERLOGGED, fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8);
 
@@ -110,12 +104,12 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public boolean placeLiquid(LevelAccessor worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && SimpleWaterloggedBlock.super.placeLiquid(worldIn, pos, state, fluidStateIn);
+        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && super.placeLiquid(worldIn, pos, state, fluidStateIn);
     }
 
     @Override
     public boolean canPlaceLiquid(BlockGetter worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && SimpleWaterloggedBlock.super.canPlaceLiquid(worldIn, pos, state, fluidIn);
+        return state.getValue(TYPE) != VerticalSlabType.DOUBLE && super.canPlaceLiquid(worldIn, pos, state, fluidIn);
     }
 
     @Override

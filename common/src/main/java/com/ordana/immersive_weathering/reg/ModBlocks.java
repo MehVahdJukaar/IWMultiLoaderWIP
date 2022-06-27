@@ -3,6 +3,8 @@ package com.ordana.immersive_weathering.reg;
 import com.ordana.immersive_weathering.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.blocks.WeedsBlock;
+import com.ordana.immersive_weathering.blocks.crackable.*;
+import com.ordana.immersive_weathering.blocks.mossable.*;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostBlock;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostyGlassBlock;
 import com.ordana.immersive_weathering.common.blocks.frostable.FrostyGlassPaneBlock;
@@ -238,7 +240,7 @@ public class ModBlocks {
                     .sound(SoundType.ROOTED_DIRT).randomTicks()));
     public static final Supplier<Block> NULCH_BLOCK = regWithItem("nulch_block", () ->
             new NulchBlock(Properties.of(Material.NETHER_WOOD).strength(1f, 1f)
-                    .sound(SoundType.NETHER_WART).lightLevel(createLightLevelFromMoltenBlockState(10)).randomTicks()));
+                    .sound(SoundType.NETHER_WART).lightLevel(moltenLightLevel(10)).randomTicks()));
 
     //cut iron
 

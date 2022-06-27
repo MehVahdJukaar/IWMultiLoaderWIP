@@ -1,11 +1,6 @@
 package com.ordana.immersive_weathering.blocks.mossable;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
-import com.ordana.immersive_weathering.blocks.mossable.MossSpreader;
-import com.ordana.immersive_weathering.blocks.mossable.Mossable;
-import com.ordana.immersive_weathering.unique.ModStairBlock;
+import com.ordana.immersive_weathering.blocks.ModStairBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -14,12 +9,15 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Random;
+import java.util.function.Supplier;
+
 public class MossyStairsBlock extends ModStairBlock implements Mossable, BonemealableBlock {
 
     private final MossLevel mossLevel;
 
     public MossyStairsBlock(MossLevel mossLevel, Supplier<Block> state, Properties properties) {
-        super(state,properties);
+        super(state, properties);
         this.mossLevel = mossLevel;
     }
 

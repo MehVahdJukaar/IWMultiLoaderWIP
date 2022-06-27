@@ -1,12 +1,17 @@
 package com.ordana.immersive_weathering.platform.forge;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.integration.IntegrationHandler;
+import com.ordana.immersive_weathering.integration.QuarkPlugin;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.jetbrains.annotations.NotNull;
@@ -60,6 +65,16 @@ public class CommonPlatformImpl {
         if (IntegrationHandler.quark) {
             QuarkPlugin.addAllVerticalSlabs(builder);
         }
+    }
+
+    public static void addExtraCrackedBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
+        if (IntegrationHandler.quark) {
+            QuarkPlugin.addAllVerticalSlabs(builder);
+        }
+    }
+
+    public static boolean isMobGriefingOn(Level level, Entity entity) {
+        return ForgeEventFactory.getMobGriefingEvent(level, entity);
     }
 
 

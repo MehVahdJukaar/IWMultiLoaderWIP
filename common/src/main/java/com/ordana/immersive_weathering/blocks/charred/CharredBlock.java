@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common.blocks.charred;
+package com.ordana.immersive_weathering.blocks.charred;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -8,17 +8,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class CharredSlabBlock extends SlabBlock implements Charred {
+public class CharredBlock extends Block implements Charred {
 
-    public CharredSlabBlock(Properties settings) {
+    public CharredBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.defaultBlockState().setValue(SMOLDERING, false).setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(SMOLDERING, false));
     }
 
     @Override

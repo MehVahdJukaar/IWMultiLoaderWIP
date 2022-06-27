@@ -2,7 +2,9 @@ package com.ordana.immersive_weathering.platform;
 
 import com.google.common.collect.ImmutableBiMap;
 import dev.architectury.injectables.annotations.ExpectPlatform;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +42,16 @@ public class CommonPlatform {
 
     @ExpectPlatform
     public static void addExtraMossyBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void addExtraCrackedBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static boolean isMobGriefingOn(Level level, Entity entity) {
         throw new AssertionError();
     }
 }

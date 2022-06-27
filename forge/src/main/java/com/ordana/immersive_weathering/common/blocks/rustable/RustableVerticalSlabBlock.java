@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering.common.blocks.rustable;
 
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.common.blocks.VerticalSlabBlock;
+import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
 import com.ordana.immersive_weathering.common.blocks.Waxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

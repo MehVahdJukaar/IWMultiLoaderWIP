@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.blocks.mossable;
 
 import com.ordana.immersive_weathering.blocks.PatchSpreader;
+import com.ordana.immersive_weathering.blocks.Weatherable;
 import com.ordana.immersive_weathering.blocks.crackable.Crackable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;

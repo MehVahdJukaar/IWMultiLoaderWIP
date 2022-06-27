@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
+import java.util.Properties;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -37,7 +38,6 @@ public class CrackableStairsBlock extends CrackedStairsBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
-        super.onNeighborChange(state, level, pos, neighbor);
         this.updateWeatheredStateOnNeighborChanged(state, level, pos);
     }
 

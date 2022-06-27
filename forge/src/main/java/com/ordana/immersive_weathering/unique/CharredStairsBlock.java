@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.unique;
 
-import com.ordana.immersive_weathering.common.blocks.charred.Charred;
+import com.ordana.immersive_weathering.blocks.charred.Charred;
 import com.ordana.immersive_weathering.unique.ModStairBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

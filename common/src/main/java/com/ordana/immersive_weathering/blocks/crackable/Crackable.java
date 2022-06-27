@@ -3,11 +3,10 @@ package com.ordana.immersive_weathering.blocks.crackable;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.blocks.PatchSpreader;
-import com.ordana.immersive_weathering.common.blocks.Weatherable;
-import com.ordana.immersive_weathering.integration.IntegrationHandler;
-import com.ordana.immersive_weathering.integration.QuarkPlugin;
+import com.ordana.immersive_weathering.blocks.PatchSpreader;
+import com.ordana.immersive_weathering.blocks.Weatherable;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Item;
@@ -15,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.ModList;
 
 import java.util.Optional;
 import java.util.Random;
@@ -62,9 +60,7 @@ public interface Crackable extends Weatherable {
                 .put(ModBlocks.PRISMARINE_BRICK_WALL.get(), ModBlocks.CRACKED_PRISMARINE_BRICK_WALL.get())
                 .put(Blocks.END_STONE_BRICK_WALL, ModBlocks.CRACKED_END_STONE_BRICK_WALL.get());
 
-        if (IntegrationHandler.quark) {
-            QuarkPlugin.addAllVerticalSlabs(builder);
-        }
+        CommonPlatform.addExtraCrackedBlocks(builder);
 
         return builder.build();
     });

@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering.integration;
 
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
-import com.ordana.immersive_weathering.common.blocks.VerticalSlabBlock;
+import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;

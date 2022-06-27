@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.blocks.crackable;
 
+import com.ordana.immersive_weathering.blocks.Weatherable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.Item;
@@ -32,7 +33,6 @@ public class CrackableSlabBlock extends CrackedSlabBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
-        super.onNeighborChange(state, level, pos, neighbor);
         this.updateWeatheredStateOnNeighborChanged(state, level, pos);
     }
 

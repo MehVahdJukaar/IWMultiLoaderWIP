@@ -1,13 +1,11 @@
 package com.ordana.immersive_weathering.blocks.crackable;
 
-import java.util.function.Supplier;
-
-import com.ordana.immersive_weathering.blocks.crackable.CrackSpreader;
-import com.ordana.immersive_weathering.blocks.crackable.Crackable;
-import com.ordana.immersive_weathering.unique.ModStairBlock;
+import com.ordana.immersive_weathering.blocks.ModStairBlock;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.function.Supplier;
 
 public class CrackedStairsBlock extends ModStairBlock implements Crackable {
 

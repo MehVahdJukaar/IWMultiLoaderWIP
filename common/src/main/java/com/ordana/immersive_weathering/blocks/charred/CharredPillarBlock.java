@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common.blocks.charred;
+package com.ordana.immersive_weathering.blocks.charred;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
