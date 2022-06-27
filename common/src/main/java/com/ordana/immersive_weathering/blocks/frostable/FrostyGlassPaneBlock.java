@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common.blocks.frostable;
+package com.ordana.immersive_weathering.blocks.frostable;
 
 import java.util.Random;
 import net.minecraft.core.BlockPos;
@@ -22,11 +22,11 @@ public class FrostyGlassPaneBlock extends IronBarsBlock implements Frosty {
         super.createBlockStateDefinition(builder);
         builder.add(NATURAL);
     }
+
+    @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if (state.getValue(NATURAL)) {
-            if (world.dimensionType().ultraWarm() || (!world.isRaining() && world.isDay()) || (world.getBrightness(LightLayer.BLOCK, pos) > 7 - state.getLightBlock(world, pos))) {
-                world.setBlockAndUpdate(pos, Blocks.GLASS_PANE.withPropertiesOf(state));
-            }
-        }
+        tryUnFrost(state, world, pos);
     }
+
+
 }
