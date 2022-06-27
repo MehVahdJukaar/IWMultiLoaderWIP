@@ -1,8 +1,5 @@
 package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.WeatheringHelper;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
 import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;

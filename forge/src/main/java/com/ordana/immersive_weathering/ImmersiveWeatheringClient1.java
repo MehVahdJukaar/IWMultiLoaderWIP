@@ -50,51 +50,6 @@ public class ImmersiveWeatheringClient1 {
 
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerParticles(ParticleFactoryRegisterEvent event) {
-
-        ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
-
-
-        particleEngine.register(ModParticles.EMBERSPARK.get(), EmberParticle.EmberFactory::new);
-        particleEngine.register(ModParticles.EMBER.get(), EmberParticle.EmberFactory::new);
-        particleEngine.register(ModParticles.SOOT.get(), LeafParticle.SimpleLeafParticle::new);
-        particleEngine.register(ModParticles.OAK_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.SPRUCE_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.BIRCH_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.JUNGLE_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.ACACIA_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.DARK_OAK_LEAF.get(), LeafParticle.ColoredLeafParticle::new);
-        particleEngine.register(ModParticles.AZALEA_LEAF.get(), LeafParticle.SimpleLeafParticle::new);
-        particleEngine.register(ModParticles.AZALEA_FLOWER.get(), LeafParticle.SimpleLeafParticle::new);
-
-
-        particleEngine.register(ModParticles.MULCH.get(), LeafParticle.SimpleLeafParticle::new);
-        particleEngine.register(ModParticles.NULCH.get(), LeafParticle.SimpleLeafParticle::new);
-
-        particleEngine.register(ModParticles.SCRAPE_RUST.get(), ScrapeRustFactory::new);
-    }
-
-    public static class ScrapeRustFactory extends GlowParticle.ScrapeProvider {
-
-        public ScrapeRustFactory(SpriteSet spriteSet) {
-            super(spriteSet);
-        }
-
-        @Override
-        public Particle createParticle(SimpleParticleType particleType, ClientLevel level, double p_172207_, double p_172208_, double p_172209_, double p_172210_, double p_172211_, double p_172212_) {
-            Particle p = super.createParticle(particleType, level, p_172207_, p_172208_, p_172209_, p_172210_, p_172211_, p_172212_);
-            if (p != null) {
-                if (level.random.nextBoolean()) {
-                    p.setColor(196 / 255f, 118 / 255f, 73 / 255f);
-                } else {
-                    p.setColor(176 / 255f, 63 / 255f, 40 / 255f);
-                }
-            }
-            return p;
-        }
-    }
-
 
     @Mod.EventBusSubscriber(modid = ImmersiveWeathering.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class ClientTicker {
