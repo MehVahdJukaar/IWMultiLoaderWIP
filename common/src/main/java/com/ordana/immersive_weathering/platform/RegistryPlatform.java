@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.platform;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -21,6 +22,11 @@ public class RegistryPlatform {
     }
 
     @ExpectPlatform
+    public static <T extends EntityType<?>> Supplier<T> registerEntity(String name, Supplier<T> entity) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
     public static Supplier<SimpleParticleType> registerParticle(String name) {
         throw new AssertionError();
     }
@@ -30,8 +36,15 @@ public class RegistryPlatform {
         throw new AssertionError();
     }
 
+
+
     @ExpectPlatform //fabric
     public static void registerItemBurnTime(Item item, int burnTime) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform //fabric
+    public static void registerBlockFlammability(Block item, int burn, int spread) {
         throw new AssertionError();
     }
 

@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common;
+package com.ordana.immersive_weathering.utils;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
@@ -8,6 +8,9 @@ import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
 import com.ordana.immersive_weathering.common.blocks.charred.CharredBlock;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
 import com.ordana.immersive_weathering.integration.IntegrationHandler;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -36,18 +39,8 @@ public class WeatheringHelper {
                 .put(Blocks.FLOWERING_AZALEA, Blocks.AZALEA)
                 .put(Blocks.FLOWERING_AZALEA_LEAVES, Blocks.AZALEA_LEAVES)
                 .put(ModBlocks.FLOWERING_AZALEA_LEAF_PILE.get(), ModBlocks.AZALEA_LEAF_PILE.get());
-        if (IntegrationHandler.quark) {
-            Block a = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_hedge"));
-            Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_hedge"));
-            if (a != null && b != null) {
-                builder.put(a, b);
-            }
-            Block c = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_leaf_carpet"));
-            Block d = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_leaf_carpet"));
-            if (c != null && d != null) {
-                builder.put(c, d);
-            }
-        }
+
+        CommonPlatform.addExtraFloweryBlocks(builder);
         return builder.build();
     });
 

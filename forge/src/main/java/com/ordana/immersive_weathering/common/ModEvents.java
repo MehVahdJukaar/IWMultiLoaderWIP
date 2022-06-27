@@ -13,6 +13,7 @@ import com.ordana.immersive_weathering.common.entity.FollowLeafCrownGoal;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
 import com.ordana.immersive_weathering.integration.IntegrationHandler;
 import com.ordana.immersive_weathering.integration.QuarkPlugin;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
