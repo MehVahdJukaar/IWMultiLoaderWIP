@@ -7,6 +7,7 @@ import com.ordana.immersive_weathering.registry.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.registry.blocks.rustable.RustableBarsBlock;
 import com.ordana.immersive_weathering.registry.blocks.rustable.RustableDoorBlock;
 import com.ordana.immersive_weathering.registry.blocks.rustable.RustableTrapdoorBlock;
+import com.ordana.immersive_weathering.registry.blocks.test.SoilBlock;
 import net.minecraft.block.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;

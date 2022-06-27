@@ -1,7 +1,7 @@
-package com.ordana.immersive_weathering.common.blocks.soil;
+package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
-import net.minecraft.block.*;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -42,6 +42,7 @@ public class RootedGrassBlock extends ModGrassBlock implements BonemealableBlock
         return true;
     }
 
+    //TODO: check this whole class
     @Override
     public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
         Direction rootDir = Direction.values()[1 + random.nextInt(5)].getOpposite();

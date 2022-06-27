@@ -8,6 +8,7 @@ import com.ordana.immersive_weathering.registry.blocks.crackable.CrackableWallBl
 import com.ordana.immersive_weathering.registry.blocks.mossable.*;
 import com.ordana.immersive_weathering.registry.blocks.rotten.*;
 import com.ordana.immersive_weathering.registry.blocks.rustable.*;
+import com.ordana.immersive_weathering.registry.blocks.test.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;

@@ -2,9 +2,9 @@ package com.ordana.immersive_weathering.mixin;
 
 import com.ordana.immersive_weathering.blocks.crackable.*;
 import com.ordana.immersive_weathering.blocks.mossable.*;
-import com.ordana.immersive_weathering.common.blocks.soil.ModGrassBlock;
-import com.ordana.immersive_weathering.common.blocks.soil.ModMyceliumBlock;
-import com.ordana.immersive_weathering.common.blocks.soil.SoilBlock;
+import com.ordana.immersive_weathering.blocks.soil.ModGrassBlock;
+import com.ordana.immersive_weathering.blocks.soil.ModMyceliumBlock;
+import com.ordana.immersive_weathering.blocks.soil.SoilBlock;
 import com.ordana.immersive_weathering.common.blocks.crackable.*;
 import com.ordana.immersive_weathering.common.blocks.mossable.*;
 import com.ordana.immersive_weathering.common.blocks.rustable.Rustable;

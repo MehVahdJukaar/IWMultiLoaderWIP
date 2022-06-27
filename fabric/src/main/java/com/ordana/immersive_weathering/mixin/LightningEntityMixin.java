@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering1;
-import com.ordana.immersive_weathering.registry.blocks.FulguriteBlock;
+import com.ordana.immersive_weathering.registry.blocks.test.FulguriteBlock;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import com.ordana.immersive_weathering.registry.blocks.WeatheringHelper;
 import net.minecraft.block.*;

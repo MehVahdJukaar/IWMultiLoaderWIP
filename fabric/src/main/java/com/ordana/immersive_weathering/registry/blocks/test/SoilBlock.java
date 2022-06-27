@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.registry.blocks.test;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
 import net.minecraft.block.*;

@@ -1,8 +1,7 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
-import com.ordana.immersive_weathering.registry.ModTags;
-import java.util.Random;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -13,6 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.Fluids;
+
+import java.util.Random;
 
 public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
 
@@ -61,8 +62,7 @@ public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
             if (!state.getValue(SOAKED)) {
                 world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
             }
-        }
-        else if (temperature > 0 && state.getValue(SOAKED)) {
+        } else if (temperature > 0 && state.getValue(SOAKED)) {
             world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
         }
     }

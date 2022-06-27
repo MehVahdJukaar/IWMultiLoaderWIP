@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.registry.blocks.test;
 
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;

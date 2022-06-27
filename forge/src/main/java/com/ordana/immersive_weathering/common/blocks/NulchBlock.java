@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.common.blocks;
 
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import java.util.Random;
@@ -27,7 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class NulchBlock extends Block {
     //TODO: merge with Mulch
-    public static final BooleanProperty MOLTEN = BooleanProperty.create("molten");
+    public static final BooleanProperty MOLTEN = ModBlockProperties.MOLTEN;
 
     public NulchBlock(Properties settings) {
         super(settings);

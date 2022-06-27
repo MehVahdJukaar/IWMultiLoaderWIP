@@ -1,18 +1,19 @@
-package com.ordana.immersive_weathering.common.blocks.soil;
+package com.ordana.immersive_weathering.registry.blocks.test;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
 import com.ordana.immersive_weathering.registry.ModTags;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Fluids;
+
+import java.util.Random;
 
 public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
 
@@ -48,22 +49,25 @@ public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
             var targetPos = pos.relative(direction);
             var biome = world.getBiome(pos);
             BlockState neighborState = world.getBlockState(targetPos);
-            if (neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+
+            if (neighborState.getFluidState().is(FluidTags.WATER)) {
                 isTouchingWater = true;
+                break;
             }
-            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+
+            if (world.isRainingAt(pos.relative(direction))) {
                 temperature--;
-            } else if (neighborState.is(ModTags.MAGMA_SOURCE) || biome.is(ModTags.HOT) || world.dimension() == Level.NETHER) {
+            } else if (neighborState.is(ModTags.MAGMA_SOURCE) || world.dimension() == Level.NETHER) {
+                temperature++;
+            } else if (biome.is(ModTags.WET)) {
+                temperature--;
+            } else if (biome.is(ModTags.HOT)) {
                 temperature++;
             }
         }
-        if (temperature < 0 || isTouchingWater) {
-            if (!state.getValue(SOAKED)) {
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
-            }
-        }
-        else if (temperature > 0 && state.getValue(SOAKED)) {
-            world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
+        boolean newState = temperature < 0 || isTouchingWater;
+        if (state.getValue(SOAKED) != newState) {
+            world.setBlockAndUpdate(pos, state.setValue(SOAKED, newState));
         }
     }
 

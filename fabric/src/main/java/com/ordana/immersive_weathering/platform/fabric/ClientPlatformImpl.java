@@ -1,14 +1,13 @@
 package com.ordana.immersive_weathering.platform.fabric;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
-import net.minecraft.core.Registry;
-import net.minecraft.core.particles.SimpleParticleType;
-
-import java.util.function.Supplier;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Block;
 
 public class ClientPlatformImpl {
 
 
+    public static void registerRenderType(Block block, RenderType type) {
+        BlockRenderLayerMap.INSTANCE.putBlock(block, type);
+    }
 }

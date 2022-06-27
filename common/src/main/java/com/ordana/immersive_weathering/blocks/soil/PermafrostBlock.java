@@ -1,12 +1,14 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.blocks.soil;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
+import com.ordana.immersive_weathering.ImmersiveWeathering;
 import java.util.Random;
+
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -24,22 +26,22 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public class PermafrostBlock extends Block {
 
+    public static final BooleanProperty DIRTY = BooleanProperty.create("dirty");
+
     public PermafrostBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(DIRTY, false));
     }
-
-    public static final BooleanProperty DIRTY = BooleanProperty.create("dirty");
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         BlockState upState = world.getBlockState(pos.above());
         BlockState downState = world.getBlockState(pos.below());
         if (upState.is(BlockTags.DIRT)) {
-            world.setBlockAndUpdate(pos, ModBlocks.PERMAFROST.defaultBlockState().setValue(PermafrostBlock.DIRTY, true));
+            world.setBlockAndUpdate(pos, ModBlocks.PERMAFROST.get().defaultBlockState().setValue(PermafrostBlock.DIRTY, true));
         }
         if (downState.is(BlockTags.DIRT)) {
-            world.setBlockAndUpdate(pos.below(), ModBlocks.CRYOSOL.defaultBlockState());
+            world.setBlockAndUpdate(pos.below(), ModBlocks.CRYOSOL.get().defaultBlockState());
         }
     }
 
@@ -47,21 +49,24 @@ public class PermafrostBlock extends Block {
         return entity instanceof LivingEntity && ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS);
     }
 
+    @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || isWearingBoots(entity) || entity.getType() == EntityType.VILLAGER || entity.getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES) || entity.getType() == EntityType.FOX || entity.getType() == EntityType.RABBIT || entity.getType() == EntityType.SHEEP || entity.getType() == EntityType.STRAY || entity.getType() == EntityType.GOAT) {
+        if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || isWearingBoots(entity) || entity.getType() == EntityType.FOX || entity.getType() == EntityType.RABBIT || entity.getType() == EntityType.SHEEP || entity.getType() == EntityType.STRAY || entity.getType() == EntityType.GOAT) {
             return;
         }
-        if (ImmersiveWeathering1.getConfig().fireAndIceConfig.permafrostFreezing) {
-            entity.setTicksFrozen(ImmersiveWeathering1.getConfig().fireAndIceConfig.freezingPermafrostSeverity);
+        if (ConfigPlatform.permafrostFreezing()) {
+            entity.setTicksFrozen(300);
         }
 
         super.stepOn(world, pos, state, entity);
     }
 
+    @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
         return direction == Direction.UP ? state.setValue(DIRTY, isDirt(neighborState)) : super.updateShape(state, direction, neighborState, world, pos, neighborPos);
     }
 
+    @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         BlockState blockState = ctx.getLevel().getBlockState(ctx.getClickedPos().above());
         return this.defaultBlockState().setValue(DIRTY, isDirt(blockState));

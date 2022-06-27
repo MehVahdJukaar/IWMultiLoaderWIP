@@ -1,7 +1,8 @@
-package com.ordana.immersive_weathering.common.blocks.soil;
+package com.ordana.immersive_weathering.blocks.soil;
 
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -29,7 +30,7 @@ import java.util.Random;
 
 public class SoilBlock extends SnowyDirtBlock implements BonemealableBlock, IConditionalGrowingBlock {
 
-    public static final BooleanProperty FERTILE = BooleanProperty.create("fertile");
+    public static final BooleanProperty FERTILE = ModBlockProperties.FERTILE;
 
     public SoilBlock(Properties settings) {
         super(settings);

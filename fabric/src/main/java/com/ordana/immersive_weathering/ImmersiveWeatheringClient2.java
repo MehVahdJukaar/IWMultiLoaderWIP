@@ -25,7 +25,7 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Blocks;
 
-public class ImmersiveWeatheringClient implements ClientModInitializer {
+public class ImmersiveWeatheringClient2 implements ClientModInitializer {
 
     public static class ScrapeRustFactory extends GlowParticle.ScrapeProvider {
 

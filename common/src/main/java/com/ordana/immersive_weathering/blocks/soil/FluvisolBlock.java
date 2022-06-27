@@ -1,9 +1,9 @@
-package com.ordana.immersive_weathering.common.blocks.soil;
+package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
-import net.minecraft.block.*;
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -18,41 +18,39 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import java.util.Random;
 
 public class FluvisolBlock extends SoilBlock implements IConditionalGrowingBlock {
+
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
     protected static final VoxelShape PUDDLE_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
+
+    public static final BooleanProperty SOAKED = ModBlockProperties.SOAKED;
 
     public FluvisolBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(SOAKED, false).setValue(FERTILE, true));
     }
 
-    public static final BooleanProperty SOAKED = BooleanProperty.create("soaked");
-    public static final BooleanProperty FERTILE = BooleanProperty.create("fertile");
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
+        super.createBlockStateDefinition(stateManager);
         stateManager.add(SOAKED);
-        stateManager.add(FERTILE);
-        stateManager.add(SNOWY);
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         if (state.getValue(SOAKED)) {
             return PUDDLE_SHAPE;
-        }
-        else return SHAPE;
+        } else return SHAPE;
     }
 
     @Override
     public VoxelShape getBlockSupportShape(BlockState state, BlockGetter world, BlockPos pos) {
         if (state.getValue(SOAKED)) {
             return PUDDLE_SHAPE;
-        }
-        else return SHAPE;
+        } else return SHAPE;
     }
 
     @Override
@@ -62,20 +60,15 @@ public class FluvisolBlock extends SoilBlock implements IConditionalGrowingBlock
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        BlockState upState = world.getBlockState(pos.above());
+
         BlockState downState = world.getBlockState(pos.below());
-        if (downState.is(ModBlocks.SILT) || downState.is(ModBlocks.FLUVISOL)) {
+        if (downState.is(ModBlocks.SILT.get()) || downState.is(ModBlocks.FLUVISOL.get())) {
             world.setBlockAndUpdate(pos.below(), Blocks.DIRT.defaultBlockState());
         }
-        for (Direction direction : Direction.values()) {
-            var targetPos = pos.relative(direction);
-            BlockState neighborState = world.getBlockState(targetPos);
-            if (!state.getValue(SOAKED) && world.isRainingAt(pos.above())) {
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
-            }
-            if (state.getValue(SOAKED) && !world.isRainingAt(pos.above())) {
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
-            }
+
+        boolean newState = world.isRainingAt(pos.above());
+        if (state.getValue(SOAKED) != newState) {
+            world.setBlockAndUpdate(pos, state.setValue(SOAKED, newState));
         }
     }
 
