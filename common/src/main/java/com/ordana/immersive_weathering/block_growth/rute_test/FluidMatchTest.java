@@ -10,7 +10,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.Random;
 
 public class FluidMatchTest extends RuleTest {
-
+    //TODO: add holder set(tag) instead
     public static final Codec<FluidMatchTest> CODEC = Registry.FLUID.byNameCodec().fieldOf("fluid")
             .xmap(FluidMatchTest::new, (fluidMatchTest) -> fluidMatchTest.fluid).codec();
 

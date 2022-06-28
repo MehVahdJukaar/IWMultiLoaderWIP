@@ -1,13 +1,12 @@
 package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
-import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.registry.ModTags;
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,13 +17,13 @@ import java.util.Random;
 
 public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
 
+    public static final BooleanProperty SOAKED = ModBlockProperties.SOAKED;
+    public static final BooleanProperty FERTILE = ModBlockProperties.FERTILE;
+
     public CrackedMudBlock(Properties settings) {
         super(settings);
         this.registerDefaultState(this.defaultBlockState().setValue(SOAKED, false).setValue(FERTILE, true));
     }
-
-    public static final BooleanProperty SOAKED = BooleanProperty.create("soaked");
-    public static final BooleanProperty FERTILE = BooleanProperty.create("fertile");
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
@@ -44,12 +43,11 @@ public class CrackedMudBlock extends Block implements IConditionalGrowingBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        boolean newState = shouldGetWet(world, pos);
+        boolean newState = WeatheringHelper.shouldGetWet(world, pos);
         if (state.getValue(SOAKED) != newState) {
             world.setBlockAndUpdate(pos, state.setValue(SOAKED, newState));
         }
     }
-
 
 
     @Override

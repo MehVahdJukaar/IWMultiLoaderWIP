@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks.rustable;
+package com.ordana.immersive_weathering.blocks.rustable;
 
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import net.minecraft.block.*;
@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Material;
+
 import java.util.Random;
 
 public class WaxedRustableDoorBlock extends DoorBlock {

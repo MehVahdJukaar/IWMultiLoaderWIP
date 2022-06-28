@@ -31,6 +31,15 @@ public class RegistryPlatformImpl {
         return () -> instance;
     }
 
-    public static Block createStairs(RegistryPlatform.StairType type, Supplier<Block> baseBlock, BlockBehaviour.Properties properties) {
+    public static Block createStairs(RegistryPlatform.BlockType type, Supplier<Block> baseBlock, BlockBehaviour.Properties properties) {
+    }
+
+    public static Block createSpecialBlock(RegistryPlatform.BlockType type, Supplier<Block> baseBlock, BlockBehaviour.Properties properties) {
+    }
+
+    public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties) {
+    }
+
+    public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties, Object ...extraParams) {
     }
 }

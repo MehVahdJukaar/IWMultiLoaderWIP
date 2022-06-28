@@ -61,6 +61,7 @@ public class FluvisolBlock extends SoilBlock implements IConditionalGrowingBlock
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
 
+        //world gen hax to speed up turning those blocks to dirt
         BlockState downState = world.getBlockState(pos.below());
         if (downState.is(ModBlocks.SILT.get()) || downState.is(ModBlocks.FLUVISOL.get())) {
             world.setBlockAndUpdate(pos.below(), Blocks.DIRT.defaultBlockState());

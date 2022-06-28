@@ -10,10 +10,7 @@
         {
           "data": {
             "block": {
-              "Name": "immersive_weathering:frosty_grass",
-              "Properties": {
-                "half": "lower"
-              }
+              "Name": "immersive_weathering:frosty_grass"
             }
           },
           "weight": 1

@@ -1,7 +1,8 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.blocks;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -88,7 +89,7 @@ public class WallRootsBlock extends Block implements SimpleWaterloggedBlock {
     }
 
 
-    @Override
+    @PlatformOnly(PlatformOnly.FORGE)
     public boolean isLadder(BlockState state, LevelReader level, BlockPos pos, LivingEntity entity) {
         return true;
     }

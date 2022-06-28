@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks.rustable;
+package com.ordana.immersive_weathering.blocks.rustable;
 
 import net.minecraft.world.level.block.IronBarsBlock;
 

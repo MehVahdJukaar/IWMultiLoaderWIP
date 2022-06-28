@@ -79,16 +79,15 @@ public class RegistryPlatform {
         throw new AssertionError();
     }
 
-    public enum StairType{
-
-        NORMAL,MOSSY,CRACKED, CRACKABLE, CHARRED, RUSTABLE;
+    public enum BlockType {
+        MULCH, RUSTABLE_BARS, RUSTABLE_BLOCK, RUSTABLE_DOOR, RUSTABLE_SLAB,
+        RUSTABLE_STAIRS, RUSTABLE_TRAPDOOR, RUSTABLE_VERTICAL_SLAB;
     }
 
     @ExpectPlatform
-    public static Block createStairs(StairType type, Supplier<Block> baseBlock, BlockBehaviour.Properties properties) {
+    public static Block createSpecialBlock(BlockType type, BlockBehaviour.Properties properties, Object ...extraParams) {
         throw new AssertionError();
     }
-
 
 
     @ExpectPlatform //fabric

@@ -1,17 +1,6 @@
 {
+  "tick_sources": ["snow"],
   "growth_chance": 0.05,
-  "position_predicates": [
-    {
-      "biomes": [
-        "#immersive_weathering:icy"
-      ],
-      "predicate_type": "biome_match"
-    },
-    {
-      "predicate_type": "day_test",
-      "day": false
-    }
-  ],
   "target_self": true,
   "growth_for_face": [
     {
@@ -21,7 +10,7 @@
         {
           "data": {
             "block": {
-              "Name": "immersive_weathering:frosty_grass"
+              "Name": "immersive_weathering:frosty_glass_pane"
             }
           },
           "weight": 1
@@ -29,7 +18,7 @@
       ]
     }
   ],
-  "owners": "minecraft:grass",
+  "owners": "minecraft:glass_pane",
   "replacing_target": {
     "block": "minecraft:air",
     "predicate_type": "minecraft:block_match"

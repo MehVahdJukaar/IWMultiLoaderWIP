@@ -3,6 +3,8 @@ package com.ordana.immersive_weathering.common.blocks.rustable;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import com.ordana.immersive_weathering.blocks.ModStairBlock;
+import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.common.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.unique.ModStairBlock;

@@ -1,8 +1,11 @@
 package com.ordana.immersive_weathering.reg;
 
+import com.ordana.immersive_weathering.ImmersiveWeathering;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
@@ -47,6 +50,13 @@ public final class ModTags {
     public static final TagKey<Biome> WET = registerBiomeTag("wet");
 
 
+
+    //entity type
+    /**
+     * For water permafrost and icicles. All animals with fur or that live near cold biomes
+     */
+    public static final TagKey<EntityType<?>> LIGHT_FREEZE_IMMUNE = registerEntityTag("light_freeze_immune");
+
     //fabric only.
     //TODO: remove unneded from forge
     public static final TagKey<Block> RAW_LOGS = registerBlockTag("raw_logs");
@@ -62,19 +72,22 @@ public final class ModTags {
     public static final TagKey<Block> BARS = registerBlockTag("bars");
 
 
-
     private ModTags() {
     }
 
     private static TagKey<Block> registerBlockTag(String id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("immersive_weathering", id));
+        return TagKey.create(Registry.BLOCK_REGISTRY, ImmersiveWeathering.res( id));
     }
 
     private static TagKey<Item> registerItemTag(String id) {
-        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("immersive_weathering", id));
+        return TagKey.create(Registry.ITEM_REGISTRY,ImmersiveWeathering.res(id));
     }
 
     private static TagKey<Biome> registerBiomeTag(String id) {
-        return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("immersive_weathering", id));
+        return TagKey.create(Registry.BIOME_REGISTRY, ImmersiveWeathering.res( id));
+    }
+
+    private static TagKey<EntityType<?>> registerEntityTag(String id) {
+        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, ImmersiveWeathering.res( id));
     }
 }

@@ -198,19 +198,19 @@ public class WeatheringHelper {
 
 
     //TODO: add serene seasons compat
-    public float getTemp(Level level, BlockPos pos) {
+    public static float getTemp(Level level, BlockPos pos) {
         return level.getBiome(pos).value().getTemperature(pos);
     }
 
-    public boolean isPosWet(Level level, Holder<Biome> biome, BlockPos pos) {
+    public static boolean isPosWet(Level level, Holder<Biome> biome, BlockPos pos) {
         return biome.is(ModTags.WET);
     }
 
-    public boolean isPosHot(Level level, Holder<Biome> biome, BlockPos pos) {
+    public static boolean isPosHot(Level level, Holder<Biome> biome, BlockPos pos) {
         return biome.is(ModTags.HOT);
     }
 
-    private boolean shouldGetWet(ServerLevel world, BlockPos pos) {
+    public static boolean shouldGetWet(ServerLevel world, BlockPos pos) {
         int temperature = 0;
         boolean isTouchingWater = false;
         for (Direction direction : Direction.values()) {

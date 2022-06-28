@@ -171,7 +171,7 @@ public class ConfigPlatform {
     }
 
     @ExpectPlatform
-    public static int freezingPermafrostSeverity() {
+    public static int permafrostFreezingSeverity() {
         throw new AssertionError();
     }
 
@@ -181,7 +181,7 @@ public class ConfigPlatform {
     }
 
     @ExpectPlatform
-    public static int freezingIcicleSeverity() {
+    public static int icicleFreezingSeverity() {
         throw new AssertionError();
     }
 
@@ -215,6 +215,11 @@ public class ConfigPlatform {
 
     @ExpectPlatform
     public static boolean icicleFood() {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static boolean pondWaterEnabled() {
         throw new AssertionError();
     }
 

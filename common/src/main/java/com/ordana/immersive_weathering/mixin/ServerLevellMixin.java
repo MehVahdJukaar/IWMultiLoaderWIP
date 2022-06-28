@@ -61,4 +61,13 @@ public abstract class ServerLevellMixin extends Level {
         BlockGrowthHandler.tickBlock(TickSource.BLOCK_TICK, this.getBlockState(grabbedPos), ((ServerLevel) ((Object) this)), grabbedPos);
     }
 
+    @Inject(method = "tickChunk",
+            require = 0,
+            at = @At(value = "TAIL"))
+    private void spawnIcicles(LevelChunk levelChunk, int randomTickSpeed, CallbackInfo ci) {
+        var p = this.getProfiler();
+        p.push("ImmWeatheringExtraRandomTicks");
+        BlockGrowthHandler.performSkyAccessTick((ServerLevel) (Object) this, levelChunk, randomTickSpeed);
+        p.pop();
+    }
 }

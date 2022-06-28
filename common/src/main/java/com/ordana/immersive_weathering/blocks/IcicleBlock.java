@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.blocks;
 
 import com.ordana.immersive_weathering.entities.FallingIcicleEntity;
 import com.ordana.immersive_weathering.entities.IcicleBlockEntity;
+import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModDamageSource;
 import com.ordana.immersive_weathering.reg.ModTags;
@@ -13,9 +14,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -101,7 +107,14 @@ public class IcicleBlock extends PointedDripstoneBlock implements EntityBlock {
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
         if (state.getValue(TIP_DIRECTION) == Direction.UP && state.getValue(THICKNESS) == DripstoneThickness.TIP) {
             entity.causeFallDamage(fallDistance + 2.0F, 3.5F, ModDamageSource.ICICLE);
-            entity.setTicksFrozen(300);
+
+      if(ConfigPlatform.icicleFreezing() && (entity instanceof LivingEntity le) &&
+              !(EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, le) > 0) &&
+              !le.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS) &&
+              !entity.getType().is(ModTags.LIGHT_FREEZE_IMMUNE)){
+          entity.setTicksFrozen(ConfigPlatform.icicleFreezingSeverity());
+      }
+
         } else {
             entity.causeFallDamage(fallDistance, 1.0F, DamageSource.FALL);
         }

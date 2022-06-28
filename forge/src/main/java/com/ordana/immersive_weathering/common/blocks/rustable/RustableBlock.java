@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.common.blocks.rustable;
 
+import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import java.util.Random;
@@ -21,7 +22,7 @@ import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
 
-public class RustableBlock extends Block implements Rustable{
+public class RustableBlock extends Block implements Rustable {
     private final RustLevel rustLevel;
 
     public RustableBlock(RustLevel rustLevel, Properties settings) {

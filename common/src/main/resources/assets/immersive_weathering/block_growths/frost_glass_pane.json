@@ -21,7 +21,7 @@
         {
           "data": {
             "block": {
-              "Name": "immersive_weathering:frosty_grass"
+              "Name": "immersive_weathering:frosty_glass_pane"
             }
           },
           "weight": 1
@@ -29,7 +29,7 @@
       ]
     }
   ],
-  "owners": "minecraft:grass",
+  "owners": "minecraft:glass_pane",
   "replacing_target": {
     "block": "minecraft:air",
     "predicate_type": "minecraft:block_match"

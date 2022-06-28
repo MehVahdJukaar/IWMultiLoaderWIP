@@ -3,8 +3,10 @@ package com.ordana.immersive_weathering.blocks.soil;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import java.util.Random;
 
+import com.ordana.immersive_weathering.blocks.IcicleBlock;
 import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +22,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -45,19 +48,16 @@ public class PermafrostBlock extends Block {
         }
     }
 
-    public static boolean isWearingBoots(Entity entity) {
-        return entity instanceof LivingEntity && ((LivingEntity) entity).getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS);
-    }
 
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || isWearingBoots(entity) || entity.getType() == EntityType.FOX || entity.getType() == EntityType.RABBIT || entity.getType() == EntityType.SHEEP || entity.getType() == EntityType.STRAY || entity.getType() == EntityType.GOAT) {
-            return;
-        }
-        if (ConfigPlatform.permafrostFreezing()) {
-            entity.setTicksFrozen(300);
-        }
+        if (ConfigPlatform.permafrostFreezing() && (entity instanceof LivingEntity le) &&
+                !(EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, le) > 0) &&
+                !le.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS) &&
+                !entity.getType().is(ModTags.LIGHT_FREEZE_IMMUNE)) {
 
+            entity.setTicksFrozen(ConfigPlatform.permafrostFreezingSeverity());
+        }
         super.stepOn(world, pos, state, entity);
     }
 

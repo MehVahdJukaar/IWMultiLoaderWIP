@@ -39,7 +39,7 @@ abstract public class IceMixin extends Block {
         int rand = random.nextInt(4);
         Direction direction = Direction.from2DDataValue(rand);
         if(ImmersiveWeathering1.getConfig().fireAndIceConfig.thinIceFormation) {
-            if (world.getBlockState(pos.above()).is(Blocks.AIR) && (world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY) && (world.getBrightness(LightLayer.BLOCK, pos) < 7 - state.getLightBlock(world, pos))) {
+            if (world.getBlockState(pos.above()).is(Blocks.AIR) && (world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY) && (world.getBrightness(LightLayer.BLOCK, pos) < 7 - stat e.getLightBlock(world, pos))) {
                 if (world.getFluidState(pos.relative(direction)).is(Fluids.WATER)) {
                     world.setBlockAndUpdate(pos.relative(direction), ModBlocks.THIN_ICE.defaultBlockState().setValue(ThinIceBlock.WATERLOGGED, true));
                 }

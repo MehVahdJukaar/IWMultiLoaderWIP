@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.registry.blocks.rustable;
+package com.ordana.immersive_weathering.blocks.rustable;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChangeOverTimeBlock;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.Optional;
 import java.util.function.Supplier;
 

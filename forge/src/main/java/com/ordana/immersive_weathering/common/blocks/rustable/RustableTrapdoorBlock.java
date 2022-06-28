@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.common.blocks.rustable;
 
+import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.common.blocks.Waxables;

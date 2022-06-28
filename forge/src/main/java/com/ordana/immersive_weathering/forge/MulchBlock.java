@@ -1,18 +1,26 @@
-package com.ordana.immersive_weathering.registry.blocks;
+package com.ordana.immersive_weathering.forge;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
-import com.ordana.immersive_weathering.registry.ModTags;
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
@@ -21,27 +29,23 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
-public class MulchBlock extends FarmBlock {
+public class MulchBlock extends Block {
 
-    public static final IntegerProperty MOISTURE = BlockStateProperties.MOISTURE;
-    protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    public static final int MAX_MOISTURE = 7;
+    public static final BooleanProperty SOAKED = ModBlockProperties.SOAKED;
 
     public MulchBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.defaultBlockState().setValue(MOISTURE, 0));
-    }
-
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos) {
-        return super.updateShape(state, direction, neighborState, world, pos, neighborPos);
+        this.registerDefaultState(this.defaultBlockState().setValue(SOAKED, false));
     }
 
     @Override
@@ -61,12 +65,12 @@ public class MulchBlock extends FarmBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return Shapes.block();
     }
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
-        if (state.getValue(MOISTURE) == 7) {
+        if (state.getValue(SOAKED)) {
             if (random.nextInt(25) == 1) {
                 BlockPos blockpos = pos.below();
                 BlockState blockstate = level.getBlockState(blockpos);
@@ -85,7 +89,7 @@ public class MulchBlock extends FarmBlock {
 
         BlockState cropState = world.getBlockState(pos.above());
         if (ImmersiveWeatheringFabric.getConfig().leavesConfig.mulchGrowsCrops) {
-            if (state.is(ModBlocks.MULCH_BLOCK) && state.getValue(MulchBlock.MOISTURE) == 7) {
+            if (state.getValue(MulchBlock.SOAKED)) {
                 if (world.getRawBrightness(pos.above(), 0) >= 9) {
                     if (cropState.getBlock() instanceof BeetrootBlock) {
                         return;
@@ -105,10 +109,10 @@ public class MulchBlock extends FarmBlock {
             var targetPos = pos.relative(direction);
             var biome = world.getBiome(pos);
             BlockState neighborState = world.getBlockState(targetPos);
-            if (neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+            if (neighborState.getFluidState().is(FluidTags.WATER)) {
                 isTouchingWater = true;
             }
-            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().getType() == Fluids.FLOWING_WATER || neighborState.getFluidState().getType() == Fluids.WATER) {
+            if (world.isRainingAt(pos.relative(direction)) || biome.is(ModTags.WET) || neighborState.getFluidState().is(FluidTags.WATER)) {
                 temperature--;
             } else if (neighborState.is(ModTags.MAGMA_SOURCE) || biome.is(ModTags.HOT) || world.dimension() == Level.NETHER) {
                 temperature++;
@@ -126,11 +130,58 @@ public class MulchBlock extends FarmBlock {
 
     @Override
     public void fallOn(Level world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        entity.causeFallDamage(fallDistance, 1F, DamageSource.FALL);
+        entity.causeFallDamage(fallDistance, 0.2F, DamageSource.FALL);
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(MOISTURE);
+    }
+
+
+    @Override
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!player.isSecondaryUseActive()) {
+            // empty bucket into mulch
+            if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && !state.getValue(SOAKED)) {
+                if (!player.isCreative()) {
+                    player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                }
+                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
+                world.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+            // fill bucket from mulch
+            else if (player.getItemInHand(hand).is(Items.BUCKET) && state.getValue(SOAKED)) {
+                if (!player.isCreative()) {
+                    player.setItemInHand(hand, new ItemStack(Items.WATER_BUCKET));
+                }
+                world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
+                world.playSound(player, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.use(state, world, pos, player, hand, hit);
+    }
+
+
+    @Override
+    public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
+        return state.getValue(SOAKED);
+    }
+
+    @Override
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction direction, IPlantable plantable) {
+        return true;
+    }
+
+    @Override
+    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return 5;
+    }
+
+    @Override
+    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return 5;
     }
 }

@@ -18,9 +18,12 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.io.FileWriter;
 import java.util.*;
@@ -55,8 +58,10 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
         //TODO: move this line to datapack self predicate
         if (state.getBlock() instanceof IConditionalGrowingBlock cb && !cb.canGrow(state)) return;
 
-        var universalGroup = UNIVERSAL_GROWTHS.get(source);
         Holder<Biome> biome = null;
+
+        var universalGroup = UNIVERSAL_GROWTHS.get(source);
+
         if (universalGroup != null) {
             biome = level.getBiome(pos);
             for (var config : universalGroup) {
@@ -77,25 +82,34 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
         }
     }
 
-    public void writeToFile(final BlockGrowthConfiguration obj, FileWriter writer) {
-        var r = CODEC.encodeStart(JsonOps.INSTANCE, obj);
-        r.result().ifPresent(a -> GSON.toJson(sortJson(a.getAsJsonObject()), writer));
-    }
+    //called by mixin
+    public static void performSkyAccessTick(ServerLevel level, LevelChunk levelChunk, int randomTickSpeed) {
+        ChunkPos chunkpos = levelChunk.getPos();
 
-    private JsonObject sortJson(JsonObject jsonObject) {
-        try {
-            Map<String, JsonElement> joToMap = new TreeMap<>();
-            jsonObject.entrySet().forEach(e -> {
-                var j = e.getValue();
-                if (j instanceof JsonObject jo) j = sortJson(jo);
-                joToMap.put(e.getKey(), j);
-            });
-            JsonObject sortedJSON = new JsonObject();
-            joToMap.forEach(sortedJSON::add);
-            return sortedJSON;
-        } catch (Exception ignored) {
-        }
-        return jsonObject;
+        float chance = (float) randomTickSpeed / (3f * 16f);
+        int minX = chunkpos.getMinBlockX();
+        int minZ = chunkpos.getMinBlockZ();
+        boolean isRaining = level.isRaining();
+        do {
+            if (chance > level.random.nextFloat()) {
+
+                BlockPos firstAirPos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, level.getBlockRandomPos(minX, 0, minZ, 15));
+                BlockPos targetPos = firstAirPos.below();
+                BlockState state = level.getBlockState(targetPos);
+
+                TickSource source = TickSource.CLEAR_SKY;
+                if (isRaining) {
+                    Biome biome = level.getBiome(targetPos).value();
+                    Biome.Precipitation precipitation = biome.getPrecipitation();
+                    if (precipitation == Biome.Precipitation.RAIN) {
+                        if (biome.coldEnoughToSnow(targetPos)) source = TickSource.SNOW;
+                        else source = TickSource.RAIN;
+                    }
+                }
+                tickBlock(source, state, level, targetPos);
+            }
+            chance--;
+        } while (chance > 0);
     }
 
     @Override
@@ -153,7 +167,29 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
                 TICKING_BLOCKS.put(g.getKey(), b.build());
             }
             GROWTH_TO_PARSE.clear();
-
         }
+    }
+
+    //debug
+
+    private void writeToFile(final BlockGrowthConfiguration obj, FileWriter writer) {
+        var r = CODEC.encodeStart(JsonOps.INSTANCE, obj);
+        r.result().ifPresent(a -> GSON.toJson(sortJson(a.getAsJsonObject()), writer));
+    }
+
+    private JsonObject sortJson(JsonObject jsonObject) {
+        try {
+            Map<String, JsonElement> joToMap = new TreeMap<>();
+            jsonObject.entrySet().forEach(e -> {
+                var j = e.getValue();
+                if (j instanceof JsonObject jo) j = sortJson(jo);
+                joToMap.put(e.getKey(), j);
+            });
+            JsonObject sortedJSON = new JsonObject();
+            joToMap.forEach(sortedJSON::add);
+            return sortedJSON;
+        } catch (Exception ignored) {
+        }
+        return jsonObject;
     }
 }

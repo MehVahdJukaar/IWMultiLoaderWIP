@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.blocks;
+package com.ordana.immersive_weathering.fabric;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import com.ordana.immersive_weathering.reg.ModTags;
@@ -8,13 +8,19 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -81,7 +87,7 @@ public class MulchBlock extends FarmBlock {
 
         BlockState cropState = world.getBlockState(pos.above());
         if (ImmersiveWeatheringFabric.getConfig().leavesConfig.mulchGrowsCrops) {
-            if (state.is(ModBlocks.MULCH_BLOCK) && state.getValue(MulchBlock.MOISTURE) == 7) {
+            if (state.getValue(MulchBlock.MOISTURE) == 7) {
                 if (world.getRawBrightness(pos.above(), 0) >= 9) {
                     if (cropState.getBlock() instanceof BeetrootBlock) {
                         return;
@@ -128,5 +134,31 @@ public class MulchBlock extends FarmBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
         stateManager.add(MOISTURE);
+    }
+
+
+    @Override
+    public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!player.isSecondaryUseActive()) {
+            // empty bucket into mulch
+            if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && !state.getValue(SOAKED)) {
+                if (!player.isCreative()) {
+                    player.setItemInHand(hand, new ItemStack(Items.BUCKET));
+                }
+                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
+                world.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+            // fill bucket from mulch
+            else if (player.getItemInHand(hand).is(Items.BUCKET) && state.getValue(SOAKED)) {
+                if (!player.isCreative()) {
+                    player.setItemInHand(hand, new ItemStack(Items.WATER_BUCKET));
+                }
+                world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
+                world.playSound(player, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return super.use(state, world, pos, player, hand, hit);
     }
 }
