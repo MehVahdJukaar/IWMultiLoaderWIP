@@ -4,7 +4,7 @@ package com.ordana.immersive_weathering.forge;
 import com.mojang.datafixers.util.Pair;
 import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
-import com.ordana.immersive_weathering.common.blocks.Waxables;
+import com.ordana.immersive_weathering.reg.ModWaxables;
 import com.ordana.immersive_weathering.common.blocks.Weatherable;
 import com.ordana.immersive_weathering.blocks.crackable.Crackable;
 import com.ordana.immersive_weathering.blocks.mossable.Mossable;
@@ -307,7 +307,7 @@ public class ModEvents {
         }
         //waxing
         else if (i instanceof HoneycombItem) {
-            var waxed = Waxables.getWaxedState(state).orElse(null);
+            var waxed = ModWaxables.getWaxedState(state).orElse(null);
             if (waxed != null) {
 
                 level.levelEvent(player, 3003, pos, 0);

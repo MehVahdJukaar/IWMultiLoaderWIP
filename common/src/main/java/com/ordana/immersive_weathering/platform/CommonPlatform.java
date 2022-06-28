@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.platform;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +22,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class CommonPlatform {
@@ -76,6 +79,11 @@ public class CommonPlatform {
 
     @ExpectPlatform
     public static FlowingFluid getFlowingFluid(LiquidBlock block){
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static Collection<LeafPileBlock> getLeafPiles(){
         throw new AssertionError();
     }
 

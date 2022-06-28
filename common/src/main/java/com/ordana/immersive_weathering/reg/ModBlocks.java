@@ -107,6 +107,22 @@ public class ModBlocks {
             new LeafPileBlock(Properties.copy(AZALEA_LEAF_PILE.get()), true, false, false,
                     List.of(ModParticles.AZALEA_FLOWER)));
 
+    //later stuff
+
+    public static final Supplier<Block> SAND_LAYER_BLOCK = regBlock("sand_layer_block", () ->
+            new AshLayerBlock(Blocks.SAND.defaultBlockState(), 14406560, Properties.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.5f)
+                    .sound(SoundType.SAND).isSuffocating(NEVER)
+                    .isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(SandLayerBlock.LAYERS) >= 8).noOcclusion()));
+    public static final Supplier<Block> RED_SAND_LAYER_BLOCK = regBlock("red_sand_layer_block", () ->
+            new AshLayerBlock(Blocks.RED_SAND.defaultBlockState(), 11098145, Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE)
+                    .strength(0.5f).sound(SoundType.SAND).isSuffocating(NEVER).noOcclusion()));
+    public static final Supplier<Block> ASH_LAYER_BLOCK = regBlock("ash_layer_block", () ->
+            new AshLayerBlock(Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).instabreak()
+                    .sound(SoundType.SNOW).isSuffocating(NEVER).noOcclusion()));
+    public static final Supplier<Block> ASH_BLOCK = regBlock("ash_block", () ->
+            new AshBlock(Properties.of(Material.SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW)));
+    public static final Supplier<Block> SOOT = regBlock("soot", () ->
+            new SootBlock(Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.SNOW).randomTicks()));
 
     //vegetation
 
@@ -481,13 +497,13 @@ public class ModBlocks {
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(Blocks.IRON_BARS).sound(SoundType.COPPER),
                     Rustable.RustLevel.UNAFFECTED));
     public static final Supplier<Block> WAXED_EXPOSED_IRON_BARS = regWithItem("waxed_exposed_iron_bars", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS,Properties.copy(WAXED_IRON_BARS.get()),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(WAXED_IRON_BARS.get()),
                     Rustable.RustLevel.EXPOSED));
     public static final Supplier<Block> WAXED_WEATHERED_IRON_BARS = regWithItem("waxed_weathered_iron_bars", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS,Properties.copy(WAXED_IRON_BARS.get()),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(WAXED_IRON_BARS.get()),
                     Rustable.RustLevel.WEATHERED));
     public static final Supplier<Block> WAXED_RUSTED_IRON_BARS = regWithItem("waxed_rusted_iron_bars", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS,Properties.copy(WAXED_IRON_BARS.get()),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(WAXED_IRON_BARS.get()),
                     Rustable.RustLevel.RUSTED));
 
     //cracked end stone

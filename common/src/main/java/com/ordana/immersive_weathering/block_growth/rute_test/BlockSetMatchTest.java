@@ -5,13 +5,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryCodecs;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 
-import java.util.Optional;
 import java.util.Random;
 
 public class BlockSetMatchTest extends RuleTest {
@@ -39,8 +37,8 @@ public class BlockSetMatchTest extends RuleTest {
         return TYPE;
     }
 
-    //just need to load and static init will register
-    public static void init() {
+    //just need to load and static setup will register
+    public static void setup() {
     }
 
 }

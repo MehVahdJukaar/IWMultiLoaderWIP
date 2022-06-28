@@ -2,8 +2,9 @@ package com.ordana.immersive_weathering.common.blocks.rustable;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
+import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.common.blocks.Waxables;
+import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -11,6 +12,7 @@ import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -119,11 +121,18 @@ public class RustableBarsBlock extends IronBarsBlock implements Rustable {
             return this.getPrevious(state).orElse(null);
         }
         else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
-           var v = Waxables.getUnWaxedState(state);
+           var v = ModWaxables.getUnWaxedState(state);
            if(v.isPresent()){
                return v.get();
            }
         }
         return super.getToolModifiedState(state, level, pos, player, stack, toolAction);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+
+        return super.getToolModifiedState(state, context, toolAction, simulate);
     }
 }

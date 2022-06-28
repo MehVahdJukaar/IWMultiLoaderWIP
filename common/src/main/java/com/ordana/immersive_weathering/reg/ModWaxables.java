@@ -1,17 +1,14 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.reg;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.common.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
-public final class Waxables {
+public final class ModWaxables {
 
     private static final Supplier<BiMap<Block, Block>> WAXABLES = Suppliers.memoize(() -> ImmutableBiMap.<Block, Block>builder()
             .put(ModBlocks.EXPOSED_PLATE_IRON.get(), ModBlocks.WAXED_EXPOSED_PLATE_IRON.get())
@@ -69,14 +66,7 @@ public final class Waxables {
             .put(ModBlocks.RUSTED_PLATE_IRON_VERTICAL_SLAB.get(), ModBlocks.WAXED_RUSTED_PLATE_IRON_VERTICAL_SLAB.get())
             .build());
 
-    public static Optional<BlockState> getWaxedState(BlockState state) {
-        return Optional.ofNullable(WAXABLES.get().get(state.getBlock()))
-                .map(block -> block.withPropertiesOf(state));
+    public static BiMap<Block, Block> getValues() {
+        return WAXABLES.get();
     }
-
-    public static Optional<BlockState> getUnWaxedState(BlockState state) {
-        return Optional.ofNullable(WAXABLES.get().inverse().get(state.getBlock()))
-                .map(block -> block.withPropertiesOf(state));
-    }
-
 }

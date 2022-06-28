@@ -2,11 +2,14 @@ package com.ordana.immersive_weathering.block_growth.hardcoded;
 
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
+import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.common.ModBlocks;
 import com.ordana.immersive_weathering.common.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
 import com.ordana.immersive_weathering.common.WeatheringHelper;
 import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.reg.LeafPilesRegistry;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,8 +33,8 @@ import java.util.Random;
 public class LeavesGrowth implements IBlockGrowth {
 
     @Override
-    public Iterable<Block> getOwners() {
-        return LeafPilesRegistry.LEAF_PILES.get().keySet();
+    public Iterable<LeafPileBlock> getOwners() {
+        return CommonPlatform.getLeafPiles();
     }
 
     @Override

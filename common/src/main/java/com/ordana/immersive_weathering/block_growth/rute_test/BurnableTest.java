@@ -30,7 +30,7 @@ public class BurnableTest extends RuleTest {
         return TYPE;
     }
 
-    //just need to load and static init will register
+    //just need to load and static setup will register
     public static void init() {
     }
 

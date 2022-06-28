@@ -9,6 +9,7 @@ import com.ordana.immersive_weathering.fabric.ModEvents;
 import com.ordana.immersive_weathering.fabric.ModLootTables;
 import com.ordana.immersive_weathering.fabric.ModWaxable;
 import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.reg.ModWaxables;
 import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
 import com.ordana.immersive_weathering.registry.entities.ModEntities;
 import com.ordana.immersive_weathering.registry.items.ModItems;
@@ -17,12 +18,14 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.level.block.Blocks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,21 +34,17 @@ import java.util.function.Supplier;
 
 public class ImmersiveWeatheringFabric implements ModInitializer {
 
-    public static final String MOD_ID = "immersive_weathering";
+    public static final String MOD_ID = ImmersiveWeathering.MOD_ID;
 
-    public static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Supplier<ServerConfig> CONFIG = Util.make(() -> {
-        AutoConfig.register(ServerConfig.class, JanksonConfigSerializer::new);
-        return AutoConfig.getConfigHolder(ServerConfig.class);
-    });
 
-    public static ServerConfig getConfig() {
-        return CONFIG.get();
-    }
 
     @Override
     public void onInitialize() {
+
+        ModWaxables.getValues().forEach(OxidizableBlocksRegistry::registerWaxableBlockPair);
+
+
 
         if (ConfigPlatform.flammableCobwebs()) {
             FlammableBlockRegistry.getDefaultInstance().add(Blocks.COBWEB, 100, 100);
@@ -76,5 +75,14 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
             ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("immersive_weathering:visual_waxed_iron_items"), modContainer, ResourcePackActivationType.NORMAL);
             ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation("immersive_weathering:biome_tinted_mossy_blocks"), modContainer, ResourcePackActivationType.NORMAL);
         });
+    }
+
+    private static final Supplier<ServerConfig> CONFIG = Util.make(() -> {
+        AutoConfig.register(ServerConfig.class, JanksonConfigSerializer::new);
+        return AutoConfig.getConfigHolder(ServerConfig.class);
+    });
+
+    public static ServerConfig getConfig() {
+        return CONFIG.get();
     }
 }

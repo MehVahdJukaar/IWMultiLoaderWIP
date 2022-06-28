@@ -13,7 +13,7 @@ import java.util.Collection;
 public interface IBlockGrowth {
 
     @Nullable
-    Iterable<Block> getOwners();
+    Iterable<? extends Block> getOwners();
 
     void tryGrowing(BlockPos pos, BlockState state, ServerLevel level, Holder<Biome> biome);
 

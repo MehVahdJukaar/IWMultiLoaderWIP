@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.common.blocks.rustable;
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.common.blocks.Waxables;
+import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -175,7 +175,7 @@ public class RustableTrapdoorBlock extends TrapDoorBlock implements Rustable {
         if (this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)) {
             return this.getPrevious(state).orElse(null);
         } else if (ToolActions.AXE_WAX_OFF.equals(toolAction)) {
-            var v = Waxables.getUnWaxedState(state);
+            var v = ModWaxables.getUnWaxedState(state);
             if (v.isPresent()) {
                 return v.get();
             }
