@@ -71,8 +71,9 @@ public class CommonConfigs {
         ASH_SPAWNS = builder.define("ash_spawn", true);
         SOOT_SPAWN = builder.define("soot_spawn", true);
         FLAMMABLE_COBWEBS = builder.define("flammable_cobweb", true);
-
         builder.pop();
+
+
 
         //fabric specific
         CommonPlatform.getPlatform().ifFabric(() -> {

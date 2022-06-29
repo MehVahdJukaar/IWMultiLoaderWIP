@@ -8,18 +8,29 @@ import java.util.function.Supplier;
 public abstract class ConfigBuilderWrapper {
 
     private final String name;
+    protected final ConfigType type;
 
-    public ConfigBuilderWrapper(String name) {
+    public ConfigBuilderWrapper(String name, ConfigType type) {
         this.name = name;
+        this.type = type;
     }
 
-    ;
+    public enum ConfigType{
+        CLIENT,COMMON
+    }
+
+    public abstract void buildAndRegister();
 
     public String getName() {
         return name;
     }
 
     public abstract ConfigBuilderWrapper push(String category);
+
+    public ConfigBuilderWrapper pushPage(String category){
+        push(category);
+        return this;
+    };
 
     public abstract ConfigBuilderWrapper pop();
 

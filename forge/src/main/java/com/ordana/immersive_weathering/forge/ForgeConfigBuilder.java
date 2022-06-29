@@ -2,17 +2,24 @@ package com.ordana.immersive_weathering.forge;
 
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 
 import java.util.function.Supplier;
 
 public class ForgeConfigBuilder extends ConfigBuilderWrapper {
 
-
     private final ForgeConfigSpec.Builder builder;
 
-    public ForgeConfigBuilder(String name) {
-        super(name);
+    public ForgeConfigBuilder(String name, ConfigType type) {
+        super(name, type);
         this.builder = new ForgeConfigSpec.Builder();
+    }
+
+    @Override
+    public void buildAndRegister() {
+        ModConfig.Type t = this.type == ConfigType.COMMON ? ModConfig.Type.COMMON : ModConfig.Type.CLIENT;
+        ModLoadingContext.get().registerConfig(t, this.builder.build());
     }
 
     @Override
