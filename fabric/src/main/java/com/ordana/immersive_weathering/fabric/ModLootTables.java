@@ -1,6 +1,5 @@
 package com.ordana.immersive_weathering.fabric;
-
-import com.ordana.immersive_weathering.registry.items.ModItems;
+/*
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +11,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
 
 public class ModLootTables {
     private static final ResourceLocation BLAZE_ID = EntityType.BLAZE.getDefaultLootTable();
@@ -153,4 +153,4 @@ public class ModLootTables {
                 }
         );
     }
-}
+}*/

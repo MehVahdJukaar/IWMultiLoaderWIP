@@ -50,7 +50,7 @@ public class CommonConfigs {
     public static Supplier<Boolean> CRYOSOL_FEATURE;
     public static Supplier<Boolean> HUMUS_FEATURE;
     public static Supplier<Boolean> FLUVISOL_FEATURE;
-    public static Supplier<Boolean> SLIT_FEATURE;
+    public static Supplier<Boolean> SILT_FEATURE;
     public static Supplier<Boolean> VERITOSOL_FEATURE;
     public static Supplier<Boolean> LAKEBED_FEATURE;
     public static Supplier<Boolean> ICICLE_FEATURE;
@@ -120,7 +120,7 @@ public class CommonConfigs {
         CRYOSOL_FEATURE = builder.define("cryosol_feature", true);
         HUMUS_FEATURE = builder.define("humus_feature", true);
         FLUVISOL_FEATURE = builder.define("fluvisol_feature", true);
-        SLIT_FEATURE = builder.define("silt_feature", true);
+        SILT_FEATURE = builder.define("silt_feature", true);
         VERITOSOL_FEATURE = builder.define("vertisol_feature", true);
         LAKEBED_FEATURE = builder.define("lakebed_feature", true);
         ICICLE_FEATURE = builder.define("icicle_feature", true);

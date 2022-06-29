@@ -4,7 +4,9 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
+import com.ordana.immersive_weathering.blocks.charred.CharredBlock;
 import com.ordana.immersive_weathering.configs.CommonConfigs;
+import com.ordana.immersive_weathering.mixin.accessors.BiomeAccessor;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModParticles;
@@ -12,7 +14,6 @@ import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -63,6 +64,7 @@ public class WeatheringHelper {
     }
 
     public static Optional<Pair<Item, Block>> getBarkForStrippedLog(BlockState log) {
+        /*
         var pair = Optional.ofNullable(LeafPilesRegistry.STRIPPED_TO_BARK.get().get(log.getBlock()));
 
         if (pair.isPresent()) {
@@ -75,6 +77,9 @@ public class WeatheringHelper {
             }
         }
         return pair;
+        */
+        //TODO: re add
+        return Optional.empty();
     }
 
     /**
@@ -207,7 +212,8 @@ public class WeatheringHelper {
 
     //TODO: add serene seasons compat
     public static float getTemp(Level level, BlockPos pos) {
-        return level.getBiome(pos).value().getTemperature(pos);
+        Biome biome = level.getBiome(pos).value();
+        return ((BiomeAccessor) (Object) biome).invokeGetTemperature(pos);
     }
 
     public static boolean isPosWet(Level level, Holder<Biome> biome, BlockPos pos) {
@@ -265,7 +271,7 @@ public class WeatheringHelper {
         Direction dir = Direction.values()[1 + random.nextInt(5)].getOpposite();
         BlockPos targetPos = pos.relative(dir);
         BlockState targetState = world.getBlockState(targetPos);
-        if(targetState.isAir())return;
+        if (targetState.isAir()) return;
         BlockState newState = dir == Direction.DOWN ? Blocks.HANGING_ROOTS.defaultBlockState() :
                 ModBlocks.HANGING_ROOTS_WALL.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, dir);
         if (targetState.is(Blocks.WATER)) {

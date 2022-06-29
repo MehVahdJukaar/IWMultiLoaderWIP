@@ -6,12 +6,17 @@ import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.material.FlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
@@ -106,7 +111,12 @@ public class CommonPlatform {
     }
 
     @ExpectPlatform
-    public static ConfigBuilderWrapper getConfigBuilder(String name) {
+    public static ConfigBuilderWrapper getConfigBuilder(String name, ConfigBuilderWrapper.ConfigType type) {
         throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static void addFeatureToBiome(GenerationStep.Decoration topLayerModification, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
+
     }
 }

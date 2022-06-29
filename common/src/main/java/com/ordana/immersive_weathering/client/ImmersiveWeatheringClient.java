@@ -35,7 +35,7 @@ public class ImmersiveWeatheringClient {
 
     public static void initClient() {
 
-        ClientPlatform.registerRenderType(ModBlocks.ROOTED_GRASS_BLOCK, RenderType.cutout());
+        ClientPlatform.registerRenderType(ModBlocks.ROOTED_GRASS_BLOCK.get(), RenderType.cutout());
         ClientPlatform.registerRenderType(Blocks.MOSSY_COBBLESTONE, RenderType.cutout());
         ClientPlatform.registerRenderType(Blocks.MOSSY_COBBLESTONE_SLAB, RenderType.cutout());
         ClientPlatform.registerRenderType(Blocks.MOSSY_COBBLESTONE_STAIRS, RenderType.cutout());

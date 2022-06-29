@@ -1,48 +1,6 @@
 package com.ordana.immersive_weathering.fabric;
 
-import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
-import com.ordana.immersive_weathering.reg.ModBlocks;
-import com.ordana.immersive_weathering.registry.blocks.*;
-import com.ordana.immersive_weathering.registry.blocks.charred.*;
-import com.ordana.immersive_weathering.blocks.soil.CrackedMudBlock;
-import com.ordana.immersive_weathering.blocks.test.FluvisolBlock;
-import com.ordana.immersive_weathering.blocks.test.SiltBlock;
-import com.ordana.immersive_weathering.registry.items.ModItems;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.block.*;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.item.*;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.ParticleUtils;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.LayeredCauldronBlock;
-import net.minecraft.world.level.block.SnowyDirtBlock;
-import net.minecraft.world.level.block.WeatheringCopper;
-import net.minecraft.world.level.block.piston.PistonBaseBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import java.util.HashMap;
-import java.util.Random;
-
+/*
 public class ModEvents {
     public static final HashMap<Block, Block> CLEANED_BLOCKS = new HashMap<>();
     private static final HashMap<Block, Block> CRACKED_BLOCKS = new HashMap<>();
@@ -993,3 +951,4 @@ public class ModEvents {
 }
 
 
+*/

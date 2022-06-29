@@ -1,10 +1,7 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.blocks.ModBlockProperties;
-import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
-import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -27,6 +24,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.Random;
 
 public class NulchBlock extends Block {
     //TODO: merge with Mulch
@@ -79,8 +78,7 @@ public class NulchBlock extends Block {
             if (world.random.nextFloat() < 0.4f) {
                 world.setBlockAndUpdate(pos, state.setValue(MOLTEN, false));
             }
-        }
-        else if (world.dimension() == Level.NETHER) {
+        } else if (world.dimension() == Level.NETHER) {
             if (world.random.nextFloat() < 0.5f) {
                 world.setBlockAndUpdate(pos, state.setValue(MOLTEN, true));
             }
@@ -112,10 +110,10 @@ public class NulchBlock extends Block {
                 if (bl && random.nextBoolean()) {
 
                     level.addParticle(ModParticles.NULCH.get(),
-                            entity.getX() + Mth.randomBetween(random,-0.2f,0.2f),
+                            entity.getX() + Mth.randomBetween(random, -0.2f, 0.2f),
                             pos.getY() + 1.025,
-                            entity.getZ() +Mth.randomBetween(random,-0.2f,0.2f),
-                            Mth.randomBetween(random,-0.9f,-1),
+                            entity.getZ() + Mth.randomBetween(random, -0.2f, 0.2f),
+                            Mth.randomBetween(random, -0.9f, -1),
                             -1,
                             0);
                 }

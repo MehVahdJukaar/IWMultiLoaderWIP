@@ -1,9 +1,8 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.registry.ModTags;
-import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
-import com.ordana.immersive_weathering.registry.blocks.MulchBlock;
-import net.minecraft.block.*;
+import com.ordana.immersive_weathering.fabric.MulchBlock;
+import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.BlockGetter;
@@ -34,6 +33,6 @@ public abstract class CropBlockMixin extends Block {
     @Inject(method = "randomTick", at = @At("HEAD"), cancellable = true)
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
         BlockState soilState = world.getBlockState(pos.below());
-        if (soilState.is(ModBlocks.MULCH_BLOCK) && soilState.getValue(MulchBlock.MOISTURE) == 0) ci.cancel();
+        if (soilState.is(ModBlocks.MULCH_BLOCK.get()) && soilState.getValue(MulchBlock.MOISTURE) == 0) ci.cancel();
     }
 }

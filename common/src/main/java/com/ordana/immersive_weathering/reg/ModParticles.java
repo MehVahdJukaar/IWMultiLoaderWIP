@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 
 public class ModParticles {
 
+    public static void init(){}
+
     public static final Supplier<SimpleParticleType> OAK_LEAF = RegistryPlatform.registerParticle("oak_leaf");
     public static final Supplier<SimpleParticleType> BIRCH_LEAF = RegistryPlatform.registerParticle("birch_leaf");
     public static final Supplier<SimpleParticleType> SPRUCE_LEAF = RegistryPlatform.registerParticle("spruce_leaf");

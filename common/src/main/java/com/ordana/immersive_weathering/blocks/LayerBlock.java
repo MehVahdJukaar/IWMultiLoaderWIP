@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class LayerBlock extends FallingBlock {
     private static final int MAX_LAYERS = 8;
-    private static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
+    public static final IntegerProperty LAYERS_8 = BlockStateProperties.LAYERS;
     private static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[MAX_LAYERS + 1];
 
     static {
@@ -49,7 +49,7 @@ public class LayerBlock extends FallingBlock {
     }
 
     public IntegerProperty layerProperty() {
-        return LAYERS;
+        return LAYERS_8;
     }
 
     public int getLayers(BlockState state) {
@@ -63,7 +63,7 @@ public class LayerBlock extends FallingBlock {
     }
 
     public VoxelShape getDefaultShape(BlockState state) {
-        return SHAPE_BY_LAYER[state.getValue(LAYERS)];
+        return SHAPE_BY_LAYER[state.getValue(LAYERS_8)];
     }
 
     @Override

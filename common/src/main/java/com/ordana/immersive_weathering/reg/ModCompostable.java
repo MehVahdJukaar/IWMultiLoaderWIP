@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.reg;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 
 public class ModCompostable {
-    public static void setup() {
+    public static void init() {
 
         RegistryPlatform.registerCompostable(ModItems.MOSS_CLUMP.get(), 0.5f);
         RegistryPlatform.registerCompostable(ModItems.AZALEA_FLOWERS.get(), 0.5f);
@@ -17,9 +17,9 @@ public class ModCompostable {
         RegistryPlatform.registerCompostable(ModBlocks.NULCH_BLOCK.get(), 1f);
         RegistryPlatform.registerCompostable(ModItems.MOSS_CLUMP.get(), 0.5f);
         RegistryPlatform.registerCompostable(ModItems.FLOWER_CROWN.get(), 0.3f);
-        RegistryPlatform.registerCompostable.add(ModBlocks.IVY, 0.3f);
+        RegistryPlatform.registerCompostable(ModBlocks.IVY.get(), 0.3f);
 
         //TODO: re add
-        //  LeafPilesRegistry.LEAF_PILES.get().values().forEach(l -> RegistryPlatform.setup (l, 0.3f));
+        //  LeafPilesRegistry.LEAF_PILES.get().values().forEach(l -> RegistryPlatform.init (l, 0.3f));
     }
 }

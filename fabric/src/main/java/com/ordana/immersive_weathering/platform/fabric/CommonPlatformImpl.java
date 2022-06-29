@@ -66,8 +66,8 @@ public class CommonPlatformImpl {
         return null;
     }
 
-    public static ConfigBuilderWrapper getConfigBuilder(String name) {
-        return new FabricConfigBuilder(name);
+    public static ConfigBuilderWrapper getConfigBuilder(String name, ConfigBuilderWrapper.ConfigType type) {
+        return new FabricConfigBuilder(name,type);
     }
 
 

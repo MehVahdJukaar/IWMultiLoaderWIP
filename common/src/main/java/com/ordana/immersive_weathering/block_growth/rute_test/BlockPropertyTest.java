@@ -2,11 +2,8 @@ package com.ordana.immersive_weathering.block_growth.rute_test;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
-import net.minecraft.util.valueproviders.ClampedInt;
-import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -19,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class BlockPropertyTest extends RuleTest {
@@ -47,9 +43,9 @@ public class BlockPropertyTest extends RuleTest {
     protected RuleTestType<BlockPropertyTest> getType() {
         return TYPE;
     }
-    //just need to load and static setup will register
+    //just need to load and static init will register
 
-    public static void setup() {
+    public static void init() {
     }
 
 

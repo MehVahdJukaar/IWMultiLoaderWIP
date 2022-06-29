@@ -32,6 +32,8 @@ import java.util.function.ToIntFunction;
 @SuppressWarnings("unused")
 public class ModBlocks {
 
+    public static void init(){}
+
     public static <T extends Block> Supplier<T> regBlock(String name, Supplier<T> block) {
         return RegistryPlatform.registerBlock(name, block);
     }
@@ -110,17 +112,18 @@ public class ModBlocks {
     //later stuff
 
     public static final Supplier<Block> SAND_LAYER_BLOCK = regBlock("sand_layer_block", () ->
-            new AshLayerBlock(Blocks.SAND.defaultBlockState(), 14406560, Properties.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.5f)
+            new SandLayerBlock(14406560, Properties.of(Material.TOP_SNOW, MaterialColor.SAND).strength(0.5f)
                     .sound(SoundType.SAND).isSuffocating(NEVER)
-                    .isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(SandLayerBlock.LAYERS) >= 8).noOcclusion()));
+                    .isViewBlocking((blockState, blockView, blockPos) -> blockState.getValue(LayerBlock.LAYERS_8) >= 8)
+                    .noOcclusion()));
     public static final Supplier<Block> RED_SAND_LAYER_BLOCK = regBlock("red_sand_layer_block", () ->
-            new AshLayerBlock(Blocks.RED_SAND.defaultBlockState(), 11098145, Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE)
+            new SandLayerBlock( 11098145, Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_ORANGE)
                     .strength(0.5f).sound(SoundType.SAND).isSuffocating(NEVER).noOcclusion()));
     public static final Supplier<Block> ASH_LAYER_BLOCK = regBlock("ash_layer_block", () ->
-            new AshLayerBlock(Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).instabreak()
+            new LayerBlock(Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).instabreak()
                     .sound(SoundType.SNOW).isSuffocating(NEVER).noOcclusion()));
     public static final Supplier<Block> ASH_BLOCK = regBlock("ash_block", () ->
-            new AshBlock(Properties.of(Material.SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW)));
+            new LayerBlock(Properties.of(Material.SNOW, MaterialColor.COLOR_BLACK).instabreak().sound(SoundType.SNOW)));
     public static final Supplier<Block> SOOT = regBlock("soot", () ->
             new SootBlock(Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_BLACK).noCollission().instabreak().sound(SoundType.SNOW).randomTicks()));
 
@@ -163,6 +166,9 @@ public class ModBlocks {
             new MossySlabBlock(Mossable.MossLevel.MOSSY, Properties.copy(MOSSY_STONE.get())));
     public static final Supplier<Block> MOSSY_STONE_VERTICAL_SLAB = regWithItem("mossy_stone_vertical_slab", () ->
             new MossyVerticalSlabBlock(Mossable.MossLevel.MOSSY, Properties.copy(MOSSY_STONE_STAIRS.get())), "quark");
+    public static final Supplier<Block> MOSSY_STONE_WALL = regWithItem("mossy_stone_wall",()->
+            new MossyWallBlock(Mossable.MossLevel.MOSSY, Properties.copy(Blocks.COBBLESTONE_WALL)));
+
 
     //cracked bricks
 

@@ -12,6 +12,8 @@ import java.util.function.Supplier;
 
 public class ModEntities {
 
+    public static void init(){}
+
     //entities
     public static Supplier<EntityType<FallingIcicleEntity>> FALLING_ICICLE = RegistryPlatform.registerEntityType("falling_icicle",
             FallingIcicleEntity::new, MobCategory.MISC, 0.98F, 0.98F, 10 ,20);

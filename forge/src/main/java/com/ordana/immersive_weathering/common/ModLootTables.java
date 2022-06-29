@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.common;
 
-import com.ordana.immersive_weathering.registry.items.ModItems;
+import com.ordana.immersive_weathering.registry_delete.items.ModItems;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.minecraft.resources.ResourceLocation;

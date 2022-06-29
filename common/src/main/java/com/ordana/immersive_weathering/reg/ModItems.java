@@ -14,6 +14,8 @@ import java.util.function.Supplier;
 
 public class ModItems {
 
+    public static void init(){}
+
     public static Supplier<BlockItem> regBlockItem(String name, Supplier<? extends Block> blockSup, Item.Properties properties) {
         return RegistryPlatform.registerItem(name, () -> new BlockItem(blockSup.get(), properties));
     }
@@ -110,10 +112,6 @@ public class ModItems {
             new IceSickleItem(IcicleToolMaterial.INSTANCE, 5, -1f,
                     new Item.Properties().food(ModFoods.ICICLE).tab(CreativeModeTab.TAB_COMBAT)));
 
-
-    //TODO: mvoe to mixin since we need it anyways
-    public static final Supplier<Item> HANGING_ROOTS_ITEM = regOverride(Items.HANGING_ROOTS, () ->
-            new CeilingAndWallBlockItem(Blocks.HANGING_ROOTS, ModBlocks.HANGING_ROOTS_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 
 }

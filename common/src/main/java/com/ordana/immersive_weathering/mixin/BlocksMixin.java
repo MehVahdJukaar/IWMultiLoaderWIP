@@ -2,9 +2,11 @@ package com.ordana.immersive_weathering.mixin;
 
 import com.ordana.immersive_weathering.blocks.crackable.*;
 import com.ordana.immersive_weathering.blocks.mossable.*;
+import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.blocks.soil.ModGrassBlock;
 import com.ordana.immersive_weathering.blocks.soil.ModMyceliumBlock;
 import com.ordana.immersive_weathering.blocks.soil.SoilBlock;
+import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import com.ordana.immersive_weathering.reg.ModItems;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
@@ -792,7 +794,7 @@ public abstract class BlocksMixin {
             )
     )
     private static IronBarsBlock ironBars(BlockBehaviour.Properties settings) {
-        return new RustableBarsBlock(Rustable.RustLevel.UNAFFECTED, settings);
+        return (IronBarsBlock)RegistryPlatform.createSpecialBlock(RegistryPlatform.BlockType.RUSTABLE_BARS, settings, Rustable.RustLevel.UNAFFECTED);
     }
 
     @Redirect(
@@ -811,7 +813,7 @@ public abstract class BlocksMixin {
     )
 
     private static DoorBlock ironDoor(BlockBehaviour.Properties settings) {
-        return new RustableDoorBlock(Rustable.RustLevel.UNAFFECTED, settings.sound(SoundType.COPPER));
+        return (DoorBlock) RegistryPlatform.createSpecialBlock(RegistryPlatform.BlockType.RUSTABLE_DOOR, settings, Rustable.RustLevel.UNAFFECTED);
     }
 
     @Redirect(
@@ -829,7 +831,7 @@ public abstract class BlocksMixin {
             )
     )
     private static TrapDoorBlock ironTrapdoor(BlockBehaviour.Properties settings) {
-        return new RustableTrapdoorBlock(Rustable.RustLevel.UNAFFECTED, settings.sound(SoundType.COPPER));
+        return (TrapDoorBlock) RegistryPlatform.createSpecialBlock(RegistryPlatform.BlockType.RUSTABLE_TRAPDOOR, settings, Rustable.RustLevel.UNAFFECTED);
     }
 
 

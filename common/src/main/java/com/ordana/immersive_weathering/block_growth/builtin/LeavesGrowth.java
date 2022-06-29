@@ -141,10 +141,10 @@ public class LeavesGrowth implements IBlockGrowth {
     //called from mixin
     public static void decayLeavesPile(BlockState state, ServerLevel level, BlockPos pos) {
         if (ClientConfigs.LEAF_DECAY_PARTICLES.get()) {
-            var leafParticle = LeafPilesRegistry.getFallenLeafParticle(state).orElse(null);
-            level.sendParticles(leafParticle, (double) pos.getX() + 0.5D,
+            var leafParticle = LeafPilesRegistry.getFallenLeafParticle(state);
+            leafParticle.ifPresent(p -> level.sendParticles(p, (double) pos.getX() + 0.5D,
                     (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 10,
-                    0.5D, 0.5D, 0.5D, 0.0D);
+                    0.5D, 0.5D, 0.5D, 0.0D));
         }
         if (CommonConfigs.LEAF_DECAY_SOUND.get()) {
             level.playSound(null, pos, SoundEvents.AZALEA_LEAVES_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);

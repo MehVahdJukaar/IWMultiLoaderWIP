@@ -17,10 +17,6 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -36,7 +32,6 @@ import net.minecraftforge.resource.PathResourcePack;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.function.Supplier;
 
 /**
  * Author: Ordana, Keybounce, MehVahdJukaar
@@ -82,10 +77,10 @@ public class ImmersiveWeatheringForge {
 
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(()->{
-            ModCompostable.setup();
-            FluidMatchTest.setup();
-            LogMatchTest.setup();
-            BlockSetMatchTest.setup();
+            ModCompostable.init();
+            FluidMatchTest.init();
+            LogMatchTest.init();
+            BlockSetMatchTest.init();
 
             registerWaxables();
 

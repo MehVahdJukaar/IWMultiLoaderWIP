@@ -1,5 +1,7 @@
 package com.ordana.immersive_weathering.client;
 
+import com.ordana.immersive_weathering.reg.LeafPilesRegistry;
+import com.ordana.immersive_weathering.utils.CommonUtils;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -36,21 +38,23 @@ public class ParticleHelper {
         double d0 = vec3.x + (i == 0 ? Mth.nextDouble(p_144958_.random, -0.5D, 0.5D) : (double)i * 0.55D);
         double d1 = vec3.y + (j == 0 ? Mth.nextDouble(p_144958_.random, -0.5D, 0.5D) : (double)j * 0.55D);
         double d2 = vec3.z + (k == 0 ? Mth.nextDouble(p_144958_.random, -0.5D, 0.5D) : (double)k * 0.55D);
-        float v = p_144961_.getType().getRegistryName().getNamespace().equals("immersive_weathering") ? -2:0;
+        float v = CommonUtils.getID(p_144961_.getType()).getNamespace().equals("immersive_weathering") ? -2:0;
         //TODO: generalize this and redo leaf particle physics
         p_144958_.addParticle(p_144961_, d0, d1, d2, v, 0, 0);
     }
 
 
     public static void spawnLeavesParticles(BlockState state, Level world, BlockPos pos, Random random) {
-        var leafParticle = WeatheringHelper.getFallenLeafParticle(state).orElse(null);
+        var leafParticle = LeafPilesRegistry.getFallenLeafParticle(state).orElse(null);
         if (leafParticle == null) return;
+        //TODO: readd
+        /*
         if(ImmersiveWeathering1.getConfig().leavesConfig.fallingLeafParticles && state.is(ModTags.VANILLA_LEAVES)) {
             if (random.nextInt(32) == 0 && !world.getBlockState(pos.below()).isRedstoneConductor(world, pos)) {
                 if (!(world.getBlockState(pos.below()).getBlock() instanceof LeavesBlock) && state.is(ModTags.VANILLA_LEAVES)) {
                     ParticleUtils.spawnParticlesOnBlockFaces(world, pos, leafParticle, UniformInt.of(0, 1));
                 }
             }
-        }
+        }*/
     }
 }

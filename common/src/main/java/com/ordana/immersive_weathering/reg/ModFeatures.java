@@ -1,8 +1,10 @@
 package com.ordana.immersive_weathering.reg;
 
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.features.IcicleClusterFeature;
 import com.ordana.immersive_weathering.features.IcicleClusterFeatureConfig;
 import com.ordana.immersive_weathering.features.IvyFeature;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -23,30 +25,30 @@ public class ModFeatures {
     public static final Supplier<Feature<GlowLichenConfiguration>> IVY_FEATURE = RegistryPlatform.registerFeature("ivy_feature", () ->
             new IvyFeature(GlowLichenConfiguration.CODEC));
 
-    public static void registerFeatures() {
+    public static void init() {
 
         ResourceKey<PlacedFeature> icicles = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "icicles"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.icicleFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.ICY), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, icicles);
+        if (CommonConfigs.ICICLE_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.TOP_LAYER_MODIFICATION,ModTags.ICY,icicles);
         }
 
         ResourceKey<PlacedFeature> cryosol_patch = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "cryosol_patch"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.cryosolFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.tag(ModTags.ICY), GenerationStep.Decoration.RAW_GENERATION, cryosol_patch);
+        if (CommonConfigs.CRYOSOL_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.ICY,cryosol_patch);
         }
 
         ResourceKey<PlacedFeature> humus_patch = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "humus_patch"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.humusFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DARK_FOREST), GenerationStep.Decoration.RAW_GENERATION, humus_patch);
+        if (CommonConfigs.HUMUS_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_HUMUS,humus_patch);
         }
 
         ResourceKey<PlacedFeature> rooted_ceiling = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "rooted_ceiling"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.rootsFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DARK_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, rooted_ceiling);
+        if (CommonConfigs.ROOTS_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.VEGETAL_DECORATION,ModTags.HAS_HUMUS,rooted_ceiling);
         }
 
         ResourceKey<PlacedFeature> fluvisol_patch_submerged = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
@@ -55,42 +57,37 @@ public class ModFeatures {
                 new ResourceLocation("immersive_weathering", "fluvisol_patch_surface"));
         ResourceKey<PlacedFeature> fluvisol_patch_dry = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "fluvisol_patch_dry"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.fluvisolFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.RIVER, Biomes.SWAMP), GenerationStep.Decoration.RAW_GENERATION, fluvisol_patch_dry);
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.RIVER, Biomes.SWAMP), GenerationStep.Decoration.RAW_GENERATION, fluvisol_patch_surface);
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.RIVER, Biomes.SWAMP), GenerationStep.Decoration.RAW_GENERATION, fluvisol_patch_submerged);
-        }
+        if (CommonConfigs.FLUVISOL_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_FLUVISOL,fluvisol_patch_dry);
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_FLUVISOL,fluvisol_patch_surface);
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_FLUVISOL,fluvisol_patch_submerged);
+     }
 
         ResourceKey<PlacedFeature> silt_disk = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "silt_disk"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.siltFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.RIVER, Biomes.SWAMP), GenerationStep.Decoration.RAW_GENERATION, silt_disk);
+        if (CommonConfigs.SILT_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_FLUVISOL,silt_disk);
         }
 
         ResourceKey<PlacedFeature> dry_lakebed = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "dry_lakebed"));
         ResourceKey<PlacedFeature> dry_lakebed_large = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "dry_lakebed_large"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.lakebedFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BADLANDS, Biomes.ERODED_BADLANDS, Biomes.WOODED_BADLANDS, Biomes.DESERT), GenerationStep.Decoration.RAW_GENERATION, dry_lakebed_large);
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BADLANDS, Biomes.ERODED_BADLANDS, Biomes.WOODED_BADLANDS, Biomes.DESERT), GenerationStep.Decoration.RAW_GENERATION, dry_lakebed);
+        if (CommonConfigs.LAKEBED_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_LAKEBED,dry_lakebed_large);
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_LAKEBED,dry_lakebed);
         }
 
         ResourceKey<PlacedFeature> vertisol_patch = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "vertisol_patch"));
-        if (ImmersiveWeathering1.getConfig().worldgenConfig.vertisolFeature) {
-            BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BADLANDS, Biomes.ERODED_BADLANDS, Biomes.WOODED_BADLANDS), GenerationStep.Decoration.RAW_GENERATION, vertisol_patch);
+        if (CommonConfigs.VERITOSOL_FEATURE.get()) {
+            CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.RAW_GENERATION,ModTags.HAS_VERITOSOL,vertisol_patch);
         }
 
 
         ResourceKey<PlacedFeature> ivy_patch = ResourceKey.create(Registry.PLACED_FEATURE_REGISTRY,
                 new ResourceLocation("immersive_weathering", "ivy_patch"));
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.WINDSWEPT_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.FLOWER_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DARK_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BIRCH_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
-        BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.OLD_GROWTH_BIRCH_FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ivy_patch);
+        CommonPlatform.addFeatureToBiome(GenerationStep.Decoration.VEGETAL_DECORATION,ModTags.HAS_IVY,ivy_patch);
 
 
     }
