@@ -2,8 +2,6 @@ package com.ordana.immersive_weathering.fabric;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.registry.ModTags;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

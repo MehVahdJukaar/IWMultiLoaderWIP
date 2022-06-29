@@ -15,7 +15,7 @@
         "minecraft:savanna_plateau",
         "minecraft:windswept_savanna"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.0005,

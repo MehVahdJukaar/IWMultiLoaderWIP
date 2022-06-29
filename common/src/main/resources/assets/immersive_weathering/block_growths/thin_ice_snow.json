@@ -8,7 +8,7 @@
       "biomes": [
         "#immersive_weathering:icy"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_for_face": [

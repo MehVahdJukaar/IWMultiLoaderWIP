@@ -41,19 +41,19 @@ public class LayerBlock extends FallingBlock {
 
     public LayerBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(layerPropertu(), 1));
+        this.registerDefaultState(this.stateDefinition.any().setValue(layerProperty(), 1));
     }
 
     public int getMaxLayers() {
         return MAX_LAYERS;
     }
 
-    public IntegerProperty layerPropertu() {
+    public IntegerProperty layerProperty() {
         return LAYERS;
     }
 
     public int getLayers(BlockState state) {
-        return state.getValue(layerPropertu());
+        return state.getValue(layerProperty());
     }
 
     @Override
@@ -135,7 +135,7 @@ public class LayerBlock extends FallingBlock {
         BlockState blockstate = context.getLevel().getBlockState(context.getClickedPos());
         if (blockstate.is(this)) {
             int i = getLayers(blockstate);
-            return blockstate.setValue(layerPropertu(), Math.min(getMaxLayers(), i + 1));
+            return blockstate.setValue(layerProperty(), Math.min(getMaxLayers(), i + 1));
         } else {
             return super.getStateForPlacement(context);
         }
@@ -144,12 +144,12 @@ public class LayerBlock extends FallingBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(layerPropertu());
+        builder.add(layerProperty());
     }
 
     protected void removeOneLayer(BlockState state, BlockPos pos, Level level) {
         int levels = getLayers(state);
-        if (levels > 1) level.setBlockAndUpdate(pos, state.setValue(layerPropertu(), levels - 1));
+        if (levels > 1) level.setBlockAndUpdate(pos, state.setValue(layerProperty(), levels - 1));
         else level.removeBlock(pos, false);
     }
 

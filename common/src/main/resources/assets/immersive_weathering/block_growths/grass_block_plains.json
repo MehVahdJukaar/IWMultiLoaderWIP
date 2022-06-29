@@ -10,7 +10,7 @@
   "position_predicates": [
     {
       "biomes": ["minecraft:plains"],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.001,

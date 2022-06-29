@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.blocks;
 
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
@@ -12,4 +13,5 @@ public class ModBlockProperties {
     public static final BooleanProperty HAS_ICE = BooleanProperty.create("has_ice");
     public static final IntegerProperty LEAF_LAYERS = IntegerProperty.create("layers", 0, 8);
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 10);
+
 }

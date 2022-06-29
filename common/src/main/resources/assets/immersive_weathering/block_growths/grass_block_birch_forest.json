@@ -13,7 +13,7 @@
         "minecraft:birch_forest",
         "minecraft:old_growth_birch_forest"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.001,

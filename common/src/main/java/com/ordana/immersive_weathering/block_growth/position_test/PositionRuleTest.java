@@ -26,7 +26,7 @@ public interface PositionRuleTest {
     };
 
     Codec<PositionRuleTest> CODEC = PositionRuleTestType.CODEC
-            .dispatch("predicate_type", PositionRuleTest::getType, PositionRuleTestType::codec);
+            .dispatch("type", PositionRuleTest::getType, PositionRuleTestType::codec);
 
 
     Map<String, PositionRuleTestType<?>> TYPES = new HashMap<>(){{
@@ -39,7 +39,7 @@ public interface PositionRuleTest {
         put(HeightTest.TYPE.name, HeightTest.TYPE);
         put(EntityTest.TYPE.name, EntityTest.TYPE);
         put(BiomeSetMatchTest.TYPE.name, BiomeSetMatchTest.TYPE);
-        put(NeighborTest.TYPE.name, NeighborTest.TYPE);
+        put(BlockTest.TYPE.name, BlockTest.TYPE);
     }};
 
 

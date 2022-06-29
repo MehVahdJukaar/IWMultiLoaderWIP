@@ -13,7 +13,7 @@
         "minecraft:forest",
         "minecraft:windswept_forest"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.002,

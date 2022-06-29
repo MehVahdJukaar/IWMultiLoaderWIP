@@ -125,11 +125,11 @@ public class ThinIceBlock extends IceBlock implements LiquidBlockContainer {
         }
         if (!world.isClientSide && world.random.nextFloat() < fallDistance - 0.5f && (entity instanceof Player || world.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) && entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512f) {
             if (world.random.nextBoolean()) {
-                world.setBlockAndUpdate(pos, ThinIceBlock.pushEntitiesUp(state, Blocks.WATER.defaultBlockState(), world, pos));
+                world.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
             } else if (i < 3) {
                 world.setBlockAndUpdate(pos, state.setValue(CRACKED, i + 1));
             } else if (i == 3) {
-                world.setBlockAndUpdate(pos, ThinIceBlock.pushEntitiesUp(state, Blocks.WATER.defaultBlockState(), world, pos));
+                world.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
             }
             world.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
         }

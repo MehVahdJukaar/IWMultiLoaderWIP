@@ -38,27 +38,26 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class LeafPileBlock extends Block implements BonemealableBlock {
+public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
 
     private static final int FIRE_SPREAD = 30;
     private static final int FLAMMABILITY = 60;
 
     public static final IntegerProperty LAYERS = ModBlockProperties.LEAF_LAYERS;
 
-    protected static final VoxelShape[] LAYERS_TO_SHAPE = new VoxelShape[]{
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
-            Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
+
+    private static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[8 + 1];
+
+    static {
+        Arrays.setAll(SHAPE_BY_LAYER, l -> Block.box(0.0D, 0.0D, 0.0D, 16.0D, l * 2, 16.0D));
+        SHAPE_BY_LAYER[0] = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1f, 16.0D);
+    }
+
     private static final float[] COLLISIONS = new float[]{1, 0.999f, 0.998f, 0.997f, 0.996f, 0.994f, 0.993f, 0.992f};
 
     private final boolean hasFlowers; //if it can be boneMealed
@@ -77,6 +76,9 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
         RegistryPlatform.registerBlockFlammability(this, FIRE_SPREAD, FLAMMABILITY);
     }
 
+
+
+
     @PlatformOnly(PlatformOnly.FORGE)
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return FIRE_SPREAD;
@@ -87,15 +89,22 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
         return FLAMMABILITY;
     }
 
+    @Override
+    public int getLayers(BlockState state) {
+        return state.getValue(LAYERS);
+    }
+
+    @Override
+    public IntegerProperty layerProperty() {
+        return LAYERS;
+    }
 
     @Override
     public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
         return 1;
     }
 
-    protected int getLayers(BlockState state) {
-        return state.getValue(LAYERS);
-    }
+
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
@@ -145,37 +154,8 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, BlockGetter world, BlockPos pos, PathComputationType type) {
-        return switch (type) {
-            case LAND -> getLayers(state) < 5;
-            case WATER -> getLayers(state) == 0;
-            case AIR -> false;
-        };
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return LAYERS_TO_SHAPE[getLayers(state)];
-    }
-
-    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
-    }
-
-    @Override
-    public VoxelShape getBlockSupportShape(BlockState state, BlockGetter world, BlockPos pos) {
-        return LAYERS_TO_SHAPE[getLayers(state)];
-    }
-
-    @Override
-    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        return LAYERS_TO_SHAPE[getLayers(state)];
-    }
-
-    @Override
-    public boolean useShapeForLightOcclusion(BlockState state) {
-        return true;
     }
 
     @Override
@@ -231,11 +211,6 @@ public class LeafPileBlock extends Block implements BonemealableBlock {
             }
             return super.getStateForPlacement(ctx);
         }
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(LAYERS);
     }
 
     @Override

@@ -271,7 +271,7 @@ public class ModBlocks {
     //cut iron
 
     public static final Supplier<Block> CUT_IRON = regWithItem("cut_iron", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BLOCK, Properties.copy(Blocks.IRON_DOOR).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BLOCK, Properties.copy(Blocks.IRON_DOOR),
                     Rustable.RustLevel.UNAFFECTED));
     public static final Supplier<Block> EXPOSED_CUT_IRON = regWithItem("exposed_cut_iron", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BLOCK, Properties.copy(CUT_IRON.get()),
@@ -427,7 +427,7 @@ public class ModBlocks {
     //iron door
 
     public static final Supplier<Block> EXPOSED_IRON_DOOR = regWithItem("exposed_iron_door", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_DOOR, Properties.copy(Blocks.IRON_DOOR).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_DOOR, Properties.copy(Blocks.IRON_DOOR),
                     Rustable.RustLevel.EXPOSED), CreativeModeTab.TAB_DECORATIONS);
     public static final Supplier<Block> WEATHERED_IRON_DOOR = regWithItem("weathered_iron_door", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_DOOR, Properties.copy(EXPOSED_IRON_DOOR.get()),
@@ -439,7 +439,7 @@ public class ModBlocks {
     //iron trapdoor
 
     public static final Supplier<Block> EXPOSED_IRON_TRAPDOOR = regWithItem("exposed_iron_trapdoor", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(Blocks.IRON_TRAPDOOR).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(Blocks.IRON_TRAPDOOR),
                     Rustable.RustLevel.EXPOSED), CreativeModeTab.TAB_DECORATIONS);
     public static final Supplier<Block> WEATHERED_IRON_TRAPDOOR = regWithItem("weathered_iron_trapdoor", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(EXPOSED_IRON_TRAPDOOR.get()),
@@ -451,7 +451,7 @@ public class ModBlocks {
     //iron bars
 
     public static final Supplier<Block> EXPOSED_IRON_BARS = regWithItem("exposed_iron_bars", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(Blocks.IRON_BARS).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(Blocks.IRON_BARS),
                     Rustable.RustLevel.EXPOSED));
     public static final Supplier<Block> WEATHERED_IRON_BARS = regWithItem("weathered_iron_bars", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(EXPOSED_IRON_BARS.get()),
@@ -478,7 +478,7 @@ public class ModBlocks {
     //waxed trapdoor
 
     public static final Supplier<Block> WAXED_IRON_TRAPDOOR = regWithItem("waxed_iron_trapdoor", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(Blocks.IRON_TRAPDOOR).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(Blocks.IRON_TRAPDOOR),
                     Rustable.RustLevel.UNAFFECTED));
     public static final Supplier<Block> WAXED_EXPOSED_IRON_TRAPDOOR = regWithItem("waxed_exposed_iron_trapdoor", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_TRAPDOOR, Properties.copy(WAXED_IRON_TRAPDOOR.get()),
@@ -494,7 +494,7 @@ public class ModBlocks {
 
     //TODO: rethink sound since its diff that iron bars
     public static final Supplier<Block> WAXED_IRON_BARS = regWithItem("waxed_iron_bars", () ->
-            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(Blocks.IRON_BARS).sound(SoundType.COPPER),
+            RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(Blocks.IRON_BARS),
                     Rustable.RustLevel.UNAFFECTED));
     public static final Supplier<Block> WAXED_EXPOSED_IRON_BARS = regWithItem("waxed_exposed_iron_bars", () ->
             RegistryPlatform.createSpecialBlock(BlockType.RUSTABLE_BARS, Properties.copy(WAXED_IRON_BARS.get()),

@@ -31,7 +31,7 @@ public class BurnableTest extends RuleTest {
     }
 
     //just need to load and static setup will register
-    public static void init() {
+    public static void setup() {
     }
 
 }

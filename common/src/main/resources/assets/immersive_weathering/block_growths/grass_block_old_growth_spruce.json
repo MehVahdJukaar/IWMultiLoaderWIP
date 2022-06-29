@@ -13,7 +13,7 @@
         "minecraft:old_growth_spruce_taiga",
         "minecraft:old_growth_pine_taiga"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.001,

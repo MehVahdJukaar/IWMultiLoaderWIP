@@ -1,9 +1,6 @@
 package com.ordana.immersive_weathering;
 
-import com.ordana.immersive_weathering.block_growth.rute_test.BlockSetMatchTest;
-import com.ordana.immersive_weathering.block_growth.rute_test.BurnableTest;
-import com.ordana.immersive_weathering.block_growth.rute_test.FluidMatchTest;
-import com.ordana.immersive_weathering.block_growth.rute_test.LogMatchTest;
+import com.ordana.immersive_weathering.block_growth.rute_test.*;
 import com.ordana.immersive_weathering.reg.ModCompostable;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +22,8 @@ public class ImmersiveWeathering {
         FluidMatchTest.setup();
         LogMatchTest.setup();
         BlockSetMatchTest.setup();
-        BurnableTest.init();
+        BurnableTest.setup();
+        BlockPropertyTest.setup();
     }
 
     //hanging roots item override (mixin for fabric override for forge)

@@ -18,7 +18,7 @@
   "position_predicates": [
     {
       "biomes":"#minecraft:is_nether",
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_for_face": [

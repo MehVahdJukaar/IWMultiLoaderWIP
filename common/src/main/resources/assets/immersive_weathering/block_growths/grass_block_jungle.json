@@ -12,7 +12,7 @@
       "biomes": [
         "minecraft:jungle"
       ],
-      "predicate_type": "biome_match"
+     "type": "biome_match"
     }
   ],
   "growth_chance": 0.001,
