@@ -3,13 +3,11 @@ package com.ordana.immersive_weathering.block_growth.builtin;
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
-import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.blocks.LeafPileBlock;
-import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
-import com.ordana.immersive_weathering.common.WeatheringHelper;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
+import com.ordana.immersive_weathering.configs.ClientConfigs;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import com.ordana.immersive_weathering.reg.LeafPilesRegistry;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,6 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -31,11 +30,13 @@ import java.util.Random;
 
 public class LeavesGrowth implements IBlockGrowth {
 
+
     @Override
     public Iterable<LeafPileBlock> getOwners() {
         return CommonPlatform.getLeafPiles();
     }
 
+    //TODO: add particles here too
     @Override
     public void tryGrowing(BlockPos pos, BlockState state, ServerLevel level, Holder<Biome> biome) {
 
@@ -44,21 +45,23 @@ public class LeavesGrowth implements IBlockGrowth {
         //Drastically reduced this chance to help lag
         //checking if it has this properties because mcreator mods...
         if ((!state.hasProperty(LeavesBlock.PERSISTENT) || !state.getValue(LeavesBlock.PERSISTENT))
-                && random.nextFloat() < ServerConfigs.FALLING_LEAVES.get()) {
+                && random.nextFloat() < CommonConfigs.LEAF_PILES_REACH.get()) {
 
             var leafPile = LeafPilesRegistry.getFallenLeafPile(state).orElse(null);
             if (leafPile != null && level.getBlockState(pos.below()).isAir()) {
 
 
+                //also spawns icicles
+                //TODO: mvoe out of here to data
                 if (random.nextBoolean() && WeatheringHelper.isIciclePos(pos) && level.getBiome(pos).value().coldEnoughToSnow(pos)) {
                     level.setBlock(pos.below(), ModBlocks.ICICLE.get().defaultBlockState()
                             .setValue(PointedDripstoneBlock.TIP_DIRECTION, Direction.DOWN), 2);
                 }
 
-                if (!level.isAreaLoaded(pos, 2)) return;
+                if (!CommonPlatform.isAreaLoaded(level, pos, 2)) return;
                 BlockPos targetPos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos);
-                int maxFallenLeavesReach = ServerConfigs.LEAF_PILE_REACH.get();
-                int maxPileHeight = ServerConfigs.MAX_LEAF_PILE_HEIGHT.get();
+                int maxFallenLeavesReach = CommonConfigs.LEAF_PILES_REACH.get();
+                int maxPileHeight = CommonConfigs.LEAF_PILE_MAX_HEIGHT.get();
                 int dist = pos.getY() - targetPos.getY();
                 //calculating normally if heightmap fails
                 if (dist < 0) {
@@ -129,51 +132,32 @@ public class LeavesGrowth implements IBlockGrowth {
 
     }
 
-
-    //TODO: new, CHECK. ALso merge the others
-
-    @Override
-    public void spawnLeafPile(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        if (!state.getValue(LeavesBlock.PERSISTENT) && state.getValue(LeavesBlock.DISTANCE) == 7) {
-            var leafPile = WeatheringHelper.getFallenLeafPile(state).orElse(null);
-            BlockState baseLeaf = leafPile.defaultBlockState().with(LeafPileBlock.LAYERS, 0);
-            if (world.random.nextFloat() < 0.3f) {
-                world.setBlockAndUpdate(pos, baseLeaf.setValue(LeafPileBlock.LAYERS, Mth.nextBetween(random, 1, 6)), 2);
-            }
-            else {
-                LeavesBlock.dropStacks(state, world, pos);
-                world.removeBlock(pos, false);
-            }
-        }
-    }
-
     @Override
     public Collection<TickSource> getTickSources() {
         return List.of(TickSource.BLOCK_TICK);
     }
 
 
+    //called from mixin
+    public static void decayLeavesPile(BlockState state, ServerLevel level, BlockPos pos) {
+        if (ClientConfigs.LEAF_DECAY_PARTICLES.get()) {
+            var leafParticle = LeafPilesRegistry.getFallenLeafParticle(state).orElse(null);
+            level.sendParticles(leafParticle, (double) pos.getX() + 0.5D,
+                    (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 10,
+                    0.5D, 0.5D, 0.5D, 0.0D);
+        }
+        if (CommonConfigs.LEAF_DECAY_SOUND.get()) {
+            level.playSound(null, pos, SoundEvents.AZALEA_LEAVES_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
+        }
 
-
-    //FABRIC STUFF: TODO: Merge
-   if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayPiles) {
-        if (state.hasProperty(LeavesBlock.PERSISTENT) && !state.getValue(LeavesBlock.PERSISTENT) && state.hasProperty(LeavesBlock.DISTANCE) && state.getValue(LeavesBlock.DISTANCE) == 7 && state.is(ModTags.VANILLA_LEAVES)) {
-            var leafPile = WeatheringHelper.getFallenLeafPile(state).orElse(null);
+        if (CommonConfigs.LEAF_PILES_FROM_DECAY_CHANCE.get() > level.random.nextFloat()) {
+            Block leafPile = LeafPilesRegistry.getFallenLeafPile(state).orElse(null);
             if (leafPile == null) return;
             BlockState baseLeaf = leafPile.defaultBlockState().setValue(LeafPileBlock.LAYERS, 0);
-            var leafParticle = WeatheringHelper.getFallenLeafParticle(state).orElse(null);
-            if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecayParticles) {
-                world.sendParticles(leafParticle, (double) pos.getX() + 0.5D,
-                        (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, 10,
-                        0.5D, 0.5D, 0.5D, 0.0D);
-            }
-            if(ImmersiveWeathering1.getConfig().leavesConfig.leafDecaySound) {
-                world.playSound(null, pos, SoundEvents.AZALEA_LEAVES_BREAK, SoundSource.BLOCKS, 1.0f, 1.0f);
-            }
-            if (world.random.nextFloat() < 0.3f) {
-                world.setBlock(pos, baseLeaf.setValue(LeafPileBlock.LAYERS, Mth.randomBetweenInclusive(random, 1, 6)), 2);
-                ci.cancel();
-            }
+
+            level.setBlock(pos, baseLeaf.setValue(LeafPileBlock.LAYERS, Mth.randomBetweenInclusive(level.random, 1, 6)), 2);
         }
     }
+
+
 }

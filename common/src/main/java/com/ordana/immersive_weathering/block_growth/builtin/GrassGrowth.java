@@ -2,7 +2,8 @@ package com.ordana.immersive_weathering.block_growth.builtin;
 
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
-import com.ordana.immersive_weathering.common.WeatheringHelper;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
@@ -46,9 +47,9 @@ public class GrassGrowth implements IBlockGrowth {
         //fire turns this to dirt
         //gets the block again because we are injecting at tail and it could already be dirt
 
-        //TODO: this can be added and converted to data
+        //TODO: this can be added and converted to data. ALso add this to fire growth instead
         if (level.random.nextFloat() < 0.1f) {
-            if (!level.isAreaLoaded(pos, 1)) return;
+            if (!CommonPlatform.isAreaLoaded(level,pos, 1)) return;
             if (WeatheringHelper.hasEnoughBlocksFacingMe(pos, level, b -> b.is(BlockTags.FIRE), 1)) {
                 level.setBlockAndUpdate(pos, Blocks.DIRT.defaultBlockState());
             }

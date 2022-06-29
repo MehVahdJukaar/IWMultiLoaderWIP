@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.fabric;
 
 import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.registry.blocks.*;
 import com.ordana.immersive_weathering.registry.blocks.charred.*;
 import com.ordana.immersive_weathering.blocks.soil.CrackedMudBlock;

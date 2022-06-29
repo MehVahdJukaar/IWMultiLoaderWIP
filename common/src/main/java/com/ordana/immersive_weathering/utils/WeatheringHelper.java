@@ -4,8 +4,8 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.mojang.datafixers.util.Pair;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
@@ -17,13 +17,21 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -126,14 +134,14 @@ public class WeatheringHelper {
         return false;
     }
 
-    public static boolean isLog(BlockState neighbor) {
-        return neighbor.is(BlockTags.LOGS) && (!neighbor.hasProperty(RotatedPillarBlock.AXIS) ||
-                neighbor.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y) &&
-                !neighbor.getBlock().getRegistryName().getPath().contains("stripped");
+    public static boolean isLog(BlockState state) {
+        return state.is(BlockTags.LOGS) && (!state.hasProperty(RotatedPillarBlock.AXIS) ||
+                state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y) &&
+                !CommonUtils.getID(state.getBlock()).getPath().contains("stripped");
     }
 
     public static boolean isIciclePos(BlockPos pos) {
-        int rarity = ConfigPlatform.icicleRarity();
+        int rarity = CommonConfigs.ICICLE_RARITY.get();
         if (rarity == 1001) return false;
         Random posRandom = new Random(Mth.getSeed(pos));
         return posRandom.nextInt(rarity) == 0;
@@ -144,14 +152,14 @@ public class WeatheringHelper {
         BlockState newState = null;
         if (world.random.nextFloat() < 0.8f) {
             BlockState charred = getCharredState(state);
-            if (charred != null){
+            if (charred != null) {
                 newState = charred.setValue(CharredBlock.SMOLDERING, world.random.nextBoolean());
             }
         } else if (world.random.nextFloat() < 0.5f) {
-           // newState = ModBlocks.ASH_LAYER_BLOCK.get().withPropertiesOf(state), 3);
+            // newState = ModBlocks.ASH_LAYER_BLOCK.get().withPropertiesOf(state), 3);
         }
 
-        if(newState != null) {
+        if (newState != null) {
             world.sendParticles(ModParticles.SOOT.get(),
                     pos.getX() + 0.5D,
                     pos.getY() + 0.5D,
@@ -160,7 +168,7 @@ public class WeatheringHelper {
                     0.5D, 0.5D, 0.5D,
                     0.0D);
 
-                return world.setBlock(pos, newState, 3);
+            return world.setBlock(pos, newState, 3);
         }
         return false;
     }
@@ -189,7 +197,7 @@ public class WeatheringHelper {
     public boolean ashStuff(BlockState state, Level level, BlockPos pos) {
         BlockState downState = level.getBlockState(pos.below());
         if (level.random.nextFloat() > 0.2f) {
-             //level.setBlock(pos, ModBlocks.ASH_LAYER_BLOCK.withPropertiesOf(state), 3);
+            //level.setBlock(pos, ModBlocks.ASH_LAYER_BLOCK.withPropertiesOf(state), 3);
         } else if (downState.is(Blocks.GRASS_BLOCK)) {
             return level.setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 3);
         }
@@ -235,4 +243,35 @@ public class WeatheringHelper {
         }
         return temperature < 0 || isTouchingWater;
     }
+
+    public static void applyFreezing(Entity entity, int freezing) {
+        applyFreezing(entity, freezing, false);
+    }
+
+    public static void applyFreezing(Entity entity, int freezing, boolean inWater) {
+        if (freezing != 0 && (entity instanceof LivingEntity le) &&
+                !(EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, le) > 0) &&
+                !entity.getType().is(ModTags.LIGHT_FREEZE_IMMUNE)) {
+            if (inWater) {
+                if (le.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS)) return;
+            } else {
+                if (le.hasEffect(MobEffects.CONDUIT_POWER)) return;
+            }
+            entity.setTicksFrozen(freezing);
+        }
+    }
+
+    public static void growHangingRoots(ServerLevel world, Random random, BlockPos pos) {
+        Direction dir = Direction.values()[1 + random.nextInt(5)].getOpposite();
+        BlockPos targetPos = pos.relative(dir);
+        BlockState targetState = world.getBlockState(targetPos);
+        if(targetState.isAir())return;
+        BlockState newState = dir == Direction.DOWN ? Blocks.HANGING_ROOTS.defaultBlockState() :
+                ModBlocks.HANGING_ROOTS_WALL.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, dir);
+        if (targetState.is(Blocks.WATER)) {
+            newState = newState.setValue(BlockStateProperties.WATERLOGGED, true);
+        }
+        world.setBlockAndUpdate(targetPos, newState);
+    }
+
 }

@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering.block_growth.builtin;
 
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
-import com.ordana.immersive_weathering.common.ModBlocks;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;

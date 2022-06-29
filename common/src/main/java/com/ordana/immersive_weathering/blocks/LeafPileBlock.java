@@ -1,8 +1,6 @@
 package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
-import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.client.Minecraft;
@@ -26,12 +24,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -51,11 +46,11 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
     public static final IntegerProperty LAYERS = ModBlockProperties.LEAF_LAYERS;
 
 
-    private static final VoxelShape[] SHAPE_BY_LAYER = new VoxelShape[8 + 1];
+    private static final VoxelShape[] SHAPE_BY_LAYER_L = new VoxelShape[8 + 1];
 
     static {
-        Arrays.setAll(SHAPE_BY_LAYER, l -> Block.box(0.0D, 0.0D, 0.0D, 16.0D, l * 2, 16.0D));
-        SHAPE_BY_LAYER[0] = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1f, 16.0D);
+        Arrays.setAll(SHAPE_BY_LAYER_L, l -> Block.box(0.0D, 0.0D, 0.0D, 16.0D, l * 2, 16.0D));
+        SHAPE_BY_LAYER_L[0] = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1f, 16.0D);
     }
 
     private static final float[] COLLISIONS = new float[]{1, 0.999f, 0.998f, 0.997f, 0.996f, 0.994f, 0.993f, 0.992f};
@@ -75,8 +70,6 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
         this.isLeafy = isLeafy;
         RegistryPlatform.registerBlockFlammability(this, FIRE_SPREAD, FLAMMABILITY);
     }
-
-
 
 
     @PlatformOnly(PlatformOnly.FORGE)
@@ -103,7 +96,6 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
     public int getLightBlock(BlockState state, BlockGetter world, BlockPos pos) {
         return 1;
     }
-
 
 
     @Override
@@ -137,7 +129,7 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
             boolean bl = entity.xOld != entity.getX() || entity.zOld != entity.getZ();
             if (bl && random.nextBoolean()) {
                 //double yOff = (layers < 5) ? 0.5 : 1;
-                double y = pos.getY() + LAYERS_TO_SHAPE[layers].max(Direction.Axis.Y) + 0.0625;
+                double y = pos.getY() + SHAPE_BY_LAYER_L[layers].max(Direction.Axis.Y) + 0.0625;
                 int color = Minecraft.getInstance().getBlockColors().getColor(state, level, pos, 0);
                 for (var p : particles) {
                     level.addParticle(p.get(),

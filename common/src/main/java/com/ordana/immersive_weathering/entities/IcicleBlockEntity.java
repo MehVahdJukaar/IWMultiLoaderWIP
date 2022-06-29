@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.entities;
 
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModEntities;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMaps;
@@ -49,7 +49,7 @@ public class IcicleBlockEntity extends BlockEntity implements GameEventListener 
     public IcicleBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.ICICLE_TILE.get(), pos, state);
         this.listenerSource = new BlockPositionSource(this.worldPosition);
-        this.radius = ConfigPlatform.fallingIcicles() ? 15 : 0;
+        this.radius = CommonConfigs.FALLING_ICICLES.get() ? 15 : 0;
     }
 
     @Override

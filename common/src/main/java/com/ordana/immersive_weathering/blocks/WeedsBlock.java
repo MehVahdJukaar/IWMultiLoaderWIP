@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import com.ordana.immersive_weathering.reg.ModTags;
 import dev.architectury.injectables.annotations.PlatformOnly;
@@ -73,7 +73,7 @@ public class WeedsBlock extends CropBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (level.random.nextFloat() < 0.1 && entity instanceof Player player) { //no more dead villagers
             if (!level.isClientSide && state.getValue(AGE) > 0 && (entity.xOld != entity.getX() || entity.zOld != entity.getZ())) {
-                if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty() || !ConfigPlatform.leggingsPreventThornDamage()) {
+                if (player.getItemBySlot(EquipmentSlot.FEET).isEmpty() || !CommonConfigs.LEGGINGS_PREVENTS_THORN_DAMAGE.get()) {
                     double d0 = Math.abs(entity.getX() - entity.xOld);
                     double d1 = Math.abs(entity.getZ() - entity.zOld);
                     if (d0 >= (double) 0.003F || d1 >= (double) 0.003F) {

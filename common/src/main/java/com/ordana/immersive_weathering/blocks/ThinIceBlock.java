@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.blocks;
 
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -105,7 +105,7 @@ public class ThinIceBlock extends IceBlock implements LiquidBlockContainer {
             this.melt(state, world, pos);
         }
 
-        if (ConfigPlatform.thinIceMelting()) {
+        if (CommonConfigs.THIN_ICE_MELTING.get()) {
             if (world.dimensionType().ultraWarm() || (!world.isRaining() && world.isDay()) || !isDimEnoughToForm(state, world, pos)) {
                 world.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
             }

@@ -560,7 +560,7 @@ public class ModBlocks {
             new FluvisolBlock(Properties.of(Material.DIRT, MaterialColor.DEEPSLATE)
                     .strength(0.5F).sound(SoundType.WART_BLOCK).randomTicks()));
     public static final Supplier<Block> SILT = regWithItem("silt", () ->
-            new SiltBlock(Properties.of(Material.DIRT, MaterialColor.DEEPSLATE)
+            new FluvisolBlock(Properties.of(Material.DIRT, MaterialColor.DEEPSLATE)
                     .strength(0.5F).sound(SoundType.WART_BLOCK).randomTicks()));
 
     public static final Supplier<Block> VERTISOL = regWithItem("vertisol", () ->
@@ -576,6 +576,11 @@ public class ModBlocks {
     public static final Supplier<Block> PERMAFROST = regWithItem("permafrost", () ->
             new PermafrostBlock(Properties.of(Material.ICE_SOLID, MaterialColor.CLAY)
                     .strength(3F).friction(1F).sound(SoundType.TUFF).randomTicks()));
+
+    public static final Supplier<Block> ROOTED_GRASS_BLOCK = regWithItem("roored_grass", () ->
+            new RootedGrassBlock(Properties.of(Material.GRASS).randomTicks().strength(0.5F)
+                    .sound(SoundType.ROOTED_DIRT)));
+
 
     //vertical slab
 
@@ -672,17 +677,6 @@ public class ModBlocks {
 
     public static final Supplier<Block> CHARRED_FENCE_GATE = regWithItem("charred_fence_gate", () ->
             new CharredFenceGateBlock(Properties.copy(CHARRED_LOG.get())));
-
-    //ash
-
-    public static final Supplier<Block> ASH_BLOCK = regWithItem("soot_block", () ->
-            new AshBlock(Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(0.5f)
-                    .sound(SoundType.SNOW).lightLevel(litLightLevel(6)).randomTicks());
-
-    public static final Supplier<Block> SOOT = regWithItem("soot", () ->
-            new SootLayerBlock(Properties.of(Material.REPLACEABLE_WATER_PLANT, MaterialColor.COLOR_BLACK)
-                    .noCollission().requiresCorrectToolForDrops().instabreak().sound(SoundType.SNOW)
-                    .lightLevel(litLightLevel(5)).randomTicks()));
 
 
 }

@@ -19,6 +19,8 @@ public class ImmersiveWeathering {
     public static void commonInit(){
 
         ModCompostable.setup();
+
+        //rule tests
         FluidMatchTest.setup();
         LogMatchTest.setup();
         BlockSetMatchTest.setup();
@@ -28,4 +30,5 @@ public class ImmersiveWeathering {
 
     //hanging roots item override (mixin for fabric override for forge)
     //RE add lightning strike growths
+    //TODO: disabled conditional growth. add command system
 }

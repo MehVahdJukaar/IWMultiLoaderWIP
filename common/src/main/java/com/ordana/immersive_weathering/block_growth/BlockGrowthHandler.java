@@ -8,7 +8,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.block_growth.builtin.HardcodedGrowths;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
@@ -53,7 +53,7 @@ public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
     }
 
     public static void tickBlock(TickSource source, BlockState state, ServerLevel level, BlockPos pos) {
-        if (!ConfigPlatform.blockGrowths()) return;
+        if (!CommonConfigs.BLOCK_GROWTHS.get()) return;
 
         //TODO: move this line to datapack self predicate
         if (state.getBlock() instanceof IConditionalGrowingBlock cb && !cb.canGrow(state)) return;

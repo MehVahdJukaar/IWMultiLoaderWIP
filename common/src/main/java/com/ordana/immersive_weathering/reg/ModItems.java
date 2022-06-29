@@ -80,7 +80,8 @@ public class ModItems {
                     .rarity(Rarity.EPIC).food(ModFoods.ENCHANTED_GOLDEN_MOSS_CLUMP)));
 
     //I hate pond water ;_;
-    public static final Supplier<Item> POND_WATER = regItem("pond_water",()-> new PondWaterItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(ModFoods.POND_WATER).stacksTo(16));
+    public static final Supplier<Item> POND_WATER = regItem("pond_water", () ->
+            new PondWaterItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(ModFoods.POND_WATER).stacksTo(16)));
 
 
     //bark

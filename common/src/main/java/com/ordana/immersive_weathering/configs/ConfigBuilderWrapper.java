@@ -31,8 +31,6 @@ public abstract class ConfigBuilderWrapper {
         return this;
     }
 
-    ;
-
     public abstract ConfigBuilderWrapper pop();
 
     public abstract Supplier<Boolean> define(String name, boolean defaultValue);

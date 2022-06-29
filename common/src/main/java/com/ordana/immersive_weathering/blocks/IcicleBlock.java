@@ -1,11 +1,13 @@
 package com.ordana.immersive_weathering.blocks;
 
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.entities.FallingIcicleEntity;
 import com.ordana.immersive_weathering.entities.IcicleBlockEntity;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModDamageSource;
 import com.ordana.immersive_weathering.reg.ModTags;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -108,17 +110,15 @@ public class IcicleBlock extends PointedDripstoneBlock implements EntityBlock {
         if (state.getValue(TIP_DIRECTION) == Direction.UP && state.getValue(THICKNESS) == DripstoneThickness.TIP) {
             entity.causeFallDamage(fallDistance + 2.0F, 3.5F, ModDamageSource.ICICLE);
 
-      if(ConfigPlatform.icicleFreezing() && (entity instanceof LivingEntity le) &&
-              !(EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, le) > 0) &&
-              !le.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS) &&
-              !entity.getType().is(ModTags.LIGHT_FREEZE_IMMUNE)){
-          entity.setTicksFrozen(ConfigPlatform.icicleFreezingSeverity());
-      }
+            int freezing = CommonConfigs.FREEZING_ICICLE_SEVERITY.get();
+            WeatheringHelper.applyFreezing(entity, freezing);
 
         } else {
             entity.causeFallDamage(fallDistance, 1.0F, DamageSource.FALL);
         }
     }
+
+
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {

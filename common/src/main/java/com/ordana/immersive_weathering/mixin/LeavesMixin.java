@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.mixin;
 
+import com.ordana.immersive_weathering.block_growth.builtin.LeavesGrowth;
 import com.ordana.immersive_weathering.client.ParticleHelper;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
@@ -25,6 +26,14 @@ public abstract class LeavesMixin extends Block implements BonemealableBlock {
     public LeavesMixin(Properties settings) {
         super(settings);
     }
+
+    @Inject(method = "randomTick", at = @At(value = "INVOKE",
+            shift = At.Shift.AFTER,
+            target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"))
+    public void randomDisplayTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random, CallbackInfo ci) {
+        LeavesGrowth.decayLeavesPile(blockState, serverLevel, blockPos);
+    }
+
 
     @Inject(method = "animateTick", at = @At("HEAD"))
     public void randomDisplayTick(BlockState state, Level world, BlockPos pos, Random random, CallbackInfo ci) {

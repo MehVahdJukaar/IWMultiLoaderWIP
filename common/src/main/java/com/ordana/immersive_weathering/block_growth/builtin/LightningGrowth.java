@@ -2,10 +2,10 @@ package com.ordana.immersive_weathering.block_growth.builtin;
 
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 import com.ordana.immersive_weathering.block_growth.TickSource;
-import com.ordana.immersive_weathering.common.ModBlocks;
+import com.ordana.immersive_weathering.blocks.crackable.Crackable;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.common.blocks.crackable.Crackable;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -37,7 +37,7 @@ public class LightningGrowth implements IBlockGrowth {
     }
 
     public void onLightningHit(BlockPos centerPos, Level level, int rec) {
-        if (rec == 0 && !ServerConfigs.VITRIFIED_LIGHTNING.get()) return;
+        if (rec == 0 && !CommonConfigs.VITRIFIED_LIGHTNING.get()) return;
 
 
         this.convert(level, centerPos);

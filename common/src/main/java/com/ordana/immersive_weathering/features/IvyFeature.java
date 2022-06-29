@@ -2,8 +2,8 @@ package com.ordana.immersive_weathering.features;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import com.ordana.immersive_weathering.registry.blocks.IvyBlock;
-import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
+import com.ordana.immersive_weathering.blocks.IvyBlock;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
@@ -45,7 +45,7 @@ public class IvyFeature extends Feature<GlowLichenConfiguration> {
                     for (int i = 0; i < glowLichenFeatureConfig.searchRange; ++i) {
                         mutable.setWithOffset(blockPos, direction);
                         BlockState blockState = structureWorldAccess.getBlockState(mutable);
-                        if (isAirOrWater(blockState) && !blockState.is(ModBlocks.IVY)) {
+                        if (isAirOrWater(blockState) && !blockState.is(ModBlocks.IVY.get())) {
                             break;
                         }
 

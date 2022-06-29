@@ -31,7 +31,6 @@ public class MossableStairsBlock extends MossyStairsBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
-        super.onNeighborChange(state, level, pos, neighbor);
         this.updateWeatheredStateOnNeighborChanged(state, level, pos);
     }
 

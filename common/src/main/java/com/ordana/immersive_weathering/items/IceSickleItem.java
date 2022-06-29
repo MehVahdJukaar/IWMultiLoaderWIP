@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.items;
 
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModFoods;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
@@ -25,6 +25,10 @@ public class IceSickleItem extends SwordItem {
     @Nullable
     @Override
     public FoodProperties getFoodProperties() {
-        return ConfigPlatform.icicleFood() ? ModFoods.ICICLE : null;
+        return CommonConfigs.ICICLE_FOOD.get() ? ModFoods.ICICLE : null;
+    }
+    @Override
+    public boolean isEdible() {
+        return CommonConfigs.ICICLE_FOOD.get();
     }
 }

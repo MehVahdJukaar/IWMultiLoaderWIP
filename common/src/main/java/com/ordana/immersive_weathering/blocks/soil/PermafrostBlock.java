@@ -1,31 +1,22 @@
 package com.ordana.immersive_weathering.blocks.soil;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering;
-import java.util.Random;
-
-import com.ordana.immersive_weathering.blocks.IcicleBlock;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModBlocks;
-import com.ordana.immersive_weathering.reg.ModTags;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+
+import java.util.Random;
 
 public class PermafrostBlock extends Block {
 
@@ -51,13 +42,8 @@ public class PermafrostBlock extends Block {
 
     @Override
     public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        if (ConfigPlatform.permafrostFreezing() && (entity instanceof LivingEntity le) &&
-                !(EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, le) > 0) &&
-                !le.getItemBySlot(EquipmentSlot.FEET).is(Items.LEATHER_BOOTS) &&
-                !entity.getType().is(ModTags.LIGHT_FREEZE_IMMUNE)) {
-
-            entity.setTicksFrozen(ConfigPlatform.permafrostFreezingSeverity());
-        }
+        int freezing = CommonConfigs.FREEZING_PERMAFROST_SEVERITY.get();
+        WeatheringHelper.applyFreezing(entity, freezing);
         super.stepOn(world, pos, state, entity);
     }
 

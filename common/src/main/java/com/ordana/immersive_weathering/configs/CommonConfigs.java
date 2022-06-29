@@ -66,6 +66,15 @@ public class CommonConfigs {
     public static Supplier<Boolean> LEGGINGS_PREVENTS_THORN_DAMAGE;
     public static Supplier<String> GENERIC_BARK;
 
+    public static Supplier<Double> LEAF_PILES_FROM_DECAY_CHANCE;
+    public static Supplier<Boolean> LEAF_DECAY_SOUND;
+    public static Supplier<Double> LEAF_PILES_CHANCE;
+    public static Supplier<Integer> LEAF_PILE_MAX_HEIGHT;
+    public static Supplier<Integer> LEAF_PILES_REACH;
+
+    public static Supplier<Boolean> THIN_ICE_MELTING;
+
+    public static Supplier<Boolean> VITRIFIED_LIGHTNING;
 
     public static void init() {
         ConfigBuilderWrapper builder = CommonPlatform.getConfigBuilder("server");
@@ -148,7 +157,23 @@ public class CommonConfigs {
         GENERIC_BARK = builder.define("generic_bark", "");
         FEATHER_FALLING_FARMERS = builder.define("feather_falling_farmers", true);
         LEGGINGS_PREVENTS_THORN_DAMAGE = builder.define("leggings_prevents_thorn_damage", true);
+        builder.pop();
 
+        builder.push("leaf_piles");
+        LEAF_PILES_FROM_DECAY_CHANCE = builder.define("spawn_entity_from_decay",0.3,0, 1);
+        LEAF_DECAY_SOUND = builder.define("decay_sound",true);
+
+        LEAF_PILES_CHANCE = builder.define("leaf_piles_spawn_chance", 0.005, 0, 1);
+        LEAF_PILES_REACH = builder.define("reach", 12, 1, 256);
+        LEAF_PILE_MAX_HEIGHT = builder.define("max_pile_height",3, 1, 8);
+        builder.pop();
+
+        builder.push("thin_ice");
+        THIN_ICE_MELTING = builder.define("natural_melting", true);
+        builder.pop();
+
+        builder.push("lightning_growths"); //TODO:move to data
+        VITRIFIED_LIGHTNING = builder.define("vitrified_lightning",true);
         builder.pop();
 
         //fabric specific
@@ -178,15 +203,6 @@ public class CommonConfigs {
         throw new AssertionError();
     }
 
-    public static int leafPileMaxHeight() {
-        throw new AssertionError();
-    }
-
-
-    public static int leafPileReach() {
-        throw new AssertionError();
-    }
-
     public enum LeafPileMode {
         LEAF_LAYER, SIMPLE, OFF
     }
@@ -208,10 +224,6 @@ public class CommonConfigs {
     //frost
 
 
-    public static boolean thinIceMelting() {
-        throw new AssertionError();
-    }
-
     public static boolean naturalIceMelt() { //?
         throw new AssertionError();
     }
@@ -227,11 +239,8 @@ public class CommonConfigs {
     public boolean lightningCreateLava = true; //bg
     public boolean lightningCreateVitrifiedSand = true;
 
-    public static boolean leafDecaySound() {
-        throw new AssertionError();
-    }
 
-    public static ForgeConfigSpec.BooleanValue VITRIFIED_LAVA;
+    public static boolean VITRIFIED_LAVA;
 
     //here are forge old config values. only here for their old description
 

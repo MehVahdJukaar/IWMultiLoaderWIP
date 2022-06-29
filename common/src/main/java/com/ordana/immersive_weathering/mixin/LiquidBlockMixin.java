@@ -1,20 +1,16 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.google.common.collect.ImmutableList;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModTags;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -149,11 +145,8 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
         if (world.getBiome(pos).is(ModTags.ICY) && this.getFluid().is(FluidTags.WATER)) {
-            if (!(entity instanceof LivingEntity) || EnchantmentHelper.getEnchantmentLevel(Enchantments.FROST_WALKER, (LivingEntity) entity) > 0 || ((LivingEntity) entity).hasEffect(MobEffects.CONDUIT_POWER) || entity.getType().is(EntityTypeTags.FREEZE_IMMUNE_ENTITY_TYPES)) {
-                return;
-            } else if (ConfigPlatform.freezingWater() && entity.isInWater()) {
-                entity.setTicksFrozen(ConfigPlatform.freezingWaterSeverity());
-            }
+            var freezing = CommonConfigs.FREEZING_WATER_SEVERITY.get();
+            WeatheringHelper.applyFreezing(entity, freezing, true);
         }
     }
 

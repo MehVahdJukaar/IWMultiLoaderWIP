@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.blocks.mossable;
 
-import com.ordana.immersive_weathering.common.blocks.crackable.CrackSpreader;
+import com.ordana.immersive_weathering.blocks.crackable.CrackSpreader;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockState;
 

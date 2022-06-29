@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.mixin;
 
 import com.ordana.immersive_weathering.reg.ModBlocks;
+import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -35,16 +36,8 @@ public abstract class RootedDirtBlockMixin extends Block implements Bonemealable
 
     @Override
     public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-        Direction dir = Direction.values()[1 + random.nextInt(5)].getOpposite();
-        BlockPos targetPos = pos.relative(dir);
-        BlockState targetState = world.getBlockState(targetPos);
-        BlockState newState = dir == Direction.DOWN ? Blocks.HANGING_ROOTS.defaultBlockState() :
-                ModBlocks.HANGING_ROOTS_WALL.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, dir);
-        if (targetState.is(Blocks.WATER)) {
-            newState = newState.setValue(BlockStateProperties.WATERLOGGED, true);
-        } else if (!targetState.isAir()) {
-            return;
-        }
-        world.setBlockAndUpdate(targetPos, newState);
+        WeatheringHelper.growHangingRoots(world, random, pos);
     }
+
+
 }

@@ -20,6 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+/*
 public class AshLayerBlock extends LayerBlock{
     public AshLayerBlock(Properties properties) {
         super(properties.isViewBlocking((s, l, p) -> s.getValue(BlockStateProperties.LAYERS) == 8));
@@ -81,4 +82,4 @@ public class AshLayerBlock extends LayerBlock{
             }
         }
     }
-}
+}*/

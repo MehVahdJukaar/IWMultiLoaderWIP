@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering.blocks.soil;
 
 import com.ordana.immersive_weathering.block_growth.IConditionalGrowingBlock;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.utils.WeatheringHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.lighting.LayerLightEngine;
 import java.util.List;
 import java.util.Random;
 
+
 public class RootedGrassBlock extends ModGrassBlock implements BonemealableBlock, IConditionalGrowingBlock {
     public RootedGrassBlock(Properties settings) {
         super(settings);
@@ -45,23 +47,12 @@ public class RootedGrassBlock extends ModGrassBlock implements BonemealableBlock
     //TODO: check this whole class
     @Override
     public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
-        Direction rootDir = Direction.values()[1 + random.nextInt(5)].getOpposite();
-        BlockPos rootPos = pos.relative(rootDir);
-        BlockState targetState = world.getBlockState(rootPos);
-        BlockState toPlace = Blocks.HANGING_ROOTS.defaultBlockState();
-        if(targetState.is(Blocks.WATER)) {
-            toPlace = toPlace.setValue(ModHangingRootsBlock.WATERLOGGED, true);
-        }
-        else if(!targetState.isAir())return;
-        if (rootDir == Direction.DOWN) {
-            world.setBlock(rootPos, toPlace.setValue(ModHangingRootsBlock.HANGING, true), 3);
-        }
-        else {
-            world.setBlock(rootPos, toPlace.setValue(ModHangingRootsBlock.FACING, (rootDir)).setValue(ModHangingRootsBlock.HANGING, Boolean.FALSE), 3);
-        }
+
+        WeatheringHelper.growHangingRoots(world, random, pos);
+
         BlockPos blockPos = pos.above();
         BlockState blockState = Blocks.GRASS.defaultBlockState();
-        world.setBlockAndUpdate(pos, ModBlocks.ROOTED_GRASS_BLOCK.defaultBlockState().setValue(FERTILE, true));
+        world.setBlockAndUpdate(pos, this.defaultBlockState().setValue(FERTILE, true));
         label46:
         for(int i = 0; i < 128; ++i) {
             BlockPos blockPos2 = blockPos;
@@ -134,7 +125,7 @@ public class RootedGrassBlock extends ModGrassBlock implements BonemealableBlock
                         world.setBlockAndUpdate(blockPos, Blocks.GRASS_BLOCK.defaultBlockState().setValue(SNOWY, world.getBlockState(blockPos.above()).is(Blocks.SNOW)));
                     }
                     else if ((world.getBlockState(blockPos).is(Blocks.ROOTED_DIRT)) && canPropagate(blockState, world, blockPos)) {
-                        world.setBlockAndUpdate(blockPos, ModBlocks.ROOTED_GRASS_BLOCK.defaultBlockState().setValue(SNOWY, world.getBlockState(blockPos.above()).is(Blocks.SNOW)));
+                        world.setBlockAndUpdate(blockPos, this.defaultBlockState().setValue(SNOWY, world.getBlockState(blockPos.above()).is(Blocks.SNOW)));
                     }
                 }
             }
