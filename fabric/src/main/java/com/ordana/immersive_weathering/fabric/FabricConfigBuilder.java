@@ -30,17 +30,20 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
 
     @Override
     public void buildAndRegister() {
+        assert currentCategory == null;
         ConfigSpec.COMMON_INSTANCE = new ConfigSpec(this.getName(), categoryBuilder.build());
     }
 
     @Override
     public FabricConfigBuilder push(String translation) {
+        assert currentCategory == null;
         currentCategory = Pair.of(translation, new ArrayList<>());
         return this;
     }
 
     @Override
     public FabricConfigBuilder pop() {
+        assert currentCategory != null;
         categoryBuilder.put(currentCategory.getFirst(), currentCategory.getSecond());
         this.currentCategory = null;
         return this;

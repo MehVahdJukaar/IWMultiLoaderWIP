@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.blocks.mossable;
 
 import com.ordana.immersive_weathering.blocks.PatchSpreader;
-import com.ordana.immersive_weathering.platform.ConfigPlatform;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,18 +25,18 @@ public class MossSpreader implements PatchSpreader<Mossable.MossLevel> {
     //basically how big those patches will be
     @Override
     public double getInterestForDirection(Level level, BlockPos pos) {
-        return ConfigPlatform.mossInterestForFace();
+        return CommonConfigs.MOSS_INTERESTS_FOR_FACE.get();
     }
 
     @Override
     public double getDisjointGrowthChance(Level level, BlockPos pos) {
-        return ConfigPlatform.mossPatchiness();
+        return CommonConfigs.MOSS_PATCHINESS.get();
     }
 
     //chance to have blocks that wont weather but still be able to make others weather if getDisjointGrowthChance is high enough
     @Override
     public double getUnWeatherableChance(Level level, BlockPos pos) {
-        return ConfigPlatform.mossImmuneChance();
+        return CommonConfigs.MOSS_IMMUNE_CHANCE.get();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class MossSpreader implements PatchSpreader<Mossable.MossLevel> {
 
     @Override
     public boolean needsAirToSpread(Level level, BlockPos pos) {
-        return ConfigPlatform.mossNeedsAir();
+        return CommonConfigs.MOSS_NEEDS_AIR.get();
     }
 
     //utility to grow stuff
