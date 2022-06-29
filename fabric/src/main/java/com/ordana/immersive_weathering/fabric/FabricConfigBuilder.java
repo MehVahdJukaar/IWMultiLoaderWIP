@@ -36,13 +36,13 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     }
 
     @Override
-    public Supplier<Boolean> define(String name, String tooltip, boolean defaultValue) {
+    public Supplier<Boolean> define(String name, boolean defaultValue) {
         assert currentCategory != null;
         Wrapper<Boolean> value = new Wrapper<>();
 
-        currentCategory.addEntry(entryBuilder.startBooleanToggle(new TranslatableComponent(name), defaultValue)
+        currentCategory.addEntry(entryBuilder.startBooleanToggle(description(name), defaultValue)
                 .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
-                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setTooltip(tooltip(name)) // Optional: Shown when the user hover over this option
                 .setSaveConsumer(value::set) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
@@ -50,13 +50,13 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     }
 
     @Override
-    public Supplier<Double> define(String name, String tooltip, double defaultValue, double min, double max) {
+    public Supplier<Double> define(String name, double defaultValue, double min, double max) {
         assert currentCategory != null;
         Wrapper<Double> value = new Wrapper<>();
 
-        currentCategory.addEntry(entryBuilder.startDoubleField(new TranslatableComponent(name), defaultValue)
+        currentCategory.addEntry(entryBuilder.startDoubleField(description(name), defaultValue)
                 .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
-                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setTooltip(tooltip(name)) // Optional: Shown when the user hover over this option
                 .setSaveConsumer(value::set) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
@@ -64,13 +64,13 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     }
 
     @Override
-    public Supplier<Integer> define(String name, String tooltip, int defaultValue, int min, int max) {
+    public Supplier<Integer> define(String name, int defaultValue, int min, int max) {
         assert currentCategory != null;
         Wrapper<Integer> value = new Wrapper<>();
 
-        currentCategory.addEntry(entryBuilder.startIntField(new TranslatableComponent(name), defaultValue)
+        currentCategory.addEntry(entryBuilder.startIntField(description(name), defaultValue)
                 .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
-                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setTooltip(tooltip(name)) // Optional: Shown when the user hover over this option
                 .setSaveConsumer(value::set) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
@@ -78,13 +78,13 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     }
 
     @Override
-    public Supplier<String> define(String name, String tooltip, String defaultValue) {
+    public Supplier<String> define(String name, String defaultValue) {
         assert currentCategory != null;
         Wrapper<String> value = new Wrapper<>();
 
-        currentCategory.addEntry(entryBuilder.startStrField(new TranslatableComponent(name), defaultValue)
+        currentCategory.addEntry(entryBuilder.startStrField(description(name), defaultValue)
                 .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
-                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setTooltip(tooltip(name)) // Optional: Shown when the user hover over this option
                 .setSaveConsumer(value::set) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
@@ -96,9 +96,9 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
         assert currentCategory != null;
         Wrapper<V> value = new Wrapper<>();
 
-        currentCategory.addEntry(entryBuilder.startEnumSelector(new TranslatableComponent(name), defaultValue.getDeclaringClass(), defaultValue)
+        currentCategory.addEntry(entryBuilder.startEnumSelector(description(name), defaultValue.getDeclaringClass(), defaultValue)
                 .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
-                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setTooltip(tooltip(name)) // Optional: Shown when the user hover over this option
                 .setSaveConsumer(value::set) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 

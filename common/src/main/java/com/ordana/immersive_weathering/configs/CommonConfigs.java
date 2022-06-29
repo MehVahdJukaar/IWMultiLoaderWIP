@@ -1,7 +1,6 @@
 package com.ordana.immersive_weathering.configs;
 
 import com.ordana.immersive_weathering.platform.CommonPlatform;
-import dev.architectury.injectables.annotations.ExpectPlatform;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -33,57 +32,54 @@ public class CommonConfigs {
     private static Supplier<Boolean> ASH_SPAWNS;
     private static Supplier<Boolean> SOOT_SPAWN;
     private static Supplier<Boolean> FLAMMABLE_COBWEBS;
-    public static void init(){
+
+    public static void init() {
         ConfigBuilderWrapper builder = CommonPlatform.getConfigBuilder("server");
 
         builder.push("general");
-        BLOCK_GROWTHS = builder.define("block_growths", "immersive_weathering.config.block_growths", true);
+        BLOCK_GROWTHS = builder.define("block_growths", true);
         builder.pop();
 
         builder.push("mossy_blocks");
-        MOSS_INTERESTS_FOR_FACE = builder.define("interest_for_face", "",0.3, 0, 1d);
-        MOSS_PATCHINESS = builder.define("patchiness", "",0.5, 0, 1);
-        MOSS_IMMUNE_CHANCE = builder.define("immune_chance","",0.4, 0, 1);
-        MOSS_NEEDS_AIR = builder.define("needs_air","",true);
+        MOSS_INTERESTS_FOR_FACE = builder.define("interest_for_face", 0.3, 0, 1d);
+        MOSS_PATCHINESS = builder.define("patchiness", 0.5, 0, 1);
+        MOSS_IMMUNE_CHANCE = builder.define("immune_chance", 0.4, 0, 1);
+        MOSS_NEEDS_AIR = builder.define("needs_air", true);
         builder.pop();
 
         builder.push("cracked_blocks");
-        MOSS_INTERESTS_FOR_FACE = builder.define("interest_for_face", "",0.6, 0, 1d);
-        MOSS_PATCHINESS = builder.define("patchiness", "",0.4, 0, 1);
-        MOSS_IMMUNE_CHANCE = builder.define("immune_chance","",0.4, 0, 1);
-        MOSS_NEEDS_AIR = builder.define("needs_air","",false);
+        MOSS_INTERESTS_FOR_FACE = builder.define("interest_for_face", 0.6, 0, 1d);
+        MOSS_PATCHINESS = builder.define("patchiness", 0.4, 0, 1);
+        MOSS_IMMUNE_CHANCE = builder.define("immune_chance", 0.4, 0, 1);
+        MOSS_NEEDS_AIR = builder.define("needs_air", false);
         builder.pop();
 
         builder.push("icicle");
-        FALLING_ICICLES = builder.define("react_to_vibrations","", true);
-        ICICLE_RARITY = builder.define("spawn_rarity","", true);
+        FALLING_ICICLES = builder.define("react_to_vibrations", true);
+        ICICLE_RARITY = builder.define("spawn_rarity", true);
         builder.pop();
 
         builder.push("freezing");
         //all these are disabled when at 0 of course
-        FREEZING_WATER_SEVERITY = builder.define("water_severity", "", 300, 0, 1000);
-        FREEZING_ICICLE_SEVERITY = builder.define("icicle", "", 300, 0, 1000);
-        FREEZING_PERMAFROST_SEVERITY = builder.define("permafrost", "", 300, 0, 1000);
+        FREEZING_WATER_SEVERITY = builder.define("water_severity", 300, 0, 1000);
+        FREEZING_ICICLE_SEVERITY = builder.define("icicle", 300, 0, 1000);
+        FREEZING_PERMAFROST_SEVERITY = builder.define("permafrost", 300, 0, 1000);
         builder.pop();
 
         builder.push("charring");
-        FIRE_CHARS_WOOD = builder.define("fire_chars_wood", "", true);
-        ASH_SPAWNS = builder.define("ash_spawn", "", true);
-        SOOT_SPAWN = builder.define("soot_spawn", "", true);
-        FLAMMABLE_COBWEBS = builder.define("flammable_cobweb", "", true);
+        FIRE_CHARS_WOOD = builder.define("fire_chars_wood", true);
+        ASH_SPAWNS = builder.define("ash_spawn", true);
+        SOOT_SPAWN = builder.define("soot_spawn", true);
+        FLAMMABLE_COBWEBS = builder.define("flammable_cobweb", true);
 
         builder.pop();
 
         //fabric specific
-        CommonPlatform.getPlatform().ifFabric(()->{
-
+        CommonPlatform.getPlatform().ifFabric(() -> {
 
 
         });
     }
-
-
-
 
 
     //stuff belows represents the configs that need to be added
@@ -92,10 +88,7 @@ public class CommonConfigs {
     //moss
 
 
-
     // todo: LEAF_PILES_BLACKLIST tag
-
-
 
 
     //leaf piles
@@ -104,12 +97,12 @@ public class CommonConfigs {
     public static LeafPileMode fallenLeafPiles() {
         throw new AssertionError();
     }
-    
+
     public static int leafPileMaxHeight() {
         throw new AssertionError();
     }
 
-    
+
     public static int leafPileReach() {
         throw new AssertionError();
     }
@@ -120,16 +113,17 @@ public class CommonConfigs {
 
 
     @Nullable
-    public static boolean leggingsPreventThornDamage() {;
+    public static boolean leggingsPreventThornDamage() {
+        ;
         throw new AssertionError();
     }
 
-    
+
     public static boolean composterDropsDirt() {
         throw new AssertionError();
     }
 
-    
+
     public static boolean featherFallingFarmers() {
         throw new AssertionError();
     }
@@ -137,21 +131,17 @@ public class CommonConfigs {
     //TODO: fix campfire soot onto non burnable
     //fire stuff
 
-    
 
-    
     public static boolean vitrifiedSand() {
         throw new AssertionError();
     }
 
-    
+
     public static boolean fulgurite() {
         throw new AssertionError();
     }
 
     //frost
-
-    
 
 
     public static boolean thinIceMelting() {
@@ -169,13 +159,14 @@ public class CommonConfigs {
 
     //food
 
-    
+
     public static boolean icicleFood() {
         throw new AssertionError();
     }
+
     public static ForgeConfigSpec.DoubleValue MOSS_CLUMP_CHANCE;
     public static ForgeConfigSpec.BooleanValue ICICLE_FIRE_RESISTANCE;
-    
+
     public static boolean pondWaterEnabled() {
         throw new AssertionError();
     }
@@ -187,9 +178,6 @@ public class CommonConfigs {
     public boolean lightningCreateVitrifiedSand = true;
 
 
-
-
-    
     public static boolean leafDecaySound() {
         throw new AssertionError();
     }
@@ -268,8 +256,6 @@ public class CommonConfigs {
         public boolean spruceLeavesFeature = true;
 
 
-
-
         public static ForgeConfigSpec.BooleanValue CRACK_REQUIRES_SHIFTING;
 
         public static ForgeConfigSpec.BooleanValue VITRIFIED_LAVA;
@@ -321,7 +307,7 @@ public class CommonConfigs {
         BARK_ENABLED = builder.comment("Allows bark to be dropped after scraping off log blocks")
                 .define("enabled", true);
         GENERIC_BARK = builder.comment("If you dont like having a bark item for each wood type, write here a valid item id and it will be used as a generic bark instead. Note that existing bark items will not be hidden in creative inventory")
-                .define("generic_bark_id","");
+                .define("generic_bark_id", "");
         builder.pop();
 
         builder.push("icicles");
@@ -380,8 +366,6 @@ public class CommonConfigs {
 
         SPEC = builder.build();
     }
-    
-    
-    
-    
+
+
 }

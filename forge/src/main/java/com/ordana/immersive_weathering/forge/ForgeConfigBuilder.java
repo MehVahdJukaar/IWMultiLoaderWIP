@@ -3,7 +3,6 @@ package com.ordana.immersive_weathering.forge;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class ForgeConfigBuilder extends ConfigBuilderWrapper {
@@ -13,7 +12,7 @@ public class ForgeConfigBuilder extends ConfigBuilderWrapper {
 
     public ForgeConfigBuilder(String name) {
         super(name);
-       this.builder = new ForgeConfigSpec.Builder();
+        this.builder = new ForgeConfigSpec.Builder();
     }
 
     @Override
@@ -29,32 +28,32 @@ public class ForgeConfigBuilder extends ConfigBuilderWrapper {
     }
 
     @Override
-    public Supplier<Boolean> define(String name, String tooltip, boolean defaultValue) {
-        var value = builder.translation(tooltip).define(name, defaultValue);
+    public Supplier<Boolean> define(String name, boolean defaultValue) {
+        var value = builder.translation(tooltip(name).getKey()).define(name, defaultValue);
         return value::get;
     }
 
     @Override
-    public Supplier<Double> define(String name, String tooltip, double defaultValue, double min, double max) {
-        var value = builder.translation(tooltip).defineInRange(name, defaultValue, min, max);
+    public Supplier<Double> define(String name, double defaultValue, double min, double max) {
+        var value = builder.translation(tooltip(name).getKey()).defineInRange(name, defaultValue, min, max);
         return value::get;
     }
 
     @Override
-    public Supplier<Integer> define(String name, String tooltip, int defaultValue, int min, int max) {
-        var value = builder.translation(tooltip).defineInRange(name, defaultValue, min, max);
+    public Supplier<Integer> define(String name, int defaultValue, int min, int max) {
+        var value = builder.translation(tooltip(name).getKey()).defineInRange(name, defaultValue, min, max);
         return value::get;
     }
 
     @Override
-    public Supplier<String> define(String name, String tooltip, String defaultValue) {
-        ForgeConfigSpec.ConfigValue<String> value = builder.translation(tooltip).define(name, defaultValue);
+    public Supplier<String> define(String name, String defaultValue) {
+        ForgeConfigSpec.ConfigValue<String> value = builder.translation(tooltip(name).getKey()).define(name, defaultValue);
         return value::get;
     }
 
     @Override
-    public <V extends Enum<V>> Supplier<V> define(String name, String tooltip, V defaultValue) {
-        var value = builder.translation(tooltip).defineEnum(name, defaultValue);
+    public <V extends Enum<V>> Supplier<V> define(String name, V defaultValue) {
+        var value = builder.translation(tooltip(name).getKey()).defineEnum(name, defaultValue);
         return value::get;
     }
 }
