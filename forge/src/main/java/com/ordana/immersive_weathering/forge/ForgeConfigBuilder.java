@@ -51,4 +51,10 @@ public class ForgeConfigBuilder extends ConfigBuilderWrapper {
         ForgeConfigSpec.ConfigValue<String> value = builder.translation(tooltip).define(name, defaultValue);
         return value::get;
     }
+
+    @Override
+    public <V extends Enum<V>> Supplier<V> define(String name, String tooltip, V defaultValue) {
+        var value = builder.translation(tooltip).defineEnum(name, defaultValue);
+        return value::get;
+    }
 }

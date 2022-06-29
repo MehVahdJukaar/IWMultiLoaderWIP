@@ -3,6 +3,7 @@ package com.ordana.immersive_weathering.platform.fabric;
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
+import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +21,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class CommonPlatformImpl {
+
+    public CommonPlatform.Platform getPlatform(){
+        return CommonPlatform.Platform.FABRIC;
+    }
 
     public static boolean isModLoaded(String name) {
 

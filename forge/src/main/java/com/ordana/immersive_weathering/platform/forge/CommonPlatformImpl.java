@@ -36,6 +36,10 @@ import java.util.function.Supplier;
 
 public class CommonPlatformImpl {
 
+    public static CommonPlatform.Platform getPlatform() {
+        return CommonPlatform.Platform.FORGE;
+    }
+
     public static boolean isModLoaded(String name) {
         return ModList.get().isLoaded(name);
     }
@@ -105,6 +109,8 @@ public class CommonPlatformImpl {
     public static ConfigBuilderWrapper getConfigBuilder(String name) {
         return new ForgeConfigBuilder(name);
     }
+
+
 
 
 }

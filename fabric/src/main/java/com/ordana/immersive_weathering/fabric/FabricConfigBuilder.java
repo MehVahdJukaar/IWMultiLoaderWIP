@@ -15,7 +15,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
 
     private ConfigCategory currentCategory = null;
 
-    public FabricConfigBuilder(String name){
+    public FabricConfigBuilder(String name) {
         super(name);
         this.builder = ConfigBuilder.create()
                 .setParentScreen(null)
@@ -25,7 +25,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
 
     @Override
     public FabricConfigBuilder push(String translation) {
-        this.currentCategory = builder.getOrCreateCategory(new TranslatableComponent( translation));
+        this.currentCategory = builder.getOrCreateCategory(new TranslatableComponent(translation));
         return this;
     }
 
@@ -91,12 +91,26 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
         return value;
     }
 
+    @Override
+    public <V extends Enum<V>> Supplier<V> define(String name, String tooltip, V defaultValue) {
+        assert currentCategory != null;
+        Wrapper<V> value = new Wrapper<>();
+
+        currentCategory.addEntry(entryBuilder.startEnumSelector(new TranslatableComponent(name), defaultValue.getDeclaringClass(), defaultValue)
+                .setDefaultValue(defaultValue) // Recommended: Used when user click "Reset"
+                .setTooltip(new TranslatableComponent(tooltip)) // Optional: Shown when the user hover over this option
+                .setSaveConsumer(value::set) // Recommended: Called when user save the config
+                .build()); // Builds the option entry for cloth config
+
+        return value;
+    }
+
 
     public static class Wrapper<T> implements Supplier<T> {
 
         private T value;
 
-        public void set(T newValue){
+        public void set(T newValue) {
             this.value = newValue;
         }
 

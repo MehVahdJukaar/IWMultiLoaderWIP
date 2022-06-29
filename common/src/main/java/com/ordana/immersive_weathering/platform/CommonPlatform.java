@@ -6,28 +6,45 @@ import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.List;
-import java.util.function.Supplier;
 
 public class CommonPlatform {
+
+    public enum Platform {
+        FORGE, FABRIC;
+
+        public boolean isForge() {
+            return this == FORGE;
+        }
+
+        public boolean isFabric() {
+            return this == FABRIC;
+        }
+
+        public void ifForge(Runnable runnable) {
+            if (isForge()) runnable.run();
+        }
+
+        public void ifFabric(Runnable runnable) {
+            if (isFabric()) runnable.run();
+        }
+    }
+
+    @ExpectPlatform
+    public static Platform getPlatform(){
+        throw new AssertionError();
+    }
 
     @Nullable
     @ExpectPlatform
@@ -79,12 +96,12 @@ public class CommonPlatform {
     }
 
     @ExpectPlatform
-    public static FlowingFluid getFlowingFluid(LiquidBlock block){
+    public static FlowingFluid getFlowingFluid(LiquidBlock block) {
         throw new AssertionError();
     }
 
     @ExpectPlatform
-    public static Collection<LeafPileBlock> getLeafPiles(){
+    public static Collection<LeafPileBlock> getLeafPiles() {
         throw new AssertionError();
     }
 

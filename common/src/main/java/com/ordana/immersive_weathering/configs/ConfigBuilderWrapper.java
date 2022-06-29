@@ -29,4 +29,6 @@ public abstract class ConfigBuilderWrapper {
 
     public abstract Supplier<String> define(String name, String tooltip, String defaultValue);
 
+    public abstract <V extends Enum<V>> Supplier<V> define(String name, String tooltip, V defaultValue);
+
 }
