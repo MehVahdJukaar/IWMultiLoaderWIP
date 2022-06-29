@@ -243,20 +243,5 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
         return layers > 1 && (this.isLeafy || this.hasThorns);
     }
 
-    @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-        int layers = this.getLayers(state);
-        double chance = ConfigPlatform.humusSpawnBelowChance();
-        if (layers > 1 && random.nextFloat() < chance) {
-            //TODO: maybe move this to data
-            if (this.isLeafy || this.hasThorns) {
-                BlockState below = world.getBlockState(pos.below());
-                if (below.is(Blocks.GRASS_BLOCK) || below.is(Blocks.DIRT) || below.is(Blocks.COARSE_DIRT) || below.is(Blocks.ROOTED_DIRT)) {
-                    world.setBlock(pos.below(), (isLeafy ? ModBlocks.HUMUS.get() : Blocks.PODZOL).defaultBlockState(), 2);
-                }
-            }
-        }
-    }
-
 
 }

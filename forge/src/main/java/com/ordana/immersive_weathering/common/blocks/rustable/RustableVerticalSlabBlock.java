@@ -1,8 +1,9 @@
 package com.ordana.immersive_weathering.common.blocks.rustable;
 
+import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
+import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.common.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
-import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,13 +26,13 @@ public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rust
 
     private final RustLevel rustLevel;
 
-    public RustableVerticalSlabBlock( RustLevel rustLevel,Properties properties) {
+    public RustableVerticalSlabBlock(Rustable.RustLevel rustLevel, Properties properties) {
         super(properties);
         this.rustLevel = rustLevel;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
             for (Direction direction : Direction.values()) {
                 var targetPos = pos.relative(direction);
@@ -63,7 +64,7 @@ public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rust
                 if (world.isRainingAt(pos.relative(direction)) && world.getBlockState(pos.above()).is(ModTags.WEATHERED_IRON)) {
                     if (BlockPos.withinManhattanStream(pos, 2, 2, 2)
                             .map(world::getBlockState)
-                            .filter(b->b.is(ModTags.WEATHERED_IRON))
+                            .filter(b -> b.is(ModTags.WEATHERED_IRON))
                             .toList().size() <= 9) {
                         float f = 0.06f;
                         if (random.nextFloat() > 0.06f) {
@@ -114,12 +115,11 @@ public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rust
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-        if(this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)){
+        if (this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)) {
             return this.getPrevious(state).orElse(null);
-        }
-        else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
+        } else if (ToolActions.AXE_WAX_OFF.equals(toolAction)) {
             var v = ModWaxables.getUnWaxedState(state);
-            if(v.isPresent()){
+            if (v.isPresent()) {
                 return v.get();
             }
         }

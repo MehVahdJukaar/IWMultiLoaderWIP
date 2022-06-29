@@ -1,26 +1,14 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.ImmersiveWeathering1;
-import com.ordana.immersive_weathering.registry.ModTags;
-import com.ordana.immersive_weathering.registry.blocks.ModBlocks;
-import com.ordana.immersive_weathering.registry.blocks.ThinIceBlock;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -29,22 +17,6 @@ abstract public class IceMixin extends Block {
 
     public IceMixin(Properties settings) {
         super(settings);
-    }
-
-
-
-    @Deprecated(forRemoval = true) //TODO: move to block Growths
-    @Inject(method = "randomTick", at = @At("HEAD"))
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo ci) {
-        int rand = random.nextInt(4);
-        Direction direction = Direction.from2DDataValue(rand);
-        if(ImmersiveWeathering1.getConfig().fireAndIceConfig.thinIceFormation) {
-            if (world.getBlockState(pos.above()).is(Blocks.AIR) && (world.isRaining() || world.isNight()) && world.getBiome(pos).is(ModTags.ICY) && (world.getBrightness(LightLayer.BLOCK, pos) < 7 - stat e.getLightBlock(world, pos))) {
-                if (world.getFluidState(pos.relative(direction)).is(Fluids.WATER)) {
-                    world.setBlockAndUpdate(pos.relative(direction), ModBlocks.THIN_ICE.defaultBlockState().setValue(ThinIceBlock.WATERLOGGED, true));
-                }
-            }
-        }
     }
 
     //TODO: is day is broken on client side

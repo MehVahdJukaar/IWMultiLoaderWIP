@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.block_growth.hardcoded;
+package com.ordana.immersive_weathering.block_growth.builtin;
 
 import com.ordana.immersive_weathering.block_growth.IBlockGrowth;
 

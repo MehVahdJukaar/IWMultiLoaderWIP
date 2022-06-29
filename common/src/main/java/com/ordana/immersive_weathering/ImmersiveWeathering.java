@@ -16,7 +16,7 @@ public class ImmersiveWeathering {
         return new ResourceLocation(MOD_ID, name);
     }
 
-    public static void init(){
+    public static void commonInit(){
 
         ModCompostable.setup();
         FluidMatchTest.setup();

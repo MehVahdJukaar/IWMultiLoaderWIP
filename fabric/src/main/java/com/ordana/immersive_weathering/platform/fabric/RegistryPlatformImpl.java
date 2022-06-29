@@ -40,6 +40,11 @@ public class RegistryPlatformImpl {
     public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties) {
     }
 
-    public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties, Object ...extraParams) {
+    public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties, Object... extraParams) {
+    }
+
+    public static <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> block) {
+        var o = Registry.register(Registry.BLOCK, ImmersiveWeathering.res(name), block.get());
+        return () -> o;
     }
 }

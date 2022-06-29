@@ -33,8 +33,8 @@ record TemperatureMatchTest(float max, float min, Optional<Boolean> useLocalPos)
         float temp;
         if (level.dimensionType().ultraWarm()) {
             temp = 3;
-        } else if (useLocalPos.isPresent() && useLocalPos.get() && biome.value() instanceof BiomeAccessor ba) {
-            temp = ba.invokeGetTemperature(pos);
+        } else if (useLocalPos.isPresent() && useLocalPos.get()) {
+            temp = ((BiomeAccessor) (Object) biome.value()).invokeGetTemperature(pos);
         } else {
             temp = biome.value().getBaseTemperature();
         }

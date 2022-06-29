@@ -4,6 +4,9 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 
 @SuppressWarnings("ALL")
 @Config(name = "immersive_weathering")
@@ -80,6 +83,19 @@ public final class ServerConfig extends PartitioningSerializer.GlobalData {
         public boolean iciclePlacement = true;
 
         private FireAndIceConfig() {
+            ConfigBuilder builder = ConfigBuilder.create()
+                    .setParentScreen(parent)
+                    .setTitle(new TranslatableText("title.examplemod.config"));
+            ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+
+            ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category.examplemod.general"));
+
+            general.addEntry(entryBuilder.startStrField(new TranslatableText("option.examplemod.optionA"), currentValue)
+                    .setDefaultValue("This is the default value") // Recommended: Used when user click "Reset"
+                    .setTooltip(new TranslatableText("This option is awesome!")) // Optional: Shown when the user hover over this option
+                    .setSaveConsumer(newValue -> currentValue = newValue) // Recommended: Called when user save the config
+                    .build()); // Builds the option entry for cloth config
+
         }
     }
     

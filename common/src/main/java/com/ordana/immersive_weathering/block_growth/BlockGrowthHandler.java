@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
-import com.ordana.immersive_weathering.block_growth.hardcoded.HardcodedGrowths;
+import com.ordana.immersive_weathering.block_growth.builtin.HardcodedGrowths;
 import com.ordana.immersive_weathering.platform.ConfigPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
