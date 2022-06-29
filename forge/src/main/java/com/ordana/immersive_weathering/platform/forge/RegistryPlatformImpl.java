@@ -1,17 +1,23 @@
 package com.ordana.immersive_weathering.platform.forge;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common.blocks.rustable.*;
+import com.ordana.immersive_weathering.common_delete.blocks.rustable.*;
 import com.ordana.immersive_weathering.forge.ModRegistry;
 import com.ordana.immersive_weathering.forge.MulchBlock;
+import com.ordana.immersive_weathering.forge.rustable.*;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraft.world.level.levelgen.feature.Feature;
 
 import java.util.function.Supplier;
 
@@ -21,10 +27,29 @@ public class RegistryPlatformImpl {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
 
-    public static void registerItemBurnTime(Item item, int burnTime) {
+    public static <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> block) {
+        return ModRegistry.BLOCKS.register(name, block);
+    }
+
+    public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item) {
+        return ModRegistry.ITEMS.register(name,item);
+    }
+
+    public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> registerBlockEntityType(String name, Supplier<T> blockEntity) {
+        return ModRegistry.BLOCK_ENTITIES.register(name, blockEntity);
+    }
+
+    public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory, MobCategory category, float width, float height, int clientTrackingRange, int updateInterval) {
+        return ModRegistry.ENTITIES.register(name, () -> EntityType.Builder.of(factory, category)
+                .sized(width, height).build(name));
+    }
+
+    public static <T extends Feature<?>>  Supplier<T> registerFeature(String name, Supplier<T> feature) {
+        return ModRegistry.FEATURES.register(name, feature);
     }
 
     public static Supplier<SimpleParticleType> registerParticle(String name) {
+        return ModRegistry.PARTICLES.register(name, ()->new SimpleParticleType(true));
 
     }
 
@@ -42,9 +67,14 @@ public class RegistryPlatformImpl {
         };
     }
 
-    public static <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> block) {
-        return ModRegistry.BLOCKS.register(name, block);
+    public static <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(RegistryPlatform.BlockEntitySupplier<T> blockEntitySupplier, Block... validBlocks) {
+        return BlockEntityType.Builder.of(blockEntitySupplier::create, validBlocks).build(null);
     }
 
 
+    public static void registerItemBurnTime(Item item, int burnTime) {
+    }
+
+    public static void registerBlockFlammability(Block item, int fireSpread, int flammability) {
+    }
 }

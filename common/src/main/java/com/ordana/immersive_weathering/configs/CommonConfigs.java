@@ -77,7 +77,7 @@ public class CommonConfigs {
     public static Supplier<Boolean> VITRIFIED_LIGHTNING;
 
     public static void init() {
-        ConfigBuilderWrapper builder = CommonPlatform.getConfigBuilder("server");
+        ConfigBuilderWrapper builder = CommonPlatform.getConfigBuilder("server", ConfigBuilderWrapper.ConfigType.COMMON);
 
         builder.push("general");
         BLOCK_GROWTHS = builder.define("block_growths", true);

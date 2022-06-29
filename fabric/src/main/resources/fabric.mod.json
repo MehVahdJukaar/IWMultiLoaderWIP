@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "immersive_weathering",
   "version": "${version}",
-  "name": "Example Mod",
+  "name": "Immersive Weathering",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -16,12 +16,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "com.ordana.immersive_weathering.ImmersiveWeatheringFabric"
     ]
   },
   "mixins": [
     "immersive_weathering.mixins.json",
-    "examplemod-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

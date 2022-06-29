@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.mixin;
 
-import com.ordana.immersive_weathering.common.blocks.AshBlock;
-import com.ordana.immersive_weathering.common.blocks.SootLayerBlock;
+import com.ordana.immersive_weathering.common_delete.blocks.AshBlock;
+import com.ordana.immersive_weathering.common_delete.blocks.SootLayerBlock;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,5 +1,7 @@
-package com.ordana.immersive_weathering.common.items;
+package com.ordana.immersive_weathering.items;
 
+import com.ordana.immersive_weathering.platform.CommonPlatform;
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -48,7 +50,7 @@ public class CeilingAndWallBlockItem extends BlockItem {
         map.put(this.wallBlock, item);
     }
 
-    @Override
+    @PlatformOnly(PlatformOnly.FORGE)
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
         super.removeFromBlockToItemMap(blockToItemMap, itemIn);
         blockToItemMap.remove(this.wallBlock);

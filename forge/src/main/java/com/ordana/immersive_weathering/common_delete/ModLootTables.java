@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.common;
+package com.ordana.immersive_weathering.common_delete;
 
 import com.ordana.immersive_weathering.registry_delete.items.ModItems;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;

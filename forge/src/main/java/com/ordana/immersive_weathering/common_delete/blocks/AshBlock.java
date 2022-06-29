@@ -1,7 +1,7 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.common_delete.blocks;
 
-import com.ordana.immersive_weathering.common.ModBlocks;
-import com.ordana.immersive_weathering.common.ModParticles;
+import com.ordana.immersive_weathering.common_delete.ModBlocks;
+import com.ordana.immersive_weathering.common_delete.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

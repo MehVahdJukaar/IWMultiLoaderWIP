@@ -1,9 +1,13 @@
-package com.ordana.immersive_weathering.common.blocks.rustable;
+package com.ordana.immersive_weathering.forge.rustable;
 
-import com.ordana.immersive_weathering.blocks.VerticalSlabBlock;
+import java.util.Random;
+import java.util.function.Supplier;
+
+import com.ordana.immersive_weathering.blocks.ModStairBlock;
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common.ModParticles;
-import com.ordana.immersive_weathering.reg.ModTags;
+import com.ordana.immersive_weathering.common_delete.ModParticles;
+import com.ordana.immersive_weathering.common_delete.blocks.rustable.Rustable;
+import com.ordana.immersive_weathering.unique.ModStairBlock;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,26 +17,25 @@ import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
-public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rustable {
-
+public class RustableStairsBlock extends ModStairBlock implements Rustable {
     private final RustLevel rustLevel;
 
-    public RustableVerticalSlabBlock(Rustable.RustLevel rustLevel, Properties properties) {
-        super(properties);
+    public RustableStairsBlock(RustLevel rustLevel, Supplier<Block> baseBlockState, Properties settings) {
+        super(baseBlockState, settings);
         this.rustLevel = rustLevel;
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
         if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
             for (Direction direction : Direction.values()) {
                 var targetPos = pos.relative(direction);
@@ -64,7 +67,7 @@ public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rust
                 if (world.isRainingAt(pos.relative(direction)) && world.getBlockState(pos.above()).is(ModTags.WEATHERED_IRON)) {
                     if (BlockPos.withinManhattanStream(pos, 2, 2, 2)
                             .map(world::getBlockState)
-                            .filter(b -> b.is(ModTags.WEATHERED_IRON))
+                            .filter(b->b.is(ModTags.WEATHERED_IRON))
                             .toList().size() <= 9) {
                         float f = 0.06f;
                         if (random.nextFloat() > 0.06f) {
@@ -115,11 +118,12 @@ public class RustableVerticalSlabBlock extends VerticalSlabBlock implements Rust
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-        if (this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)) {
+        if(this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)){
             return this.getPrevious(state).orElse(null);
-        } else if (ToolActions.AXE_WAX_OFF.equals(toolAction)) {
+        }
+        else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
             var v = ModWaxables.getUnWaxedState(state);
-            if (v.isPresent()) {
+            if(v.isPresent()){
                 return v.get();
             }
         }

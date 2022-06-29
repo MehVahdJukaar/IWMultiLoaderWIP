@@ -1,7 +1,7 @@
-package com.ordana.immersive_weathering.common.blocks.rustable;
+package com.ordana.immersive_weathering.forge.rustable;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common.ModParticles;
+import com.ordana.immersive_weathering.common_delete.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;

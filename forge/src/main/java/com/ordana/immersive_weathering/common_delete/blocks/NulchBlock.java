@@ -1,7 +1,7 @@
-package com.ordana.immersive_weathering.common.blocks;
+package com.ordana.immersive_weathering.common_delete.blocks;
 
 import com.ordana.immersive_weathering.blocks.ModBlockProperties;
-import com.ordana.immersive_weathering.common.ModParticles;
+
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import java.util.Random;

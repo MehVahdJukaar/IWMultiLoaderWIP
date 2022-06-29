@@ -1,6 +1,7 @@
 package com.ordana.immersive_weathering;
 
 import com.ordana.immersive_weathering.block_growth.rute_test.*;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.*;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -16,14 +17,16 @@ public class ImmersiveWeathering {
         return new ResourceLocation(MOD_ID, name);
     }
 
+    //called either on mod creation on fabric or mod setup on forge
     public static void commonInit(){
-
         ModBlocks.init();
         ModItems.init();
         ModEntities.init();
         ModParticles.init();
+        CommonConfigs.init();
+    }
 
-
+    public static void commonSetup() {
         ModCompostable.init();
 
         //rule tests

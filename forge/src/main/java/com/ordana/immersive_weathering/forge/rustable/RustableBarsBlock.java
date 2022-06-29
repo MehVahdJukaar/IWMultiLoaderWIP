@@ -1,9 +1,8 @@
-package com.ordana.immersive_weathering.common.blocks.rustable;
-
-import java.util.Random;
+package com.ordana.immersive_weathering.forge.rustable;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common.ModParticles;
+import com.ordana.immersive_weathering.common_delete.ModParticles;
+import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
@@ -13,25 +12,29 @@ import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
 import org.jetbrains.annotations.Nullable;
 
-public class RustableSlabBlock extends SlabBlock implements Rustable {
+import java.util.Random;
+
+public class RustableBarsBlock extends IronBarsBlock implements Rustable {
     private final RustLevel rustLevel;
 
-    public RustableSlabBlock(RustLevel rustLevel, Properties settings) {
+    public RustableBarsBlock(RustLevel rustLevel, Properties settings) {
         super(settings);
         this.rustLevel = rustLevel;
     }
 
+    //TODO: review and optimize this. base it off copper block. also merge
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
             for (Direction direction : Direction.values()) {
                 var targetPos = pos.relative(direction);
@@ -63,7 +66,7 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
                 if (world.isRainingAt(pos.relative(direction)) && world.getBlockState(pos.above()).is(ModTags.WEATHERED_IRON)) {
                     if (BlockPos.withinManhattanStream(pos, 2, 2, 2)
                             .map(world::getBlockState)
-                            .filter(b->b.is(ModTags.WEATHERED_IRON))
+                            .filter(b -> b.is(ModTags.WEATHERED_IRON))
                             .toList().size() <= 9) {
                         float f = 0.06f;
                         if (random.nextFloat() > 0.06f) {
@@ -81,7 +84,6 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
                     this.onRandomTick(state, world, pos, random);
                 }
                 if (world.getBlockState(pos.relative(direction)).is(Blocks.BUBBLE_COLUMN)) {
-                    float f = 0.07f;
                     if (random.nextFloat() > 0.07f) {
                         this.applyChangeOverTime(state, world, pos, random);
                     }
@@ -99,6 +101,7 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
     public RustLevel getAge() {
         return this.rustLevel;
     }
+
 
     @Override
     public boolean triggerEvent(BlockState state, Level level, BlockPos pos, int i, int i1) {
@@ -118,11 +121,18 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
             return this.getPrevious(state).orElse(null);
         }
         else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
-            var v = ModWaxables.getUnWaxedState(state);
-            if(v.isPresent()){
-                return v.get();
-            }
+           var v = ModWaxables.getUnWaxedState(state);
+           if(v.isPresent()){
+               return v.get();
+           }
         }
         return super.getToolModifiedState(state, level, pos, player, stack, toolAction);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+
+        return super.getToolModifiedState(state, context, toolAction, simulate);
     }
 }

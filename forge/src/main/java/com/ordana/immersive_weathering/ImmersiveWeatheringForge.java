@@ -2,7 +2,7 @@ package com.ordana.immersive_weathering;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.common.blocks.LeafPilesRegistry;
+import com.ordana.immersive_weathering.common_delete.blocks.LeafPilesRegistry;
 import com.ordana.immersive_weathering.block_growth.rute_test.BlockSetMatchTest;
 import com.ordana.immersive_weathering.block_growth.rute_test.FluidMatchTest;
 import com.ordana.immersive_weathering.block_growth.rute_test.LogMatchTest;
@@ -51,6 +51,8 @@ public class ImmersiveWeatheringForge {
         ModRegistry.PARTICLES.register(bus);
         ModRegistry.FEATURES.register(bus);
 
+        ImmersiveWeathering.commonInit();
+
 
         /**
          * Update stuff:
@@ -63,28 +65,16 @@ public class ImmersiveWeatheringForge {
         //TODO: fix layers texture generation
         //TODO: fix grass growth replacing double plants and add tag
 
-
         LeafPilesRegistry.registerBus(bus);
-
 
         bus.addListener(ImmersiveWeatheringForge::init);
         bus.addListener(ImmersiveWeatheringForge::addPackFinders);
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ServerConfigs.SPEC);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC);
-
     }
 
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(()->{
-            ModCompostable.init();
-            FluidMatchTest.init();
-            LogMatchTest.init();
-            BlockSetMatchTest.init();
-
+            ImmersiveWeathering.commonSetup();
             registerWaxables();
-
-
         });
     }
 
