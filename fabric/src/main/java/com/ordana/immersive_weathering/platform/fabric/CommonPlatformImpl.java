@@ -1,32 +1,23 @@
 package com.ordana.immersive_weathering.platform.fabric;
 
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.platform.CommonPlatform;
-import com.ordana.immersive_weathering.reg.ModTags;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
+import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.function.Supplier;
 
 public class CommonPlatformImpl {
 
@@ -70,7 +61,9 @@ public class CommonPlatformImpl {
         return null;
     }
 
-
+    public static ConfigBuilderWrapper getConfigBuilder(String name) {
+        return new FabricConfigBuilder(name);
+    }
 
 
 }

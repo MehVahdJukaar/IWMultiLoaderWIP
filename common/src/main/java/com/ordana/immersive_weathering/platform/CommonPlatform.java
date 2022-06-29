@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.platform;
 
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
+import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -87,4 +88,8 @@ public class CommonPlatform {
         throw new AssertionError();
     }
 
+    @ExpectPlatform
+    public static ConfigBuilderWrapper getConfigBuilder(String name) {
+        throw new AssertionError();
+    }
 }

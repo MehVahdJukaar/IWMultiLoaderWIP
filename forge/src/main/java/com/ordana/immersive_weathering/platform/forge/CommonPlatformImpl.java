@@ -1,6 +1,8 @@
 package com.ordana.immersive_weathering.platform.forge;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
+import com.ordana.immersive_weathering.forge.ForgeConfigBuilder;
 import com.ordana.immersive_weathering.integration.IntegrationHandler;
 import com.ordana.immersive_weathering.integration.QuarkPlugin;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
@@ -100,6 +102,9 @@ public class CommonPlatformImpl {
         return block.getFluid();
     }
 
+    public static ConfigBuilderWrapper getConfigBuilder(String name) {
+        return new ForgeConfigBuilder(name);
+    }
 
 
 }
