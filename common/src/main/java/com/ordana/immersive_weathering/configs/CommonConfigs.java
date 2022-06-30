@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 public class CommonConfigs {
 
+
     public static Supplier<Boolean> BLOCK_GROWTHS;
 
     public static Supplier<Double> MOSS_INTERESTS_FOR_FACE;
@@ -75,6 +76,10 @@ public class CommonConfigs {
     public static Supplier<Boolean> THIN_ICE_MELTING;
 
     public static Supplier<Boolean> VITRIFIED_LIGHTNING;
+
+    public static Supplier<Boolean> RUSTING;
+
+    public static Supplier<Boolean> MULCH_GROWS_CROPS;
 
     public static void init() {
         ConfigBuilderWrapper builder = CommonPlatform.getConfigBuilder("server", ConfigBuilderWrapper.ConfigType.COMMON);
@@ -153,6 +158,7 @@ public class CommonConfigs {
         builder.pop();
 
         builder.push("misc");
+        MULCH_GROWS_CROPS = builder.define("mulch_grows_crops", true);
         COMPOSTER_DIRT = builder.define("composter_dirt", true);
         GENERIC_BARK = builder.define("generic_bark", "");
         FEATHER_FALLING_FARMERS = builder.define("feather_falling_farmers", true);
@@ -160,12 +166,12 @@ public class CommonConfigs {
         builder.pop();
 
         builder.push("leaf_piles");
-        LEAF_PILES_FROM_DECAY_CHANCE = builder.define("spawn_entity_from_decay",0.3,0, 1);
-        LEAF_DECAY_SOUND = builder.define("decay_sound",true);
+        LEAF_PILES_FROM_DECAY_CHANCE = builder.define("spawn_entity_from_decay", 0.3, 0, 1);
+        LEAF_DECAY_SOUND = builder.define("decay_sound", true);
 
         LEAF_PILES_CHANCE = builder.define("leaf_piles_spawn_chance", 0.005, 0, 1);
         LEAF_PILES_REACH = builder.define("reach", 12, 1, 256);
-        LEAF_PILE_MAX_HEIGHT = builder.define("max_pile_height",3, 1, 8);
+        LEAF_PILE_MAX_HEIGHT = builder.define("max_pile_height", 3, 1, 8);
         builder.pop();
 
         builder.push("thin_ice");
@@ -173,7 +179,11 @@ public class CommonConfigs {
         builder.pop();
 
         builder.push("lightning_growths"); //TODO:move to data
-        VITRIFIED_LIGHTNING = builder.define("vitrified_lightning",true);
+        VITRIFIED_LIGHTNING = builder.define("vitrified_lightning", true);
+        builder.pop();
+
+        builder.push("rusting");
+        RUSTING = builder.define("rusting", true);
         builder.pop();
 
         //fabric specific

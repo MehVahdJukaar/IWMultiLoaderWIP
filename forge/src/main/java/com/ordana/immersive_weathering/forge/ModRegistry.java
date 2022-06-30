@@ -1,7 +1,6 @@
 package com.ordana.immersive_weathering.forge;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering;
-import com.ordana.immersive_weathering.items.CeilingAndWallBlockItem;
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.entity.EntityType;

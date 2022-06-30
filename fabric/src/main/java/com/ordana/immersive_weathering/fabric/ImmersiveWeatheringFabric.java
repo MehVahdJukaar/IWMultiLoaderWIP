@@ -1,14 +1,17 @@
-package com.ordana.immersive_weathering;
+package com.ordana.immersive_weathering.fabric;
 
+import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
 import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.OxidizableBlocksRegistry;
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.world.level.block.Blocks;
 
@@ -28,7 +31,8 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
             FlammableBlockRegistry.getDefaultInstance().add(Blocks.COBWEB, 100, 100);
         }
 
-        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new BlockGrowthHandler());
+
+        ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(BlockGrowthHandler.getInstance(FabricBlockGrowthManager::new));
 
 
         // ModEvents.registerEvents();
@@ -40,6 +44,14 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
             ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("immersive_weathering:visual_waxed_iron_items"), modContainer, ResourcePackActivationType.NORMAL);
             ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("immersive_weathering:biome_tinted_mossy_blocks"), modContainer, ResourcePackActivationType.NORMAL);
         });
+    }
+
+    private static class FabricBlockGrowthManager extends BlockGrowthHandler implements IdentifiableResourceReloadListener{
+
+        @Override
+        public ResourceLocation getFabricId() {
+            return ImmersiveWeathering.res("block_growths");
+        }
     }
 
     /*

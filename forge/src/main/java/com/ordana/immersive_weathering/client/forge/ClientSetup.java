@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.client.forge;
 
-import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
+import com.ordana.immersive_weathering.forge.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.client.ImmersiveWeatheringClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleEngine;
@@ -40,7 +40,7 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void registerItemColors(ColorHandlerEvent.Item event) {
-        var colors = event.getBlockColors();
+        var colors = event.getItemColors();
         ImmersiveWeatheringClient.onRegisterItemColors(colors::register);
     }
 

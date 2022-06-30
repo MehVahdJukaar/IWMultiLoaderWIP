@@ -1,10 +1,11 @@
 package com.ordana.immersive_weathering.platform.fabric;
 
 import com.google.common.collect.ImmutableBiMap;
-import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
+import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +28,7 @@ public class CommonPlatformImpl {
     }
 
     public static boolean isModLoaded(String name) {
-
+        return FabricLoader.getInstance().isModLoaded(name);
     }
 
     public static void addExtraFloweryBlocks(ImmutableBiMap.Builder<Block, Block> builder) {

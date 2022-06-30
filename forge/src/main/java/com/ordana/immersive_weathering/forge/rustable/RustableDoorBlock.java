@@ -1,7 +1,7 @@
 package com.ordana.immersive_weathering.forge.rustable;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common_delete.ModParticles;
+import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.core.BlockPos;
@@ -195,7 +195,7 @@ public class RustableDoorBlock extends DoorBlock implements Rustable {
             return this.getPrevious(state).orElse(null);
         }
         else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
-            var v = ModWaxables.getUnWaxedState(state);
+            var v = ModWaxables.getUnWaxed(state);
             if(v.isPresent()){
                 return v.get();
             }

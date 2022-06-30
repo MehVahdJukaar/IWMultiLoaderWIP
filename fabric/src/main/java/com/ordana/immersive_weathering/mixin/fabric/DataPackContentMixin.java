@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.mixin.fabric;
 
 import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
 import net.minecraft.core.RegistryAccess;
@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ReloadableServerResources.class)
 public abstract class DataPackContentMixin {
 
-    @Inject(method = "updateRegistryTags", at = @At("TAIL"))
+    @Inject(method = "updateRegistryTags*", at = @At("TAIL"))
     private void onTagReload(RegistryAccess registryAccess, CallbackInfo ci){
-        BlockGrowthHandler.rebuild(registryAccess);
+        BlockGrowthHandler.getInstance().rebuild(registryAccess);
     }
 }

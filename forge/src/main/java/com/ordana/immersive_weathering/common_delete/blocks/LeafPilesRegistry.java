@@ -4,8 +4,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
-import com.ordana.immersive_weathering.integration.IntegrationHandler;
-import com.ordana.immersive_weathering.integration.dynamic_stuff.ModDynamicRegistry;
+
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModItems;
 import net.minecraft.world.item.Item;
@@ -22,9 +21,10 @@ public class LeafPilesRegistry {
 
     public static final Supplier<Map<Block, LeafPileBlock>> LEAF_PILES = Suppliers.memoize(() -> {
 
-                if (IntegrationHandler.hasLib) {
-                    return ModDynamicRegistry.getLeafToLeafPileMap();
-                } else return ImmutableMap.<Block, LeafPileBlock>builder()
+                //if (IntegrationHandler.hasLib) {
+                //    return ModDynamicRegistry.getLeafToLeafPileMap();
+               // } else
+        return ImmutableMap.<Block, LeafPileBlock>builder()
                         .put(Blocks.OAK_LEAVES, ModBlocks.OAK_LEAF_PILE.get())
                         .put(Blocks.DARK_OAK_LEAVES, ModBlocks.DARK_OAK_LEAF_PILE.get())
                         .put(Blocks.SPRUCE_LEAVES, ModBlocks.SPRUCE_LEAF_PILE.get())
@@ -56,22 +56,22 @@ public class LeafPilesRegistry {
                 .put(Blocks.STRIPPED_CRIMSON_HYPHAE, Pair.of(ModItems.CRIMSON_SCALES.get(), Blocks.CRIMSON_HYPHAE))
                 .put(Blocks.STRIPPED_WARPED_STEM, Pair.of(ModItems.WARPED_SCALES.get(), Blocks.WARPED_STEM))
                 .put(Blocks.STRIPPED_WARPED_HYPHAE, Pair.of(ModItems.WARPED_SCALES.get(), Blocks.WARPED_HYPHAE));
-        if (IntegrationHandler.hasLib) {
-            builder.putAll(ModDynamicRegistry.getBarkMap());
-        }
+       // if (IntegrationHandler.hasLib) {
+       //     builder.putAll(ModDynamicRegistry.getBarkMap());
+      //  }
         return builder.build();
     });
 
     public static void registerBus(IEventBus bus) {
-        if (IntegrationHandler.hasLib) {
-            ModDynamicRegistry.init(bus);
-        }
+     //   if (IntegrationHandler.hasLib) {
+      //      ModDynamicRegistry.init(bus);
+      //  }
     }
 
     public static Optional<Block> getFallenLeafPile(BlockState state) {
         Block b = state.getBlock();
-        if (ServerConfigs.LEAF_PILES_BLACKLIST.get().contains(b.getRegistryName().toString()))
-            return Optional.empty();
+      //  if (ServerConfigs.LEAF_PILES_BLACKLIST.get().contains(b.getRegistryName().toString()))
+      //      return Optional.empty();
         return Optional.ofNullable(LeafPilesRegistry.LEAF_PILES.get().get(b));
     }
 

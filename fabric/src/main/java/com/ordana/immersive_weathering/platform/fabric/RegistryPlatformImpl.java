@@ -3,6 +3,7 @@ package com.ordana.immersive_weathering.platform.fabric;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
 import com.ordana.immersive_weathering.fabric.MulchBlock;
+import com.ordana.immersive_weathering.fabric.NulchBlock;
 import com.ordana.immersive_weathering.fabric.rustable.*;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -59,9 +60,11 @@ public class RegistryPlatformImpl {
         return () -> instance;
     }
 
+    @SuppressWarnings("unchecked")
     public static Block createSpecialBlock(RegistryPlatform.BlockType type, BlockBehaviour.Properties properties, Object... extraParams) {
         return switch (type) {
             case MULCH -> new MulchBlock(properties);
+            case NULCH -> new NulchBlock(properties);
             case RUSTABLE_BLOCK -> new RustableBlock((Rustable.RustLevel) extraParams[0], properties);
             case RUSTABLE_STAIRS ->
                     new RustableStairsBlock((Rustable.RustLevel) extraParams[0], (Supplier<Block>) extraParams[1], properties);

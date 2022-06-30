@@ -1,7 +1,5 @@
-package com.ordana.immersive_weathering.items;
+package com.ordana.immersive_weathering.forge;
 
-import com.ordana.immersive_weathering.platform.CommonPlatform;
-import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -31,7 +29,7 @@ public class CeilingAndWallBlockItem extends BlockItem {
         LevelReader levelreader = context.getLevel();
         BlockPos blockpos = context.getClickedPos();
 
-        for(Direction direction : context.getNearestLookingDirections()) {
+        for (Direction direction : context.getNearestLookingDirections()) {
             if (direction != Direction.DOWN) {
                 BlockState blockstate2 = direction == Direction.UP ? this.getBlock().getStateForPlacement(context) : blockstate;
                 if (blockstate2 != null && blockstate2.canSurvive(levelreader, blockpos)) {
@@ -50,7 +48,7 @@ public class CeilingAndWallBlockItem extends BlockItem {
         map.put(this.wallBlock, item);
     }
 
-    @PlatformOnly(PlatformOnly.FORGE)
+    @Override
     public void removeFromBlockToItemMap(Map<Block, Item> blockToItemMap, Item itemIn) {
         super.removeFromBlockToItemMap(blockToItemMap, itemIn);
         blockToItemMap.remove(this.wallBlock);

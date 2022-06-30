@@ -3,9 +3,12 @@ package com.ordana.immersive_weathering.reg;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
+import net.minecraft.world.item.HoneycombItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public final class ModWaxables {
@@ -68,5 +71,14 @@ public final class ModWaxables {
 
     public static BiMap<Block, Block> getValues() {
         return WAXABLES.get();
+    }
+
+    public static Optional<BlockState> getUnWaxed(BlockState blockState) {
+        return Optional.ofNullable(HoneycombItem.WAX_OFF_BY_BLOCK.get().get(blockState.getBlock()))
+                .map(block -> block.withPropertiesOf(blockState));
+    }
+
+    public static Optional<BlockState> getWaxed(BlockState blockState) {
+        return HoneycombItem.getWaxed(blockState);
     }
 }

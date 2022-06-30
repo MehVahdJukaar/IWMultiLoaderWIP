@@ -1,10 +1,17 @@
 {
   "required": true,
-  "package": "com.ordana.immersive_weathering.fabric",
+  "package": "com.ordana.immersive_weathering.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
   ],
   "mixins": [
+    "fabric.CropBlockMixin",
+    "fabric.DataPackContentMixin",
+    "fabric.FarmlandBlockMixin",
+    "fabric.FungusBlockMixin",
+    "fabric.NetherWartBlockMixin",
+    "fabric.SproutsBlockMixin",
+    "fabric.SugarCaneBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

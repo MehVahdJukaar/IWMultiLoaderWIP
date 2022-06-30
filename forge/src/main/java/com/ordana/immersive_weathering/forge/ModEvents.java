@@ -1,71 +1,21 @@
 package com.ordana.immersive_weathering.forge;
 
 
-import com.mojang.datafixers.util.Pair;
-import com.ordana.immersive_weathering.ImmersiveWeatheringForge;
 import com.ordana.immersive_weathering.block_growth.BlockGrowthHandler;
-import com.ordana.immersive_weathering.reg.ModWaxables;
-import com.ordana.immersive_weathering.common_delete.blocks.Weatherable;
-import com.ordana.immersive_weathering.blocks.crackable.Crackable;
-import com.ordana.immersive_weathering.blocks.mossable.Mossable;
-import com.ordana.immersive_weathering.common_delete.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common_delete.entity.FollowLeafCrownGoal;
-import com.ordana.immersive_weathering.configs.ServerConfigs;
-import com.ordana.immersive_weathering.integration.IntegrationHandler;
-import com.ordana.immersive_weathering.integration.QuarkPlugin;
-import com.ordana.immersive_weathering.utils.WeatheringHelper;
-import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.Bee;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
-import net.minecraft.world.level.block.FireBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.ToolActions;
+
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.TagsUpdatedEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = ImmersiveWeatheringForge.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModEvents {
 
-    private static final BlockGrowthHandler GROWTH_MANAGER = new BlockGrowthHandler();
+
 
     @SubscribeEvent
     public static void onTagUpdated(TagsUpdatedEvent event) {
-        GROWTH_MANAGER.rebuild(event.getTagManager());
+        BlockGrowthHandler.getInstance().rebuild(event.getTagManager());
     }
 
 
@@ -74,17 +24,9 @@ public class ModEvents {
     //use this until forge approves that datapack registries PR (will take some time)
     @SubscribeEvent
     public static void onAddReloadListeners(final AddReloadListenerEvent event) {
-        event.addListener(GROWTH_MANAGER);
+        event.addListener(BlockGrowthHandler.getInstance());
     }
-
-
-    @SubscribeEvent
-    public static void onEntityJoin(EntityJoinWorldEvent event) {
-        Entity entity = event.getEntity();
-        if (entity instanceof Bee bee) {
-            bee.goalSelector.addGoal(3, new FollowLeafCrownGoal(bee, 1D, false));
-        }
-    }
+    /*
 
     //TODO: copy and merge fabic one from latest update
 
@@ -103,7 +45,7 @@ public class ModEvents {
             var newState = WeatheringHelper.getAzaleaSheared(state).orElse(null);
             if (newState != null) {
                 if (level.isClientSide) {
-                    ModParticles.spawnParticlesOnBlockFaces(level, pos, ModParticles.AZALEA_FLOWER.get(), UniformInt.of(4, 6));
+                    ParticleHelper.spawnParticlesOnBlockFaces(level, pos, ModParticles.AZALEA_FLOWER.get(), UniformInt.of(4, 6));
                 } else {
                     Block.popResourceFromFace(level, pos, event.getFace(), new ItemStack(ModItems.AZALEA_FLOWERS.get()));
                 }
@@ -439,6 +381,8 @@ public class ModEvents {
             }
         }
     }
+    */
+
 }
 
 

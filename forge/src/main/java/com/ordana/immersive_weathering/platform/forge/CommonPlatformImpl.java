@@ -3,8 +3,7 @@ package com.ordana.immersive_weathering.platform.forge;
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import com.ordana.immersive_weathering.forge.ForgeConfigBuilder;
-import com.ordana.immersive_weathering.integration.IntegrationHandler;
-import com.ordana.immersive_weathering.integration.QuarkPlugin;
+
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -63,31 +62,31 @@ public class CommonPlatformImpl {
     }
 
     public static void addExtraFloweryBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
-        if (IntegrationHandler.quark) {
-            Block a = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_hedge"));
-            Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_hedge"));
-            if (a != null && b != null) {
-                builder.put(a, b);
-            }
-            Block c = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_leaf_carpet"));
-            Block d = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_leaf_carpet"));
-            if (c != null && d != null) {
-                builder.put(c, d);
-            }
+
+        Block a = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_hedge"));
+        Block b = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_hedge"));
+        if (a != null && b != null) {
+            builder.put(a, b);
         }
+        Block c = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:flowering_azalea_leaf_carpet"));
+        Block d = ForgeRegistries.BLOCKS.getValue(new ResourceLocation("quark:azalea_leaf_carpet"));
+        if (c != null && d != null) {
+            builder.put(c, d);
+        }
+
 
     }
 
     public static void addExtraMossyBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
-        if (IntegrationHandler.quark) {
-            QuarkPlugin.addAllVerticalSlabs(builder);
-        }
+        //if (IntegrationHandler.quark) {
+        //    QuarkPlugin.addAllVerticalSlabs(builder);
+       // }
     }
 
     public static void addExtraCrackedBlocks(ImmutableBiMap.Builder<Block, Block> builder) {
-        if (IntegrationHandler.quark) {
-            QuarkPlugin.addAllVerticalSlabs(builder);
-        }
+       // if (IntegrationHandler.quark) {
+        //    QuarkPlugin.addAllVerticalSlabs(builder);
+       // }
     }
 
     public static boolean isMobGriefingOn(Level level, Entity entity) {
@@ -106,8 +105,8 @@ public class CommonPlatformImpl {
         return block.getFluid();
     }
 
-    public static ConfigBuilderWrapper getConfigBuilder(String name) {
-        return new ForgeConfigBuilder(name);
+    public static ConfigBuilderWrapper getConfigBuilder(String name, ConfigBuilderWrapper.ConfigType type) {
+        return new ForgeConfigBuilder(name,type);
     }
 
 

@@ -3,14 +3,11 @@ package com.ordana.immersive_weathering.registry_delete.blocks;
 import com.google.common.base.Supplier;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableMap;
-import com.ordana.immersive_weathering.registry_delete.ModParticles;
-import com.ordana.immersive_weathering.registry_delete.blocks.charred.CharredBlock;
-import com.ordana.immersive_weathering.blocks.test.FulguriteBlock;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tag.*;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -20,21 +17,23 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/*
 public class WeatheringHelper {
 
     private static final HashMap<TagKey, Block> CHARRED_BLOCKS = new HashMap<>();
 
     static {
-        CHARRED_BLOCKS.put(BlockTags.LOGS_THAT_BURN, ModBlocks.CHARRED_LOG);
-        CHARRED_BLOCKS.put(BlockTags.PLANKS, ModBlocks.CHARRED_PLANKS);
-        CHARRED_BLOCKS.put(BlockTags.WOODEN_SLABS, ModBlocks.CHARRED_SLAB);
-        CHARRED_BLOCKS.put(BlockTags.WOODEN_STAIRS, ModBlocks.CHARRED_STAIRS);
-        CHARRED_BLOCKS.put(BlockTags.WOODEN_FENCES, ModBlocks.CHARRED_FENCE);
-        CHARRED_BLOCKS.put(BlockTags.FENCE_GATES, ModBlocks.CHARRED_FENCE_GATE);
+        CHARRED_BLOCKS.put(BlockTags.LOGS_THAT_BURN, ModBlocks.CHARRED_LOG.get());
+        CHARRED_BLOCKS.put(BlockTags.PLANKS, ModBlocks.CHARRED_PLANKS.get());
+        CHARRED_BLOCKS.put(BlockTags.WOODEN_SLABS, ModBlocks.CHARRED_SLAB.get());
+        CHARRED_BLOCKS.put(BlockTags.WOODEN_STAIRS, ModBlocks.CHARRED_STAIRS.get());
+        CHARRED_BLOCKS.put(BlockTags.WOODEN_FENCES, ModBlocks.CHARRED_FENCE.get());
+        CHARRED_BLOCKS.put(BlockTags.FENCE_GATES, ModBlocks.CHARRED_FENCE_GATE.get());
     }
 
     public static final Supplier<ImmutableMap<Block, Block>> FLOWERY_BLOCKS = Suppliers.memoize(() -> ImmutableMap.<Block, Block>builder()
@@ -101,11 +100,7 @@ public class WeatheringHelper {
         return Optional.ofNullable(BARK_PARTICLES.get().get(state.getBlock()));
     }
 
-    /**
-     * Grabs block positions around center pos. Order of these is random and depends on current blockpos
-     *
-     * @param centerPos center pos
-     */
+
     public static List<BlockPos> grabBlocksAroundRandomly(BlockPos centerPos, int radiusX, int radiusY, int radiusZ) {
         var list = BlockPos.withinManhattanStream(centerPos, radiusX, radiusY, radiusZ)
                 .map(BlockPos::new)
@@ -115,14 +110,7 @@ public class WeatheringHelper {
         return list;
     }
 
-    /**
-     * optimized version of BlockPos.withinManhattanStream / BlockPos.expandOutwards that tries to limit world.getBlockState calls
-     * Remember to call  "if (!level.isAreaLoaded(pos, radius)) return" before calling this
-     *
-     * @param blockPredicate type of target block
-     * @param requiredAmount maximum amount of blocks that we want around this
-     * @return true if blocks around that match the given predicate exceed(inclusive) the maximum size given
-     */
+
     public static boolean hasEnoughBlocksAround(BlockPos centerPos, int radiusX, int radiusY, int radiusZ, Level world, Predicate<BlockState> blockPredicate, int requiredAmount) {
 
         var lis = grabBlocksAroundRandomly(centerPos, radiusX, radiusY, radiusZ);
@@ -285,3 +273,5 @@ public class WeatheringHelper {
         return false;
     }
 }
+
+ */

@@ -1,13 +1,9 @@
-package com.ordana.immersive_weathering;
+package com.ordana.immersive_weathering.forge;
 
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.common_delete.blocks.LeafPilesRegistry;
-import com.ordana.immersive_weathering.block_growth.rute_test.BlockSetMatchTest;
-import com.ordana.immersive_weathering.block_growth.rute_test.FluidMatchTest;
-import com.ordana.immersive_weathering.block_growth.rute_test.LogMatchTest;
-import com.ordana.immersive_weathering.forge.ModRegistry;
-import com.ordana.immersive_weathering.reg.ModCompostable;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
@@ -21,9 +17,7 @@ import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -52,7 +46,6 @@ public class ImmersiveWeatheringForge {
         ModRegistry.FEATURES.register(bus);
 
         ImmersiveWeathering.commonInit();
-
 
         /**
          * Update stuff:

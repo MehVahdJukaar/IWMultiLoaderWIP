@@ -1,7 +1,6 @@
 package com.ordana.immersive_weathering.forge.rustable;
 
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.common_delete.ModParticles;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import com.ordana.immersive_weathering.reg.ModWaxables;
@@ -117,14 +116,13 @@ public class RustableBarsBlock extends IronBarsBlock implements Rustable {
     @Nullable
     @Override
     public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-        if(this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)){
+        if (this.getAge() != RustLevel.RUSTED && ToolActions.AXE_SCRAPE.equals(toolAction)) {
             return this.getPrevious(state).orElse(null);
-        }
-        else if(ToolActions.AXE_WAX_OFF.equals(toolAction)){
-           var v = ModWaxables.getUnWaxedState(state);
-           if(v.isPresent()){
-               return v.get();
-           }
+        } else if (ToolActions.AXE_WAX_OFF.equals(toolAction)) {
+            var v = ModWaxables.getUnWaxed(state);
+            if (v.isPresent()) {
+                return v.get();
+            }
         }
         return super.getToolModifiedState(state, level, pos, player, stack, toolAction);
     }

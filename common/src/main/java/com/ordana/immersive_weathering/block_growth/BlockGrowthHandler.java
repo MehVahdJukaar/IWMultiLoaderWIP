@@ -27,10 +27,21 @@ import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.io.FileWriter;
 import java.util.*;
+import java.util.function.Supplier;
 
 import static com.ordana.immersive_weathering.block_growth.BlockGrowthConfiguration.CODEC;
 
 public class BlockGrowthHandler extends SimpleJsonResourceReloadListener {
+
+    public static BlockGrowthHandler getInstance(){
+        return getInstance(BlockGrowthHandler::new);
+    }
+    public static <T extends BlockGrowthHandler> T getInstance(Supplier<T> factory){
+        if(INSTANCE == null)INSTANCE = factory.get();
+        return (T) INSTANCE;
+    }
+
+    private static BlockGrowthHandler INSTANCE;
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create(); //json object that will write stuff
 

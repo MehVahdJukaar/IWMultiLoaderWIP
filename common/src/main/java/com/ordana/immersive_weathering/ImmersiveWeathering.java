@@ -40,4 +40,5 @@ public class ImmersiveWeathering {
     //hanging roots item override (mixin for fabric override for forge)
     //RE add lightning strike growths
     //TODO: disabled conditional growth. add command system
+    //fire mixin
 }

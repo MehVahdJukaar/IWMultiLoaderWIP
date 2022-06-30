@@ -1,7 +1,6 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.mixin.forge;
 
-import com.ordana.immersive_weathering.common_delete.blocks.AshBlock;
-import com.ordana.immersive_weathering.common_delete.blocks.SootLayerBlock;
+
 import com.ordana.immersive_weathering.reg.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +23,7 @@ import java.util.Random;
 
 @Mixin(FireBlock.class)
 public abstract class FireMixin {
-
+/*
     //TODO: re add to main mixin
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(BlockState state, ServerLevel level, BlockPos pos, Random random, CallbackInfo ci) {
@@ -87,4 +86,6 @@ public abstract class FireMixin {
     private void beforeRemoveBlock(Level pLevel, BlockPos pPos, int pChance, Random pRandom, int pAge, Direction face, CallbackInfo ci) {
         bs = pLevel.getBlockState(pPos);
     }
+
+ */
 }

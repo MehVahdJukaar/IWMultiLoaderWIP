@@ -1,9 +1,8 @@
 package com.ordana.immersive_weathering.forge;
 
-import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
 import com.ordana.immersive_weathering.blocks.ModBlockProperties;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModTags;
-import net.minecraft.block.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -25,12 +24,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BeetrootBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -88,7 +84,7 @@ public class MulchBlock extends Block {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
 
         BlockState cropState = world.getBlockState(pos.above());
-        if (ImmersiveWeatheringFabric.getConfig().leavesConfig.mulchGrowsCrops) {
+        if (CommonConfigs.MULCH_GROWS_CROPS.get()) {
             if (state.getValue(MulchBlock.SOAKED)) {
                 if (world.getRawBrightness(pos.above(), 0) >= 9) {
                     if (cropState.getBlock() instanceof BeetrootBlock) {
@@ -119,12 +115,11 @@ public class MulchBlock extends Block {
             }
         }
         if (temperature < 0 || isTouchingWater) {
-            if (state.getValue(MOISTURE) == 0) {
-                world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 7));
+            if (!state.getValue(SOAKED)) {
+                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
             }
-        }
-        else if (temperature > 0 && state.getValue(MOISTURE) == 7) {
-            world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 0));
+        } else if (temperature > 0 && state.getValue(SOAKED)) {
+            world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
         }
     }
 
@@ -135,7 +130,7 @@ public class MulchBlock extends Block {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(MOISTURE);
+        stateManager.add(SOAKED);
     }
 
 

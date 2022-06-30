@@ -1,6 +1,6 @@
 package com.ordana.immersive_weathering.fabric;
 
-import com.ordana.immersive_weathering.ImmersiveWeatheringFabric;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -66,7 +66,7 @@ public class MulchBlock extends FarmBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
-        if (state.getValue(MOISTURE) == 7) {
+        if (isSoaked(state)) {
             if (random.nextInt(25) == 1) {
                 BlockPos blockpos = pos.below();
                 BlockState blockstate = level.getBlockState(blockpos);
@@ -84,7 +84,7 @@ public class MulchBlock extends FarmBlock {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
 
         BlockState cropState = world.getBlockState(pos.above());
-        if (ImmersiveWeatheringFabric.getConfig().leavesConfig.mulchGrowsCrops) {
+        if (CommonConfigs.MULCH_GROWS_CROPS.get()) {
             if (state.getValue(MulchBlock.MOISTURE) == 7) {
                 if (world.getRawBrightness(pos.above(), 0) >= 9) {
                     if (cropState.getBlock() instanceof BeetrootBlock) {
@@ -119,9 +119,13 @@ public class MulchBlock extends FarmBlock {
                 world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 7));
             }
         }
-        else if (temperature > 0 && state.getValue(MOISTURE) == 7) {
+        else if (temperature > 0 && isSoaked(state)) {
             world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 0));
         }
+    }
+
+    private boolean isSoaked(BlockState state) {
+        return state.getValue(MOISTURE) == 7;
     }
 
     @Override
@@ -139,20 +143,20 @@ public class MulchBlock extends FarmBlock {
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.isSecondaryUseActive()) {
             // empty bucket into mulch
-            if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && !state.getValue(SOAKED)) {
+            if (player.getItemInHand(hand).is(Items.WATER_BUCKET) && !isSoaked(state)) {
                 if (!player.isCreative()) {
                     player.setItemInHand(hand, new ItemStack(Items.BUCKET));
                 }
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, true));
+                world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 7));
                 world.playSound(player, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }
             // fill bucket from mulch
-            else if (player.getItemInHand(hand).is(Items.BUCKET) && state.getValue(SOAKED)) {
+            else if (player.getItemInHand(hand).is(Items.BUCKET) && isSoaked(state)) {
                 if (!player.isCreative()) {
                     player.setItemInHand(hand, new ItemStack(Items.WATER_BUCKET));
                 }
-                world.setBlockAndUpdate(pos, state.setValue(SOAKED, false));
+                world.setBlockAndUpdate(pos, state.setValue(MOISTURE, 7));
                 world.playSound(player, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                 return InteractionResult.SUCCESS;
             }

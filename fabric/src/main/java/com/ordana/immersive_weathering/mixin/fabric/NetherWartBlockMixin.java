@@ -1,6 +1,6 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.mixin.fabric;
 
-import com.ordana.immersive_weathering.registry_delete.ModTags;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.NetherWartBlock;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(NetherWartBlock.class)
 public abstract class NetherWartBlockMixin {
 
-    @Inject(method = "canPlantOnTop", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "mayPlaceOn", at = @At("HEAD"), cancellable = true)
     protected void canPlantOnTop(BlockState floor, BlockGetter world, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (floor.is(ModTags.WART_GROW_BLOCKS)) {
             cir.setReturnValue(true);

@@ -1,19 +1,17 @@
 package com.ordana.immersive_weathering.fabric.rustable;
 
-import java.util.Random;
-
-import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
-import com.ordana.immersive_weathering.registry.ModTags;
-import net.minecraft.block.*;
+import com.ordana.immersive_weathering.configs.CommonConfigs;
+import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
+
+import java.util.Random;
 
 public class RustableSlabBlock extends SlabBlock implements Rustable {
     private final Rustable.RustLevel rustLevel;
@@ -24,8 +22,8 @@ public class RustableSlabBlock extends SlabBlock implements Rustable {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random){
-        if(ImmersiveWeathering.getConfig().blockGrowthConfig.blockRusting) {
+    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+        if (CommonConfigs.RUSTING.get()) {
             if (world.getBlockState(pos).is(ModTags.CLEAN_IRON)) {
                 for (Direction direction : Direction.values()) {
                     var targetPos = pos.relative(direction);

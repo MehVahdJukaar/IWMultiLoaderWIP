@@ -1,4 +1,4 @@
-package com.ordana.immersive_weathering.mixin;
+package com.ordana.immersive_weathering.mixin.forge;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

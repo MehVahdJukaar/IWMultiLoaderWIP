@@ -1,5 +1,6 @@
-package com.ordana.immersive_weathering.blocks;
+package com.ordana.immersive_weathering.forge;
 
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.minecraft.core.BlockPos;
@@ -18,12 +19,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.PlantType;
 
 import java.util.Random;
 
@@ -136,5 +140,11 @@ public class NulchBlock extends Block {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
+        if (plantable.getPlantType(world, pos) == PlantType.NETHER) return true;
+        return super.canSustainPlant(state, world, pos, facing, plantable);
     }
 }

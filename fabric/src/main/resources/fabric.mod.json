@@ -16,7 +16,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.ordana.immersive_weathering.ImmersiveWeatheringFabric"
+      "com.ordana.immersive_weathering.fabric.ImmersiveWeatheringFabric"
     ]
   },
   "mixins": [
