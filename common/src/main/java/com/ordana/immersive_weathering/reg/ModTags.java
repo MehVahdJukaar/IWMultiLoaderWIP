@@ -2,8 +2,6 @@ package com.ordana.immersive_weathering.reg;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -56,7 +54,6 @@ public final class ModTags {
     public static final TagKey<Biome> HAS_IVY = registerBiomeTag("has_ivy");
 
 
-
     //entity type
     /**
      * For water permafrost and icicles. All animals with fur or that live near cold biomes
@@ -82,18 +79,18 @@ public final class ModTags {
     }
 
     private static TagKey<Block> registerBlockTag(String id) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, ImmersiveWeathering.res( id));
+        return TagKey.create(Registry.BLOCK_REGISTRY, ImmersiveWeathering.res(id));
     }
 
     private static TagKey<Item> registerItemTag(String id) {
-        return TagKey.create(Registry.ITEM_REGISTRY,ImmersiveWeathering.res(id));
+        return TagKey.create(Registry.ITEM_REGISTRY, ImmersiveWeathering.res(id));
     }
 
     private static TagKey<Biome> registerBiomeTag(String id) {
-        return TagKey.create(Registry.BIOME_REGISTRY, ImmersiveWeathering.res( id));
+        return TagKey.create(Registry.BIOME_REGISTRY, ImmersiveWeathering.res(id));
     }
 
     private static TagKey<EntityType<?>> registerEntityTag(String id) {
-        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, ImmersiveWeathering.res( id));
+        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, ImmersiveWeathering.res(id));
     }
 }

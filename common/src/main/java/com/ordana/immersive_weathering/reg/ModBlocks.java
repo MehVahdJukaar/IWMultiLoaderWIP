@@ -14,6 +14,7 @@ import com.ordana.immersive_weathering.platform.CommonPlatform;
 import com.ordana.immersive_weathering.platform.RegistryPlatform;
 import com.ordana.immersive_weathering.platform.RegistryPlatform.BlockType;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -44,13 +45,18 @@ public class ModBlocks {
 
     public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory, CreativeModeTab tab) {
         Supplier<T> block = regBlock(name, blockFactory);
-        ModItems.regBlockItem(name, block, new Item.Properties().tab(tab));
+        regBlockItem(name, block, new Item.Properties().tab(tab));
         return block;
     }
 
     public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> block, String requiredMod) {
         CreativeModeTab tab = CommonPlatform.isModLoaded(requiredMod) ? CreativeModeTab.TAB_BUILDING_BLOCKS : null;
         return regWithItem(name, block, tab);
+    }
+
+
+    public static Supplier<BlockItem> regBlockItem(String name, Supplier<? extends Block> blockSup, Item.Properties properties) {
+        return RegistryPlatform.registerItem(name, () -> new BlockItem(blockSup.get(), properties));
     }
 
     //predicates

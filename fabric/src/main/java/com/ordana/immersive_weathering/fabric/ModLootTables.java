@@ -31,7 +31,7 @@ public class ModLootTables {
 
     public static void registerLootTables() {
 
-        LootTableLoadingCallback.EVENT.register((resourceManager, lootManager, id, table, setter) ->
+        LootTableLoadingCallback.EVENT.add((resourceManager, lootManager, id, table, setter) ->
                 {
                     //mobs
                     if (BLAZE_ID.equals(id)) {

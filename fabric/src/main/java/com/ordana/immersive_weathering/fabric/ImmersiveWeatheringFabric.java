@@ -24,6 +24,7 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
     public void onInitialize() {
 
         ImmersiveWeathering.commonInit();
+        ModRegistry.registerEntries();
 
         ModWaxables.getValues().forEach(OxidizableBlocksRegistry::registerWaxableBlockPair);
 
@@ -40,9 +41,9 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
 
         FabricLoader.getInstance().getModContainer(ImmersiveWeatheringFabric.MOD_ID).ifPresent(modContainer -> {
             ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("better_brick_items"), modContainer, ResourcePackActivationType.NORMAL);
-            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("immersive_weathering:better_brick_blocks"), modContainer, ResourcePackActivationType.NORMAL);
-            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("immersive_weathering:visual_waxed_iron_items"), modContainer, ResourcePackActivationType.NORMAL);
-            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("immersive_weathering:biome_tinted_mossy_blocks"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("better_brick_blocks"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("visual_waxed_iron_items"), modContainer, ResourcePackActivationType.NORMAL);
+            ResourceManagerHelper.registerBuiltinResourcePack(ImmersiveWeathering.res("biome_tinted_mossy_blocks"), modContainer, ResourcePackActivationType.NORMAL);
         });
     }
 
@@ -56,7 +57,7 @@ public class ImmersiveWeatheringFabric implements ModInitializer {
 
     /*
     private static final Supplier<ServerConfig> CONFIG = Util.make(() -> {
-        AutoConfig.register(ServerConfig.class, JanksonConfigSerializer::new);
+        AutoConfig.add(ServerConfig.class, JanksonConfigSerializer::new);
         return AutoConfig.getConfigHolder(ServerConfig.class);
     });
 

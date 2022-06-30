@@ -33,7 +33,7 @@ import java.util.List;
 
 public class CommonPlatformImpl {
 
-    public CommonPlatform.Platform getPlatform() {
+    public static CommonPlatform.Platform getPlatform() {
         return CommonPlatform.Platform.FABRIC;
     }
 
@@ -89,6 +89,7 @@ public class CommonPlatformImpl {
         BiomeModifications.addFeature(BiomeSelectors.tag(tagKey), step, feature);
 
     }
+
 
 
 }

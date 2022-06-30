@@ -16,10 +16,6 @@ public class ModItems {
 
     public static void init(){}
 
-    public static Supplier<BlockItem> regBlockItem(String name, Supplier<? extends Block> blockSup, Item.Properties properties) {
-        return RegistryPlatform.registerItem(name, () -> new BlockItem(blockSup.get(), properties));
-    }
-
     public static <T extends Item> Supplier<T> regItem(String name, Supplier<T> itemSup) {
         return RegistryPlatform.registerItem(name, itemSup);
     }

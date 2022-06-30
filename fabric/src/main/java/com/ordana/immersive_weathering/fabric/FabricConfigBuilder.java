@@ -51,6 +51,8 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public Supplier<Boolean> define(String name, boolean defaultValue) {
         assert currentCategory != null;
         Wrapper<Boolean> value = new Wrapper<>();
+        //TODO: fix up
+        value.set(defaultValue);
 
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()
@@ -67,6 +69,8 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public Supplier<Double> define(String name, double defaultValue, double min, double max) {
         assert currentCategory != null;
         Wrapper<Double> value = new Wrapper<>();
+        value.set(defaultValue);
+
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()
                 .startDoubleField(description(name), defaultValue)
@@ -82,6 +86,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public Supplier<Integer> define(String name, int defaultValue, int min, int max) {
         assert currentCategory != null;
         Wrapper<Integer> value = new Wrapper<>();
+        value.set(defaultValue);
 
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()
@@ -98,6 +103,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public Supplier<String> define(String name, String defaultValue) {
         assert currentCategory != null;
         Wrapper<String> value = new Wrapper<>();
+        value.set(defaultValue);
 
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()
@@ -114,6 +120,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public <V extends Enum<V>> Supplier<V> define(String name, V defaultValue) {
         assert currentCategory != null;
         Wrapper<V> value = new Wrapper<>();
+        value.set(defaultValue);
 
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()

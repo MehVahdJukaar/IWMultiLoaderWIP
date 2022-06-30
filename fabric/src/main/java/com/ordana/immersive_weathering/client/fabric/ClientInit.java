@@ -3,10 +3,19 @@ package com.ordana.immersive_weathering.client.fabric;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.client.ImmersiveWeatheringClient;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.ParticleProvider;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.world.inventory.InventoryMenu;
+
+import java.util.function.Function;
 
 public class ClientInit implements ClientModInitializer {
 
@@ -16,6 +25,7 @@ public class ClientInit implements ClientModInitializer {
         ImmersiveWeatheringClient.onRegisterEntityRenderTypes(EntityRendererRegistry::register);
         ImmersiveWeatheringClient.onRegisterBlockColors(ColorProviderRegistry.BLOCK::register);
         ImmersiveWeatheringClient.onRegisterItemColors(ColorProviderRegistry.ITEM::register);
+        ImmersiveWeatheringClient.onRegisterParticles(ClientInit::registerParticle);
 
         ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register(((atlasTexture, registry) -> {
             registry.register(ImmersiveWeathering.res( "particle/ember_0"));
@@ -73,5 +83,12 @@ public class ClientInit implements ClientModInitializer {
             registry.register(ImmersiveWeathering.res( "particle/bee_1"));
 
         }));
+
+
+    }
+
+    private static <T extends ParticleOptions> void registerParticle(ParticleType<T> type, Function<SpriteSet,
+            ParticleProvider<T>> registration) {
+        ParticleFactoryRegistry.getInstance().register(type,registration::apply);
     }
 }

@@ -2,6 +2,7 @@ package com.ordana.immersive_weathering.platform.fabric;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.blocks.rustable.Rustable;
+import com.ordana.immersive_weathering.fabric.ModRegistry;
 import com.ordana.immersive_weathering.fabric.MulchBlock;
 import com.ordana.immersive_weathering.fabric.NulchBlock;
 import com.ordana.immersive_weathering.fabric.rustable.*;
@@ -29,35 +30,29 @@ import java.util.function.Supplier;
 public class RegistryPlatformImpl {
 
     public static <T extends Block> Supplier<T> registerBlock(String name, Supplier<T> block) {
-        var o = Registry.register(Registry.BLOCK, ImmersiveWeathering.res(name), block.get());
-        return () -> o;
+        return ModRegistry.BLOCKS.add(() -> Registry.register(Registry.BLOCK, ImmersiveWeathering.res(name), block.get()));
     }
 
     public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item) {
-        var o = Registry.register(Registry.ITEM, ImmersiveWeathering.res(name), item.get());
-        return () -> o;
+        return ModRegistry.ITEMS.add(() -> Registry.register(Registry.ITEM, ImmersiveWeathering.res(name), item.get()));
     }
 
     public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> registerBlockEntityType(String name, Supplier<T> blockEntity) {
-        var o = Registry.register(Registry.BLOCK_ENTITY_TYPE, ImmersiveWeathering.res(name), blockEntity.get());
-        return () -> o;
+        return ModRegistry.BLOCK_ENTITIES.add(() ->Registry.register(Registry.BLOCK_ENTITY_TYPE, ImmersiveWeathering.res(name), blockEntity.get()));
     }
 
     public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory, MobCategory category, float width, float height, int clientTrackingRange, int updateInterval) {
-        var o = Registry.register(Registry.ENTITY_TYPE, ImmersiveWeathering.res(name),
-                EntityType.Builder.of(factory, category).sized(width, height).build(name));
-        return () -> o;
+        return ModRegistry.ENTITIES.add(()-> Registry.register(Registry.ENTITY_TYPE, ImmersiveWeathering.res(name),
+                EntityType.Builder.of(factory, category).sized(width, height).build(name)));
     }
 
-    public static <T extends Feature<?>>  Supplier<T> registerFeature(String name, Supplier<T> feature) {
-        var o = Registry.register(Registry.FEATURE, ImmersiveWeathering.res(name), feature.get());
-        return () -> o;
+    public static <T extends Feature<?>> Supplier<T> registerFeature(String name, Supplier<T> feature) {
+        return ModRegistry.FEATURES.add(() -> Registry.register(Registry.FEATURE, ImmersiveWeathering.res(name), feature.get()));
     }
 
     public static Supplier<SimpleParticleType> registerParticle(String name) {
-        SimpleParticleType instance = Registry.register(Registry.PARTICLE_TYPE,
-                ImmersiveWeathering.res(name), FabricParticleTypes.simple());
-        return () -> instance;
+        return ModRegistry.PARTICLES.add(() -> Registry.register(Registry.PARTICLE_TYPE,
+                ImmersiveWeathering.res(name), FabricParticleTypes.simple()));
     }
 
     @SuppressWarnings("unchecked")
@@ -72,7 +67,8 @@ public class RegistryPlatformImpl {
             case RUSTABLE_DOOR -> new RustableDoorBlock((Rustable.RustLevel) extraParams[0], properties);
             case RUSTABLE_SLAB -> new RustableSlabBlock((Rustable.RustLevel) extraParams[0], properties);
             case RUSTABLE_TRAPDOOR -> new RustableTrapdoorBlock((Rustable.RustLevel) extraParams[0], properties);
-            case RUSTABLE_VERTICAL_SLAB -> new RustableVerticalSlabBlock((Rustable.RustLevel) extraParams[0], properties);
+            case RUSTABLE_VERTICAL_SLAB ->
+                    new RustableVerticalSlabBlock((Rustable.RustLevel) extraParams[0], properties);
         };
     }
 
@@ -85,17 +81,12 @@ public class RegistryPlatformImpl {
     }
 
     public static void registerBlockFlammability(Block item, int fireSpread, int flammability) {
-        FlammableBlockRegistry.getDefaultInstance().add(item,fireSpread, flammability);
+        FlammableBlockRegistry.getDefaultInstance().add(item, fireSpread, flammability);
     }
 
     public static void registerCompostable(ItemLike item, float chance) {
         ComposterBlock.COMPOSTABLES.put(item, chance);
     }
-
-
-
-
-
 
 
 }

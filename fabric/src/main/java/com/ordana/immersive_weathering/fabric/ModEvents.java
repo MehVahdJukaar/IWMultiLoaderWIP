@@ -286,7 +286,7 @@ public class ModEvents {
     }
 
     public static void registerEvents() {
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+        UseBlockCallback.EVENT.add((player, world, hand, hitResult) -> {
 
             BlockPos targetPos = hitResult.getBlockPos();
             BlockPos fixedPos = targetPos.relative(hitResult.getDirection());
