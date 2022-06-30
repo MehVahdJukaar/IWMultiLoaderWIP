@@ -51,7 +51,7 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
 
     @Inject(method = "shouldSpreadLiquid", at = @At("HEAD"), cancellable = true)
     private void shouldSpreadLiquid(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        var fluid = this.getFluid();
+        var fluid = this.getOwnFluid();
         if (fluid != null && fluid.is(FluidTags.LAVA)) {
             boolean hasWater = false;
             boolean blueIceDown = false;
@@ -145,14 +145,14 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
 
     @Override
     public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (world.getBiome(pos).is(ModTags.ICY) && this.getFluid().is(FluidTags.WATER)) {
+        if (world.getBiome(pos).is(ModTags.ICY) && this.getOwnFluid().is(FluidTags.WATER)) {
             var freezing = CommonConfigs.FREEZING_WATER_SEVERITY.get();
             WeatheringHelper.applyFreezing(entity, freezing, true);
         }
     }
 
     @Unique
-    public FlowingFluid getFluid() {
+    public FlowingFluid getOwnFluid() {
         var f = CommonPlatform.getFlowingFluid((LiquidBlock) (Object) this);
         if (f == null) return this.fluid;
         return f;

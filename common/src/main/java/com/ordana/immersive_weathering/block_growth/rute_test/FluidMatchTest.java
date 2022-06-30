@@ -29,7 +29,7 @@ public class FluidMatchTest extends RuleTest {
     protected RuleTestType<FluidMatchTest> getType() {
         return TYPE;
     }
-    //just need to load and static init will register
-    public static void init() {}
+    //just need to load and static register will register
+    public static void register() {}
 
 }

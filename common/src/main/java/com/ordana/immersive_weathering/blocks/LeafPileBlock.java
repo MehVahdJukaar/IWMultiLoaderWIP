@@ -97,6 +97,10 @@ public class LeafPileBlock extends LayerBlock implements BonemealableBlock {
         return 1;
     }
 
+    @Override
+    public VoxelShape getDefaultShape(BlockState state) {
+        return SHAPE_BY_LAYER_L[state.getValue(LAYERS)];
+    }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {

@@ -147,8 +147,16 @@ public class ImmersiveWeatheringClient {
 
         event.register(ModParticles.SCRAPE_RUST.get(), ScrapeRustFactory::new);
 
-        //flower crowns
-        event.register(ModParticles.CROWN_BEE.get(), LeafParticle.SimpleLeafParticle::new);
+        event.register(ModParticles.OAK_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.BIRCH_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.SPRUCE_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.DARK_OAK_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.JUNGLE_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.ACACIA_BARK.get(), LeafParticle.ColoredLeafParticle::new);
+        event.register(ModParticles.NETHER_SCALE.get(), LeafParticle.SimpleLeafParticle::new);
+
+        event.register(ModParticles.MOSS.get(), LeafParticle.SimpleLeafParticle::new);
+       // event.register(ModParticles.CROWN_BEE.get(), LeafParticle.SimpleLeafParticle::new);
     }
 
     private static class ScrapeRustFactory extends GlowParticle.ScrapeProvider {

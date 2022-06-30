@@ -28,13 +28,13 @@ public class ModRegistry {
 
 
     public static void init(IEventBus bus) {
+        ModRegistry.ITEMS.register(bus);
         ModRegistry.BLOCKS.register(bus);
         ModRegistry.BLOCK_ENTITIES.register(bus);
         ModRegistry.ENTITIES.register(bus);
-        ModRegistry.ITEMS.register(bus);
         ModRegistry.PARTICLES.register(bus);
         ModRegistry.FEATURES.register(bus);
-
+        bus.addGenericListener(Item.class, ModRegistry::registerOverrides);
     }
 
     public static void registerOverrides(RegistryEvent.Register<Item> event){

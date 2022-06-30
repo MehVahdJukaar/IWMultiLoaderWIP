@@ -19,22 +19,24 @@ public class ImmersiveWeathering {
 
     //called either on mod creation on fabric or mod setup on forge
     public static void commonInit(){
+        CommonConfigs.init();
+
         ModBlocks.init();
         ModItems.init();
         ModEntities.init();
         ModParticles.init();
-        CommonConfigs.init();
+        ModFeatures.init();
     }
 
     public static void commonSetup() {
-        ModCompostable.init();
+        ModCompostable.register();
 
         //rule tests
-        FluidMatchTest.init();
-        LogMatchTest.init();
-        BlockSetMatchTest.init();
-        BurnableTest.init();
-        BlockPropertyTest.init();
+        FluidMatchTest.register();
+        LogMatchTest.register();
+        BlockSetMatchTest.register();
+        BurnableTest.register();
+        BlockPropertyTest.register();
     }
 
     //hanging roots item override (mixin for fabric override for forge)

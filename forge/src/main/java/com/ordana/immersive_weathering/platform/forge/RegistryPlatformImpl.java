@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -32,7 +33,7 @@ public class RegistryPlatformImpl {
     }
 
     public static <T extends Item> Supplier<T> registerItem(String name, Supplier<T> item) {
-        return ModRegistry.ITEMS.register(name,item);
+       return ModRegistry.ITEMS.register(name,item);
     }
 
     public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> registerBlockEntityType(String name, Supplier<T> blockEntity) {

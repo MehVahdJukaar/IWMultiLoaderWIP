@@ -1,5 +1,6 @@
 package com.ordana.immersive_weathering.blocks.charred;
 
+import com.ordana.immersive_weathering.blocks.ModBlockProperties;
 import com.ordana.immersive_weathering.reg.ModParticles;
 import com.ordana.immersive_weathering.reg.ModTags;
 import net.mehvahdjukaar.supplementaries.api.ILightable;
@@ -20,7 +21,7 @@ import java.util.Random;
 
 public interface Charred extends ILightable {
 
-    BooleanProperty SMOLDERING = BooleanProperty.create("smoldering");
+    BooleanProperty SMOLDERING = ModBlockProperties.SMOLDERING;
 
     default void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         int temperature = 0;

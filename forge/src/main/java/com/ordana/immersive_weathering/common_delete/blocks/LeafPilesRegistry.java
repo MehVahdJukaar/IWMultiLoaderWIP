@@ -64,7 +64,7 @@ public class LeafPilesRegistry {
 
     public static void registerBus(IEventBus bus) {
      //   if (IntegrationHandler.hasLib) {
-      //      ModDynamicRegistry.init(bus);
+      //      ModDynamicRegistry.register(bus);
       //  }
     }
 

@@ -1,12 +1,17 @@
 package com.ordana.immersive_weathering.platform.forge;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import com.ordana.immersive_weathering.forge.ForgeConfigBuilder;
 
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
@@ -20,9 +25,13 @@ import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +40,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class CommonPlatformImpl {
@@ -109,7 +121,21 @@ public class CommonPlatformImpl {
         return new ForgeConfigBuilder(name,type);
     }
 
+    public static Collection<LeafPileBlock> getLeafPiles() {
+        return List.of();
+    }
 
+    public static void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
+
+        Consumer<BiomeLoadingEvent> c = e->{
+            var biome = ForgeRegistries.BIOMES.getHolder(e.getName());
+            if(biome.isPresent() && biome.get().is(tagKey)){
+                Holder<PlacedFeature> featureHolder = BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(feature);
+                e.getGeneration().addFeature(step, featureHolder);
+            }
+        };
+        MinecraftForge.EVENT_BUS.addListener(c);
+    }
 
 
 }

@@ -43,9 +43,9 @@ public class BlockPropertyTest extends RuleTest {
     protected RuleTestType<BlockPropertyTest> getType() {
         return TYPE;
     }
-    //just need to load and static init will register
+    //just need to load and static register will register
 
-    public static void init() {
+    public static void register() {
     }
 
 

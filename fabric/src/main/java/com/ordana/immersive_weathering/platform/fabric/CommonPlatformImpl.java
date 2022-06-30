@@ -1,29 +1,39 @@
 package com.ordana.immersive_weathering.platform.fabric;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
 import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.material.FlowingFluid;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.List;
 
 public class CommonPlatformImpl {
 
-    public CommonPlatform.Platform getPlatform(){
+    public CommonPlatform.Platform getPlatform() {
         return CommonPlatform.Platform.FABRIC;
     }
 
@@ -68,7 +78,16 @@ public class CommonPlatformImpl {
     }
 
     public static ConfigBuilderWrapper getConfigBuilder(String name, ConfigBuilderWrapper.ConfigType type) {
-        return new FabricConfigBuilder(name,type);
+        return new FabricConfigBuilder(name, type);
+    }
+
+    public static Collection<LeafPileBlock> getLeafPiles() {
+        return List.of();
+    }
+
+    public static void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
+        BiomeModifications.addFeature(BiomeSelectors.tag(tagKey), step, feature);
+
     }
 
 

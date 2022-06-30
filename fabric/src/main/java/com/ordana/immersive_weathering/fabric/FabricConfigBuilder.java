@@ -51,6 +51,7 @@ public class FabricConfigBuilder extends ConfigBuilderWrapper {
     public Supplier<Boolean> define(String name, boolean defaultValue) {
         assert currentCategory != null;
         Wrapper<Boolean> value = new Wrapper<>();
+
         var list = currentCategory.getSecond();
         list.add((b, c) -> c.addEntry(b.entryBuilder()
                 .startBooleanToggle(description(name), defaultValue)

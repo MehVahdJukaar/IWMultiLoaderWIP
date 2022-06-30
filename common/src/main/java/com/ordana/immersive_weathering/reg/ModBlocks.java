@@ -42,10 +42,10 @@ public class ModBlocks {
         return regWithItem(name, block, CreativeModeTab.TAB_BUILDING_BLOCKS);
     }
 
-    public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> block, CreativeModeTab tab) {
-        Supplier<T> toReturn = regBlock(name, block);
+    public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory, CreativeModeTab tab) {
+        Supplier<T> block = regBlock(name, blockFactory);
         ModItems.regBlockItem(name, block, new Item.Properties().tab(tab));
-        return toReturn;
+        return block;
     }
 
     public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> block, String requiredMod) {
@@ -56,7 +56,7 @@ public class ModBlocks {
     //predicates
 
     private static ToIntFunction<BlockState> litLightLevel(int litLevel) {
-        return (state) -> state.getValue(BlockStateProperties.LIT) ? litLevel : 0;
+        return (state) -> state.getValue(ModBlockProperties.SMOLDERING) ? litLevel : 0;
     }
 
     private static ToIntFunction<BlockState> moltenLightLevel(int litLevel) {

@@ -45,7 +45,7 @@ public class ThinIceBlock extends IceBlock implements LiquidBlockContainer {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateManager) {
-        stateManager.add(CRACKED);
+        stateManager.add(CRACKED,HAS_ICE);
     }
 
     @Override
