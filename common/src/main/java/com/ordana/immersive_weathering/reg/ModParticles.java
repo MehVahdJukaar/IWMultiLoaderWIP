@@ -25,9 +25,9 @@ public class ModParticles {
 
     //ash
 
-    public static final Supplier<SimpleParticleType> EMBER = RegistryPlatform.registerParticle("");
-    public static final Supplier<SimpleParticleType> SOOT = RegistryPlatform.registerParticle("");
-    public static final Supplier<SimpleParticleType> EMBERSPARK = RegistryPlatform.registerParticle("");
+    public static final Supplier<SimpleParticleType> EMBER = RegistryPlatform.registerParticle("ember");
+    public static final Supplier<SimpleParticleType> SOOT = RegistryPlatform.registerParticle("soot");
+    public static final Supplier<SimpleParticleType> EMBERSPARK = RegistryPlatform.registerParticle("emberspark");
 
     //bark
 

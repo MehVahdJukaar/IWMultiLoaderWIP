@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
 import com.ordana.immersive_weathering.common_delete.blocks.LeafPilesRegistry;
+import com.ordana.immersive_weathering.reg.ModBlocks;
 import com.ordana.immersive_weathering.reg.ModWaxables;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
@@ -11,8 +12,11 @@ import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.HoneycombItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.data.loading.DatagenModLoader;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +30,7 @@ import net.minecraftforge.resource.PathResourcePack;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.function.Supplier;
 
 /**
  * Author: Ordana, Keybounce, MehVahdJukaar
@@ -38,12 +43,10 @@ public class ImmersiveWeatheringForge {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModRegistry.BLOCKS.register(bus);
-        ModRegistry.BLOCK_ENTITIES.register(bus);
-        ModRegistry.ENTITIES.register(bus);
-        ModRegistry.ITEMS.register(bus);
-        ModRegistry.PARTICLES.register(bus);
-        ModRegistry.FEATURES.register(bus);
+        ModRegistry.init(bus);
+
+
+
 
         ImmersiveWeathering.commonInit();
 
@@ -63,6 +66,8 @@ public class ImmersiveWeatheringForge {
         bus.addListener(ImmersiveWeatheringForge::init);
         bus.addListener(ImmersiveWeatheringForge::addPackFinders);
     }
+
+
 
     public static void init(final FMLCommonSetupEvent event) {
         event.enqueueWork(()->{

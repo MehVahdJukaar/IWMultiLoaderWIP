@@ -10,6 +10,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,9 +27,20 @@ public class ModRegistry {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, ImmersiveWeathering.MOD_ID);
 
 
-    //override
-    public static final Supplier<Item> HANGING_ROOTS_ITEM = ITEMS.register("minecraft:hanging_roots", () ->
-            new CeilingAndWallBlockItem(Blocks.HANGING_ROOTS, ModBlocks.HANGING_ROOTS_WALL.get(),
-                    new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
+    public static void init(IEventBus bus) {
+        ModRegistry.BLOCKS.register(bus);
+        ModRegistry.BLOCK_ENTITIES.register(bus);
+        ModRegistry.ENTITIES.register(bus);
+        ModRegistry.ITEMS.register(bus);
+        ModRegistry.PARTICLES.register(bus);
+        ModRegistry.FEATURES.register(bus);
 
+    }
+
+    public static void registerOverrides(RegistryEvent.Register<Item> event){
+        //override
+        event.getRegistry().register(
+                new CeilingAndWallBlockItem(Blocks.HANGING_ROOTS, ModBlocks.HANGING_ROOTS_WALL.get(),
+                        new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)).setRegistryName("minecraft:hanging_roots"));
+    }
 }

@@ -23,6 +23,7 @@ import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -150,7 +151,8 @@ public abstract class LiquidBlockMixin extends Block implements BucketPickup {
         }
     }
 
-    private FlowingFluid getFluid() {
+    @Unique
+    public FlowingFluid getFluid() {
         var f = CommonPlatform.getFlowingFluid((LiquidBlock) (Object) this);
         if (f == null) return this.fluid;
         return f;
