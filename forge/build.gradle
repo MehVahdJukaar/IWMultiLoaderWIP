@@ -13,6 +13,10 @@ loom {
     forge {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+
+        mixinConfig "immersive_weathering-common.mixins.json"
+        mixinConfig "immersive_weathering.mixins.json"
+
     }
 }
 

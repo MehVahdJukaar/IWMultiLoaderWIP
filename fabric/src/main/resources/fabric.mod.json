@@ -26,7 +26,8 @@
     ]
   },
   "mixins": [
-    "immersive_weathering.mixins.json"
+    "immersive_weathering.mixins.json",
+    "immersive_weathering-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

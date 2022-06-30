@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.function.Supplier;
 
 @Mixin(ServerLevel.class)
-public abstract class ServerLevellMixin extends Level {
+public abstract class ServerLevelMixin extends Level {
 
 
-    protected ServerLevellMixin(WritableLevelData levelData, ResourceKey<Level> key, Holder<DimensionType> typeHolder, Supplier<ProfilerFiller> supplier, boolean aSuper, boolean aSuper1, long aSuper2) {
+    protected ServerLevelMixin(WritableLevelData levelData, ResourceKey<Level> key, Holder<DimensionType> typeHolder, Supplier<ProfilerFiller> supplier, boolean aSuper, boolean aSuper1, long aSuper2) {
         super(levelData, key, typeHolder, supplier, aSuper, aSuper1, aSuper2);
     }
 
@@ -64,7 +64,7 @@ public abstract class ServerLevellMixin extends Level {
     @Inject(method = "tickChunk",
             require = 0,
             at = @At(value = "TAIL"))
-    private void spawnIcicles(LevelChunk levelChunk, int randomTickSpeed, CallbackInfo ci) {
+    private void precipitationTick(LevelChunk levelChunk, int randomTickSpeed, CallbackInfo ci) {
         var p = this.getProfiler();
         p.push("ImmWeatheringExtraRandomTicks");
         BlockGrowthHandler.performSkyAccessTick((ServerLevel) (Object) this, levelChunk, randomTickSpeed);

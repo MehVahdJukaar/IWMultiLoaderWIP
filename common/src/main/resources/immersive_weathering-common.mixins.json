@@ -1,7 +1,8 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "com.ordana.immersive_weathering.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_17",
   "client": [
     "accessors.RandomBlockMatchTestAccessor"
   ],
@@ -17,8 +18,10 @@
     "RabbitEatGoalMixin",
     "RabbitMixin",
     "RootedDirtBlockMixin",
+    "ServerLevelMixin",
     "SweetBerryBushMixin",
-    "accessors.BiomeAccessor"
+    "accessors.BiomeAccessor",
+    "accessors.IceInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

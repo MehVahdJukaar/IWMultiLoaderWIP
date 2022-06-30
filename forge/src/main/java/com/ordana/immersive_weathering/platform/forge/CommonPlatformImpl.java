@@ -129,7 +129,7 @@ public class CommonPlatformImpl {
     public static void addFeatureToBiome(GenerationStep.Decoration step, TagKey<Biome> tagKey, ResourceKey<PlacedFeature> feature) {
 
         Consumer<BiomeLoadingEvent> c = e->{
-            ModTags
+
             var biome = ForgeRegistries.BIOMES.getHolder(e.getName());
             if(biome.isPresent() && biome.get().is(tagKey)){
                 Holder<PlacedFeature> featureHolder = BuiltinRegistries.PLACED_FEATURE.getHolderOrThrow(feature);

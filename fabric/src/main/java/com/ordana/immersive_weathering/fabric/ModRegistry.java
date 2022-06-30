@@ -52,7 +52,6 @@ public class ModRegistry {
         }
     }
 
-
     static class EntryWrapper<T> implements Supplier<T> {
         private Supplier<T> regSupplier;
         private T entry;

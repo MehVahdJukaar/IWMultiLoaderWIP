@@ -148,4 +148,10 @@ public class NulchBlock extends Block {
         if (plantable.getPlantType(world, pos) == PlantType.NETHER) return true;
         return super.canSustainPlant(state, world, pos, facing, plantable);
     }
+
+    @Override
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir) {
+        return super.hidesNeighborFace(level, pos, state, neighborState, dir);
+    }
+
 }

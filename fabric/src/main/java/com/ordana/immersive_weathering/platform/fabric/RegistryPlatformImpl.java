@@ -38,11 +38,11 @@ public class RegistryPlatformImpl {
     }
 
     public static <T extends BlockEntityType<E>, E extends BlockEntity> Supplier<T> registerBlockEntityType(String name, Supplier<T> blockEntity) {
-        return ModRegistry.BLOCK_ENTITIES.add(() ->Registry.register(Registry.BLOCK_ENTITY_TYPE, ImmersiveWeathering.res(name), blockEntity.get()));
+        return ModRegistry.BLOCK_ENTITIES.add(() -> Registry.register(Registry.BLOCK_ENTITY_TYPE, ImmersiveWeathering.res(name), blockEntity.get()));
     }
 
     public static <T extends Entity> Supplier<EntityType<T>> registerEntityType(String name, EntityType.EntityFactory<T> factory, MobCategory category, float width, float height, int clientTrackingRange, int updateInterval) {
-        return ModRegistry.ENTITIES.add(()-> Registry.register(Registry.ENTITY_TYPE, ImmersiveWeathering.res(name),
+        return ModRegistry.ENTITIES.add(() -> Registry.register(Registry.ENTITY_TYPE, ImmersiveWeathering.res(name),
                 EntityType.Builder.of(factory, category).sized(width, height).build(name)));
     }
 

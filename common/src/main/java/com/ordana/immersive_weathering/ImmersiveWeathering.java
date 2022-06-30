@@ -1,6 +1,8 @@
 package com.ordana.immersive_weathering;
 
+import com.ordana.immersive_weathering.block_growth.position_test.PositionRuleTest;
 import com.ordana.immersive_weathering.block_growth.rute_test.*;
+import com.ordana.immersive_weathering.configs.ClientConfigs;
 import com.ordana.immersive_weathering.configs.CommonConfigs;
 import com.ordana.immersive_weathering.reg.*;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +21,9 @@ public class ImmersiveWeathering {
 
     //called either on mod creation on fabric or mod setup on forge
     public static void commonInit(){
+        //TODO: fabric config API is client only
         CommonConfigs.init();
+        ClientConfigs.init();
 
         ModBlocks.init();
         ModItems.init();
@@ -31,6 +35,7 @@ public class ImmersiveWeathering {
     public static void commonSetup() {
         ModCompostable.register();
 
+        PositionRuleTest.register();
         //rule tests
         FluidMatchTest.register();
         LogMatchTest.register();

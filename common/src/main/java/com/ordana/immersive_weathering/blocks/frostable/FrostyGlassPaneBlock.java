@@ -1,8 +1,12 @@
 package com.ordana.immersive_weathering.blocks.frostable;
 
 import java.util.Random;
+
+import dev.architectury.injectables.annotations.PlatformOnly;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -26,6 +30,18 @@ public class FrostyGlassPaneBlock extends IronBarsBlock implements Frosty {
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
         tryUnFrost(state, world, pos);
+    }
+
+    @Override
+    public boolean skipRendering(BlockState blockState, BlockState neighborState, Direction direction) {
+        if (neighborState.is(Blocks.GLASS)) return true;
+        return super.skipRendering(blockState, neighborState, direction);
+    }
+
+    @PlatformOnly(PlatformOnly.FORGE)
+    public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir) {
+        if(neighborState.is(this)||neighborState.is(Blocks.GLASS))return true;
+        return false;
     }
 
 

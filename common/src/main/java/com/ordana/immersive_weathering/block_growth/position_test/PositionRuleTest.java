@@ -12,6 +12,9 @@ import java.util.Optional;
 
 public interface PositionRuleTest {
 
+    //just loads the class and registers its stuff
+    static void register(){}
+
     PositionRuleTest EMPTY = new PositionRuleTest() {
 
         @Override
