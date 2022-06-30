@@ -74,7 +74,7 @@ public class ModItems {
             new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS).food(ModFoods.GOLDEN_MOSS_CLUMP)));
 
     public static final Supplier<Item> ENCHANTED_GOLDEN_MOSS_CLUMP = regItem("enchanted_golden_moss_clump", () ->
-            new Item(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)
+            new EnchantedGoldenMossClumpItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)
                     .rarity(Rarity.EPIC).food(ModFoods.ENCHANTED_GOLDEN_MOSS_CLUMP)));
 
     //I hate pond water ;_;
@@ -108,6 +108,8 @@ public class ModItems {
             new IceSickleItem(IcicleToolMaterial.INSTANCE, 5, -1f,
                     new Item.Properties().food(ModFoods.ICICLE).tab(CreativeModeTab.TAB_COMBAT)));
 
+    public static final Supplier<Item> THIN_ICE_ITEM = regItem("thin_ice", ()->
+            new ThinIceItem(ModBlocks.THIN_ICE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS)));
 
 
 }

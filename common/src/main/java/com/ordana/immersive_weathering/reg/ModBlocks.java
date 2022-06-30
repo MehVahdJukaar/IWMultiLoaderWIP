@@ -664,7 +664,7 @@ public class ModBlocks {
     public static final Supplier<Block> FROSTY_GLASS_PANE = regWithItem("frosty_glass_pane", () ->
             new FrostyGlassPaneBlock(Properties.copy(Blocks.GLASS_PANE).randomTicks()));
 
-    public static final Supplier<Block> THIN_ICE = regWithItem("thin_ice", () ->
+    public static final Supplier<Block> THIN_ICE = regBlock("thin_ice", () ->
             new ThinIceBlock(Properties.copy(Blocks.ICE)
                     .isViewBlocking(NEVER).isSuffocating(NEVER).isViewBlocking(NEVER)));
 

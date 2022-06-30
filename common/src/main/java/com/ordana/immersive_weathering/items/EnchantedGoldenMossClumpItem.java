@@ -8,6 +8,7 @@ public class EnchantedGoldenMossClumpItem extends Item {
         super(settings);
     }
 
+    @Override
     public boolean isFoil(ItemStack stack) {
         return true;
     }
