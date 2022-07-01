@@ -19,7 +19,8 @@ public class BlockSetMatchTest extends RuleTest {
             Codec.FLOAT.optionalFieldOf("probability",1f).forGetter(b->b.probability)
     ).apply(instance, BlockSetMatchTest::new));
 
-    public static final RuleTestType<BlockSetMatchTest> TYPE = RuleTestType.register("immersive_weathering:block_set_match", CODEC);
+    public static final RuleTestType<BlockSetMatchTest> TYPE = RuleTestType.register(
+            "immersive_weathering:block_set_match", CODEC);
 
     private final HolderSet<Block> blocks;
     private final float probability;

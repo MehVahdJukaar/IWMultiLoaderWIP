@@ -2,11 +2,11 @@
   "growth_chance": 0.01,
   "area_condition": {
     "must_have": {
-      "fluid": "minecraft:lava",
+      "fluids": ["minecraft:lava"],
       "predicate_type": "immersive_weathering:fluid_match"
     },
     "must_not_have": {
-      "fluid": "minecraft:water",
+      "fluids": ["minecraft:water"],
       "predicate_type": "immersive_weathering:fluid_match"
     },
     "radiusX": 3,

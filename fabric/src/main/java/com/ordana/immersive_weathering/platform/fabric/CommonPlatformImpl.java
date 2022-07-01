@@ -3,7 +3,7 @@ package com.ordana.immersive_weathering.platform.fabric;
 import com.google.common.collect.ImmutableBiMap;
 import com.ordana.immersive_weathering.blocks.LeafPileBlock;
 import com.ordana.immersive_weathering.configs.ConfigBuilderWrapper;
-import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
+import com.ordana.immersive_weathering.configs.fabric.FabricConfigBuilder;
 import com.ordana.immersive_weathering.platform.CommonPlatform;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;

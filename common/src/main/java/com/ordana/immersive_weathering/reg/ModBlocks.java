@@ -143,7 +143,7 @@ public class ModBlocks {
     public static final Supplier<Block> HANGING_ROOTS_WALL = regBlock("hanging_roots_wall", () ->
             new WallRootsBlock(Properties.copy(Blocks.HANGING_ROOTS)));
 
-    public static final Supplier<Block> IVY = regBlock("ivy_block", () ->
+    public static final Supplier<Block> IVY = regWithItem("ivy", () ->
             new IvyBlock(Properties.of(Material.PLANT).noCollission().strength(0.2f)
                     .sound(SoundType.AZALEA_LEAVES)));
 

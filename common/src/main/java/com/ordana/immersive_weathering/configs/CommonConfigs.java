@@ -104,7 +104,7 @@ public class CommonConfigs {
 
         builder.push("icicle");
         FALLING_ICICLES = builder.define("react_to_vibrations", true);
-        ICICLE_RARITY = builder.define("spawn_rarity", 1, 12, 1001); //1001 to disable
+        ICICLE_RARITY = builder.define("spawn_rarity", 12, 1, 1001); //1001 to disable
         builder.pop();
 
         builder.push("freezing");

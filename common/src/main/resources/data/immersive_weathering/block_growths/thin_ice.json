@@ -75,7 +75,7 @@
   ],
   "owners": [ "minecraft:ice", "immersive_weathering:thin_ice"],
   "replacing_target": {
-    "block": "minecraft:water",
+    "fluids": ["minecraft:water"],
     "predicate_type": "immersive_weathering:fluid_match"
   }
 }

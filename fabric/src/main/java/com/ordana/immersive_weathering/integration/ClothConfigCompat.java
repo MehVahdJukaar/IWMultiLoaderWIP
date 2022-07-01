@@ -1,9 +1,13 @@
 package com.ordana.immersive_weathering.integration;
 
 import com.ordana.immersive_weathering.ImmersiveWeathering;
-import com.ordana.immersive_weathering.fabric.ConfigSpec;
-import com.ordana.immersive_weathering.fabric.FabricConfigBuilder;
-import com.ordana.immersive_weathering.fabric.configs.*;
+import com.ordana.immersive_weathering.configs.fabric.*;
+import com.ordana.immersive_weathering.configs.fabric.ConfigSpec;
+import com.ordana.immersive_weathering.configs.fabric.FabricConfigBuilder;
+import com.ordana.immersive_weathering.configs.fabric.values.BoolConfigValue;
+import com.ordana.immersive_weathering.configs.fabric.values.DoubleConfigValue;
+import com.ordana.immersive_weathering.configs.fabric.values.EnumConfigValue;
+import com.ordana.immersive_weathering.configs.fabric.values.IntConfigValue;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,13 +16,15 @@ import net.minecraft.network.chat.TranslatableComponent;
 public class ClothConfigCompat {
 
     public static Screen makeScreen(Screen parent, ConfigSpec spec) {
+        spec.loadConfig();
+
         ConfigBuilder builder = ConfigBuilder.create()
                 .setParentScreen(parent)
                 .setTitle(new TranslatableComponent(spec.getName()));
 
         builder.setDefaultBackgroundTexture(ImmersiveWeathering.res("textures/block/cracked_bricks.png"));
 
-        builder.setSavingRunnable(()->spec.saveConfig());
+        builder.setSavingRunnable(spec::saveConfig);
 
         for (var c : spec.getCategories()) {
             ConfigCategory category = builder.getOrCreateCategory(new TranslatableComponent(c.getName()));
