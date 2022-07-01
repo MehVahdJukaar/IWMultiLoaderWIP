@@ -36,31 +36,31 @@ public class ForgeConfigBuilder extends ConfigBuilderWrapper {
 
     @Override
     public Supplier<Boolean> define(String name, boolean defaultValue) {
-        var value = builder.translation(tooltip(name).getKey()).define(name, defaultValue);
+        var value = builder.translation(tooltipKey(name).getKey()).define(name, defaultValue);
         return value::get;
     }
 
     @Override
     public Supplier<Double> define(String name, double defaultValue, double min, double max) {
-        var value = builder.translation(tooltip(name).getKey()).defineInRange(name, defaultValue, min, max);
+        var value = builder.translation(tooltipKey(name).getKey()).defineInRange(name, defaultValue, min, max);
         return value::get;
     }
 
     @Override
     public Supplier<Integer> define(String name, int defaultValue, int min, int max) {
-        var value = builder.translation(tooltip(name).getKey()).defineInRange(name, defaultValue, min, max);
+        var value = builder.translation(tooltipKey(name).getKey()).defineInRange(name, defaultValue, min, max);
         return value::get;
     }
 
     @Override
     public Supplier<String> define(String name, String defaultValue) {
-        ForgeConfigSpec.ConfigValue<String> value = builder.translation(tooltip(name).getKey()).define(name, defaultValue);
+        ForgeConfigSpec.ConfigValue<String> value = builder.translation(tooltipKey(name).getKey()).define(name, defaultValue);
         return value::get;
     }
 
     @Override
     public <V extends Enum<V>> Supplier<V> define(String name, V defaultValue) {
-        var value = builder.translation(tooltip(name).getKey()).defineEnum(name, defaultValue);
+        var value = builder.translation(tooltipKey(name).getKey()).defineEnum(name, defaultValue);
         return value::get;
     }
 }

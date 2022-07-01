@@ -252,7 +252,7 @@ public class CommonConfigs {
 
     public static boolean VITRIFIED_LAVA;
 
-    //here are forge old config values. only here for their old description
+    //here are forge old config values. only here for their old descriptionKey
 
 
 }

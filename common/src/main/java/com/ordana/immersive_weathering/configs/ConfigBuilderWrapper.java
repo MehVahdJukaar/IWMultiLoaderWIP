@@ -1,7 +1,9 @@
 package com.ordana.immersive_weathering.configs;
 
+import com.ordana.immersive_weathering.ImmersiveWeathering;
 import net.minecraft.network.chat.TranslatableComponent;
 
+import java.util.Locale;
 import java.util.function.Supplier;
 
 public abstract class ConfigBuilderWrapper {
@@ -15,7 +17,11 @@ public abstract class ConfigBuilderWrapper {
     }
 
     public enum ConfigType {
-        CLIENT, COMMON
+        CLIENT, COMMON;
+
+        public String getFileName(){
+            return ImmersiveWeathering.MOD_ID+"-"+this.toString().toLowerCase(Locale.ROOT)+".json";
+        }
     }
 
     public abstract void buildAndRegister();
@@ -44,11 +50,11 @@ public abstract class ConfigBuilderWrapper {
     public abstract <V extends Enum<V>> Supplier<V> define(String name, V defaultValue);
 
 
-    protected static TranslatableComponent description(String name) {
+    public static TranslatableComponent descriptionKey(String name) {
         return new TranslatableComponent("text.immersive_weathering." + name);
     }
 
-    protected static TranslatableComponent tooltip(String name) {
-        return new TranslatableComponent("text.immersive_weathering." + name + ".description");
+    public static TranslatableComponent tooltipKey(String name) {
+        return new TranslatableComponent("text.immersive_weathering." + name + ".descriptionKey");
     }
 }

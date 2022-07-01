@@ -1,89 +1,77 @@
 package com.ordana.immersive_weathering.fabric;
 
+import com.google.common.collect.ImmutableList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.ordana.immersive_weathering.ImmersiveWeathering;
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.TranslatableComponent;
+import com.ordana.immersive_weathering.fabric.configs.ConfigCategory;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
 
 public class ConfigSpec {
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static ConfigSpec CLIENT_INSTANCE;
     public static ConfigSpec COMMON_INSTANCE;
 
-    private final Map<String, List<BiConsumer<ConfigBuilder, ConfigCategory>>> screenCategoryBuilders;
+    private final List<ConfigCategory> categories;
+
     private final String name;
+    private final File file;
 
-    public ConfigSpec(String name, Map<String, List<BiConsumer<ConfigBuilder, ConfigCategory>>> builder) {
-        this.screenCategoryBuilders = builder;
+    public ConfigSpec(String name, ImmutableList<ConfigCategory> categories, String filePath) {
         this.name = name;
+        this.categories = categories;
+        this.file = new File(FabricLoader.getInstance().getConfigDir().toFile(), filePath);
     }
 
-    public Screen makeScreen(Screen parent) {
-        ConfigBuilder builder = ConfigBuilder.create()
-                .setParentScreen(parent)
-                .setTitle(new TranslatableComponent(name));
 
-        builder.setDefaultBackgroundTexture(ImmersiveWeathering.res("textures/block/cracked_bricks"));
-
-        for (var e : screenCategoryBuilders.entrySet()) {
-            ConfigCategory category = builder.getOrCreateCategory(new TranslatableComponent(e.getKey()));
-            for (var entryAdder : e.getValue()) {
-                entryAdder.accept(builder, category);
-            }
-        }
-        return builder.build();
+    public List<ConfigCategory> getCategories() {
+        return categories;
     }
 
-    public static class Configuration {
-        private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-        public int ticksUntilFrameDrop = 600; //Defaulted to thirty seconds.
-        public int frameDropMaximumFrames = 10; //Must be an interval of 10.
+    public String getName() {
+        return name;
+    }
 
-        public boolean useMouseActivity = true;
-        public boolean useMovementActivity = true;
-        public boolean useHurtActivity = true;
-        public boolean useHandSwingActivity = false;
-        public static Configuration loadConfig(File file) {
-            Configuration config;
 
-            if (file.exists() && file.isFile()) {
-                try (
-                        FileInputStream fileInputStream = new FileInputStream(file);
-                        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
-                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader)
-                ) {
-                    config = GSON.fromJson(bufferedReader, Configuration.class);
-                } catch (IOException e) {
-                    throw new RuntimeException("[HTM] Failed to load config", e);
-                }
-            } else {
-                config = new Configuration();
-            }
+    public void loadConfig() {
+        JsonElement config = null;
 
-            config.saveConfig(file);
 
-            return config;
-        }
+        if (file.exists() && file.isFile()) {
+            try (FileInputStream fileInputStream = new FileInputStream(file);
+                 InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
-        public void saveConfig(File config) {
-            try (
-                    FileOutputStream stream = new FileOutputStream(config);
-                    Writer writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8)
-            ) {
-                GSON.toJson(this, writer);
+                config = GSON.fromJson(bufferedReader, JsonElement.class);
             } catch (IOException e) {
-
+                throw new RuntimeException("Failed to load config", e);
             }
         }
+
+        if (config instanceof JsonObject jo) {
+            categories.forEach(e -> e.loadFromJson(jo));
+        }
+
+        this.saveConfig();
     }
 
+    public void saveConfig() {
+        try (FileOutputStream stream = new FileOutputStream(this.file);
+             Writer writer = new OutputStreamWriter(stream, StandardCharsets.UTF_8)) {
+
+            JsonObject jo = new JsonObject();
+            categories.forEach(e->e.saveToJson(jo));
+
+            GSON.toJson(jo, writer);
+        } catch (IOException ignored) {
+        }
+    }
 }

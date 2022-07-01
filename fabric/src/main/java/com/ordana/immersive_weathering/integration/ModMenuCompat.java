@@ -8,6 +8,6 @@ public class ModMenuCompat implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> ConfigSpec.COMMON_INSTANCE.makeScreen(parent);
+        return parent -> ClothConfigCompat.makeScreen(parent, ConfigSpec.COMMON_INSTANCE);
     }
 }
